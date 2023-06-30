@@ -1,5 +1,7 @@
 import * as React from 'react';
-import './globals.css';
+
+// These styles apply to every route in the application
+import './globals.scss';
 
 export const metadata = {
   title: 'osom.run',
@@ -9,9 +11,7 @@ export const metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en">
-      <body>
-        <main>{children}</main>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
