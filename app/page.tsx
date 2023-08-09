@@ -1,14 +1,16 @@
 'use client';
 
 import Image from 'next/image';
-import * as OsomUi from 'osom-ui';
+import {Button} from 'osom-ui';
+import React from 'react';
+import OsomRunSvg from '../public/osom.run.svg';
 
-export default async function Index() {
+export default async function RootPage() {
   return (
-    <div>
-      <h1>osom.run</h1>
-      <Image src="/osom.run.svg" alt="osom.run logo" width={112} height={48} />
-      <OsomUi.Button />
-    </div>
+    <main>
+      <h1 className="font-sans h-1">osom.run</h1>
+      <Image src={OsomRunSvg} alt="osom.run" width={112} height={48} />
+      <Button />
+    </main>
   );
 }

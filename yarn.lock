@@ -2165,10 +2165,10 @@ optionator@^0.9.1:
     prelude-ls "^1.2.1"
     type-check "^0.4.0"
 
-osom-ui@^0.0.12:
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/osom-ui/-/osom-ui-0.0.12.tgz#fd0a42ecbfa940d75a0bf7c466c91ffdbe5ff461"
-  integrity sha512-C92zfpmZ0PDu83x4TCNrxsK+6FW6Mz8n5nNcQftAeZ7D3vOmP0PLuMxDT2rSKGlPIt9jnLFe/NbqKiWv7kissw==
+osom-ui@^0.0.14:
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/osom-ui/-/osom-ui-0.0.14.tgz#8405b1f0119e5b1d43a78388e2ebb314e0799a4c"
+  integrity sha512-2qPwxlN5UU/iUutj16JdMisgvSlzWWGuFq5DvxHw2d/8qQpa+qWpe5GtzEw3FQcbmgszoPR/Ps5YoAk8o8g0EA==
   dependencies:
     react "^18.2.0"
     react-dom "^18.2.0"
