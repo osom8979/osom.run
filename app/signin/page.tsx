@@ -1,4 +1,4 @@
-export default async function Login() {
+export default async function SigninPage() {
   return (
     <>
       <header className="p-4 dark:bg-gray-800 dark:text-gray-100">
@@ -141,7 +141,12 @@ export default async function Login() {
               <p className="px-3 dark:text-gray-400">OR</p>
               <hr className="w-full dark:text-gray-400"></hr>
             </div>
-            <form noValidate={false} action="" className="space-y-8">
+            <form
+              noValidate={false}
+              action="api/auth/signin"
+              method="post"
+              className="space-y-8"
+            >
               <div className="space-y-4">
                 <div className="space-y-2">
                   <label htmlFor="email" className="block text-sm">
@@ -178,7 +183,7 @@ export default async function Login() {
                 </div>
               </div>
               <button
-                type="button"
+                type="submit"
                 className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900"
               >
                 Sign in
