@@ -34,6 +34,21 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@fontsource-variable/hahmlet@^5.0.7":
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/hahmlet/-/hahmlet-5.0.7.tgz#12a41f33733adc9bcf00a82c22c015f62e85f8a8"
+  integrity sha512-2TI+gPsN2c2wixkYvOh5BJSL7KdycrZENw43u1R8U90Wn7htK9EYMSbdkbcDTgKAxk8UDhL3IObvI/GVZyC4qA==
+
+"@fontsource/nanum-gothic-coding@^5.0.7":
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/@fontsource/nanum-gothic-coding/-/nanum-gothic-coding-5.0.7.tgz#218e18c0ddec855bde3856398f9b2881823f4bcf"
+  integrity sha512-meQKZrr3b0fvzFM+ksHh5Ds7WGrUGFYULXQjMiT1c4+Mt3W7jAYAgS/j9kWNxhQCbeJhbmoY1IWvvSh2vLx25Q==
+
+"@fontsource/sunflower@^5.0.7":
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/@fontsource/sunflower/-/sunflower-5.0.7.tgz#7f4325d6b94167e0a8097419e60dd80bcfe58637"
+  integrity sha512-/xLhtPJLq6ugTHnSO9wttvDbRB/bFzbXYUovma4FUW6X5OhdAAmDyhc4oBIhzONKHgrXEDHy0EjYtESwHyIu8g==
+
 "@humanwhocodes/config-array@^0.11.6":
   version "0.11.10"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.10.tgz#5a3ffe32cc9306365fb3fd572596cd602d5e12d2"

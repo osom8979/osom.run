@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 // These styles apply to every route in the application
 import './globals.scss';

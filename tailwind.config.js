@@ -8,5 +8,5 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require('osom-ui/tailwind.plugin')],
+  plugins: [require('osom-ui/tailwind.plugin.osomui')],
 };

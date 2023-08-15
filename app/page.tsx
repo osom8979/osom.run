@@ -8,7 +8,7 @@ import OsomRunSvg from '../public/osom.run.svg';
 export default async function RootPage() {
   return (
     <main>
-      <h1 className="font-sans h-1">osom.run</h1>
+      <h1 className="font-sans">osom.run</h1>
       <Image src={OsomRunSvg} alt="osom.run" width={112} height={48} />
       <Button />
     </main>

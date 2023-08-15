@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource-variable/hahmlet": "^5.0.7",
+    "@fontsource/nanum-gothic-coding": "^5.0.7",
+    "@fontsource/sunflower": "^5.0.7",
     "@supabase/auth-helpers-nextjs": "latest",
     "@supabase/supabase-js": "latest",
     "autoprefixer": "10.4.14",
