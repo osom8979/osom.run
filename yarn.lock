@@ -2194,11 +2194,14 @@ optionator@^0.9.1:
     prelude-ls "^1.2.1"
     type-check "^0.4.0"
 
-osom-ui@^0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/osom-ui/-/osom-ui-0.0.14.tgz#8405b1f0119e5b1d43a78388e2ebb314e0799a4c"
-  integrity sha512-2qPwxlN5UU/iUutj16JdMisgvSlzWWGuFq5DvxHw2d/8qQpa+qWpe5GtzEw3FQcbmgszoPR/Ps5YoAk8o8g0EA==
+osom-ui@^0.0.15:
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/osom-ui/-/osom-ui-0.0.15.tgz#c910031c5bce11903abc029e501bcb3ffad94474"
+  integrity sha512-NMmJ6QYIVF2WQITDsKC0VS2c7riAyYbRZndxBTmsENYcBw+gsCwQxstHU0Mvpux7kGb8Mco4FQb5QtFv14MlSw==
   dependencies:
+    "@fontsource-variable/hahmlet" "^5.0.7"
+    "@fontsource/nanum-gothic-coding" "^5.0.7"
+    "@fontsource/sunflower" "^5.0.7"
     react "^18.2.0"
     react-dom "^18.2.0"
 
