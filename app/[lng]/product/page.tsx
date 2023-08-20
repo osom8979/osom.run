@@ -1,5 +1,5 @@
 import {Fragment} from 'react';
-import Header from '@/app/product/_header';
+import Header from '@/app/[lng]/product/_header';
 
 export default async function ProductPage() {
   return (
