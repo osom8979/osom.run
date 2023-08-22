@@ -1,7 +1,7 @@
 import {type InitOptions} from 'i18next/typescript/options';
 
-export const fallbackLng = 'en-US';
-export const languages = [fallbackLng, 'ko-KR'];
+export const fallbackLng = 'en';
+export const languages = [fallbackLng, 'ko'];
 export const defaultNS = '_default';
 
 export function defaultOptions(lng = fallbackLng, ns = defaultNS, debug = false) {
