@@ -1,7 +1,7 @@
-import {createMiddlewareClient} from '@supabase/auth-helpers-nextjs';
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
-import {nextLanguage, upgradeI18nCookies, validatePath} from '@/app/i18n/helpers';
+import {upgradeSessionCookies} from '@/app/auth/middle';
+import {findNextLanguage, invalidPath, upgradeI18nCookies} from '@/app/i18n/middle';
 
 export const config = {
   matcher: [
@@ -18,27 +18,21 @@ export const config = {
   ],
 };
 
-async function upgradeSessionCookies(req: NextRequest, res: NextResponse) {
-  // Create a Supabase client configured to use cookies
-  const supabase = createMiddlewareClient({req, res});
-
-  // Refresh session if expired - required for Server Components
-  // https://supabase.com/docs/guides/auth/auth-helpers/nextjs#managing-session-with-middleware
-  await supabase.auth.getSession();
-}
-
 export async function middleware(req: NextRequest) {
   // Redirect if lng in path is not supported
-  if (!validatePath(req)) {
-    const lng = nextLanguage(req);
-    console.assert(req.nextUrl.pathname.startsWith('/'));
-    const redirectUrl = new URL(`/${lng}${req.nextUrl.pathname}`, req.url);
+  if (invalidPath(req)) {
+    const lng = findNextLanguage(req);
+    const nextPath = req.nextUrl.pathname;
+    console.assert(nextPath.startsWith('/'));
+
+    const redirectPath = `/${lng}${nextPath}`;
+    const redirectUrl = new URL(redirectPath, req.url);
+
     return NextResponse.redirect(redirectUrl);
   }
 
   const res = NextResponse.next();
   upgradeI18nCookies(req, res);
-
   await upgradeSessionCookies(req, res);
 
   return res;
