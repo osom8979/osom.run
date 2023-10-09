@@ -1,7 +1,7 @@
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
-import {upgradeSessionCookies} from '@/app/auth/middle';
-import {findNextLanguage, invalidPath, upgradeI18nCookies} from '@/app/i18n/middle';
+import {upgradeSessionCookies} from '@/app/lib/auth/middle';
+import {findNextLanguage, invalidPath, upgradeI18nCookies} from '@/app/lib/i18n/middle';
 
 export const config = {
   matcher: [
@@ -19,6 +19,8 @@ export const config = {
 };
 
 export async function middleware(req: NextRequest) {
+  console.debug(`middleware request: ${req.url}`);
+
   // Redirect if lng in path is not supported
   if (invalidPath(req)) {
     const lng = findNextLanguage(req);
@@ -28,12 +30,16 @@ export async function middleware(req: NextRequest) {
     const redirectPath = `/${lng}${nextPath}`;
     const redirectUrl = new URL(redirectPath, req.url);
 
+    console.debug(`Redirect next url: ${redirectUrl}`);
+
     return NextResponse.redirect(redirectUrl);
   }
 
   const res = NextResponse.next();
   upgradeI18nCookies(req, res);
   await upgradeSessionCookies(req, res);
+
+  console.debug(`Update next cookies: ${res.cookies}`);
 
   return res;
 }

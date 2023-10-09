@@ -1,7 +1,7 @@
 import acceptLanguage from 'accept-language';
 import {RequestCookie} from 'next/dist/compiled/@edge-runtime/cookies';
 import {NextRequest, NextResponse} from 'next/server';
-import {fallbackLng, languages} from '@/app/i18n/settings';
+import {fallbackLng, languages} from '@/app/lib/i18n/settings';
 
 acceptLanguage.languages(languages);
 
@@ -63,8 +63,10 @@ export function upgradeI18nCookies(
   const refererUrl = new URL(refererPath);
   const lngInReferer = languages.find(lng => refererUrl.pathname.startsWith(`/${lng}`));
   if (!lngInReferer) {
+    console.debug(`Has referer lng: ${lngInReferer}`);
     return;
   }
 
+  console.debug(`Update i18n cookie: ${i18nCookie} -> ${lngInReferer}`);
   res.cookies.set(i18nCookie, lngInReferer);
 }

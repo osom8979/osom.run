@@ -3,7 +3,7 @@
 // import Image from 'next/image';
 import OsomUi from 'osom-ui';
 import React from 'react';
-import useTranslation from '@/app/i18n';
+import useTranslation from '@/app/lib/i18n';
 
 export default async function RootLngPage({params: {lng}}: {params: {lng: string}}) {
   const {t} = await useTranslation(lng);
