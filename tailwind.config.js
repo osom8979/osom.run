@@ -4,5 +4,15 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require('osom-ui/tailwind.plugin.osomui')],
+  plugins: [require('osom-ui/tailwind.plugin.osomui'), require('daisyui')],
+  daisyui: {
+    themes: false,
+    darkTheme: 'dark',
+    base: true,
+    styled: true,
+    utils: true,
+    rtl: false,
+    prefix: '',
+    logs: true,
+  },
 };
