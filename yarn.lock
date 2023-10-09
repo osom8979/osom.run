@@ -2269,10 +2269,10 @@ optionator@^0.9.1:
     prelude-ls "^1.2.1"
     type-check "^0.4.0"
 
-osom-ui@^0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/osom-ui/-/osom-ui-0.0.17.tgz#377d65043c614c0929baa3da4b1d563d971481ed"
-  integrity sha512-XFS5XTbh+jPbiBfwRTHOfmcCz62gpcCUTpB39xdP5iokfYnedVWC78WdVX+td795M1rt2+dZFPV/MtiWFMl0Rg==
+osom-ui@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/osom-ui/-/osom-ui-0.0.18.tgz#37c985dc53fa2c6ee5c6b2a9374ded5c83ea0164"
+  integrity sha512-SkLC6wydGDmQVVOHFf1gKlImpUkf8PxxvhgCvk5U6yzMTQKKYvIZbLY2F54UakuQ0H7au+fLvGrnbb/K29iSnw==
   dependencies:
     "@fontsource-variable/hahmlet" "^5.0.7"
     "@fontsource/nanum-gothic-coding" "^5.0.7"
