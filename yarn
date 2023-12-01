@@ -6,7 +6,7 @@ N_PREFIX="$ROOT_DIR/.node"
 N_DIR="$ROOT_DIR/.n"
 N_EXE="$N_DIR/n"
 NODE_EXE="$N_PREFIX/bin/node"
-NODE_VERSION=18.16.1
+NODE_VERSION=20.10.0
 ENV_EXPORT_REGEX='^[ \t]*export[ \t]*[_a-zA-Z0-9]+=.*$'
 
 if [[ ! -d "$N_DIR" ]]; then
