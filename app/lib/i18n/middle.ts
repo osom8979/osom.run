@@ -1,25 +1,30 @@
+import 'server-only';
+
 import acceptLanguage from 'accept-language';
 import {RequestCookie} from 'next/dist/compiled/@edge-runtime/cookies';
 import {NextRequest, NextResponse} from 'next/server';
-import {fallbackLng, languages} from '@/app/lib/i18n/settings';
+import {
+  COOKIE_I18N_KEY,
+  FALLBACK_LANGUAGE,
+  IGNORE_REQUEST_PATHS,
+  LANGUAGES,
+} from '@/app/lib/i18n/settings';
 
-acceptLanguage.languages(languages);
+acceptLanguage.languages(LANGUAGES);
 
 const HEADER_ACCEPT_LANGUAGE_KEY = 'Accept-Language';
 const HEADER_REFERER_KEY = 'referer';
-const COOKIE_I18N_KEY = 'i18n';
-const IGNORE_PATHS = ['/api', '/_next', 'favicon.ico'];
 
-export function hasLng(req: NextRequest) {
-  return languages.some(lng => req.nextUrl.pathname.startsWith(`/${lng}`));
+export function hasLang(req: NextRequest) {
+  return LANGUAGES.some(lng => req.nextUrl.pathname.startsWith(`/${lng}`));
 }
 
 export function hasIgnore(req: NextRequest) {
-  return IGNORE_PATHS.some(path => req.nextUrl.pathname.startsWith(path));
+  return IGNORE_REQUEST_PATHS.some(path => req.nextUrl.pathname.startsWith(path));
 }
 
 export function validPath(req: NextRequest) {
-  return hasLng(req) || hasIgnore(req);
+  return hasLang(req) || hasIgnore(req);
 }
 
 export function invalidPath(req: NextRequest) {
@@ -43,7 +48,7 @@ export function findNextLanguage(
   }
 
   if (!lng) {
-    lng = fallbackLng;
+    lng = FALLBACK_LANGUAGE;
   }
 
   return lng;
@@ -61,7 +66,7 @@ export function upgradeI18nCookies(
 
   const refererPath = req.headers.get(refererHeader) as string;
   const refererUrl = new URL(refererPath);
-  const lngInReferer = languages.find(lng => refererUrl.pathname.startsWith(`/${lng}`));
+  const lngInReferer = LANGUAGES.find(lng => refererUrl.pathname.startsWith(`/${lng}`));
   if (!lngInReferer) {
     console.debug(`Has referer lng: ${lngInReferer}`);
     return;

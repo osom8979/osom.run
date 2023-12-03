@@ -1,19 +1,18 @@
+import 'server-only';
+
 import {createInstance} from 'i18next';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import {initReactI18next} from 'react-i18next/initReactI18next';
-import {defaultNS, defaultOptions, fallbackLng} from './settings';
-
-function i18nImporter(language: string, namespace: string) {
-  return import(`./locales/${language}/${namespace}.json`);
-}
+import {DEFAULT_NAMESPACE, defaultOptions, FALLBACK_LANGUAGE} from './settings';
+import {backendI18nImporter} from '@/app/lib/i18n/backend';
 
 async function initI18next(language?: string, namespace?: string) {
-  const i18nInstance = createInstance();
-  await i18nInstance
+  const i18n = createInstance();
+  await i18n
     .use(initReactI18next)
-    .use(resourcesToBackend(i18nImporter))
+    .use(resourcesToBackend(backendI18nImporter))
     .init(defaultOptions(language, namespace));
-  return i18nInstance;
+  return i18n;
 }
 
 export interface TranslationOptions {
@@ -25,8 +24,8 @@ export async function useTranslation(
   namespace?: string,
   options: TranslationOptions = {}
 ) {
-  const lng = language ?? fallbackLng;
-  const ns = namespace ?? defaultNS;
+  const lng = language ?? FALLBACK_LANGUAGE;
+  const ns = namespace ?? DEFAULT_NAMESPACE;
   const i18nextInstance = await initI18next(lng, ns);
   return {
     t: i18nextInstance.getFixedT(lng, ns, options.keyPrefix),

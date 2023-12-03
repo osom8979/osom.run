@@ -1,9 +1,7 @@
-'use client';
-
-// import Image from 'next/image';
-import OsomUi from 'osom-ui';
+import Link from 'next/link';
 import React from 'react';
-import useTranslation from '@/app/lib/i18n';
+import useTranslation from '@/app/lib/i18n/server';
+import Logo from '@/app/ui/logo';
 
 export default async function RootLngPage({params: {lng}}: {params: {lng: string}}) {
   const {t} = await useTranslation(lng, 'root');
@@ -11,9 +9,9 @@ export default async function RootLngPage({params: {lng}}: {params: {lng: string
     <main>
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <a href={`/${lng}/`} hrefLang={lng}>
-            <OsomUi.OsomRunLogo height="1em" />
-          </a>
+          <Link href={`/${lng}/`} hrefLang={lng}>
+            <Logo />
+          </Link>
         </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
