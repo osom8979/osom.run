@@ -38,5 +38,14 @@ next-env.d.ts
 /.n/
 /.node/
 
+# yarn berry - no zero-installs
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
 # IntelliJ IDEA
 /.idea
