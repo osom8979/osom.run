@@ -16,7 +16,9 @@ export default async function RootLngPage({params: {lng}}: {params: {lng: string
   if (hasSession) {
     navbarItems = (
       <React.Fragment>
-        <span>{user.data.user?.email}</span>
+        <li>
+          <span>{user.data.user?.email}</span>
+        </li>
       </React.Fragment>
     );
   } else {
@@ -24,7 +26,7 @@ export default async function RootLngPage({params: {lng}}: {params: {lng: string
       <React.Fragment>
         <li>
           {!hasSession && (
-            <Link className="font-bold" href={`/${lng}/signin`}>
+            <Link className="font-bold py-0.5" href={`/${lng}/signin`}>
               {t('signin')}
             </Link>
           )}
@@ -35,7 +37,7 @@ export default async function RootLngPage({params: {lng}}: {params: {lng: string
 
   return (
     <main>
-      <div className="navbar bg-base-100">
+      <header className="navbar min-h-fit bg-base-100">
         <div className="flex-1">
           <Link href={`/${lng}/`} hrefLang={lng}>
             <Logo height="1em" />
@@ -43,11 +45,11 @@ export default async function RootLngPage({params: {lng}}: {params: {lng: string
         </div>
 
         <div className="flex-none">
-          <ul className="menu menu-horizontal px-1">{navbarItems}</ul>
+          <ul className="menu menu-horizontal">{navbarItems}</ul>
         </div>
-      </div>
+      </header>
 
-      <div className="hero min-h-screen bg-base-200">
+      <section className="hero min-h-screen bg-base-200">
         <div className="hero-content text-center">
           <div className="max-w-md">
             <h1 className="text-5xl font-bold">{t('title')}</h1>
@@ -57,7 +59,7 @@ export default async function RootLngPage({params: {lng}}: {params: {lng: string
             </Link>
           </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }
