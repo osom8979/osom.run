@@ -66,10 +66,8 @@ export function upgradeI18nCookies(
   const refererUrl = new URL(refererPath);
   const lngInReferer = LANGUAGES.find(lng => refererUrl.pathname.startsWith(`/${lng}`));
   if (!lngInReferer) {
-    console.debug(`Has referer lng: ${lngInReferer}`);
     return;
   }
 
-  console.debug(`Update i18n cookie: ${i18nCookie} -> ${lngInReferer}`);
   res.cookies.set(i18nCookie, lngInReferer);
 }

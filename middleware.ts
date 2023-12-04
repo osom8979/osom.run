@@ -19,8 +19,6 @@ export const config = {
 };
 
 export async function middleware(req: NextRequest) {
-  console.debug(`middleware request: ${req.url}`);
-
   // Redirect if lng in path is not supported
   if (invalidPath(req)) {
     const lng = findNextLanguage(req);
@@ -30,8 +28,7 @@ export async function middleware(req: NextRequest) {
     const redirectPath = `/${lng}${nextPath}`;
     const redirectUrl = new URL(redirectPath, req.url);
 
-    console.debug(`redirect next url: ${redirectUrl}`);
-
+    console.debug(`middleware(req='${req.url}') redirect '${redirectUrl}'`);
     return NextResponse.redirect(redirectUrl);
   }
 
@@ -39,7 +36,6 @@ export async function middleware(req: NextRequest) {
   upgradeI18nCookies(req, res);
   await upgradeSessionCookies(req, res);
 
-  console.debug('middleware response:', res);
-
+  console.debug(`middleware(req='${req.url}')`, res);
   return res;
 }
