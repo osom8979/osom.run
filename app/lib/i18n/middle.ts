@@ -1,5 +1,3 @@
-import 'server-only';
-
 import acceptLanguage from 'accept-language';
 import {RequestCookie} from 'next/dist/compiled/@edge-runtime/cookies';
 import {NextRequest, NextResponse} from 'next/server';

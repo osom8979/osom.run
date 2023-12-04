@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
+import Logo from '@/app/components/logo';
 import useTranslation from '@/app/lib/i18n/server';
-import Logo from '@/app/ui/logo';
 
 export default async function RootLngPage({params: {lng}}: {params: {lng: string}}) {
   const {t} = await useTranslation(lng, 'root');
@@ -10,7 +10,7 @@ export default async function RootLngPage({params: {lng}}: {params: {lng: string
       <div className="navbar bg-base-100">
         <div className="flex-1">
           <Link href={`/${lng}/`} hrefLang={lng}>
-            <Logo />
+            <Logo height="1em" />
           </Link>
         </div>
         <div className="flex-none">
@@ -29,9 +29,9 @@ export default async function RootLngPage({params: {lng}}: {params: {lng: string
           <div className="max-w-md">
             <h1 className="text-5xl font-bold">{t('title')}</h1>
             <p className="py-6">{t('abstractor')}</p>
-            <a href={`/${lng}/main`} className="btn btn-primary">
+            <Link href={`/${lng}/main`} className="btn btn-primary">
               {t('start')}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

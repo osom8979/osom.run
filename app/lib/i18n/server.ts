@@ -1,10 +1,11 @@
-import 'server-only';
-
 import {createInstance} from 'i18next';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import {initReactI18next} from 'react-i18next/initReactI18next';
 import {DEFAULT_NAMESPACE, defaultOptions, FALLBACK_LANGUAGE} from './settings';
-import {backendI18nImporter} from '@/app/lib/i18n/backend';
+
+function backendI18nImporter(language: string, namespace: string) {
+  return import(`./locales/${language}/${namespace}.json`);
+}
 
 async function initI18next(language?: string, namespace?: string) {
   const i18n = createInstance();

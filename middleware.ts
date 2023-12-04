@@ -30,7 +30,7 @@ export async function middleware(req: NextRequest) {
     const redirectPath = `/${lng}${nextPath}`;
     const redirectUrl = new URL(redirectPath, req.url);
 
-    console.debug(`Redirect next url: ${redirectUrl}`);
+    console.debug(`redirect next url: ${redirectUrl}`);
 
     return NextResponse.redirect(redirectUrl);
   }
@@ -39,7 +39,7 @@ export async function middleware(req: NextRequest) {
   upgradeI18nCookies(req, res);
   await upgradeSessionCookies(req, res);
 
-  console.debug(`Update next cookies: ${res.cookies}`);
+  console.debug('middleware response:', res);
 
   return res;
 }
