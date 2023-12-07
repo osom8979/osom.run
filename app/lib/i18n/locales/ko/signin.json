@@ -1,0 +1,12 @@
+{
+  "signin_subtitle": "계정에 로그인하세요",
+  "no_account": "계정이 없나요?",
+  "signup_link": "계정을 만드세요!",
+  "signin_google": "Google 계정으로 로그인",
+  "signin_github": "Github 계정으로 로그인",
+  "or": "또는",
+  "signin": "로그인",
+  "email": "이메일 주소",
+  "password": "비밀번호",
+  "forgot_password": "비밀번호를 잊으셨나요?"
+}

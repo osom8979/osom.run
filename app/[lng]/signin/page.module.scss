@@ -1,0 +1,17 @@
+.main {
+  @apply container;
+  @apply mx-auto;
+  @apply px-4 py-16;
+
+  @apply flex flex-col;
+  @apply items-center;
+
+  @apply text-center;
+
+  section {
+    @apply p-4;
+
+    @apply flex flex-col;
+    @apply items-center;
+  }
+}
