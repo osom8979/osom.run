@@ -2,7 +2,7 @@ import {createServerComponentClient} from '@supabase/auth-helpers-nextjs';
 import {cookies} from 'next/headers';
 import Link from 'next/link';
 import React from 'react';
-import I18nRouterProps from '@/app/lib/i18n/params';
+import {type I18nRouterProps} from '@/app/[lng]/params';
 import useTranslation from '@/app/lib/i18n/server';
 import Logo from '@/app/ui/logo';
 

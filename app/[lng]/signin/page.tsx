@@ -3,11 +3,10 @@ import {cookies} from 'next/headers';
 import Link from 'next/link';
 import {redirect} from 'next/navigation';
 import React from 'react';
-import styles from '@/app/[lng]/signin/page.module.scss';
+import {type I18nRouterProps} from '@/app/[lng]/params';
 import MdiGithub from '@/app/icon/mdi/MdiGithub';
 import MdiGoogle from '@/app/icon/mdi/MdiGoogle';
 import MdiLogin from '@/app/icon/mdi/MdiLogin';
-import I18nRouterProps from '@/app/lib/i18n/params';
 import useTranslation from '@/app/lib/i18n/server';
 import {FALLBACK_LANGUAGE} from '@/app/lib/i18n/settings';
 import Logo from '@/app/ui/logo';
@@ -24,8 +23,8 @@ export default async function SigninPage(props: I18nRouterProps) {
   }
 
   return (
-    <main className={styles.main}>
-      <section>
+    <main className="container mx-auto flex flex-col items-center">
+      <section className="mx-4 my-16 flex flex-col items-center">
         <Link href={`/${lng}/`} hrefLang={lng} className="my-8">
           <Logo height="1em" />
         </Link>
