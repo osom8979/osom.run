@@ -8,7 +8,6 @@ import MdiGithub from '@/app/icon/mdi/MdiGithub';
 import MdiGoogle from '@/app/icon/mdi/MdiGoogle';
 import MdiLogin from '@/app/icon/mdi/MdiLogin';
 import useTranslation from '@/app/lib/i18n/server';
-import {FALLBACK_LANGUAGE} from '@/app/lib/i18n/settings';
 import Logo from '@/app/ui/logo';
 
 export default async function SigninPage(props: I18nRouterProps) {
@@ -19,7 +18,7 @@ export default async function SigninPage(props: I18nRouterProps) {
   const user = await supabase.auth.getUser();
   const hasSession = user.error === null;
   if (hasSession) {
-    redirect(`/${FALLBACK_LANGUAGE}/main`);
+    redirect(`/${lng}/main`);
   }
 
   return (
@@ -60,7 +59,7 @@ export default async function SigninPage(props: I18nRouterProps) {
 
           <form
             noValidate={false}
-            action="api/auth/signin"
+            action="/api/auth/signin"
             method="post"
             className="space-y-8"
           >
