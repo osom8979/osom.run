@@ -6,6 +6,9 @@
   "signin_github": "Sign in with Github",
   "or": "OR",
   "signin": "Sign in",
+  "continue_email": "Continue with email",
+  "check_your_inbox_1": "We just sent you a temporary login code.",
+  "check_your_inbox_2": "Please check your inbox.",
   "email": "Email address",
   "password": "Password",
   "forgot_password": "Forgot password?"

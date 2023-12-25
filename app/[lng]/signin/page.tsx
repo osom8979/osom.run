@@ -4,9 +4,10 @@ import Link from 'next/link';
 import {redirect} from 'next/navigation';
 import React from 'react';
 import {type I18nRouterProps} from '@/app/[lng]/params';
+import signinWithEmail from '@/app/[lng]/signin/_actions/email';
+import SigninSubmit from '@/app/[lng]/signin/_components/SigninSubmit';
 import MdiGithub from '@/app/icon/mdi/MdiGithub';
 import MdiGoogle from '@/app/icon/mdi/MdiGoogle';
-import MdiLogin from '@/app/icon/mdi/MdiLogin';
 import useTranslation from '@/app/lib/i18n/server';
 import Logo from '@/app/ui/logo';
 
@@ -20,6 +21,8 @@ export default async function SigninPage(props: I18nRouterProps) {
   if (hasSession) {
     redirect(`/${lng}/main`);
   }
+
+  const signinWithEmailAction = signinWithEmail.bind(null, lng);
 
   return (
     <main className="container mx-auto flex flex-col items-center">
@@ -57,12 +60,7 @@ export default async function SigninPage(props: I18nRouterProps) {
             <hr className="w-full"></hr>
           </div>
 
-          <form
-            noValidate={false}
-            action="/api/auth/signin"
-            method="post"
-            className="space-y-8"
-          >
+          <form action={signinWithEmailAction} className="space-y-8">
             <div className="space-y-4">
               <div className="space-y-2">
                 <label htmlFor="email" className="block text-sm">
@@ -101,10 +99,7 @@ export default async function SigninPage(props: I18nRouterProps) {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary w-full">
-              <MdiLogin className="w-6 h-6 fill-current" />
-              <span>{t('signin')}</span>
-            </button>
+            <SigninSubmit label={t('signin')} />
           </form>
 
           <p className="text-sm text-center my-6">
