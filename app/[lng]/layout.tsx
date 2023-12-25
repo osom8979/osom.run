@@ -6,7 +6,7 @@ export async function generateStaticParams() {
   return LANGUAGES.map(lng => ({lng}));
 }
 
-export default function LngLayout(props: I18nLayoutProps) {
+export default async function LngLayout(props: I18nLayoutProps) {
   return (
     <html lang={props.params.lng} dir={dir(props.params.lng)}>
       <body>{props.children}</body>

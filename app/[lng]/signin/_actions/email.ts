@@ -3,6 +3,7 @@
 import {createServerActionClient} from '@supabase/auth-helpers-nextjs';
 import {revalidatePath} from 'next/cache';
 import {cookies} from 'next/headers';
+import {redirect} from 'next/navigation';
 import {z} from 'zod';
 
 const schema = z.object({
@@ -31,7 +32,8 @@ export default async function signinWithEmail(lng: string, formData: FormData) {
   }
 
   console.debug('signinWithEmail -- 3');
-  const supabase = createServerActionClient({cookies});
+  const cookieStore = cookies();
+  const supabase = createServerActionClient({cookies: () => cookieStore});
   const {email, password} = validatedFields.data;
   console.debug('signinWithEmail -- ', validatedFields.data);
   const {error} = await supabase.auth.signInWithPassword({email, password});
@@ -42,6 +44,8 @@ export default async function signinWithEmail(lng: string, formData: FormData) {
     };
   }
 
+  console.debug('signin-cookieStore: ', cookies().getAll());
   console.debug('signinWithEmail -- 5');
-  revalidatePath(`/${lng}/`);
+  revalidatePath('/', 'page');
+  redirect(`/${lng}/main`);
 }
