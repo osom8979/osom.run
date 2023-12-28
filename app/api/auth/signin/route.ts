@@ -8,32 +8,36 @@ import {z} from 'zod';
 export const dynamic = 'force-dynamic';
 
 const schema = z.object({
-  email: z.string().email(),
-  password: z.string(),
+  email: z.string({invalid_type_error: 'Invalid email'}).email(),
+  password: z.string({invalid_type_error: 'Invalid password'}),
 });
 
 export async function POST(request: Request) {
-  console.debug('post request:', request);
-  const requestUrl = new URL(request.url);
   const formData = await request.formData();
+  console.debug('[POST] /api/auth/signin', formData);
 
-  console.debug('form data:', request);
-
-  const {email, password} = schema.parse({
+  const validatedFields = schema.safeParse({
     email: formData.get('email'),
     password: formData.get('password'),
   });
 
-  console.debug('email:', email);
-  console.debug('password:', password);
+  // Return early if the form data is invalid
+  if (!validatedFields.success) {
+    return {errors: validatedFields.error};
+  }
 
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({cookies: () => cookieStore});
-  const result = await supabase.auth.signInWithPassword({email, password});
+  const {email, password} = validatedFields.data;
+  const signinResult = await supabase.auth.signInWithPassword({email, password});
+  const {error} = signinResult;
 
-  console.debug('signin successful', result);
+  if (error !== null) {
+    return {errors: error.message};
+  }
 
   // Returning a 301 status redirects from a POST to a GET route
   // https://developer.mozilla.org/ko/docs/Web/HTTP/Status/301
+  const requestUrl = new URL(request.url);
   return NextResponse.redirect(requestUrl.origin, {status: 301});
 }

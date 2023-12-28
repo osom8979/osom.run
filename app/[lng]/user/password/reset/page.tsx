@@ -4,9 +4,9 @@ import Link from 'next/link';
 import {redirect} from 'next/navigation';
 import React from 'react';
 import {type I18nRouterProps} from '@/app/[lng]/params';
+import Logo from '@/app/components/logo';
 import MdiLogin from '@/app/icon/mdi/MdiLogin';
 import useTranslation from '@/app/lib/i18n/server';
-import Logo from '@/app/ui/logo';
 
 export default async function UserPasswordResetPage(props: I18nRouterProps) {
   const lng = props.params.lng;

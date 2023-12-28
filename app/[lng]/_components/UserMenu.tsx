@@ -1,6 +1,7 @@
 import {User} from '@supabase/supabase-js';
 import Link from 'next/link';
 import React from 'react';
+import SignoutSubmit from '@/app/[lng]/_components/SignoutSubmit';
 import MdiAccountCircle from '@/app/icon/mdi/MdiAccountCircle';
 
 interface UserMenuProps {
@@ -32,7 +33,14 @@ export default async function UserMenu(props: UserMenuProps) {
 
         <div className="divider m-0"></div>
         <li>
-          <span className="btn btn-sm btn-secondary btn-outline">{signOutLabel}</span>
+          <form
+            noValidate={false}
+            action="/api/auth/signout"
+            method="post"
+            className="p-0 flex"
+          >
+            <SignoutSubmit label={signOutLabel} />
+          </form>
         </li>
       </ul>
     </div>

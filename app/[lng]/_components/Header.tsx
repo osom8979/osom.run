@@ -4,8 +4,8 @@ import Link from 'next/link';
 import React from 'react';
 import AnonymousMenu from '@/app/[lng]/_components/AnonymousMenu';
 import UserMenu from '@/app/[lng]/_components/UserMenu';
+import Logo from '@/app/components/logo';
 import useTranslation from '@/app/lib/i18n/server';
-import Logo from '@/app/ui/logo';
 
 export default async function Header({lng}: {lng: string}) {
   const cookieStore = cookies();
