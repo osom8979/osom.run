@@ -3,11 +3,11 @@
 import React from 'react';
 import {useFormStatus} from 'react-dom';
 
-interface SignoutSubmitProps {
+interface LogoutSubmitProps {
   label?: string;
 }
 
-export default function SignoutSubmit(props: SignoutSubmitProps) {
+export default function LogoutSubmit(props: LogoutSubmitProps) {
   const {pending} = useFormStatus();
   return (
     <button

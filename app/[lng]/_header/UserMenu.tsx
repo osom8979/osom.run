@@ -1,18 +1,18 @@
 import {User} from '@supabase/supabase-js';
 import Link from 'next/link';
 import React from 'react';
-import SignoutSubmit from '@/app/[lng]/_header/SignoutSubmit';
+import LogoutSubmit from '@/app/[lng]/_header/LogoutSubmit';
 import MdiAccountCircle from '@/app/icon/mdi/MdiAccountCircle';
 
 interface UserMenuProps {
   lng: string;
   user: User;
   settingsLabel: string;
-  signOutLabel: string;
+  logoutLabel: string;
 }
 
 export default async function UserMenu(props: UserMenuProps) {
-  const {lng, user, settingsLabel, signOutLabel} = props;
+  const {lng, user, settingsLabel, logoutLabel} = props;
 
   return (
     <div className="dropdown dropdown-end">
@@ -35,11 +35,11 @@ export default async function UserMenu(props: UserMenuProps) {
         <li>
           <form
             noValidate={false}
-            action="/api/auth/signout"
+            action="/api/auth/logout"
             method="post"
             className="p-0 flex"
           >
-            <SignoutSubmit label={signOutLabel} />
+            <LogoutSubmit label={logoutLabel} />
           </form>
         </li>
       </ul>

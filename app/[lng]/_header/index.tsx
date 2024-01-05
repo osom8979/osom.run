@@ -31,7 +31,7 @@ export default async function Header({lng}: {lng: string}) {
               lng={lng}
               user={user.data.user}
               settingsLabel={t('settings')}
-              signOutLabel={t('logout')}
+              logoutLabel={t('logout')}
             />
           ) : (
             <AnonymousMenu lng={lng} loginLabel={t('login')} />
