@@ -31,7 +31,7 @@ export default async function UserPasswordResetPage(props: I18nRouterProps) {
 
           <form
             noValidate={false}
-            action="/api/auth/signin"
+            action="/api/auth/login"
             method="post"
             className="space-y-8"
           >
@@ -52,7 +52,7 @@ export default async function UserPasswordResetPage(props: I18nRouterProps) {
 
             <button type="submit" className="btn btn-primary w-full">
               <MdiLogin className="w-6 h-6 fill-current" />
-              <span>{t('signin')}</span>
+              <span>{t('login')}</span>
             </button>
           </form>
 

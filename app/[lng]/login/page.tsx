@@ -3,18 +3,18 @@ import {cookies} from 'next/headers';
 import Link from 'next/link';
 import {redirect} from 'next/navigation';
 import React from 'react';
+import LoginSubmit from '@/app/[lng]/login/_components/LoginSubmit';
 import {type I18nRouterProps} from '@/app/[lng]/params';
-import SigninSubmit from '@/app/[lng]/signin/_components/SigninSubmit';
 import Logo from '@/app/components/logo';
 import MdiGithub from '@/app/icon/mdi/MdiGithub';
 import MdiGoogle from '@/app/icon/mdi/MdiGoogle';
 import useTranslation from '@/app/lib/i18n/server';
 
-export default async function SigninPage(props: I18nRouterProps) {
+export default async function LoginPage(props: I18nRouterProps) {
   const lng = props.params.lng;
   const cookieStore = cookies();
   const supabase = createServerComponentClient({cookies: () => cookieStore});
-  const {t} = await useTranslation(lng, 'signin');
+  const {t} = await useTranslation(lng, 'login');
   const user = await supabase.auth.getUser();
   const hasSession = user.error === null;
   if (hasSession) {
@@ -29,25 +29,17 @@ export default async function SigninPage(props: I18nRouterProps) {
         </Link>
 
         <div className="card">
-          <h2 className="my-3 text-2xl text-center">{t('signin_subtitle')}</h2>
+          <h2 className="my-3 text-2xl text-center">{t('subtitle')}</h2>
 
           <div className="my-6 space-y-4">
-            <button
-              aria-label={t('signin_google')}
-              type="button"
-              className="btn w-full"
-            >
+            <button aria-label={t('login_google')} type="button" className="btn w-full">
               <MdiGoogle className="w-6 h-6 fill-current" />
-              <span>{t('signin_google')}</span>
+              <span>{t('login_google')}</span>
             </button>
 
-            <button
-              aria-label={t('signin_github')}
-              role="button"
-              className="btn w-full"
-            >
+            <button aria-label={t('login_github')} role="button" className="btn w-full">
               <MdiGithub className="w-6 h-6 fill-current" />
-              <span>{t('signin_github')}</span>
+              <span>{t('login_github')}</span>
             </button>
           </div>
 
@@ -59,7 +51,7 @@ export default async function SigninPage(props: I18nRouterProps) {
 
           <form
             noValidate={false}
-            action="/api/auth/signin"
+            action="/api/auth/login"
             method="post"
             className="space-y-8"
           >
@@ -101,7 +93,7 @@ export default async function SigninPage(props: I18nRouterProps) {
               </div>
             </div>
 
-            <SigninSubmit label={t('signin')} />
+            <LoginSubmit label={t('login')} />
           </form>
 
           <p className="text-sm text-center my-6">

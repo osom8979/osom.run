@@ -4,11 +4,11 @@ import React from 'react';
 import {useFormStatus} from 'react-dom';
 import MdiLogin from '@/app/icon/mdi/MdiLogin';
 
-interface SigninSubmitProps {
+interface LoginSubmitProps {
   label?: string;
 }
 
-export default function SigninSubmit(props: SigninSubmitProps) {
+export default function LoginSubmit(props: LoginSubmitProps) {
   const {pending} = useFormStatus();
   return (
     <button type="submit" className="btn btn-primary w-full" aria-disabled={pending}>

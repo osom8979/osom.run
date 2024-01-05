@@ -14,7 +14,7 @@ const schema = z.object({
 
 export async function POST(request: Request) {
   const formData = await request.formData();
-  console.debug('[POST] /api/auth/signin', formData);
+  console.debug('[POST] /api/auth/login', formData);
 
   const validatedFields = schema.safeParse({
     email: formData.get('email'),
@@ -29,8 +29,8 @@ export async function POST(request: Request) {
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({cookies: () => cookieStore});
   const {email, password} = validatedFields.data;
-  const signinResult = await supabase.auth.signInWithPassword({email, password});
-  const {error} = signinResult;
+  const signInResult = await supabase.auth.signInWithPassword({email, password});
+  const {error} = signInResult;
 
   if (error !== null) {
     return {errors: error.message};

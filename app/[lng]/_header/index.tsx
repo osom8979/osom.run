@@ -2,8 +2,8 @@ import {createServerComponentClient} from '@supabase/auth-helpers-nextjs';
 import {cookies} from 'next/headers';
 import Link from 'next/link';
 import React from 'react';
-import AnonymousMenu from '@/app/[lng]/_components/AnonymousMenu';
-import UserMenu from '@/app/[lng]/_components/UserMenu';
+import AnonymousMenu from '@/app/[lng]/_header/AnonymousMenu';
+import UserMenu from '@/app/[lng]/_header/UserMenu';
 import Logo from '@/app/components/logo';
 import useTranslation from '@/app/lib/i18n/server';
 
@@ -31,10 +31,10 @@ export default async function Header({lng}: {lng: string}) {
               lng={lng}
               user={user.data.user}
               settingsLabel={t('settings')}
-              signOutLabel={t('signout')}
+              signOutLabel={t('logout')}
             />
           ) : (
-            <AnonymousMenu lng={lng} signInLabel={t('signin')} />
+            <AnonymousMenu lng={lng} loginLabel={t('login')} />
           )}
         </div>
       </nav>

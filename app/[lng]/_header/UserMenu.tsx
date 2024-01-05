@@ -1,7 +1,7 @@
 import {User} from '@supabase/supabase-js';
 import Link from 'next/link';
 import React from 'react';
-import SignoutSubmit from '@/app/[lng]/_components/SignoutSubmit';
+import SignoutSubmit from '@/app/[lng]/_header/SignoutSubmit';
 import MdiAccountCircle from '@/app/icon/mdi/MdiAccountCircle';
 
 interface UserMenuProps {

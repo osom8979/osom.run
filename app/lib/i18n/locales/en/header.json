@@ -1,5 +1,5 @@
 {
   "settings": "Edit Profile",
-  "signin": "Sign in",
-  "signout": "Sign out"
+  "login": "Log in",
+  "logout": "Log out"
 }
