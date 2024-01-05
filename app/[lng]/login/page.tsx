@@ -3,7 +3,7 @@ import {cookies} from 'next/headers';
 import Link from 'next/link';
 import {redirect} from 'next/navigation';
 import React from 'react';
-import LoginSubmit from '@/app/[lng]/login/_components/LoginSubmit';
+import LoginForm from '@/app/[lng]/login/_components/LoginForm';
 import {type I18nRouterProps} from '@/app/[lng]/params';
 import Logo from '@/app/components/logo';
 import MdiGithub from '@/app/icon/mdi/MdiGithub';
@@ -49,52 +49,13 @@ export default async function LoginPage(props: I18nRouterProps) {
             <hr className="w-full"></hr>
           </div>
 
-          <form
-            noValidate={false}
-            action="/api/auth/login"
-            method="post"
-            className="space-y-8"
-          >
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <label htmlFor="email" className="block text-sm">
-                  {t('email')}
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="your@email.com"
-                  className="input input-bordered w-full"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <label htmlFor="password" className="text-sm">
-                    {t('password')}
-                  </label>
-                  <Link
-                    rel="noopener noreferrer"
-                    href="#"
-                    className="link link-primary text-xs"
-                  >
-                    {t('forgot_password')}
-                  </Link>
-                </div>
-
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="*****"
-                  className="input input-bordered w-full"
-                />
-              </div>
-            </div>
-
-            <LoginSubmit label={t('login')} />
-          </form>
+          <LoginForm
+            lng={lng}
+            emailLabel={t('email')}
+            passwordLabel={t('password')}
+            forgotPasswordLabel={t('forgot_password')}
+            loginLabel={t('login')}
+          />
 
           <p className="text-sm text-center my-6">
             {t('no_account')}

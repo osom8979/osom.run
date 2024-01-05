@@ -23,7 +23,7 @@ export async function POST(request: Request) {
 
   // Return early if the form data is invalid
   if (!validatedFields.success) {
-    return {errors: validatedFields.error};
+    return NextResponse.json({message: validatedFields.error.message}, {status: 500});
   }
 
   const cookieStore = cookies();
@@ -33,11 +33,8 @@ export async function POST(request: Request) {
   const {error} = signInResult;
 
   if (error !== null) {
-    return {errors: error.message};
+    return NextResponse.json({message: error.message}, {status: 500});
   }
 
-  // Returning a 301 status redirects from a POST to a GET route
-  // https://developer.mozilla.org/ko/docs/Web/HTTP/Status/301
-  const requestUrl = new URL(request.url);
-  return NextResponse.redirect(requestUrl.origin, {status: 301});
+  return NextResponse.json({});
 }
