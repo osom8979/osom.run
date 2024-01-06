@@ -1,29 +1,38 @@
 import 'server-only';
 
 import {createRouteHandlerClient} from '@supabase/auth-helpers-nextjs';
+import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
 import {z} from 'zod';
 
 export const dynamic = 'force-dynamic';
 
-const schema = z.object({
-  email: z.string({invalid_type_error: 'Invalid email'}).email(),
-  password: z.string({invalid_type_error: 'Invalid password'}),
+const FormSchema = z.object({
+  email: z.string({invalid_type_error: 'Invalid email field'}).email(),
+  password: z.string({invalid_type_error: 'Invalid password field'}),
 });
+
+export interface LoginResult {
+  error?: string;
+}
 
 export async function POST(request: Request) {
   const formData = await request.formData();
-  console.debug('[POST] /api/auth/login', formData);
 
-  const validatedFields = schema.safeParse({
+  const validatedFields = FormSchema.safeParse({
     email: formData.get('email'),
     password: formData.get('password'),
   });
 
   // Return early if the form data is invalid
   if (!validatedFields.success) {
-    return NextResponse.json({message: validatedFields.error.message}, {status: 500});
+    console.debug(validatedFields.error.message);
+
+    return NextResponse.json<LoginResult>(
+      {error: 'Invalid login form datas'},
+      {status: StatusCodes.BAD_REQUEST}
+    );
   }
 
   const cookieStore = cookies();
@@ -33,8 +42,11 @@ export async function POST(request: Request) {
   const {error} = signInResult;
 
   if (error !== null) {
-    return NextResponse.json({message: error.message}, {status: 500});
+    return NextResponse.json<LoginResult>(
+      {error: error.message},
+      {status: StatusCodes.UNAUTHORIZED}
+    );
   }
 
-  return NextResponse.json({});
+  return NextResponse.json<LoginResult>({});
 }

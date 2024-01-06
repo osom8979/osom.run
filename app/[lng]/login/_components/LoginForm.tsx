@@ -3,7 +3,9 @@
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {useState} from 'react';
+import {LoginResult} from '@/app/api/auth/login/route';
 import MdiLogin from '@/app/icon/mdi/MdiLogin';
+import SvgSpinners270Ring from '@/app/icon/spinners/SvgSpinners270Ring';
 
 interface LoginSubmitProps {
   lng?: string;
@@ -29,15 +31,20 @@ export default function LoginForm(props: LoginSubmitProps) {
 
     const timeoutMilliseconds = props.fetchTimeoutMilliseconds ?? 30_000;
     const timeout = setTimeout(() => controller.abort(), timeoutMilliseconds);
+
     try {
       const method = 'POST';
       const body = new FormData();
       body.set('email', email);
       body.set('password', password);
       const response = await fetch('/api/auth/login', {method, signal, body});
-      const loginResult = await response.json();
-      console.debug('loginResult: ', loginResult);
-      router.push(`/${props.lng}/main`);
+      const jsonRaw = await response.json();
+      const result = jsonRaw as LoginResult;
+      if (result.error) {
+        // TODO ...
+      } else {
+        router.push(`/${props.lng}/main`);
+      }
     } finally {
       clearTimeout(timeout);
       setPending(false);
@@ -56,9 +63,11 @@ export default function LoginForm(props: LoginSubmitProps) {
             name="email"
             id="email"
             placeholder="your@email.com"
-            className="input input-bordered w-full"
+            className={`input input-bordered w-full ${pending ? 'input-disabled' : ''}`}
             value={email}
             onChange={e => setEmail(e.target.value)}
+            disabled={pending}
+            aria-disabled={pending}
           />
         </div>
 
@@ -81,15 +90,26 @@ export default function LoginForm(props: LoginSubmitProps) {
             name="password"
             id="password"
             placeholder="*****"
-            className="input input-bordered w-full"
+            className={`input input-bordered w-full ${pending ? 'input-disabled' : ''}`}
             value={password}
             onChange={e => setPassword(e.target.value)}
+            disabled={pending}
+            aria-disabled={pending}
           />
         </div>
       </div>
 
-      <button type="submit" className="btn btn-primary w-full" aria-disabled={pending}>
-        <MdiLogin className="w-6 h-6 fill-current" />
+      <button
+        type="submit"
+        className={`btn btn-primary w-full ${pending ? 'btn-disabled' : ''}`}
+        disabled={pending}
+        aria-disabled={pending}
+      >
+        {pending ? (
+          <SvgSpinners270Ring className="w-6 h-6 fill-current" />
+        ) : (
+          <MdiLogin className="w-6 h-6 fill-current" />
+        )}
         <span>{props.loginLabel}</span>
       </button>
     </form>
