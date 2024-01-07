@@ -10,6 +10,10 @@
   "check_your_inbox_1": "We just sent you a temporary login code.",
   "check_your_inbox_2": "Please check your inbox.",
   "email": "Email address",
+  "email_placeholder": "Enter your email address...",
   "password": "Password",
-  "forgot_password": "Forgot password?"
+  "password_placeholder": "****",
+  "forgot_password": "Forgot password?",
+  "bad_request": "Your email or password is incorrect.",
+  "unauthorized": "Your authentication information is incorrect."
 }

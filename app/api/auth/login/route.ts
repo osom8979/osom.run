@@ -13,10 +13,6 @@ const FormSchema = z.object({
   password: z.string({invalid_type_error: 'Invalid password field'}),
 });
 
-export interface LoginResult {
-  error?: string;
-}
-
 export async function POST(request: Request) {
   const formData = await request.formData();
 
@@ -28,11 +24,7 @@ export async function POST(request: Request) {
   // Return early if the form data is invalid
   if (!validatedFields.success) {
     console.debug(validatedFields.error.message);
-
-    return NextResponse.json<LoginResult>(
-      {error: 'Invalid login form datas'},
-      {status: StatusCodes.BAD_REQUEST}
-    );
+    return NextResponse.json({}, {status: StatusCodes.BAD_REQUEST});
   }
 
   const cookieStore = cookies();
@@ -42,11 +34,10 @@ export async function POST(request: Request) {
   const {error} = signInResult;
 
   if (error !== null) {
-    return NextResponse.json<LoginResult>(
-      {error: error.message},
-      {status: StatusCodes.UNAUTHORIZED}
-    );
+    console.debug(error.message);
+    return NextResponse.json({}, {status: StatusCodes.UNAUTHORIZED});
   }
 
-  return NextResponse.json<LoginResult>({});
+  console.info(`Login successful with email ${email}`);
+  return NextResponse.json({});
 }

@@ -14,13 +14,13 @@ export default async function LoginPage(props: I18nRouterProps) {
   const lng = props.params.lng;
   const cookieStore = cookies();
   const supabase = createServerComponentClient({cookies: () => cookieStore});
-  const {t} = await useTranslation(lng, 'login');
   const user = await supabase.auth.getUser();
   const hasSession = user.error === null;
   if (hasSession) {
     redirect(`/${lng}/main`);
   }
 
+  const {t} = await useTranslation(lng, 'login');
   return (
     <main className="container mx-auto flex flex-col items-center">
       <section className="mx-4 my-16 flex flex-col items-center">
@@ -52,9 +52,13 @@ export default async function LoginPage(props: I18nRouterProps) {
           <LoginForm
             lng={lng}
             emailLabel={t('email')}
+            emailPlaceholder={t('email_placeholder')}
             passwordLabel={t('password')}
+            passwordPlaceholder={t('password_placeholder')}
             forgotPasswordLabel={t('forgot_password')}
             loginLabel={t('login')}
+            errorBadRequestLabel={t('bad_request')}
+            errorUnauthorizedLabel={t('unauthorized')}
           />
 
           <p className="text-sm text-center my-6">

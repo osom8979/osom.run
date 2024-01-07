@@ -10,6 +10,10 @@
   "check_your_inbox_1": "방금 임시 로그인 코드를 보냈습니다.",
   "check_your_inbox_2": "받은 편지함을 확인하세요.",
   "email": "이메일 주소",
+  "email_placeholder": "이메일 주소를 입력하세요...",
   "password": "비밀번호",
-  "forgot_password": "비밀번호를 잊으셨나요?"
+  "password_placeholder": "****",
+  "forgot_password": "비밀번호를 잊으셨나요?",
+  "bad_request": "이메일 또는 비밀번호가 잘못되었습니다.",
+  "unauthorized": "인증 정보가 잘못되었습니다."
 }
