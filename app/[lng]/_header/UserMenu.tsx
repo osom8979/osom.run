@@ -1,7 +1,7 @@
 import {User} from '@supabase/supabase-js';
 import Link from 'next/link';
 import React from 'react';
-import LogoutSubmit from '@/app/[lng]/_header/LogoutSubmit';
+import LogoutButton from '@/app/[lng]/_header/LogoutButton';
 import MdiAccountCircle from '@/app/icon/mdi/MdiAccountCircle';
 
 interface UserMenuProps {
@@ -33,14 +33,7 @@ export default async function UserMenu(props: UserMenuProps) {
 
         <div className="divider m-0"></div>
         <li>
-          <form
-            noValidate={false}
-            action="/api/auth/logout"
-            method="post"
-            className="p-0 flex"
-          >
-            <LogoutSubmit label={logoutLabel} />
-          </form>
+          <LogoutButton label={logoutLabel} />
         </li>
       </ul>
     </div>

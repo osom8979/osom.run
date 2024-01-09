@@ -9,12 +9,10 @@ import useTranslation from '@/app/lib/i18n/server';
 
 export default async function Header({lng}: {lng: string}) {
   const cookieStore = cookies();
-  console.debug('cookieStore: ', cookieStore.getAll());
   const supabase = createServerComponentClient({cookies: () => cookieStore});
   const {t} = await useTranslation(lng, 'header');
   const user = await supabase.auth.getUser();
   const hasSession = user.error === null;
-  console.debug('hasSession: ', hasSession);
 
   return (
     <header className="navbar min-h-fit bg-base-100">

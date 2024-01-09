@@ -11,7 +11,7 @@ export default async function AnonymousMenu(props: AnonymousMenuProps) {
   return (
     <ul className="menu menu-horizontal">
       <li>
-        <Link className="font-bold py-0.5" href={`/${lng}/login`}>
+        <Link className="font-bold" href={`/${lng}/login`}>
           {loginLabel}
         </Link>
       </li>

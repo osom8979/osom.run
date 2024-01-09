@@ -10,7 +10,7 @@ import SvgSpinners270Ring from '@/app/icon/spinners/SvgSpinners270Ring';
 
 const LOGIN_API_PATH = '/api/auth/login';
 const LOGIN_API_METHOD = 'POST';
-const LOGIN_API_TIMEOUT_MILLISECONDS = 30_000;
+const LOGIN_API_TIMEOUT_MILLISECONDS = 8_000;
 
 interface LoginSubmitProps {
   lng?: string;
@@ -26,9 +26,8 @@ interface LoginSubmitProps {
 }
 
 export default function LoginForm(props: LoginSubmitProps) {
-  const emailInit = '';
   const [password, setPassword] = useState('');
-  const [email, setEmail] = useState(emailInit);
+  const [email, setEmail] = useState('');
   const [pending, setPending] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
@@ -99,7 +98,7 @@ export default function LoginForm(props: LoginSubmitProps) {
   const inputClassName = inputClasses.join(' ');
 
   return (
-    <form className="space-y-5" onSubmit={e => handleSubmit(e)}>
+    <form className="space-y-5" onSubmit={handleSubmit}>
       <div className="space-y-4">
         <div className="space-y-2">
           <label htmlFor="email" className="block text-sm">
