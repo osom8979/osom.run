@@ -17,8 +17,7 @@ export default function LogoutButton(props: LogoutSubmitProps) {
   const [pending, setPending] = useState(false);
   const router = useRouter();
 
-  const handleClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault();
+  const handleClick = async () => {
     setPending(true);
 
     const timeout = props.fetchTimeout ?? LOGOUT_API_TIMEOUT_MILLISECONDS;
@@ -30,28 +29,30 @@ export default function LogoutButton(props: LogoutSubmitProps) {
       await fetch(LOGOUT_API_PATH, fetchOptions);
       router.refresh();
     } catch (e) {
-      console.error(String(e));
-    } finally {
       setPending(false);
+      console.error(String(e)); // TODO: Print error toast UI.
+    } finally {
       clearTimeout(timeoutId);
     }
   };
 
+  // Using `<button>` will cause daisyUI's dropdown component to lose focus.
+  // Use `<div role="button" tabindex="0">` instead.
   return (
-    <button
-      type="submit"
+    <div
+      tabIndex={0}
+      role="button"
       className={`btn btn-sm btn-secondary btn-outline w-full ${
         pending ? 'btn-disabled' : ''
       }`}
       onClick={handleClick}
-      disabled={pending}
       aria-disabled={pending}
     >
-      {!pending ? (
+      {pending ? (
         <SvgSpinners270Ring className="fill-current" />
       ) : (
         <span>{props.label}</span>
       )}
-    </button>
+    </div>
   );
 }

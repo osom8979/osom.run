@@ -1,5 +1,3 @@
-import {createServerComponentClient} from '@supabase/auth-helpers-nextjs';
-import {cookies} from 'next/headers';
 import Link from 'next/link';
 import React from 'react';
 import Header from '@/app/[lng]/_header';
@@ -8,13 +6,7 @@ import useTranslation from '@/app/lib/i18n/server';
 
 export default async function RootLngPage(props: I18nRouterProps) {
   const lng = props.params.lng;
-  const cookieStore = cookies();
-  console.debug('--- cookieStore: ', cookieStore.getAll());
-  const supabase = createServerComponentClient({cookies: () => cookieStore});
   const {t} = await useTranslation(lng, 'root');
-  const user = await supabase.auth.getUser();
-  const hasSession = user.error === null;
-  console.debug('--- hasSession: ', hasSession);
 
   return (
     <React.Fragment>

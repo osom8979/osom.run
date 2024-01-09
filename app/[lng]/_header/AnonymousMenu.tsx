@@ -9,7 +9,7 @@ interface AnonymousMenuProps {
 export default async function AnonymousMenu(props: AnonymousMenuProps) {
   const {lng, loginLabel} = props;
   return (
-    <ul className="menu menu-horizontal">
+    <ul className="menu menu-horizontal p-0">
       <li>
         <Link className="font-bold" href={`/${lng}/login`}>
           {loginLabel}
