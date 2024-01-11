@@ -77,6 +77,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource-variable/noto-sans-kr@npm:^5.0.4":
+  version: 5.0.4
+  resolution: "@fontsource-variable/noto-sans-kr@npm:5.0.4"
+  checksum: bc18437d6db3ead981c332af8ce1c16b14af5cb01f39c2112ac1faab4e34766fa37db20246a2adbfe7a42529a2a26e76cd6d55d63dfeb48f0ff5675454e9fc6b
+  languageName: node
+  linkType: hard
+
 "@fontsource/nanum-gothic-coding@npm:^5.0.7":
   version: 5.0.17
   resolution: "@fontsource/nanum-gothic-coding@npm:5.0.17"
@@ -84,10 +91,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/sunflower@npm:^5.0.7":
+"@fontsource/noto-sans-kr@npm:^5.0.17":
   version: 5.0.17
-  resolution: "@fontsource/sunflower@npm:5.0.17"
-  checksum: cf59f0d4a7c65dfdff83b70eadeed024399308b9b3b2557f80f42b04663cedbc4873d434dd308cd6e2ce04e40819f00287a4ca997ab5038225a29210d0129697
+  resolution: "@fontsource/noto-sans-kr@npm:5.0.17"
+  checksum: fa6991e0984d5d8c153e8a08ff4a896db0753a29edfc7c9779cf43d102d8413a93a344d0fb0d847a5aadfd4d10a6b0714cb0c7cc9caaa38b9cc148b631aa5044
   languageName: node
   linkType: hard
 
@@ -3448,16 +3455,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"osom-ui@npm:^0.0.18":
-  version: 0.0.18
-  resolution: "osom-ui@npm:0.0.18"
+"osom-ui@npm:^0.0.19":
+  version: 0.0.19
+  resolution: "osom-ui@npm:0.0.19"
   dependencies:
     "@fontsource-variable/hahmlet": "npm:^5.0.7"
+    "@fontsource-variable/noto-sans-kr": "npm:^5.0.4"
     "@fontsource/nanum-gothic-coding": "npm:^5.0.7"
-    "@fontsource/sunflower": "npm:^5.0.7"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
-  checksum: ff102c2ec0ba2639a96efb2af7b0a56453e05563b8234318e41968b427407a4bb47c3a6432c48fee52e43a66e77d905cee043034617f2c2d23c638eb263e383d
+  checksum: 4c947cf7990f1a540f5ee6c3212db645b6c46b6eeecc2befc456902a304ff2daf7d82c80841050598c5121b9e9f03828e7467947897f3420073edcb7444a36ea
   languageName: node
   linkType: hard
 
@@ -3467,7 +3474,7 @@ __metadata:
   dependencies:
     "@fontsource-variable/hahmlet": "npm:^5.0.7"
     "@fontsource/nanum-gothic-coding": "npm:^5.0.7"
-    "@fontsource/sunflower": "npm:^5.0.7"
+    "@fontsource/noto-sans-kr": "npm:^5.0.17"
     "@supabase/auth-helpers-nextjs": "npm:^0.8.7"
     "@supabase/supabase-js": "npm:^2.39.0"
     "@types/node": "npm:^20.10.1"
@@ -3488,7 +3495,7 @@ __metadata:
     i18next: "npm:^23.7.7"
     i18next-resources-to-backend: "npm:^1.2.0"
     next: "npm:^14.0.3"
-    osom-ui: "npm:^0.0.18"
+    osom-ui: "npm:^0.0.19"
     postcss: "npm:^8.4.31"
     prettier: "npm:^3.1.0"
     react: "npm:^18.2.0"
