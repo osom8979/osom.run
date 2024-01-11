@@ -32,12 +32,12 @@ export default async function LoginPage(props: I18nRouterProps) {
           <h2 className="my-3 text-2xl text-center">{t('subtitle')}</h2>
 
           <div className="my-6 space-y-4">
-            <button aria-label={t('login_google')} type="button" className="btn w-full">
+            <button role="button" className="btn w-full" aria-label={t('login_google')}>
               <MdiGoogle className="w-6 h-6 fill-current" />
               <span>{t('login_google')}</span>
             </button>
 
-            <button aria-label={t('login_github')} role="button" className="btn w-full">
+            <button role="button" className="btn w-full" aria-label={t('login_github')}>
               <MdiGithub className="w-6 h-6 fill-current" />
               <span>{t('login_github')}</span>
             </button>
@@ -63,7 +63,11 @@ export default async function LoginPage(props: I18nRouterProps) {
 
           <p className="text-sm text-center my-6">
             {t('no_account')}
-            <Link href="#" rel="noopener noreferrer" className="link link-primary ml-1">
+            <Link
+              href={`/${lng}/signup`}
+              rel="noopener noreferrer"
+              className="link link-primary ml-1"
+            >
               {t('signup_link')}
             </Link>
           </p>

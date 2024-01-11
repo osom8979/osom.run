@@ -1,0 +1,11 @@
+{
+  "subtitle": "Create a new account!",
+  "have_account": "Already have an account?",
+  "login_link": "Login here",
+  "signup": "Sign Up",
+  "email": "Email address",
+  "email_placeholder": "Enter your email address...",
+  "password": "Password",
+  "password_placeholder": "****",
+  "bad_request": "Your email or password is incorrect."
+}

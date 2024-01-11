@@ -4,27 +4,56 @@ import {createRouteHandlerClient} from '@supabase/auth-helpers-nextjs';
 import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
+import {z} from 'zod';
 
 export const dynamic = 'force-dynamic';
 
-export async function POST(request: Request) {
-  const requestUrl = new URL(request.url);
-  const formData = await request.formData();
-  const email = String(formData.get('email'));
-  const password = String(formData.get('password'));
-  const supabase = createRouteHandlerClient({cookies});
+const FormSchema = z.object({
+  email: z.string({invalid_type_error: 'Invalid email field'}).email(),
+  password: z.string({invalid_type_error: 'Invalid password field'}),
+});
 
-  await supabase.auth.signUp({
+export interface SignupResponseBody {
+  message?: string;
+}
+
+export async function POST(request: Request) {
+  const formData = await request.formData();
+  const validatedFields = FormSchema.safeParse({
+    email: formData.get('email'),
+    password: formData.get('password'),
+  });
+
+  // Return early if the form data is invalid
+  if (!validatedFields.success) {
+    console.debug(validatedFields.error.message);
+    return NextResponse.json<SignupResponseBody>(
+      {message: validatedFields.error.message},
+      {status: StatusCodes.BAD_REQUEST}
+    );
+  }
+
+  const cookieStore = cookies();
+  const supabase = createRouteHandlerClient({cookies: () => cookieStore});
+  const {email, password} = validatedFields.data;
+
+  const requestUrl = new URL(request.url);
+  const {error} = await supabase.auth.signUp({
     email,
     password,
     options: {
-      emailRedirectTo: `${requestUrl.origin}/auth/callback`,
+      emailRedirectTo: `${requestUrl.origin}/api/auth/callback`,
     },
   });
 
-  // Returning a 301 status redirects from a POST to a GET route
-  // https://developer.mozilla.org/ko/docs/Web/HTTP/Status/301
-  return NextResponse.redirect(requestUrl.origin, {
-    status: StatusCodes.MOVED_PERMANENTLY,
-  });
+  if (error !== null) {
+    console.debug(error.message);
+    return NextResponse.json<SignupResponseBody>(
+      {message: error.message},
+      {status: StatusCodes.INTERNAL_SERVER_ERROR}
+    );
+  }
+
+  console.info(`Sign up successful with email ${email}`);
+  return NextResponse.json<SignupResponseBody>({});
 }
