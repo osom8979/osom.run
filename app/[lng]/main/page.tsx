@@ -1,3 +1,3 @@
-export default async function Main() {
+export default async function MainPage() {
   return <div />;
 }
