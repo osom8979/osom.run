@@ -2,7 +2,7 @@ import {createServerComponentClient} from '@supabase/auth-helpers-nextjs';
 import {cookies} from 'next/headers';
 import {redirect} from 'next/navigation';
 import React from 'react';
-import Header from '@/app/[lng]/_header';
+import Header from '@/app/[lng]/_header/Header';
 import {type I18nLayoutProps} from '@/app/[lng]/params';
 
 export default async function MainLayout(props: I18nLayoutProps) {

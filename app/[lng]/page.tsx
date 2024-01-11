@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import Header from '@/app/[lng]/_header';
+import Header from '@/app/[lng]/_header/Header';
 import {type I18nRouterProps} from '@/app/[lng]/params';
 import useTranslation from '@/app/lib/i18n/server';
 

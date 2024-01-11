@@ -2,6 +2,7 @@ import {createServerComponentClient} from '@supabase/auth-helpers-nextjs';
 import {cookies} from 'next/headers';
 import Link from 'next/link';
 import React from 'react';
+import styles from './Header.module.scss';
 import AnonymousMenu from '@/app/[lng]/_header/AnonymousMenu';
 import UserMenu from '@/app/[lng]/_header/UserMenu';
 import Logo from '@/app/components/logo';
@@ -15,26 +16,24 @@ export default async function Header({lng}: {lng: string}) {
   const hasSession = user.error === null;
 
   return (
-    <header className="navbar min-h-fit bg-base-100">
+    <header className={styles.header}>
       <div className="flex-1">
         <Link href={`/${lng}/`} hrefLang={lng}>
           <Logo height="1em" />
         </Link>
       </div>
 
-      <nav className="flex justify-end flex-1 px-2">
-        <div className="flex items-stretch">
-          {hasSession ? (
-            <UserMenu
-              lng={lng}
-              user={user.data.user}
-              settingsLabel={t('settings')}
-              logoutLabel={t('logout')}
-            />
-          ) : (
-            <AnonymousMenu lng={lng} loginLabel={t('login')} />
-          )}
-        </div>
+      <nav>
+        {hasSession ? (
+          <UserMenu
+            lng={lng}
+            user={user.data.user}
+            settingsLabel={t('settings')}
+            logoutLabel={t('logout')}
+          />
+        ) : (
+          <AnonymousMenu lng={lng} loginLabel={t('login')} />
+        )}
       </nav>
     </header>
   );
