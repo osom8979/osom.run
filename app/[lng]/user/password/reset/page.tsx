@@ -6,7 +6,7 @@ import React from 'react';
 import {type I18nRouterProps} from '@/app/[lng]/params';
 import Logo from '@/app/components/Logo';
 import MdiLogin from '@/app/icons/mdi/MdiLogin';
-import useTranslation from '@/app/lib/i18n/server';
+import useTranslation from '@/app/libs/i18n/server';
 
 export default async function UserPasswordResetPage(props: I18nRouterProps) {
   const lng = props.params.lng;

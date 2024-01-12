@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import GoBackButton from '@/app/components/GoBackButton';
 import Logo from '@/app/components/Logo';
-import useTranslation from '@/app/lib/i18n/server';
+import useTranslation from '@/app/libs/i18n/server';
 
 export default async function NotFound() {
   const {t} = await useTranslation(undefined, 'not-found');

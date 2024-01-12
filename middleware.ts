@@ -1,11 +1,11 @@
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
-import {upgradeSessionCookies} from '@/app/lib/auth/middle';
+import {upgradeSessionCookies} from '@/app/libs/auth/middle';
 import {
   findNextLanguage,
   invalidLngPath,
   upgradeI18nCookies,
-} from '@/app/lib/i18n/middle';
+} from '@/app/libs/i18n/middle';
 
 export const config = {
   matcher: [

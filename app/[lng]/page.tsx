@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import Header from '@/app/[lng]/_header/Header';
 import {type I18nRouterProps} from '@/app/[lng]/params';
-import useTranslation from '@/app/lib/i18n/server';
+import useTranslation from '@/app/libs/i18n/server';
 
 export default async function LngPage(props: I18nRouterProps) {
   const lng = props.params.lng;
