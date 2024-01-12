@@ -9,7 +9,7 @@ export default async function NotFound() {
   return (
     <html>
       <body className="bg-base-200 h-screen">
-        <main className="container m-auto h-full">
+        <main className="m-auto h-full">
           <div className="flex flex-col justify-center items-center h-full space-y-8">
             <figure>
               <Link href="/">
@@ -17,7 +17,7 @@ export default async function NotFound() {
               </Link>
             </figure>
 
-            <div className="card bg-base-100 shadow-lg min-w-[460px]">
+            <div className="card bg-base-100 shadow-lg">
               <div className="card-body items-center text-center">
                 <h2 className="card-title my-2">{t('title')}</h2>
 

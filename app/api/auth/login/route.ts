@@ -4,14 +4,9 @@ import {createRouteHandlerClient} from '@supabase/auth-helpers-nextjs';
 import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
-import {z} from 'zod';
+import {LoginSchema} from '@/app/schemas/login';
 
 export const dynamic = 'force-dynamic';
-
-const FormSchema = z.object({
-  email: z.string({invalid_type_error: 'Invalid email field'}).email(),
-  password: z.string({invalid_type_error: 'Invalid password field'}),
-});
 
 export interface LoginResponseBody {
   message?: string;
@@ -19,7 +14,7 @@ export interface LoginResponseBody {
 
 export async function POST(request: Request) {
   const formData = await request.formData();
-  const validatedFields = FormSchema.safeParse({
+  const validatedFields = LoginSchema.safeParse({
     email: formData.get('email'),
     password: formData.get('password'),
   });
