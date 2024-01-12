@@ -5,8 +5,8 @@ import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {useState} from 'react';
 import {BadRequestError, HttpStatusError, UnauthorizedError} from '@/app/exceptions';
-import MdiLogin from '@/app/icon/mdi/MdiLogin';
-import SvgSpinners270Ring from '@/app/icon/spinners/SvgSpinners270Ring';
+import MdiLogin from '@/app/icons/mdi/MdiLogin';
+import SvgSpinners270Ring from '@/app/icons/spinners/SvgSpinners270Ring';
 
 const LOGIN_API_PATH = '/api/auth/login';
 const LOGIN_API_METHOD = 'POST';

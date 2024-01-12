@@ -2,7 +2,7 @@
 
 import {useRouter} from 'next/navigation';
 import React, {useState} from 'react';
-import SvgSpinners270Ring from '@/app/icon/spinners/SvgSpinners270Ring';
+import SvgSpinners270Ring from '@/app/icons/spinners/SvgSpinners270Ring';
 
 const LOGOUT_API_PATH = '/api/auth/logout';
 const LOGOUT_API_METHOD = 'POST';
