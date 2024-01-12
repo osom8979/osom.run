@@ -12,7 +12,6 @@ export const USE_LANGUAGE = en;
 export const I18N_DEBUG = false;
 
 export const COOKIE_I18N_KEY = 'i18n';
-export const IGNORE_REQUEST_PATHS = ['/api', '/_next', 'favicon.ico'];
 
 export function defaultOptions(
   lng = USE_LANGUAGE,

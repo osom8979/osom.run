@@ -1,7 +1,11 @@
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
 import {upgradeSessionCookies} from '@/app/lib/auth/middle';
-import {findNextLanguage, invalidPath, upgradeI18nCookies} from '@/app/lib/i18n/middle';
+import {
+  findNextLanguage,
+  invalidLngPath,
+  upgradeI18nCookies,
+} from '@/app/lib/i18n/middle';
 
 export const config = {
   matcher: [
@@ -18,14 +22,27 @@ export const config = {
   ],
 };
 
-export async function middleware(req: NextRequest) {
-  // Redirect if lng in path is not supported
-  if (invalidPath(req)) {
-    const lng = findNextLanguage(req);
-    const nextPath = req.nextUrl.pathname;
-    console.assert(nextPath.startsWith('/'));
+const matchers = config.matcher.map(pattern => new RegExp(pattern));
 
-    const redirectPath = `/${lng}${nextPath}`;
+function validMiddlewareRequest(req: NextRequest) {
+  const pathname = req.nextUrl.pathname;
+  for (const re of matchers) {
+    if (re.test(pathname)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+export async function middleware(req: NextRequest) {
+  console.assert(validMiddlewareRequest(req));
+
+  // Redirect if lng in path is not supported
+  if (invalidLngPath(req)) {
+    const lng = findNextLanguage(req);
+    const pathname = req.nextUrl.pathname;
+    console.assert(pathname.startsWith('/'));
+    const redirectPath = `/${lng}${pathname}`;
     const redirectUrl = new URL(redirectPath, req.url);
 
     console.debug(`middleware(req='${req.url}') redirect '${redirectUrl}'`);
@@ -36,6 +53,6 @@ export async function middleware(req: NextRequest) {
   upgradeI18nCookies(req, res);
   await upgradeSessionCookies(req, res);
 
-  console.debug(`middleware(req='${req.url}')`, res);
+  console.debug(`middleware(req='${req.url}') -> ${res.status}`);
   return res;
 }
