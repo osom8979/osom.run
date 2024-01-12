@@ -5,7 +5,7 @@ import {redirect} from 'next/navigation';
 import React from 'react';
 import LoginForm from '@/app/[lng]/login/_components/LoginForm';
 import {type I18nRouterProps} from '@/app/[lng]/params';
-import Logo from '@/app/components/logo';
+import Logo from '@/app/components/Logo';
 import MdiGithub from '@/app/icon/mdi/MdiGithub';
 import MdiGoogle from '@/app/icon/mdi/MdiGoogle';
 import useTranslation from '@/app/lib/i18n/server';

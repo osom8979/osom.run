@@ -5,7 +5,7 @@ import React from 'react';
 import styles from './Header.module.scss';
 import AnonymousMenu from '@/app/[lng]/_header/AnonymousMenu';
 import UserMenu from '@/app/[lng]/_header/UserMenu';
-import Logo from '@/app/components/logo';
+import Logo from '@/app/components/Logo';
 import useTranslation from '@/app/lib/i18n/server';
 
 export default async function Header({lng}: {lng: string}) {
