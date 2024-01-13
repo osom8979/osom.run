@@ -3,8 +3,8 @@ import {cookies} from 'next/headers';
 import Link from 'next/link';
 import React from 'react';
 import styles from './Header.module.scss';
-import AnonymousMenu from '@/app/[lng]/_header/AnonymousMenu';
-import UserMenu from '@/app/[lng]/_header/UserMenu';
+import AnonymousMenu from '@/app/components/header/AnonymousMenu';
+import UserMenu from '@/app/components/header/UserMenu';
 import Logo from '@/app/components/Logo';
 import useTranslation from '@/app/libs/i18n/server';
 
