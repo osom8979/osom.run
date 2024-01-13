@@ -18,15 +18,7 @@ export default async function SignupPage(props: I18nRouterProps) {
         <div className="card">
           <h2 className="mt-3 mb-9 text-2xl text-center">{t('subtitle')}</h2>
 
-          <SignupForm
-            lng={lng}
-            emailLabel={t('email')}
-            emailPlaceholder={t('email_placeholder')}
-            passwordLabel={t('password')}
-            passwordPlaceholder={t('password_placeholder')}
-            signupLabel={t('signup')}
-            errorBadRequestLabel={t('bad_request')}
-          />
+          <SignupForm lng={lng} />
 
           <p className="text-sm text-center my-6">
             {t('have_account')}

@@ -49,17 +49,7 @@ export default async function LoginPage(props: I18nRouterProps) {
             <hr className="w-full"></hr>
           </div>
 
-          <LoginForm
-            lng={lng}
-            emailLabel={t('email')}
-            emailPlaceholder={t('email_placeholder')}
-            passwordLabel={t('password')}
-            passwordPlaceholder={t('password_placeholder')}
-            forgotPasswordLabel={t('forgot_password')}
-            loginLabel={t('login')}
-            errorBadRequestLabel={t('bad_request')}
-            errorUnauthorizedLabel={t('unauthorized')}
-          />
+          <LoginForm lng={lng} />
 
           <p className="text-sm text-center my-6">
             {t('no_account')}

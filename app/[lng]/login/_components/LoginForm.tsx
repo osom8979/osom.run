@@ -7,6 +7,7 @@ import React, {useState} from 'react';
 import {BadRequestError, HttpStatusError, UnauthorizedError} from '@/app/exceptions';
 import MdiLogin from '@/app/icons/mdi/MdiLogin';
 import SvgSpinners270Ring from '@/app/icons/spinners/SvgSpinners270Ring';
+import useTranslation from '@/app/libs/i18n/client';
 
 const LOGIN_API_PATH = '/api/auth/login';
 const LOGIN_API_METHOD = 'POST';
@@ -14,18 +15,11 @@ const LOGIN_API_TIMEOUT_MILLISECONDS = 8_000;
 
 interface LoginSubmitProps {
   lng?: string;
-  emailLabel?: string;
-  emailPlaceholder?: string;
-  passwordLabel?: string;
-  passwordPlaceholder?: string;
-  forgotPasswordLabel?: string;
-  loginLabel?: string;
-  errorBadRequestLabel?: string;
-  errorUnauthorizedLabel?: string;
   fetchTimeout?: number;
 }
 
 export default function LoginForm(props: LoginSubmitProps) {
+  const {t} = useTranslation(props.lng, 'login');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [pending, setPending] = useState(false);
@@ -69,9 +63,9 @@ export default function LoginForm(props: LoginSubmitProps) {
       setPending(false);
 
       if (e instanceof BadRequestError) {
-        setError(props.errorBadRequestLabel ?? e.message);
+        setError(t('bad_request') ?? e.message);
       } else if (e instanceof UnauthorizedError) {
-        setError(props.errorUnauthorizedLabel ?? e.message);
+        setError(t('unauthorized') ?? e.message);
       } else if (e instanceof HttpStatusError) {
         setError(e.message);
       } else {
@@ -102,13 +96,13 @@ export default function LoginForm(props: LoginSubmitProps) {
       <div className="space-y-4">
         <div className="space-y-2">
           <label htmlFor="email" className="block text-sm">
-            {props.emailLabel}
+            {t('email')}
           </label>
           <input
             type="email"
             name="email"
             id="email"
-            placeholder={props.emailPlaceholder}
+            placeholder={t('email_placeholder')}
             className={inputClassName}
             value={email}
             onChange={e => setEmail(e.target.value)}
@@ -120,14 +114,14 @@ export default function LoginForm(props: LoginSubmitProps) {
         <div className="space-y-2">
           <div className="flex justify-between">
             <label htmlFor="password" className="text-sm">
-              {props.passwordLabel}
+              {t('password')}
             </label>
             <Link
               rel="noopener noreferrer"
               href="#"
               className="link link-primary text-xs"
             >
-              {props.forgotPasswordLabel}
+              {t('forgot_password')}
             </Link>
           </div>
 
@@ -135,7 +129,7 @@ export default function LoginForm(props: LoginSubmitProps) {
             type="password"
             name="password"
             id="password"
-            placeholder={props.passwordPlaceholder}
+            placeholder={t('password_placeholder')}
             className={inputClassName}
             value={password}
             onChange={e => setPassword(e.target.value)}
@@ -158,7 +152,7 @@ export default function LoginForm(props: LoginSubmitProps) {
         ) : (
           <MdiLogin className="w-6 h-6 fill-current" />
         )}
-        <span>{props.loginLabel}</span>
+        <span>{t('login')}</span>
       </button>
     </form>
   );

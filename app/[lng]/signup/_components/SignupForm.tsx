@@ -5,6 +5,7 @@ import {useRouter} from 'next/navigation';
 import React, {useState} from 'react';
 import {BadRequestError, HttpStatusError} from '@/app/exceptions';
 import SvgSpinners270Ring from '@/app/icons/spinners/SvgSpinners270Ring';
+import useTranslation from '@/app/libs/i18n/client';
 
 const LOGIN_API_PATH = '/api/auth/signup';
 const LOGIN_API_METHOD = 'POST';
@@ -12,16 +13,12 @@ const LOGIN_API_TIMEOUT_MILLISECONDS = 8_000;
 
 interface SignupSubmitProps {
   lng?: string;
-  emailLabel?: string;
-  emailPlaceholder?: string;
-  passwordLabel?: string;
-  passwordPlaceholder?: string;
-  signupLabel?: string;
   errorBadRequestLabel?: string;
   fetchTimeout?: number;
 }
 
 export default function SignupForm(props: SignupSubmitProps) {
+  const {t} = useTranslation(props.lng, 'login');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [pending, setPending] = useState(false);
@@ -63,7 +60,7 @@ export default function SignupForm(props: SignupSubmitProps) {
       setPending(false);
 
       if (e instanceof BadRequestError) {
-        setError(props.errorBadRequestLabel ?? e.message);
+        setError(t('bad_request') ?? e.message);
       } else if (e instanceof HttpStatusError) {
         setError(e.message);
       } else {
@@ -94,13 +91,13 @@ export default function SignupForm(props: SignupSubmitProps) {
       <div className="space-y-4">
         <div className="space-y-2">
           <label htmlFor="email" className="block text-sm">
-            {props.emailLabel}
+            {t('email')}
           </label>
           <input
             type="email"
             name="email"
             id="email"
-            placeholder={props.emailPlaceholder}
+            placeholder={t('email_placeholder')}
             className={inputClassName}
             value={email}
             onChange={e => setEmail(e.target.value)}
@@ -111,13 +108,13 @@ export default function SignupForm(props: SignupSubmitProps) {
 
         <div className="space-y-2">
           <label htmlFor="password" className="block text-sm">
-            {props.passwordLabel}
+            {t('password')}
           </label>
           <input
             type="password"
             name="password"
             id="password"
-            placeholder={props.passwordPlaceholder}
+            placeholder={t('password_placeholder')}
             className={inputClassName}
             value={password}
             onChange={e => setPassword(e.target.value)}
@@ -136,7 +133,7 @@ export default function SignupForm(props: SignupSubmitProps) {
         aria-disabled={pending}
       >
         {pending && <SvgSpinners270Ring className="w-6 h-6 fill-current" />}
-        <span>{props.signupLabel}</span>
+        <span>{t('signup')}</span>
       </button>
     </form>
   );
