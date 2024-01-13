@@ -13,7 +13,7 @@ export const I18N_DEBUG = false;
 
 export const COOKIE_I18N_KEY = 'i18n';
 
-export function defaultOptions(
+export function defaultServerOptions(
   lng = USE_LANGUAGE,
   ns = LOAD_NAMESPACES,
   debug = I18N_DEBUG
@@ -26,5 +26,21 @@ export function defaultOptions(
     fallbackNS: FALLBACK_NAMESPACE,
     defaultNS: DEFAULT_NAMESPACE,
     ns,
+  } as InitOptions;
+}
+
+export function defaultClientOptions(
+  lng = USE_LANGUAGE,
+  ns = LOAD_NAMESPACES,
+  debug = I18N_DEBUG
+) {
+  const runsOnServerSide = typeof window === 'undefined';
+  return {
+    ...defaultServerOptions(lng, ns, debug),
+    lng: undefined, // let detect the language on client side
+    detection: {
+      order: ['path', 'htmlTag', 'cookie', 'navigator'],
+    },
+    preload: runsOnServerSide ? LANGUAGES : [],
   } as InitOptions;
 }

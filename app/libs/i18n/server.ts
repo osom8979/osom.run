@@ -1,18 +1,14 @@
 import {createInstance} from 'i18next';
-import resourcesToBackend from 'i18next-resources-to-backend';
 import {initReactI18next} from 'react-i18next/initReactI18next';
-import {DEFAULT_NAMESPACE, defaultOptions, FALLBACK_LANGUAGE} from './settings';
-
-function backendI18nImporter(language: string, namespace: string) {
-  return import(`./locales/${language}/${namespace}.json`);
-}
+import backendJsonModule from './backend';
+import {DEFAULT_NAMESPACE, defaultServerOptions, FALLBACK_LANGUAGE} from './settings';
 
 async function initI18next(language?: string, namespace?: string) {
   const i18n = createInstance();
   await i18n
     .use(initReactI18next)
-    .use(resourcesToBackend(backendI18nImporter))
-    .init(defaultOptions(language, namespace));
+    .use(backendJsonModule)
+    .init(defaultServerOptions(language, namespace));
   return i18n;
 }
 
