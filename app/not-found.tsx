@@ -1,6 +1,6 @@
 import React from 'react';
-import CenterMain from '@/app/components/layouts/CenterMain';
-import NotFoundCard from '@/app/components/NotFoundCard';
+import NotFoundCard from '@/app/components/data/display/NotFoundCard';
+import CenterMain from '@/app/components/layout/CenterMain';
 
 export default async function NotFound() {
   return (

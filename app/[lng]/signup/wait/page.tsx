@@ -1,6 +1,6 @@
 import React from 'react';
 import type {I18nRouterProps} from '@/app/[lng]/params';
-import CenterMain from '@/app/components/layouts/CenterMain';
+import CenterMain from '@/app/components/layout/CenterMain';
 import MdiEmailCheckOutline from '@/app/icons/mdi/MdiEmailCheckOutline';
 import SvgSpinners3DotsFade from '@/app/icons/spinners/SvgSpinners3DotsFade';
 import useTranslation from '@/app/libs/i18n/server';

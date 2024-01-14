@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import GoBackButton from '@/app/components/GoBackButton';
+import GoBackButton from '@/app/components/data/input/GoBackButton';
 import useTranslation from '@/app/libs/i18n/client';
 
 export default function NotFound() {
