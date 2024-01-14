@@ -15,7 +15,7 @@ const LOGIN_API_METHOD = 'POST';
 const LOGIN_API_TIMEOUT_MILLISECONDS = 8_000;
 
 interface LoginSubmitProps {
-  lng?: string;
+  lng: string;
   fetchTimeout?: number;
 }
 
@@ -128,7 +128,7 @@ export default function LoginForm(props: LoginSubmitProps) {
             </label>
             <Link
               rel="noopener noreferrer"
-              href="#"
+              href={`/${props.lng}/login/recovery`}
               className="link link-primary text-xs"
             >
               {t('forgot_password')}

@@ -1,0 +1,7 @@
+{
+  "title": "Password recovery",
+  "details_1": "Please enter the email address you signed up with.",
+  "details_2": "We will send you a recovery link to reset your password.",
+  "email_placeholder": "Enter your email address...",
+  "send": "Send recovery mail"
+}

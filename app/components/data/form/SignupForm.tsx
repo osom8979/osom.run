@@ -13,7 +13,7 @@ const LOGIN_API_METHOD = 'POST';
 const LOGIN_API_TIMEOUT_MILLISECONDS = 8_000;
 
 interface SignupSubmitProps {
-  lng?: string;
+  lng: string;
   errorBadRequestLabel?: string;
   fetchTimeout?: number;
 }
