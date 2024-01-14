@@ -8,7 +8,7 @@ export default async function LngPage(props: I18nRouterProps) {
   const {t} = await useTranslation(lng, 'root');
 
   return (
-    <main className="min-h-screen bg-base-200">
+    <main className="min-h-screen">
       <section className="hero min-h-screen">
         <div className="hero-content text-center">
           <div className="max-w-md">
