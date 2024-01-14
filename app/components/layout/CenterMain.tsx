@@ -15,7 +15,7 @@ export default async function CenterMain(props: CenterMainProps) {
     <main className="container h-screen m-auto">
       <div className="flex flex-col justify-center items-center h-full space-y-8">
         {!hideLogo && (
-          <Link href="/" hrefLang={lng}>
+          <Link href={`/${lng ?? ''}`} hrefLang={lng}>
             <Logo height={logoHeight ?? '1.2em'} />
           </Link>
         )}

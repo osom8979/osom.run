@@ -1,5 +1,6 @@
 {
   "title": "Waiting for email approval",
   "details_1": "A subscription confirmation link has been sent to your email.",
-  "details_2": "Please check your inbox and click the link."
+  "details_2": "Please check your inbox and click the link.",
+  "login_link": "Go to the login page."
 }

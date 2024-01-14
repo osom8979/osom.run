@@ -5,6 +5,7 @@ import {z} from 'zod';
  * https://supabase.com/dashboard/project/_/settings/auth
  */
 export const MINIMUM_PASSWORD_LENGTH = 8;
+export const MAXIMUM_PASSWORD_LENGTH = 72;
 export const AT_LEAST_ONE_LOWERCASE = /^(?=.*[a-z]).+$/g;
 export const AT_LEAST_ONE_UPPERCASE = /^(?=.*[A-Z]).+$/g;
 export const AT_LEAST_ONE_DIGIT = /^(?=.*[0-9]).+$/g;
@@ -17,6 +18,10 @@ export const LoginSchema = z.object({
     .min(
       MINIMUM_PASSWORD_LENGTH,
       `Passwords shorter than ${MINIMUM_PASSWORD_LENGTH} characters are considered weak and are rejected.`
+    )
+    .max(
+      MAXIMUM_PASSWORD_LENGTH,
+      `Passwords of up to ${MAXIMUM_PASSWORD_LENGTH} characters are allowed.`
     )
     .regex(AT_LEAST_ONE_LOWERCASE, "At least one 'lowercase' expected")
     .regex(AT_LEAST_ONE_UPPERCASE, "At least one 'uppercase' expected")

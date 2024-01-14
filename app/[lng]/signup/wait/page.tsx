@@ -1,8 +1,8 @@
+import Link from 'next/link';
 import React from 'react';
 import type {I18nRouterProps} from '@/app/[lng]/params';
 import CenterMain from '@/app/components/layout/CenterMain';
 import MdiEmailCheckOutline from '@/app/icons/mdi/MdiEmailCheckOutline';
-import SvgSpinners3DotsFade from '@/app/icons/spinners/SvgSpinners3DotsFade';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function WaitPage(props: I18nRouterProps) {
@@ -24,8 +24,16 @@ export default async function WaitPage(props: I18nRouterProps) {
             {t('details_2')}
           </p>
 
-          <div className="card-actionsm mt-6">
-            <SvgSpinners3DotsFade width="2em" height="2em" />
+          <div className="card-actions mt-4">
+            <p>
+              <Link
+                href={`/${lng}/login`}
+                hrefLang={lng}
+                className="link link-primary text-sm"
+              >
+                {t('login_link')}
+              </Link>
+            </p>
           </div>
         </div>
       </div>
