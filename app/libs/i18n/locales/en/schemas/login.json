@@ -1,0 +1,13 @@
+{
+  "required_email": "The 'email' field is required",
+  "invalid_email_type": "Invalid 'email' field type",
+  "invalid_email_format": "Invalid 'email' format",
+  "required_password": "The 'password' field is required",
+  "invalid_password_type": "Invalid 'password' field type",
+  "minimum_password_length": "Passwords shorter than {{length}} characters are considered weak and are rejected",
+  "maximum_password_length": "Passwords of up to {{length}} characters are allowed",
+  "at_least_one_lowercase": "Passwords at least one 'lowercase' expected",
+  "at_least_one_uppercase": "Passwords at least one 'uppercase' expected",
+  "at_least_one_digit": "Passwords at least one 'digit' expected",
+  "at_least_one_symbol": "Passwords at least one 'symbol' expected"
+}

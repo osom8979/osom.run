@@ -8,6 +8,7 @@ import {BadRequestError, HttpStatusError, UnauthorizedError} from '@/app/excepti
 import MdiLogin from '@/app/icons/mdi/MdiLogin';
 import SvgSpinners270Ring from '@/app/icons/spinners/SvgSpinners270Ring';
 import useTranslation from '@/app/libs/i18n/client';
+import {getLoginSchema} from '@/app/schemas/login';
 
 const LOGIN_API_PATH = '/api/auth/login';
 const LOGIN_API_METHOD = 'POST';
@@ -28,8 +29,17 @@ export default function LoginForm(props: LoginSubmitProps) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setPending(true);
 
+    const schema = await getLoginSchema(props.lng);
+    const validatedFields = schema.safeParse({email, password});
+    if (!validatedFields.success) {
+      const errors = validatedFields.error.errors;
+      console.assert(errors.length >= 1);
+      setError(errors[0].message);
+      return;
+    }
+
+    setPending(true);
     const data = new FormData();
     data.set('email', email);
     data.set('password', password);
