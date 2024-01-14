@@ -12,7 +12,7 @@ interface CenterMainProps {
 export default async function CenterMain(props: CenterMainProps) {
   const {children, lng, hideLogo, logoHeight} = props;
   return (
-    <main className="h-screen m-auto">
+    <main className="container h-screen m-auto">
       <div className="flex flex-col justify-center items-center h-full space-y-8">
         {!hideLogo && (
           <Link href="/" hrefLang={lng}>

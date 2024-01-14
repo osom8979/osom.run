@@ -95,7 +95,7 @@ export default function LoginForm(props: LoginSubmitProps) {
     <form className="space-y-5" onSubmit={handleSubmit}>
       <div className="space-y-4">
         <div className="space-y-2">
-          <label htmlFor="email" className="block text-sm">
+          <label htmlFor="email" className="block text-sm text-left">
             {t('email')}
           </label>
           <input

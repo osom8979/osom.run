@@ -18,7 +18,7 @@ interface SignupSubmitProps {
 }
 
 export default function SignupForm(props: SignupSubmitProps) {
-  const {t} = useTranslation(props.lng, 'login');
+  const {t} = useTranslation(props.lng, 'signup');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [pending, setPending] = useState(false);
@@ -90,7 +90,7 @@ export default function SignupForm(props: SignupSubmitProps) {
     <form className="space-y-5" onSubmit={handleSubmit}>
       <div className="space-y-4">
         <div className="space-y-2">
-          <label htmlFor="email" className="block text-sm">
+          <label htmlFor="email" className="block text-sm text-left">
             {t('email')}
           </label>
           <input
@@ -107,7 +107,7 @@ export default function SignupForm(props: SignupSubmitProps) {
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="password" className="block text-sm">
+          <label htmlFor="password" className="block text-sm text-left">
             {t('password')}
           </label>
           <input

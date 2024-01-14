@@ -5,7 +5,7 @@ import {redirect} from 'next/navigation';
 import React from 'react';
 import LoginForm from '@/app/[lng]/login/_components/LoginForm';
 import {type I18nRouterProps} from '@/app/[lng]/params';
-import Logo from '@/app/components/Logo';
+import CenterMain from '@/app/components/layouts/CenterMain';
 import MdiGithub from '@/app/icons/mdi/MdiGithub';
 import MdiGoogle from '@/app/icons/mdi/MdiGoogle';
 import useTranslation from '@/app/libs/i18n/server';
@@ -22,14 +22,10 @@ export default async function LoginPage(props: I18nRouterProps) {
 
   const {t} = await useTranslation(lng, 'login');
   return (
-    <main className="container mx-auto flex flex-col items-center">
-      <section className="mx-4 my-16 flex flex-col items-center">
-        <Link href={`/${lng}/`} hrefLang={lng} className="my-8">
-          <Logo height="1em" />
-        </Link>
-
-        <div className="card">
-          <h2 className="my-3 text-2xl text-center">{t('subtitle')}</h2>
+    <CenterMain lng={lng}>
+      <div className="card bg-base-100 shadow-lg">
+        <div className="card-body items-center">
+          <h2 className="card-title mb-6 text-center">{t('title')}</h2>
 
           <div className="my-6 space-y-4">
             <button role="button" className="btn w-full" aria-label={t('login_google')}>
@@ -55,6 +51,7 @@ export default async function LoginPage(props: I18nRouterProps) {
             {t('no_account')}
             <Link
               href={`/${lng}/signup`}
+              hrefLang={lng}
               rel="noopener noreferrer"
               className="link link-primary ml-1"
             >
@@ -62,7 +59,7 @@ export default async function LoginPage(props: I18nRouterProps) {
             </Link>
           </p>
         </div>
-      </section>
-    </main>
+      </div>
+    </CenterMain>
   );
 }
