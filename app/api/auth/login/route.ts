@@ -4,7 +4,7 @@ import {createRouteHandlerClient} from '@supabase/auth-helpers-nextjs';
 import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
-import {getLoginSchema} from '@/app/schemas/login';
+import {LoginSchema} from '@/app/schemas/login';
 
 export const dynamic = 'force-dynamic';
 
@@ -14,8 +14,7 @@ export interface LoginResponseBody {
 
 export async function POST(request: Request) {
   const formData = await request.formData();
-  const schema = await getLoginSchema();
-  const validatedFields = schema.safeParse({
+  const validatedFields = LoginSchema.safeParse({
     email: formData.get('email'),
     password: formData.get('password'),
   });

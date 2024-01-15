@@ -4,12 +4,11 @@ import {StatusCodes} from 'http-status-codes';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {useState} from 'react';
-import styles from './LoginForm.module.scss';
 import {BadRequestError, HttpStatusError, UnauthorizedError} from '@/app/exceptions';
 import MdiLogin from '@/app/icons/mdi/MdiLogin';
 import SvgSpinners270Ring from '@/app/icons/spinners/SvgSpinners270Ring';
 import useTranslation from '@/app/libs/i18n/client';
-import {getLoginSchema} from '@/app/schemas/login';
+import {LoginSchema} from '@/app/schemas/login';
 
 const LOGIN_API_PATH = '/api/auth/login';
 const LOGIN_API_METHOD = 'POST';
@@ -31,8 +30,7 @@ export default function LoginForm(props: LoginSubmitProps) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const schema = await getLoginSchema(props.lng);
-    const validatedFields = schema.safeParse({email, password});
+    const validatedFields = LoginSchema.safeParse({email, password});
     if (!validatedFields.success) {
       const errors = validatedFields.error.errors;
       console.assert(errors.length >= 1);
@@ -88,9 +86,9 @@ export default function LoginForm(props: LoginSubmitProps) {
   };
 
   return (
-    <form className={styles.root} onSubmit={handleSubmit}>
-      <div className={styles.inputList}>
-        <div className={styles.inputItem}>
+    <form className="osom-form" onSubmit={handleSubmit}>
+      <div className="osom-form-list">
+        <div className="osom-form-item">
           <label htmlFor="email">{t('email')}</label>
           <input
             type="email"
@@ -109,7 +107,7 @@ export default function LoginForm(props: LoginSubmitProps) {
           />
         </div>
 
-        <div className={styles.inputItem}>
+        <div className="osom-form-item">
           <div className="flex justify-between">
             <label htmlFor="password">{t('password')}</label>
             <Link
@@ -139,7 +137,7 @@ export default function LoginForm(props: LoginSubmitProps) {
         </div>
       </div>
 
-      <div className={styles.errorBox} data-error={error} aria-errormessage={error}>
+      <div className="osom-form-error" data-error={error} aria-errormessage={error}>
         <span>{error}</span>
       </div>
 

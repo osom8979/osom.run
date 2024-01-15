@@ -3,11 +3,10 @@
 import {StatusCodes} from 'http-status-codes';
 import {useRouter} from 'next/navigation';
 import React, {useState} from 'react';
-import styles from './SignupForm.module.scss';
 import {BadRequestError, HttpStatusError} from '@/app/exceptions';
 import SvgSpinners270Ring from '@/app/icons/spinners/SvgSpinners270Ring';
 import useTranslation from '@/app/libs/i18n/client';
-import {getLoginSchema} from '@/app/schemas/login';
+import {LoginSchema} from '@/app/schemas/login';
 
 const LOGIN_API_PATH = '/api/auth/signup';
 const LOGIN_API_METHOD = 'POST';
@@ -29,8 +28,7 @@ export default function SignupForm(props: SignupSubmitProps) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const schema = await getLoginSchema(props.lng);
-    const validatedFields = schema.safeParse({email, password});
+    const validatedFields = LoginSchema.safeParse({email, password});
     if (!validatedFields.success) {
       const errors = validatedFields.error.errors;
       console.assert(errors.length >= 1);
@@ -82,9 +80,9 @@ export default function SignupForm(props: SignupSubmitProps) {
   };
 
   return (
-    <form className={styles.root} onSubmit={handleSubmit}>
-      <div className={styles.inputList}>
-        <div className={styles.inputItem}>
+    <form className="osom-form" onSubmit={handleSubmit}>
+      <div className="osom-form-list">
+        <div className="osom-form-item">
           <label htmlFor="email">{t('email')}</label>
           <input
             type="email"
@@ -103,7 +101,7 @@ export default function SignupForm(props: SignupSubmitProps) {
           />
         </div>
 
-        <div className={styles.inputItem}>
+        <div className="osom-form-item">
           <label htmlFor="password">{t('password')}</label>
           <input
             type="password"
@@ -123,7 +121,7 @@ export default function SignupForm(props: SignupSubmitProps) {
         </div>
       </div>
 
-      <div className={styles.errorBox} data-error={error} aria-errormessage={error}>
+      <div className="osom-form-error" data-error={error} aria-errormessage={error}>
         <span>{error}</span>
       </div>
 
