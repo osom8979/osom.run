@@ -114,9 +114,9 @@ export default function SignupForm(props: SignupSubmitProps) {
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
-                  <SolarEyeOutline width="1.6em" height="1.6em" />
+                  <SolarEyeOutline className="w-6 h-6" />
                 ) : (
-                  <SolarEyeClosedOutline width="1.6em" height="1.6em" />
+                  <SolarEyeClosedOutline className="w-6 h-6" />
                 )}
               </button>
             </div>

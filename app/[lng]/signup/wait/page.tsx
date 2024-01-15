@@ -13,7 +13,7 @@ export default async function WaitPage(props: I18nRouterProps) {
       <div className="card bg-base-100 shadow-lg">
         <div className="card-body items-center">
           <figure>
-            <UilEnvelopeCheck width="4em" height="4em" />
+            <UilEnvelopeCheck className="w-16 h-16" />
           </figure>
 
           <h2 className="card-title mt-2 mb-6 text-center">{t('title')}</h2>

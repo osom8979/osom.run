@@ -11,7 +11,7 @@ export default function NotFound() {
     <div className="card bg-base-100 shadow-lg">
       <div className="card-body items-center text-center">
         <figure>
-          <TablerError404 width="4em" height="4em" />
+          <TablerError404 className="w-28 h-28" />
         </figure>
 
         <h2 className="card-title my-2">{t('title')}</h2>

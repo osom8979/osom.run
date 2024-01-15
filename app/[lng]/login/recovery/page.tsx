@@ -17,7 +17,7 @@ export default async function RecoveryPage(props: I18nRouterProps) {
           method="post"
         >
           <figure>
-            <MaterialSymbolsLockResetRounded width="4em" height="4em" />
+            <MaterialSymbolsLockResetRounded className="w-16 h-16" />
           </figure>
 
           <h2 className="card-title mt-2 mb-6 text-center">{t('title')}</h2>
