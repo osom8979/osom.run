@@ -3,6 +3,7 @@
 import {StatusCodes} from 'http-status-codes';
 import {useRouter} from 'next/navigation';
 import React, {useState} from 'react';
+import styles from './SignupForm.module.scss';
 import {BadRequestError, HttpStatusError} from '@/app/exceptions';
 import SvgSpinners270Ring from '@/app/icons/spinners/SvgSpinners270Ring';
 import useTranslation from '@/app/libs/i18n/client';
@@ -14,7 +15,6 @@ const LOGIN_API_TIMEOUT_MILLISECONDS = 8_000;
 
 interface SignupSubmitProps {
   lng: string;
-  errorBadRequestLabel?: string;
   fetchTimeout?: number;
 }
 
@@ -22,8 +22,8 @@ export default function SignupForm(props: SignupSubmitProps) {
   const {t} = useTranslation(props.lng, 'signup');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [pending, setPending] = useState(false);
-  const [error, setError] = useState('');
+  const [pending, setPending] = useState<undefined | boolean>();
+  const [error, setError] = useState<undefined | string>();
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -67,7 +67,7 @@ export default function SignupForm(props: SignupSubmitProps) {
 
       router.push(`/${props.lng}/signup/wait`);
     } catch (e) {
-      setPending(false);
+      setPending(undefined);
 
       if (e instanceof BadRequestError) {
         setError(t('bad_request') ?? e.message);
@@ -81,67 +81,53 @@ export default function SignupForm(props: SignupSubmitProps) {
     }
   };
 
-  let inputClasses = [
-    'input',
-    'input-bordered',
-    'w-full',
-    'placeholder-gray-500',
-    'placeholder-opacity-80',
-  ];
-  if (pending) {
-    inputClasses.push('input-disabled');
-  }
-  if (error) {
-    inputClasses.push('input-error');
-  }
-  const inputClassName = inputClasses.join(' ');
-
   return (
-    <form className="space-y-5 w-full" onSubmit={handleSubmit}>
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <label htmlFor="email" className="block text-sm text-left">
-            {t('email')}
-          </label>
+    <form className={styles.root} onSubmit={handleSubmit}>
+      <div className={styles.inputList}>
+        <div className={styles.inputItem}>
+          <label htmlFor="email">{t('email')}</label>
           <input
             type="email"
             name="email"
             id="email"
+            required={true}
+            aria-required={true}
             placeholder={t('email_placeholder')}
-            className={inputClassName}
+            aria-placeholder={t('email_placeholder')}
             value={email}
             onChange={e => setEmail(e.target.value)}
             disabled={pending}
             aria-disabled={pending}
+            data-error={error}
+            aria-errormessage={error}
           />
         </div>
 
-        <div className="space-y-2">
-          <label htmlFor="password" className="block text-sm text-left">
-            {t('password')}
-          </label>
+        <div className={styles.inputItem}>
+          <label htmlFor="password">{t('password')}</label>
           <input
             type="password"
             name="password"
             id="password"
+            required={true}
+            aria-required={true}
             placeholder={t('password_placeholder')}
-            className={inputClassName}
+            aria-placeholder={t('password_placeholder')}
             value={password}
             onChange={e => setPassword(e.target.value)}
             disabled={pending}
             aria-disabled={pending}
+            data-error={error}
+            aria-errormessage={error}
           />
         </div>
       </div>
 
-      <div className="pl-2 text-error text-sm">{error && <span>{error}</span>}</div>
+      <div className={styles.errorBox} data-error={error} aria-errormessage={error}>
+        <span>{error}</span>
+      </div>
 
-      <button
-        type="submit"
-        className={`btn btn-primary w-full ${pending ? 'btn-disabled' : ''}`}
-        disabled={pending}
-        aria-disabled={pending}
-      >
+      <button type="submit" disabled={pending} aria-disabled={pending}>
         {pending && <SvgSpinners270Ring className="w-6 h-6 fill-current" />}
         <span>{t('signup')}</span>
       </button>

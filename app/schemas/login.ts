@@ -7,6 +7,7 @@ import useTranslation from '@/app/libs/i18n/server';
  */
 export const MINIMUM_PASSWORD_LENGTH = 8;
 export const MAXIMUM_PASSWORD_LENGTH = 72;
+
 export const AT_LEAST_ONE_LOWERCASE = /^(?=.*[a-z]).+$/g;
 export const AT_LEAST_ONE_UPPERCASE = /^(?=.*[A-Z]).+$/g;
 export const AT_LEAST_ONE_DIGIT = /^(?=.*[0-9]).+$/g;
