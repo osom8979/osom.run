@@ -4,6 +4,8 @@ import {StatusCodes} from 'http-status-codes';
 import {useRouter} from 'next/navigation';
 import React, {useState} from 'react';
 import {BadRequestError, HttpStatusError} from '@/app/exceptions';
+import SolarEyeClosedOutline from '@/app/icons/solar/SolarEyeClosedOutline';
+import SolarEyeOutline from '@/app/icons/solar/SolarEyeOutline';
 import SvgSpinners270Ring from '@/app/icons/spinners/SvgSpinners270Ring';
 import useTranslation from '@/app/libs/i18n/client';
 import {LoginSchema} from '@/app/schemas/auth';
@@ -21,6 +23,7 @@ export default function SignupForm(props: SignupSubmitProps) {
   const {t} = useTranslation(props.lng, 'signup');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [pending, setPending] = useState<undefined | boolean>();
   const [error, setError] = useState<undefined | string>();
   const router = useRouter();
@@ -103,21 +106,37 @@ export default function SignupForm(props: SignupSubmitProps) {
 
         <div className="osom-form-item">
           <label htmlFor="password">{t('password')}</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            required={true}
-            aria-required={true}
-            placeholder={t('password_placeholder')}
-            aria-placeholder={t('password_placeholder')}
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            disabled={pending}
-            aria-disabled={pending}
-            data-error={error}
-            aria-errormessage={error}
-          />
+          <div className="relative w-full">
+            <div className="absolute inset-y-0 right-0 flex items-center px-3">
+              <button
+                type="button"
+                className="btn btn-sm btn-circle btn-ghost"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <SolarEyeOutline width="1.6em" height="1.6em" />
+                ) : (
+                  <SolarEyeClosedOutline width="1.6em" height="1.6em" />
+                )}
+              </button>
+            </div>
+
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              id="password"
+              required={true}
+              aria-required={true}
+              placeholder={t('password_placeholder')}
+              aria-placeholder={t('password_placeholder')}
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              disabled={pending}
+              aria-disabled={pending}
+              data-error={error}
+              aria-errormessage={error}
+            />
+          </div>
         </div>
       </div>
 
