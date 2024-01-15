@@ -5,7 +5,6 @@ import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {useState} from 'react';
 import {BadRequestError, HttpStatusError, UnauthorizedError} from '@/app/exceptions';
-import MdiLogin from '@/app/icons/mdi/MdiLogin';
 import SolarEyeClosedOutline from '@/app/icons/solar/SolarEyeClosedOutline';
 import SolarEyeOutline from '@/app/icons/solar/SolarEyeOutline';
 import SvgSpinners270Ring from '@/app/icons/spinners/SvgSpinners270Ring';
@@ -161,7 +160,7 @@ export default function LoginForm(props: LoginSubmitProps) {
       </div>
 
       <button type="submit" disabled={pending} aria-disabled={pending}>
-        {pending ? <SvgSpinners270Ring /> : <MdiLogin />}
+        {pending && <SvgSpinners270Ring />}
         <span>{t('login')}</span>
       </button>
     </form>
