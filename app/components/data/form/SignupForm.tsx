@@ -97,7 +97,7 @@ export default function SignupForm(props: SignupSubmitProps) {
   const inputClassName = inputClasses.join(' ');
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit}>
+    <form className="space-y-5 w-full" onSubmit={handleSubmit}>
       <div className="space-y-4">
         <div className="space-y-2">
           <label htmlFor="email" className="block text-sm text-left">

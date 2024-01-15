@@ -4,6 +4,7 @@ import {StatusCodes} from 'http-status-codes';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {useState} from 'react';
+import styles from './LoginForm.module.scss';
 import {BadRequestError, HttpStatusError, UnauthorizedError} from '@/app/exceptions';
 import MdiLogin from '@/app/icons/mdi/MdiLogin';
 import SvgSpinners270Ring from '@/app/icons/spinners/SvgSpinners270Ring';
@@ -23,8 +24,8 @@ export default function LoginForm(props: LoginSubmitProps) {
   const {t} = useTranslation(props.lng, 'login');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [pending, setPending] = useState(false);
-  const [error, setError] = useState('');
+  const [pending, setPending] = useState<undefined | boolean>();
+  const [error, setError] = useState<undefined | string>();
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -70,7 +71,7 @@ export default function LoginForm(props: LoginSubmitProps) {
 
       router.push(`/${props.lng}/main`);
     } catch (e) {
-      setPending(false);
+      setPending(undefined);
 
       if (e instanceof BadRequestError) {
         setError(t('bad_request') ?? e.message);
@@ -86,50 +87,35 @@ export default function LoginForm(props: LoginSubmitProps) {
     }
   };
 
-  let inputClasses = [
-    'input',
-    'input-bordered',
-    'w-full',
-    'placeholder-gray-500',
-    'placeholder-opacity-80',
-  ];
-  if (pending) {
-    inputClasses.push('input-disabled');
-  }
-  if (error) {
-    inputClasses.push('input-error');
-  }
-  const inputClassName = inputClasses.join(' ');
-
   return (
-    <form className="space-y-5" onSubmit={handleSubmit}>
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <label htmlFor="email" className="block text-sm text-left">
-            {t('email')}
-          </label>
+    <form className={styles.root} onSubmit={handleSubmit}>
+      <div className={styles.inputList}>
+        <div className={styles.inputItem}>
+          <label htmlFor="email">{t('email')}</label>
           <input
             type="email"
             name="email"
             id="email"
+            required={true}
+            aria-required={true}
             placeholder={t('email_placeholder')}
-            className={inputClassName}
+            aria-placeholder={t('email_placeholder')}
             value={email}
             onChange={e => setEmail(e.target.value)}
             disabled={pending}
             aria-disabled={pending}
+            data-error={error}
+            aria-errormessage={error}
           />
         </div>
 
-        <div className="space-y-2">
+        <div className={styles.inputItem}>
           <div className="flex justify-between">
-            <label htmlFor="password" className="text-sm">
-              {t('password')}
-            </label>
+            <label htmlFor="password">{t('password')}</label>
             <Link
-              rel="noopener noreferrer"
               href={`/${props.lng}/login/recovery`}
-              className="link link-primary text-xs"
+              hrefLang={props.lng}
+              rel="noopener noreferrer"
             >
               {t('forgot_password')}
             </Link>
@@ -139,29 +125,26 @@ export default function LoginForm(props: LoginSubmitProps) {
             type="password"
             name="password"
             id="password"
+            required={true}
+            aria-required={true}
             placeholder={t('password_placeholder')}
-            className={inputClassName}
+            aria-placeholder={t('password_placeholder')}
             value={password}
             onChange={e => setPassword(e.target.value)}
             disabled={pending}
             aria-disabled={pending}
+            data-error={error}
+            aria-errormessage={error}
           />
         </div>
       </div>
 
-      <div className="pl-2 text-error text-sm">{error && <span>{error}</span>}</div>
+      <div className={styles.errorBox} data-error={error} aria-errormessage={error}>
+        <span>{error}</span>
+      </div>
 
-      <button
-        type="submit"
-        className={`btn btn-primary w-full ${pending ? 'btn-disabled' : ''}`}
-        disabled={pending}
-        aria-disabled={pending}
-      >
-        {pending ? (
-          <SvgSpinners270Ring className="w-6 h-6 fill-current" />
-        ) : (
-          <MdiLogin className="w-6 h-6 fill-current" />
-        )}
+      <button type="submit" disabled={pending} aria-disabled={pending}>
+        {pending ? <SvgSpinners270Ring /> : <MdiLogin />}
         <span>{t('login')}</span>
       </button>
     </form>

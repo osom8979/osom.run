@@ -16,7 +16,7 @@ export default async function Header({lng}: {lng: string}) {
   const hasSession = user.error === null;
 
   return (
-    <header className={styles.header}>
+    <header className={styles.root}>
       <div className="flex-1">
         <Link href={`/${lng}/`} hrefLang={lng}>
           <Logo height="1em" />
