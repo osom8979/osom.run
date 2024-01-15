@@ -1,6 +1,7 @@
 import React from 'react';
 import {type I18nRouterProps} from '@/app/[lng]/params';
 import CenterMain from '@/app/components/layout/CenterMain';
+import MaterialSymbolsLockResetRounded from '@/app/icons/ms/MaterialSymbolsLockResetRounded';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function RecoveryPage(props: I18nRouterProps) {
@@ -15,6 +16,10 @@ export default async function RecoveryPage(props: I18nRouterProps) {
           action="/api/auth/recovery"
           method="post"
         >
+          <figure>
+            <MaterialSymbolsLockResetRounded width="4em" height="4em" />
+          </figure>
+
           <h2 className="card-title mt-2 mb-6 text-center">{t('title')}</h2>
 
           <p className="text-center">

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import type {I18nRouterProps} from '@/app/[lng]/params';
 import CenterMain from '@/app/components/layout/CenterMain';
-import MdiEmailCheckOutline from '@/app/icons/mdi/MdiEmailCheckOutline';
+import UilEnvelopeCheck from '@/app/icons/uil/UilEnvelopeCheck';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function WaitPage(props: I18nRouterProps) {
@@ -13,7 +13,7 @@ export default async function WaitPage(props: I18nRouterProps) {
       <div className="card bg-base-100 shadow-lg">
         <div className="card-body items-center">
           <figure>
-            <MdiEmailCheckOutline width="4em" height="4em" />
+            <UilEnvelopeCheck width="4em" height="4em" />
           </figure>
 
           <h2 className="card-title mt-2 mb-6 text-center">{t('title')}</h2>
