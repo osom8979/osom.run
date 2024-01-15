@@ -5,6 +5,11 @@ import {z} from 'zod';
  * https://supabase.com/dashboard/project/_/settings/auth
  */
 export const MINIMUM_PASSWORD_LENGTH = 8;
+
+/**
+ * If the password is larger than 72 chars, it will be truncated to the first 72 chars.
+ * https://supabase.com/docs/reference/javascript/auth-signup?example=sign-up
+ */
 export const MAXIMUM_PASSWORD_LENGTH = 72;
 
 export const AT_LEAST_ONE_LOWERCASE = /^(?=.*[a-z]).+$/g;

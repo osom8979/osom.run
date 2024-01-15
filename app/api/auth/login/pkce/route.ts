@@ -12,16 +12,22 @@ export async function GET(request: NextRequest) {
   // flow implemented by the Auth Helpers package.
   // It exchanges an auth code for the user's session.
   // https://supabase.com/docs/guides/auth/auth-helpers/nextjs#managing-sign-in-with-code-exchange
-  const requestUrl = new URL(request.url);
-  const code = requestUrl.searchParams.get('code');
+  const {origin, searchParams} = new URL(request.url);
+  const code = searchParams.get('code');
+  const next = searchParams.get('next') ?? '/';
 
-  console.debug(`Signup callback request code is ${code}`);
+  if (!code) {
+    return NextResponse.redirect(`${origin}/pkce-error?reason=nocode`);
+  }
 
-  if (code) {
-    const supabase = createRouteHandlerClient({cookies});
-    await supabase.auth.exchangeCodeForSession(code);
+  const supabase = createRouteHandlerClient({cookies});
+  const {error} = await supabase.auth.exchangeCodeForSession(code);
+  if (error) {
+    return NextResponse.redirect(
+      `${origin}${next}?reason=${error.name}&message=${error.message}`
+    );
   }
 
   // URL to redirect to after sign in process completes
-  return NextResponse.redirect(requestUrl.origin);
+  return NextResponse.redirect(`${origin}${next}`);
 }
