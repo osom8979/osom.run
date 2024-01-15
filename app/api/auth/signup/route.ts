@@ -4,7 +4,7 @@ import {createRouteHandlerClient} from '@supabase/auth-helpers-nextjs';
 import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
-import {LoginSchema} from '@/app/schemas/login';
+import {LoginSchema} from '@/app/schemas/auth';
 
 export const dynamic = 'force-dynamic';
 

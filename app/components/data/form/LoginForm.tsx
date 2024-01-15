@@ -8,7 +8,7 @@ import {BadRequestError, HttpStatusError, UnauthorizedError} from '@/app/excepti
 import MdiLogin from '@/app/icons/mdi/MdiLogin';
 import SvgSpinners270Ring from '@/app/icons/spinners/SvgSpinners270Ring';
 import useTranslation from '@/app/libs/i18n/client';
-import {LoginSchema} from '@/app/schemas/login';
+import {LoginSchema} from '@/app/schemas/auth';
 
 const LOGIN_API_PATH = '/api/auth/login';
 const LOGIN_API_METHOD = 'POST';
