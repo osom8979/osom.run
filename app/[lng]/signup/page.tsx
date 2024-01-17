@@ -14,7 +14,12 @@ export default async function SignupPage(props: I18nRouterProps) {
         <div className="card-body items-center">
           <h2 className="card-title mb-6 text-center">{t('title')}</h2>
 
-          <EmailPasswordForm type="signup" lng={lng} href={`/${lng}/signup/wait`} />
+          <EmailPasswordForm
+            type="signup"
+            lng={lng}
+            href={`/${lng}/signup/wait`}
+            showPasswordValidation={true}
+          />
 
           <p className="text-sm text-center my-6">
             {t('have_account')}

@@ -2,15 +2,27 @@
 
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
+import {z} from 'zod';
 import styles from './EmailPasswordForm.module.scss';
 import apiClient from '@/app/api/client';
 import {HttpStatusError} from '@/app/exceptions';
+import MdiCheckboxBlankCircleOutline from '@/app/icons/mdi/MdiCheckboxBlankCircleOutline';
+import MdiCheckboxMarkedCircleOutline from '@/app/icons/mdi/MdiCheckboxMarkedCircleOutline';
 import SolarEyeClosedOutline from '@/app/icons/solar/SolarEyeClosedOutline';
 import SolarEyeOutline from '@/app/icons/solar/SolarEyeOutline';
 import SvgSpinners270Ring from '@/app/icons/spinners/SvgSpinners270Ring';
 import useTranslation from '@/app/libs/i18n/client';
-import {EmailSchema, PasswordSchema} from '@/app/libs/schema/auth';
+import {
+  AT_LEAST_ONE_DIGIT,
+  AT_LEAST_ONE_LOWERCASE,
+  AT_LEAST_ONE_SYMBOL,
+  AT_LEAST_ONE_UPPERCASE,
+  MAXIMUM_PASSWORD_LENGTH,
+  MINIMUM_PASSWORD_LENGTH,
+  EmailSchema,
+  PasswordSchema,
+} from '@/app/libs/schema/auth';
 
 export type EmailPasswordFormTypes = 'login' | 'signup';
 
@@ -18,6 +30,12 @@ export interface EmailPasswordFormProps {
   type: EmailPasswordFormTypes;
   lng: string;
   href: string;
+  showPasswordValidation?: boolean;
+}
+
+interface PasswordValidationItem {
+  error: boolean;
+  message: string;
 }
 
 export default function EmailPasswordForm(props: EmailPasswordFormProps) {
@@ -35,6 +53,35 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
   const isDisabledSubmit = () => {
     return !email || !!emailError || !password || !!passwordError || pending;
   };
+
+  const passwordValidations = useMemo(() => {
+    return [
+      {
+        error: password.length < MINIMUM_PASSWORD_LENGTH,
+        message: t('validations.password.too_small', {min: MINIMUM_PASSWORD_LENGTH}),
+      },
+      {
+        error: MAXIMUM_PASSWORD_LENGTH < password.length,
+        message: t('validations.password.too_big', {max: MAXIMUM_PASSWORD_LENGTH}),
+      },
+      {
+        error: !password.match(AT_LEAST_ONE_LOWERCASE),
+        message: t('validations.password.no_lower'),
+      },
+      {
+        error: !password.match(AT_LEAST_ONE_UPPERCASE),
+        message: t('validations.password.no_upper'),
+      },
+      {
+        error: !password.match(AT_LEAST_ONE_DIGIT),
+        message: t('validations.password.no_digit'),
+      },
+      {
+        error: !password.match(AT_LEAST_ONE_SYMBOL),
+        message: t('validations.password.no_symbol'),
+      },
+    ] as Array<PasswordValidationItem>;
+  }, [t, password]);
 
   const handleEmailChange = (value: string) => {
     setEmail(value);
@@ -61,12 +108,20 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
       return false;
     }
 
-    if (PasswordSchema.safeParse(value).success) {
+    const parseResult = PasswordSchema.safeParse(value);
+    if (parseResult.success) {
       setPasswordError(undefined);
       return true;
     }
 
-    setPasswordError(t('errors.invalid_password'));
+    const errors = parseResult.error.errors;
+    if (errors.find(i => i.code === z.ZodIssueCode.too_small)) {
+      setPasswordError(t('errors.too_small_password', {min: MINIMUM_PASSWORD_LENGTH}));
+    } else if (errors.find(i => i.code === z.ZodIssueCode.too_big)) {
+      setPasswordError(t('errors.too_big_password', {max: MAXIMUM_PASSWORD_LENGTH}));
+    } else {
+      setPasswordError(t('errors.invalid_password'));
+    }
     return false;
   };
 
@@ -168,13 +223,34 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
             </div>
           </div>
 
-          <p
-            className={styles.formError}
-            data-error={passwordError}
-            aria-errormessage={passwordError}
-          >
-            {passwordError}
-          </p>
+          {props.showPasswordValidation ? (
+            <ul
+              className={styles.formValidation}
+              hidden={!props.showPasswordValidation}
+              aria-hidden={!props.showPasswordValidation}
+            >
+              {passwordValidations.map((v, i) => {
+                return (
+                  <li key={`validations-password-${i}`} data-error={v.error}>
+                    {v.error ? (
+                      <MdiCheckboxBlankCircleOutline />
+                    ) : (
+                      <MdiCheckboxMarkedCircleOutline />
+                    )}
+                    <span>{v.message}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p
+              className={styles.formError}
+              data-error={passwordError}
+              aria-errormessage={passwordError}
+            >
+              {passwordError}
+            </p>
+          )}
         </div>
       </div>
 
