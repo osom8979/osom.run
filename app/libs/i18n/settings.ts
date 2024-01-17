@@ -3,8 +3,8 @@ import {type InitOptions} from 'i18next/typescript/options';
 export const en = 'en';
 export const ko = 'ko';
 
-export const DEFAULT_NAMESPACE = '_default';
-export const FALLBACK_NAMESPACE = DEFAULT_NAMESPACE;
+export const FALLBACK_NAMESPACE = ['defaults/common', 'defaults/http-status'];
+export const DEFAULT_NAMESPACE = FALLBACK_NAMESPACE;
 export const LOAD_NAMESPACES = DEFAULT_NAMESPACE;
 export const LANGUAGES = [en, ko];
 export const FALLBACK_LANGUAGE = en;

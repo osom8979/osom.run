@@ -4,7 +4,7 @@ import Link from 'next/link';
 import {redirect} from 'next/navigation';
 import React from 'react';
 import {type I18nRouterProps} from '@/app/[lng]/params';
-import LoginForm from '@/app/components/data/form/LoginForm';
+import EmailPasswordForm from '@/app/components/data/form/EmailPasswordForm';
 import CenterMain from '@/app/components/layout/CenterMain';
 import MdiGithub from '@/app/icons/mdi/MdiGithub';
 import MdiGoogle from '@/app/icons/mdi/MdiGoogle';
@@ -45,7 +45,7 @@ export default async function LoginPage(props: I18nRouterProps) {
             <hr className="w-full"></hr>
           </div>
 
-          <LoginForm lng={lng} />
+          <EmailPasswordForm type="login" lng={lng} href={`/${lng}/main`} />
 
           <p className="text-sm text-center my-6">
             {t('no_account')}

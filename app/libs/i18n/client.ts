@@ -14,8 +14,8 @@ i18next
   .use(LanguageDetector)
   .use(backendJsonModule)
   .init(defaultClientOptions())
-  .then(trans => {
-    console.debug(`i18next initialization successful: ${trans.name}`);
+  .then(() => {
+    console.debug(`i18next initialization successful`);
   })
   .catch(error => {
     console.error(`i18next initialization failed: ${error}`);

@@ -54,8 +54,11 @@ export class ApiClient {
     return await this.request(input, {method: 'DELETE', ...init});
   }
 
-  async login() {
-    return await this.post('/api/auth/login');
+  async login(email: string, password: string) {
+    const body = new FormData();
+    body.set('email', email);
+    body.set('password', password);
+    return await this.post('/api/auth/login', {body});
   }
 }
 
