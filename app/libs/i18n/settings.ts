@@ -14,9 +14,9 @@ export const I18N_DEBUG = false;
 export const COOKIE_I18N_KEY = 'i18n';
 
 export function defaultServerOptions(
-  lng = USE_LANGUAGE,
-  ns = LOAD_NAMESPACES,
-  debug = I18N_DEBUG
+  lng: string = USE_LANGUAGE,
+  ns: string | readonly string[] = LOAD_NAMESPACES,
+  debug: boolean = I18N_DEBUG
 ) {
   return {
     debug,
@@ -31,7 +31,7 @@ export function defaultServerOptions(
 
 export function defaultClientOptions(
   lng = USE_LANGUAGE,
-  ns = LOAD_NAMESPACES,
+  ns: string | readonly string[] = LOAD_NAMESPACES,
   debug = I18N_DEBUG
 ) {
   const runsOnServerSide = typeof window === 'undefined';

@@ -1,9 +1,10 @@
+import 'server-only';
 import {createInstance} from 'i18next';
 import {initReactI18next} from 'react-i18next/initReactI18next';
 import backendJsonModule from './backend';
 import {DEFAULT_NAMESPACE, defaultServerOptions, FALLBACK_LANGUAGE} from './settings';
 
-async function initI18next(language?: string, namespace?: string) {
+async function initI18next(language?: string, namespace?: string | readonly string[]) {
   const i18n = createInstance();
   await i18n
     .use(initReactI18next)
