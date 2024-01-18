@@ -60,6 +60,13 @@ export class ApiClient {
     body.set('password', password);
     return await this.post('/api/auth/login', {body});
   }
+
+  async signup(email: string, password: string) {
+    const body = new FormData();
+    body.set('email', email);
+    body.set('password', password);
+    return await this.post('/api/auth/signup', {body});
+  }
 }
 
 export const apiClient = new ApiClient();

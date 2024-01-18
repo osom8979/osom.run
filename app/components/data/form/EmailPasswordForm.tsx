@@ -131,7 +131,11 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
     setPending(true);
 
     try {
-      await apiClient.login(email, password);
+      if (isSignupType()) {
+        await apiClient.signup(email, password);
+      } else {
+        await apiClient.login(email, password);
+      }
       router.push(props.href);
     } catch (e) {
       setPending(undefined);
