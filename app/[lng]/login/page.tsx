@@ -45,7 +45,12 @@ export default async function LoginPage(props: I18nRouterProps) {
             <hr className="w-full"></hr>
           </div>
 
-          <EmailPasswordForm type="login" lng={lng} href={`/${lng}/main`} />
+          <EmailPasswordForm
+            type="login"
+            lng={lng}
+            href={`/${lng}/main`}
+            emailAutoFocus={true}
+          />
 
           <p className="text-sm text-center my-6">
             {t('no_account')}

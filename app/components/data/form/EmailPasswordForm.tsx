@@ -31,6 +31,7 @@ export interface EmailPasswordFormProps {
   lng: string;
   href: string;
   showPasswordValidation?: boolean;
+  emailAutoFocus?: boolean;
 }
 
 interface PasswordValidationItem {
@@ -156,6 +157,7 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
             type="email"
             name="email"
             id="email"
+            autoFocus={props.emailAutoFocus}
             required={true}
             aria-required={true}
             placeholder={t('email_placeholder')}

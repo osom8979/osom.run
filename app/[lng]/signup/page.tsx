@@ -19,6 +19,7 @@ export default async function SignupPage(props: I18nRouterProps) {
             lng={lng}
             href={`/${lng}/signup/wait`}
             showPasswordValidation={true}
+            emailAutoFocus={true}
           />
 
           <p className="text-sm text-center my-6">
