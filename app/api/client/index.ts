@@ -67,6 +67,12 @@ export class ApiClient {
     body.set('password', password);
     return await this.post('/api/auth/signup', {body});
   }
+
+  async resetPassword(email: string) {
+    const body = new FormData();
+    body.set('email', email);
+    return await this.post('/api/auth/login/reset/password', {body});
+  }
 }
 
 export const apiClient = new ApiClient();

@@ -21,7 +21,6 @@ export async function POST(request: Request) {
 
   // Return early if the form data is invalid
   if (!validatedFields.success) {
-    console.debug(validatedFields.error.message);
     return NextResponse.json<LoginResponseBody>(
       {message: validatedFields.error.message},
       {status: StatusCodes.BAD_REQUEST}
@@ -31,13 +30,12 @@ export async function POST(request: Request) {
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({cookies: () => cookieStore});
   const {email, password} = validatedFields.data;
-  const signInResult = await supabase.auth.signInWithPassword({email, password});
-  const {error} = signInResult;
+  const result = await supabase.auth.signInWithPassword({email, password});
 
-  if (error !== null) {
-    console.debug(error.message);
+  if (result.error !== null) {
+    console.info(`API request failed: ${result.error.message}`);
     return NextResponse.json<LoginResponseBody>(
-      {message: error.message},
+      {message: result.error.message},
       {status: StatusCodes.UNAUTHORIZED}
     );
   }

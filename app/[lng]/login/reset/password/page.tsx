@@ -4,7 +4,7 @@ import CenterMain from '@/app/components/layout/CenterMain';
 import MaterialSymbolsLockResetRounded from '@/app/icons/ms/MaterialSymbolsLockResetRounded';
 import useTranslation from '@/app/libs/i18n/server';
 
-export default async function RecoveryPage(props: I18nRouterProps) {
+export default async function ResetPasswordPage(props: I18nRouterProps) {
   const lng = props.params.lng;
   const {t} = await useTranslation(lng, 'login-recovery');
   return (
@@ -13,7 +13,7 @@ export default async function RecoveryPage(props: I18nRouterProps) {
         <form
           noValidate={false}
           className="card-body items-center"
-          action="/api/auth/recovery"
+          action="/api/auth/login/recovery"
           method="post"
         >
           <figure>

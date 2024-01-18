@@ -187,7 +187,7 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
           <div className="flex justify-between">
             <label htmlFor="password">{t('password')}</label>
             <Link
-              href={`/${props.lng}/login/recovery`}
+              href={`/${props.lng}/login/reset/password?email=${email}`}
               hrefLang={props.lng}
               rel="noopener noreferrer"
               hidden={isSignupType()}
