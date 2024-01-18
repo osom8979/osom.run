@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
   const {error} = await supabase.auth.exchangeCodeForSession(code);
   if (error) {
     console.warn('Supabase exchange code error', error);
-    return NextResponse.redirect(`${origin}/pkce/fail?reason=exchange`);
+    return NextResponse.redirect(`${origin}/pkce/fail?reason=rejected`);
   }
 
   // URL to redirect to after sign in process completes
