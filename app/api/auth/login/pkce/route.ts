@@ -15,19 +15,19 @@ export async function GET(request: NextRequest) {
   const {origin, searchParams} = new URL(request.url);
   const code = searchParams.get('code');
   const next = searchParams.get('next') ?? '/';
+  const redirectPath = next.startsWith('/') ? next : `/${next}`;
 
   if (!code) {
-    return NextResponse.redirect(`${origin}/pkce-error?reason=nocode`);
+    return NextResponse.redirect(`${origin}/pkce/fail?reason=nocode`);
   }
 
   const supabase = createRouteHandlerClient({cookies});
   const {error} = await supabase.auth.exchangeCodeForSession(code);
   if (error) {
-    return NextResponse.redirect(
-      `${origin}${next}?reason=${error.name}&message=${error.message}`
-    );
+    console.warn('Supabase exchange code error', error);
+    return NextResponse.redirect(`${origin}/pkce/fail?reason=exchange`);
   }
 
   // URL to redirect to after sign in process completes
-  return NextResponse.redirect(`${origin}${next}`);
+  return NextResponse.redirect(`${origin}${redirectPath}`);
 }
