@@ -1,14 +1,14 @@
 import React from 'react';
 import NotFoundCard from '@/app/components/data/display/NotFoundCard';
-import CenterMain from '@/app/components/layout/CenterMain';
+import CenterDialog from '@/app/components/layout/CenterDialog';
 
 export default async function RootNotFound() {
   return (
     <html>
       <body>
-        <CenterMain>
+        <CenterDialog>
           <NotFoundCard />
-        </CenterMain>
+        </CenterDialog>
       </body>
     </html>
   );

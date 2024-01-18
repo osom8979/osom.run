@@ -8,7 +8,7 @@ interface CenterMainProps {
   hideLogo?: boolean;
 }
 
-export default async function CenterMain(props: CenterMainProps) {
+export default async function CenterDialog(props: CenterMainProps) {
   const {children, lng, hideLogo} = props;
   return (
     <main className="container h-screen m-auto">

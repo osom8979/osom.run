@@ -1,6 +1,6 @@
 import React from 'react';
 import {type I18nRouterProps} from '@/app/[lng]/params';
-import CenterMain from '@/app/components/layout/CenterMain';
+import CenterDialog from '@/app/components/layout/CenterDialog';
 import MaterialSymbolsLockResetRounded from '@/app/icons/ms/MaterialSymbolsLockResetRounded';
 import useTranslation from '@/app/libs/i18n/server';
 
@@ -8,7 +8,7 @@ export default async function ResetPasswordPage(props: I18nRouterProps) {
   const lng = props.params.lng;
   const {t} = await useTranslation(lng, 'login-recovery');
   return (
-    <CenterMain lng={lng}>
+    <CenterDialog lng={lng}>
       <div className="card bg-base-100 shadow-lg">
         <form
           noValidate={false}
@@ -43,6 +43,6 @@ export default async function ResetPasswordPage(props: I18nRouterProps) {
           </div>
         </form>
       </div>
-    </CenterMain>
+    </CenterDialog>
   );
 }

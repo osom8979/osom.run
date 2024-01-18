@@ -2,14 +2,14 @@ import Link from 'next/link';
 import React from 'react';
 import {type I18nRouterProps} from '@/app/[lng]/params';
 import EmailPasswordForm from '@/app/components/data/form/EmailPasswordForm';
-import CenterMain from '@/app/components/layout/CenterMain';
+import CenterDialog from '@/app/components/layout/CenterDialog';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function SignupPage(props: I18nRouterProps) {
   const lng = props.params.lng;
   const {t} = await useTranslation(lng, 'signup');
   return (
-    <CenterMain lng={lng}>
+    <CenterDialog lng={lng}>
       <div className="card bg-base-100 shadow-lg">
         <div className="card-body items-center">
           <h2 className="card-title mb-6 text-center">{t('title')}</h2>
@@ -35,6 +35,6 @@ export default async function SignupPage(props: I18nRouterProps) {
           </p>
         </div>
       </div>
-    </CenterMain>
+    </CenterDialog>
   );
 }
