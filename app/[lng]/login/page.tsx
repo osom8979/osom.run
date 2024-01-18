@@ -27,7 +27,7 @@ export default async function LoginPage(props: I18nRouterProps) {
         <div className="card-body items-center">
           <h2 className="card-title mb-6 text-center">{t('title')}</h2>
 
-          <div className="my-6 space-y-4">
+          <div className="my-6 w-full space-y-4">
             <button role="button" className="btn w-full" aria-label={t('login_google')}>
               <MdiGoogle className="w-6 h-6 fill-current" />
               <span>{t('login_google')}</span>

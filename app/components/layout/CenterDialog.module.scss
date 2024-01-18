@@ -1,0 +1,18 @@
+.dialog {
+  @apply container;
+  @apply h-screen;
+  @apply m-auto;
+
+  &Body {
+    @apply flex flex-col;
+    @apply justify-center items-center;
+    @apply h-full;
+    @apply space-y-8;
+
+    &Content {
+      @apply min-w-fit;
+      @apply sm:min-w-[512px];
+      @apply md:min-w-[640px];
+    }
+  }
+}

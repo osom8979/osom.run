@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import {type ReactNode} from 'react';
+import styles from './CenterDialog.module.scss';
 import Logo from '@/app/components/Logo';
 
 interface CenterMainProps {
@@ -11,15 +12,15 @@ interface CenterMainProps {
 export default async function CenterDialog(props: CenterMainProps) {
   const {children, lng, hideLogo} = props;
   return (
-    <main className="container h-screen m-auto">
-      <div className="flex flex-col justify-center items-center h-full space-y-8">
+    <main className={styles.dialog}>
+      <div className={styles.dialogBody}>
         {!hideLogo && (
           <Link href={`/${lng ?? ''}`} hrefLang={lng}>
             <Logo className="h-6" />
           </Link>
         )}
 
-        {children}
+        <div className={styles.dialogBodyContent}>{children}</div>
       </div>
     </main>
   );
