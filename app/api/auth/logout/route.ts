@@ -27,6 +27,6 @@ export async function POST(request: Request) {
     return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
   }
 
-  console.info('Log out request OK', {email, error});
+  console.info('Log out OK', {email});
   return NextResponse.json<EmptyResponse>({});
 }

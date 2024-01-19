@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import {type I18nRouterProps} from '@/app/[lng]/params';
-import EmailPasswordForm from '@/app/components/data/form/EmailPasswordForm';
+import SignupForm from '@/app/components/data/form/SignupForm';
 import CenterDialog from '@/app/components/layout/CenterDialog';
 import useTranslation from '@/app/libs/i18n/server';
 
@@ -14,13 +14,7 @@ export default async function SignupPage(props: I18nRouterProps) {
         <div className="card-body items-center">
           <h2 className="card-title mb-6 text-center">{t('title')}</h2>
 
-          <EmailPasswordForm
-            type="signup"
-            lng={lng}
-            nextHref={`/${lng}/signup/wait`}
-            showPasswordValidation={true}
-            buttonLabel={t('signup')}
-          />
+          <SignupForm lng={lng} />
 
           <p className="text-sm text-center my-6">
             {t('have_account')}

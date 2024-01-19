@@ -6,7 +6,6 @@ import {useRouter} from 'next/navigation';
 import React, {useMemo, useState} from 'react';
 import {z} from 'zod';
 import styles from './EmailPasswordForm.module.scss';
-import apiClient from '@/app/api/client';
 import {HttpStatusError} from '@/app/exceptions';
 import MdiCheckboxBlankCircleOutline from '@/app/icons/mdi/MdiCheckboxBlankCircleOutline';
 import MdiCheckboxMarkedCircleOutline from '@/app/icons/mdi/MdiCheckboxMarkedCircleOutline';
@@ -25,16 +24,20 @@ import {
   PasswordSchema,
 } from '@/app/libs/schema/auth';
 
-type EmailPasswordFormTypes = 'login' | 'signup' | 'email' | 'password';
+// eslint-disable-next-line no-unused-vars
+type OnAsyncSubmit = (email: string, password: string) => Promise<void>;
 
 interface EmailPasswordFormProps {
-  type: EmailPasswordFormTypes;
   lng: string;
-  nextHref: string;
+  nextHref?: string;
+  resetPasswordHref?: string;
   showPasswordValidation?: boolean;
   showResetPassword?: boolean;
+  hideEmail?: boolean;
+  hidePassword?: boolean;
   emailAutoFocus?: boolean;
   buttonLabel?: string;
+  onSubmit?: OnAsyncSubmit;
 }
 
 interface PasswordValidationItem {
@@ -53,12 +56,22 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
   const [error, setError] = useState<undefined | string>();
   const router = useRouter();
 
-  const isSignupType = () => props.type === 'signup';
-  const isDisabledSubmit = () => {
-    return !email || !!emailError || !password || !!passwordError || pending;
+  const getResetPasswordHref = () => {
+    return (props.resetPasswordHref || '/') + email ? `&email=${email}` : '';
   };
-  const getEmailParameter = () => {
-    return email ? `&email=${email}` : '';
+
+  const isDisabledSubmit = () => {
+    if (!props.hideEmail) {
+      if (!email || !!emailError) {
+        return true;
+      }
+    }
+    if (!props.hidePassword) {
+      if (!password || !!passwordError) {
+        return true;
+      }
+    }
+    return pending;
   };
 
   const passwordValidations = useMemo(() => {
@@ -137,12 +150,12 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
     setPending(true);
 
     try {
-      if (isSignupType()) {
-        await apiClient.signup(email, password);
-      } else {
-        await apiClient.login(email, password);
+      if (props.onSubmit) {
+        await props.onSubmit(email, password);
       }
-      router.push(props.nextHref);
+      if (props.nextHref) {
+        router.push(props.nextHref);
+      }
     } catch (e) {
       setPending(undefined);
 
@@ -163,7 +176,11 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.formList}>
-        <div className={styles.formItem}>
+        <div
+          className={styles.formItem}
+          hidden={props.hideEmail}
+          aria-hidden={props.hideEmail}
+        >
           <label htmlFor="email">{t('email')}</label>
           <input
             type="email"
@@ -191,11 +208,15 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
           </p>
         </div>
 
-        <div className={styles.formItem}>
+        <div
+          className={styles.formItem}
+          hidden={props.hidePassword}
+          aria-hidden={props.hidePassword}
+        >
           <div className="flex justify-between">
             <label htmlFor="password">{t('password')}</label>
             <Link
-              href={`/${props.lng}/login/reset/password${getEmailParameter()}`}
+              href={getResetPasswordHref()}
               hrefLang={props.lng}
               rel="noopener noreferrer"
               hidden={!props.showResetPassword}
@@ -280,7 +301,7 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
         {pending ? (
           <SvgSpinners270Ring />
         ) : (
-          <span>{props.buttonLabel ?? t(`submit`)}</span>
+          <span>{props.buttonLabel ?? t('submit')}</span>
         )}
       </button>
     </form>
