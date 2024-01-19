@@ -3,21 +3,22 @@
 import apiClient from '@/app/api/client';
 import EmailPasswordForm from '@/app/components/data/form/EmailPasswordForm';
 
-interface SignupFormProps {
+interface ResetPasswordFormProps {
   lng: string;
   buttonLabel: string;
 }
 
-export default function SignupForm(props: SignupFormProps) {
-  const handleSubmit = async (email: string, password: string) => {
-    await apiClient.signup(email, password);
+export default function ResetPasswordForm(props: ResetPasswordFormProps) {
+  const handleSubmit = async (email: string) => {
+    await apiClient.resetPassword(email);
   };
 
   return (
     <EmailPasswordForm
       lng={props.lng}
-      nextHref={`/${props.lng}/signup/wait`}
-      showPasswordValidation={true}
+      nextHref={`/${props.lng}/reset/password/wait`}
+      hidePassword={true}
+      hideLabel={true}
       buttonLabel={props.buttonLabel}
       onSubmit={handleSubmit}
     />

@@ -5,9 +5,9 @@ import CenterDialog from '@/app/components/layout/CenterDialog';
 import UilEnvelopeCheck from '@/app/icons/uil/UilEnvelopeCheck';
 import useTranslation from '@/app/libs/i18n/server';
 
-export default async function SignupWaitPage(props: I18nRouterProps) {
+export default async function ResetPasswordWaitPage(props: I18nRouterProps) {
   const lng = props.params.lng;
-  const {t} = await useTranslation(lng, 'signup-wait');
+  const {t} = await useTranslation(lng, 'reset-password-wait');
   return (
     <CenterDialog lng={lng}>
       <div className="card bg-base-100 shadow-lg">

@@ -35,6 +35,7 @@ interface EmailPasswordFormProps {
   showResetPassword?: boolean;
   hideEmail?: boolean;
   hidePassword?: boolean;
+  hideLabel?: boolean;
   emailAutoFocus?: boolean;
   buttonLabel?: string;
   onSubmit?: OnAsyncSubmit;
@@ -57,7 +58,7 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
   const router = useRouter();
 
   const getResetPasswordHref = () => {
-    return (props.resetPasswordHref || '/') + email ? `&email=${email}` : '';
+    return (props.resetPasswordHref || '/') + (email ? `&email=${email}` : '');
   };
 
   const isDisabledSubmit = () => {
@@ -181,7 +182,9 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
           hidden={props.hideEmail}
           aria-hidden={props.hideEmail}
         >
-          <label htmlFor="email">{t('email')}</label>
+          <label htmlFor="email" hidden={props.hideLabel} aria-hidden={props.hideLabel}>
+            {t('email')}
+          </label>
           <input
             type="email"
             name="email"
@@ -214,7 +217,13 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
           aria-hidden={props.hidePassword}
         >
           <div className="flex justify-between">
-            <label htmlFor="password">{t('password')}</label>
+            <label
+              htmlFor="password"
+              hidden={props.hideLabel}
+              aria-hidden={props.hideLabel}
+            >
+              {t('password')}
+            </label>
             <Link
               href={getResetPasswordHref()}
               hrefLang={props.lng}

@@ -45,7 +45,7 @@ export default async function LoginPage(props: I18nRouterProps) {
             <hr className="w-full"></hr>
           </div>
 
-          <LoginForm lng={lng} />
+          <LoginForm lng={lng} buttonLabel={t('login')} />
 
           <p className="text-sm text-center my-6">
             {t('no_account')}
