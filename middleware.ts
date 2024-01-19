@@ -41,8 +41,9 @@ export async function middleware(req: NextRequest) {
   if (invalidLngPath(req)) {
     const lng = findNextLanguage(req);
     const pathname = req.nextUrl.pathname;
+    const search = req.nextUrl.search;
     console.assert(pathname.startsWith('/'));
-    const redirectPath = `/${lng}${pathname}`;
+    const redirectPath = `/${lng}${pathname}${search}`;
     const redirectUrl = new URL(redirectPath, req.url);
 
     console.debug(`middleware(req='${req.url}') redirect '${redirectUrl}'`);

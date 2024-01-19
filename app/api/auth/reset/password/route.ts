@@ -22,11 +22,11 @@ export async function POST(request: Request) {
   const email = validatedFields.data;
   const requestUrl = new URL(request.url);
   const {error} = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${requestUrl.origin}/reset/password/update`,
+    redirectTo: `${requestUrl.origin}/update/password`,
   });
 
   if (error !== null) {
-    console.info('Password reset request error', {email, error});
+    console.warn('Password reset request error', {email, error});
     return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
   }
 

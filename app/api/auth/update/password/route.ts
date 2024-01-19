@@ -5,14 +5,14 @@ import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
 import type {EmptyResponse} from '@/app/api/interface';
-import {EmailPasswordSchema} from '@/app/libs/schema/auth';
+import {CodePasswordSchema} from '@/app/libs/schema/auth';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
   const formData = await request.formData();
-  const validatedFields = EmailPasswordSchema.safeParse({
-    email: formData.get('email'),
+  const validatedFields = CodePasswordSchema.safeParse({
+    code: formData.get('code'),
     password: formData.get('password'),
   });
 
@@ -22,21 +22,20 @@ export async function POST(request: Request) {
 
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({cookies: () => cookieStore});
-  const {email, password} = validatedFields.data;
-  const requestUrl = new URL(request.url);
-  const {error} = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      emailRedirectTo: `${requestUrl.origin}/login`,
-    },
-  });
+  const {code, password} = validatedFields.data;
 
-  if (error !== null) {
-    console.warn('Sign up request error', {email, error});
+  const exchangeResult = await supabase.auth.exchangeCodeForSession(code);
+  if (exchangeResult.error !== null) {
+    console.warn('Exchange code error', {code, error: exchangeResult.error});
     return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
   }
 
-  console.info('Sign up OK', {email});
+  const updateResult = await supabase.auth.updateUser({password});
+  if (updateResult.error !== null) {
+    console.warn('Update password request error', {error: updateResult.error});
+    return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
+  }
+
+  console.info('Update password OK', {email: exchangeResult.data.user.email});
   return NextResponse.json<EmptyResponse>({});
 }

@@ -31,3 +31,8 @@ export const EmailPasswordSchema = z.object({
   email: EmailSchema,
   password: PasswordSchema,
 });
+
+export const CodePasswordSchema = z.object({
+  code: z.string(),
+  password: PasswordSchema,
+});
