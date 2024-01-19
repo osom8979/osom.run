@@ -24,10 +24,11 @@ export async function GET(request: NextRequest) {
   const supabase = createRouteHandlerClient({cookies});
   const {error} = await supabase.auth.exchangeCodeForSession(code);
   if (error) {
-    console.warn('Supabase exchange code error', error);
+    console.warn('Exchange code error', {code, error});
     return NextResponse.redirect(`${origin}/pkce/fail?reason=rejected`);
   }
 
   // URL to redirect to after sign in process completes
+  console.info('Exchange code OK', {code, error});
   return NextResponse.redirect(`${origin}${redirectPath}`);
 }

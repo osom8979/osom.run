@@ -17,9 +17,9 @@ export default async function SignupPage(props: I18nRouterProps) {
           <EmailPasswordForm
             type="signup"
             lng={lng}
-            href={`/${lng}/signup/wait`}
+            nextHref={`/${lng}/signup/wait`}
             showPasswordValidation={true}
-            emailAutoFocus={true}
+            buttonLabel={t('signup')}
           />
 
           <p className="text-sm text-center my-6">

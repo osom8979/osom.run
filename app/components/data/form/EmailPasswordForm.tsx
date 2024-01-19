@@ -1,5 +1,6 @@
 'use client';
 
+import {StatusCodes} from 'http-status-codes';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {useMemo, useState} from 'react';
@@ -24,14 +25,16 @@ import {
   PasswordSchema,
 } from '@/app/libs/schema/auth';
 
-export type EmailPasswordFormTypes = 'login' | 'signup';
+type EmailPasswordFormTypes = 'login' | 'signup' | 'email' | 'password';
 
-export interface EmailPasswordFormProps {
+interface EmailPasswordFormProps {
   type: EmailPasswordFormTypes;
   lng: string;
-  href: string;
+  nextHref: string;
   showPasswordValidation?: boolean;
+  showResetPassword?: boolean;
   emailAutoFocus?: boolean;
+  buttonLabel?: string;
 }
 
 interface PasswordValidationItem {
@@ -53,6 +56,9 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
   const isSignupType = () => props.type === 'signup';
   const isDisabledSubmit = () => {
     return !email || !!emailError || !password || !!passwordError || pending;
+  };
+  const getEmailParameter = () => {
+    return email ? `&email=${email}` : '';
   };
 
   const passwordValidations = useMemo(() => {
@@ -136,12 +142,14 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
       } else {
         await apiClient.login(email, password);
       }
-      router.push(props.href);
+      router.push(props.nextHref);
     } catch (e) {
       setPending(undefined);
 
       if (e instanceof HttpStatusError) {
-        if (e.code === 401) {
+        if (e.code === StatusCodes.BAD_REQUEST) {
+          setError(t(`errors.bad_request`));
+        } else if (e.code === StatusCodes.UNAUTHORIZED) {
           setError(t(`errors.unauthorized`));
         } else {
           setError(t(`http_status.${e.code}`, {defaultValue: e.message}));
@@ -187,11 +195,11 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
           <div className="flex justify-between">
             <label htmlFor="password">{t('password')}</label>
             <Link
-              href={`/${props.lng}/login/reset/password?email=${email}`}
+              href={`/${props.lng}/login/reset/password${getEmailParameter()}`}
               hrefLang={props.lng}
               rel="noopener noreferrer"
-              hidden={isSignupType()}
-              aria-hidden={isSignupType()}
+              hidden={!props.showResetPassword}
+              aria-hidden={!props.showResetPassword}
             >
               {t('forgot_password')}
             </Link>
@@ -272,7 +280,7 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
         {pending ? (
           <SvgSpinners270Ring />
         ) : (
-          <span>{isSignupType() ? t('signup') : t('login')}</span>
+          <span>{props.buttonLabel ?? t(`submit`)}</span>
         )}
       </button>
     </form>

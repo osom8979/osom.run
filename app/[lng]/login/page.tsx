@@ -48,8 +48,9 @@ export default async function LoginPage(props: I18nRouterProps) {
           <EmailPasswordForm
             type="login"
             lng={lng}
-            href={`/${lng}/main`}
-            emailAutoFocus={true}
+            nextHref={`/${lng}/main`}
+            showResetPassword={true}
+            buttonLabel={t('login')}
           />
 
           <p className="text-sm text-center my-6">
