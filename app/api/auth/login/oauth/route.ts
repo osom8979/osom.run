@@ -22,7 +22,7 @@ export async function POST(request: Request) {
   const {data, error} = await supabase.auth.signInWithOAuth({
     provider: validatedFields.data,
     options: {
-      redirectTo: `${origin}/api/auth/pkce/route`,
+      redirectTo: `${origin}/api/auth/pkce`,
       skipBrowserRedirect: true,
     },
   });
