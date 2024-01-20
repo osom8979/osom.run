@@ -18,6 +18,12 @@ export class InaccessibleSectionError extends OsomError {
   }
 }
 
+export class NoUrlError extends OsomError {
+  constructor(message?: string, options?: ErrorOptions) {
+    super(message ?? 'The URL has no attributes', options);
+  }
+}
+
 export function getReasonPhraseSafe(code: number | string) {
   try {
     return getReasonPhrase(code);

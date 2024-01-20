@@ -1,0 +1,21 @@
+.oauth {
+  @apply tooltip tooltip-error;
+  @apply w-full;
+
+  &[data-tip] {
+    @apply tooltip-open;
+  }
+
+  button {
+    @apply btn;
+    @apply w-full;
+
+    &[disabled] {
+      @apply btn-disabled;
+    }
+
+    svg {
+      @apply w-6 h-6;
+    }
+  }
+}

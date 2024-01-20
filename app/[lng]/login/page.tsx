@@ -5,9 +5,8 @@ import {redirect} from 'next/navigation';
 import React from 'react';
 import {type I18nRouterProps} from '@/app/[lng]/params';
 import LoginForm from '@/app/components/data/form/LoginForm';
+import OAuthLoginButton from '@/app/components/data/input/OAuthLoginButton';
 import CenterDialog from '@/app/components/layout/CenterDialog';
-import MdiGithub from '@/app/icons/mdi/MdiGithub';
-import MdiGoogle from '@/app/icons/mdi/MdiGoogle';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function LoginPage(props: I18nRouterProps) {
@@ -28,15 +27,8 @@ export default async function LoginPage(props: I18nRouterProps) {
           <h2 className="card-title mb-6 text-center">{t('title')}</h2>
 
           <div className="my-6 w-full space-y-4">
-            <button role="button" className="btn w-full" aria-label={t('login_google')}>
-              <MdiGoogle className="w-6 h-6 fill-current" />
-              <span>{t('login_google')}</span>
-            </button>
-
-            <button role="button" className="btn w-full" aria-label={t('login_github')}>
-              <MdiGithub className="w-6 h-6 fill-current" />
-              <span>{t('login_github')}</span>
-            </button>
+            <OAuthLoginButton provider="google" lng={lng} />
+            <OAuthLoginButton provider="github" lng={lng} />
           </div>
 
           <div className="flex items-center w-full my-4">

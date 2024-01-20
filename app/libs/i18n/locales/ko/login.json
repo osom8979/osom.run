@@ -2,8 +2,6 @@
   "title": "계정에 로그인하세요",
   "no_account": "계정이 없나요?",
   "signup_link": "계정을 만드세요!",
-  "login_google": "Google 계정으로 로그인",
-  "login_github": "Github 계정으로 로그인",
   "or": "또는",
   "login": "로그인",
   "continue_email": "이메일로 계속하기",

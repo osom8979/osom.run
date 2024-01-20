@@ -1,6 +1,6 @@
 import {StatusCodes} from 'http-status-codes';
-import type {EmptyResponse} from '@/app/api/interface';
-import {HttpStatusError} from '@/app/exceptions';
+import type {EmptyResponse, LoginOAuthResponse} from '@/app/api/interface';
+import {HttpStatusError, NoUrlError} from '@/app/exceptions';
 
 export const DEFAULT_API_TIMEOUT_MILLISECONDS = 8_000;
 
@@ -58,6 +58,16 @@ export class ApiClient {
     body.set('email', email);
     body.set('password', password);
     return await this.post<EmptyResponse>('/api/auth/login', {body});
+  }
+
+  async loginOAuth(provider: string) {
+    const body = new FormData();
+    body.set('provider', provider);
+    const {url} = await this.post<LoginOAuthResponse>('/api/auth/login/oauth', {body});
+    if (!url) {
+      throw new NoUrlError();
+    }
+    return {url} as Required<LoginOAuthResponse>;
   }
 
   async logout() {
