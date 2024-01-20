@@ -28,12 +28,14 @@ export default async function UserMenu(props: UserMenuProps) {
         <div className="divider m-0"></div>
 
         <li>
-          <Link href={`/${lng}/user/settings`}>{settingsLabel}</Link>
+          <Link hrefLang={lng} href={`/${lng}/user/settings`}>
+            {settingsLabel}
+          </Link>
         </li>
 
         <div className="divider m-0"></div>
         <li>
-          <LogoutButton label={logoutLabel} />
+          <LogoutButton label={logoutLabel} nextHref={`/${lng}/main`} />
         </li>
       </ul>
     </div>

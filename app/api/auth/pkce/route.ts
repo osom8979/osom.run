@@ -29,6 +29,7 @@ export async function GET(request: NextRequest) {
   }
 
   // URL to redirect to after sign in process completes
-  console.info('Exchange code OK', {code, error});
+  console.info('Exchange code OK', {code});
+  console.assert(redirectPath.startsWith('/'));
   return NextResponse.redirect(`${origin}${redirectPath}`);
 }
