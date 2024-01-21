@@ -19,7 +19,7 @@ export default async function LngPage(props: I18nRouterProps) {
 
             <p className="py-6">{t('abstractor')}</p>
 
-            <Link href={`/${lng}/main`} hrefLang={lng} className="btn btn-primary">
+            <Link href={`/${lng}`} hrefLang={lng} className="btn btn-primary">
               {t('start')}
             </Link>
           </div>

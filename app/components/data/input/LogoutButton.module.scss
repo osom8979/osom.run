@@ -1,0 +1,18 @@
+.login {
+  @apply tooltip tooltip-left tooltip-error;
+  @apply w-full;
+  @apply p-0;
+
+  &[data-tip] {
+    @apply tooltip-open;
+  }
+
+  button {
+    @apply btn btn-outline btn-sm;
+    @apply w-full;
+
+    &[data-disabled] {
+      @apply btn-disabled;
+    }
+  }
+}

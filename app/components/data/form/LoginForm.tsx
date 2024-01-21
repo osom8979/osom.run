@@ -16,7 +16,7 @@ export default function LoginForm(props: LoginFormProps) {
   return (
     <EmailPasswordForm
       lng={props.lng}
-      nextHref={`/${props.lng}/main`}
+      nextHref={`/${props.lng}`}
       resetPasswordHref={`/${props.lng}/reset/password`}
       showResetPassword={true}
       buttonLabel={props.buttonLabel}

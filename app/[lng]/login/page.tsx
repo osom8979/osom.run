@@ -16,7 +16,7 @@ export default async function LoginPage(props: I18nRouterProps) {
   const user = await supabase.auth.getUser();
   const hasSession = user.error === null;
   if (hasSession) {
-    redirect(`/${lng}/main`);
+    redirect(`/${lng}`);
   }
 
   const {t} = await useTranslation(lng, 'login');
