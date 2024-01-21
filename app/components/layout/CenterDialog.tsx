@@ -6,15 +6,15 @@ import Logo from '@/app/components/Logo';
 interface CenterMainProps {
   children?: ReactNode;
   lng?: string;
-  hideLogo?: boolean;
+  showLogo?: boolean;
 }
 
 export default async function CenterDialog(props: CenterMainProps) {
-  const {children, lng, hideLogo} = props;
+  const {children, lng, showLogo} = props;
   return (
     <section className={styles.dialog}>
       <div className={styles.dialogBody}>
-        {!hideLogo && (
+        {showLogo && (
           <Link href={`/${lng ?? ''}`} hrefLang={lng}>
             <Logo className="h-6" />
           </Link>

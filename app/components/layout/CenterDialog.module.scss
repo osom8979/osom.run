@@ -10,8 +10,7 @@
     @apply space-y-8;
 
     &Content {
-      @apply min-w-fit;
-      @apply sm:min-w-[512px];
+      @apply sm:w-[512px];
     }
   }
 }
