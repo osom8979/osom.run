@@ -24,13 +24,11 @@ export async function POST(request: Request) {
   const supabase = createRouteHandlerClient({cookies: () => cookieStore});
   const {email, password} = validatedFields.data;
   const requestUrl = new URL(request.url);
-  const {error} = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      emailRedirectTo: `${requestUrl.origin}/login`,
-    },
-  });
+
+  // [INFORMATION] If signup is successful,
+  // the exchange code for the session is added as a query-parameter.
+  const options = {emailRedirectTo: `${requestUrl.origin}/api/auth/pkce`};
+  const {error} = await supabase.auth.signUp({email, password, options});
 
   if (error !== null) {
     console.warn('Sign up request error', {email, error});
