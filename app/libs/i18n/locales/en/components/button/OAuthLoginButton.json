@@ -1,5 +1,6 @@
 {
   "login_google": "Log in with Google",
   "login_github": "Log in with Github",
+  "login_discord": "Log in with Discord",
   "unknown_provider": "Unknown provider"
 }

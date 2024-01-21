@@ -5,6 +5,7 @@ import {Fragment, useEffect, useState} from 'react';
 import styles from './OAuthLoginButton.module.scss';
 import apiClient from '@/app/api/client';
 import {HttpStatusError} from '@/app/exceptions';
+import MdiDiscord from '@/app/icons/mdi/MdiDiscord';
 import MdiGithub from '@/app/icons/mdi/MdiGithub';
 import MdiGoogle from '@/app/icons/mdi/MdiGoogle';
 import MdiHelpCircleOutline from '@/app/icons/mdi/MdiHelpCircleOutline';
@@ -73,6 +74,8 @@ export default function OAuthLoginButton(props: OAuthLoginSubmitProps) {
       return <MdiGithub className={className} />;
     } else if (props.provider === 'google') {
       return <MdiGoogle className={className} />;
+    } else if (props.provider === 'discord') {
+      return <MdiDiscord className={className} />;
     } else {
       return <MdiHelpCircleOutline className={className} />;
     }
@@ -83,6 +86,8 @@ export default function OAuthLoginButton(props: OAuthLoginSubmitProps) {
       return t('login_github');
     } else if (props.provider === 'google') {
       return t('login_google');
+    } else if (props.provider === 'discord') {
+      return t('login_discord');
     } else {
       return t('unknown_provider');
     }

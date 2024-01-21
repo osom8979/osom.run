@@ -8,6 +8,7 @@ import OAuthLoginButton from '@/app/components/button/OAuthLoginButton';
 import LoginForm from '@/app/components/data/form/LoginForm';
 import CenterDialog from '@/app/components/layout/CenterDialog';
 import useTranslation from '@/app/libs/i18n/server';
+import {ProviderValues} from '@/app/libs/schema/auth';
 
 export default async function LoginPage(props: I18nRouterProps) {
   const lng = props.params.lng;
@@ -27,8 +28,9 @@ export default async function LoginPage(props: I18nRouterProps) {
           <h2 className="card-title mb-6 text-center">{t('title')}</h2>
 
           <div className="my-6 w-full space-y-4">
-            <OAuthLoginButton provider="google" lng={lng} />
-            <OAuthLoginButton provider="github" lng={lng} />
+            {ProviderValues.map(key => {
+              return <OAuthLoginButton key={key} provider={key} lng={lng} />;
+            })}
           </div>
 
           <div className="flex items-center w-full my-4">
