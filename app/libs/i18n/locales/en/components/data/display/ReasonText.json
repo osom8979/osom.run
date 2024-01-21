@@ -1,5 +1,6 @@
 {
   "null": "No reason provided.",
+  "error": "{{name}} ({{code}}) {{description}}",
   "nocode": "No code provided.",
   "rejected": "Code exchange rejected.",
   "unknown": "Unsupported reason code."

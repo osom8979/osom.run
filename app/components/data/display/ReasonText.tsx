@@ -4,7 +4,7 @@ import {useSearchParams} from 'next/navigation';
 import {Fragment} from 'react';
 import useTranslation from '@/app/libs/i18n/client';
 
-export type ReasonTypes = null | 'nocode' | 'rejected';
+export type ReasonTypes = null | 'error' | 'nocode' | 'rejected';
 export const REASON_PARAM_KEY = 'reason';
 
 interface ReasonTextProps {
@@ -21,6 +21,12 @@ export default function ReasonText(props: ReasonTextProps) {
   const getReasonMessage = () => {
     if (reason === null) {
       return t('null');
+    } else if (reason === 'error') {
+      return t('error', {
+        name: params.get('name'),
+        code: params.get('code'),
+        description: params.get('description'),
+      });
     } else if (reason === 'nocode') {
       return t('nocode');
     } else if (reason === 'rejected') {

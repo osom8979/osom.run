@@ -14,18 +14,47 @@ export async function GET(request: NextRequest) {
   // https://supabase.com/docs/guides/auth/auth-helpers/nextjs#managing-sign-in-with-code-exchange
   const {origin, searchParams} = new URL(request.url);
   const code = searchParams.get('code');
+  const error = searchParams.get('error');
   const next = searchParams.get('next') ?? '/';
   const redirectPath = next.startsWith('/') ? next : `/${next}`;
 
+  if (error) {
+    const errorCode = searchParams.get('error_code');
+    const errorDescription = searchParams.get('error_description');
+    console.warn('Exchange code request error', {
+      error: {
+        name: error,
+        code: errorCode,
+        description: errorDescription,
+      },
+    });
+
+    const nextUrl = new URL(`${origin}/pkce/fail`);
+    nextUrl.searchParams.set('reason', 'error');
+    nextUrl.searchParams.set('name', error);
+    if (errorCode) {
+      nextUrl.searchParams.set('code', errorCode);
+    }
+    if (errorDescription) {
+      nextUrl.searchParams.set('description', errorDescription);
+    }
+    return NextResponse.redirect(nextUrl);
+  }
+
   if (!code) {
-    return NextResponse.redirect(`${origin}/pkce/fail?reason=nocode`);
+    const nextUrl = new URL(`${origin}/pkce/fail`);
+    nextUrl.searchParams.set('reason', 'nocode');
+    return NextResponse.redirect(nextUrl);
   }
 
   const supabase = createRouteHandlerClient({cookies});
-  const {error} = await supabase.auth.exchangeCodeForSession(code);
-  if (error) {
-    console.warn('Exchange code error', {code, error});
-    return NextResponse.redirect(`${origin}/pkce/fail?reason=rejected`);
+  const exchangeCodeResult = await supabase.auth.exchangeCodeForSession(code);
+  if (exchangeCodeResult.error) {
+    console.warn('Exchange code error', {code, error: exchangeCodeResult.error});
+
+    const nextUrl = new URL(`${origin}/pkce/fail`);
+    nextUrl.searchParams.set('reason', 'rejected');
+    return NextResponse.redirect(nextUrl);
   }
 
   // URL to redirect to after sign in process completes

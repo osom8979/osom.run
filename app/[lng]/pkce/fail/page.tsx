@@ -18,7 +18,7 @@ export default async function PkceFailurePage(props: I18nRouterProps) {
 
           <h2 className="card-title my-2">{t('title')}</h2>
 
-          <p>
+          <p className="text-wrap">
             <ReasonText lng={lng} />
           </p>
 
