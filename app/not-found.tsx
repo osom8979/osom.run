@@ -5,10 +5,12 @@ import CenterDialog from '@/app/components/layout/CenterDialog';
 export default async function RootNotFound() {
   return (
     <html>
-      <body>
-        <CenterDialog>
-          <NotFoundCard />
-        </CenterDialog>
+      <body className="min-h-screen flex flex-col">
+        <main className="flex-grow h-0">
+          <CenterDialog showLogo={true}>
+            <NotFoundCard />
+          </CenterDialog>
+        </main>
       </body>
     </html>
   );

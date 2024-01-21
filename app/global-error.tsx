@@ -16,32 +16,34 @@ export default function GlobalError(props: GlobalErrorProps) {
   };
   return (
     <html>
-      <body>
-        <CenterDialog>
-          <div className="card bg-base-100 shadow-lg">
-            <div className="card-body items-center text-center">
-              <figure>
-                <IcOutlineErrorOutline className="w-28 h-28" />
-              </figure>
+      <body className="min-h-screen flex flex-col">
+        <main className="flex-grow h-0">
+          <CenterDialog showLogo={true}>
+            <div className="card bg-base-100 shadow-lg">
+              <div className="card-body items-center text-center">
+                <figure>
+                  <IcOutlineErrorOutline className="w-28 h-28" />
+                </figure>
 
-              <h2 className="card-title my-2">{t('title')}</h2>
+                <h2 className="card-title my-2">{t('title')}</h2>
 
-              <p>
-                <span>{props.error.message}</span>
-                <br />
-                <span>{t('digest')}</span>
-                <span>{t('colon')}</span>
-                <span>{props.error.digest}</span>
-              </p>
+                <p>
+                  <span>{props.error.message}</span>
+                  <br />
+                  <span>{t('digest')}</span>
+                  <span>{t('colon')}</span>
+                  <span>{props.error.digest}</span>
+                </p>
 
-              <div className="card-actions mt-6">
-                <button onClick={handlerClick}>
-                  <span>{t('try_again')}</span>
-                </button>
+                <div className="card-actions mt-6">
+                  <button onClick={handlerClick}>
+                    <span>{t('try_again')}</span>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </CenterDialog>
+          </CenterDialog>
+        </main>
       </body>
     </html>
   );
