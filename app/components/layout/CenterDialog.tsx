@@ -12,7 +12,7 @@ interface CenterMainProps {
 export default async function CenterDialog(props: CenterMainProps) {
   const {children, lng, hideLogo} = props;
   return (
-    <main className={styles.dialog}>
+    <section className={styles.dialog}>
       <div className={styles.dialogBody}>
         {!hideLogo && (
           <Link href={`/${lng ?? ''}`} hrefLang={lng}>
@@ -22,6 +22,6 @@ export default async function CenterDialog(props: CenterMainProps) {
 
         <div className={styles.dialogBodyContent}>{children}</div>
       </div>
-    </main>
+    </section>
   );
 }

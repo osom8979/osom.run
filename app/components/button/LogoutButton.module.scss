@@ -8,7 +8,7 @@
   }
 
   button {
-    @apply btn btn-outline btn-sm;
+    @apply btn btn-outline btn-sm btn-secondary;
     @apply w-full;
 
     &[data-disabled] {
