@@ -12,12 +12,11 @@ export const DEFAULT_TOOLTIP_TIMEOUT_MILLISECONDS = 4_000;
 
 interface LogoutSubmitProps {
   lng?: string;
-  label?: string;
   tooltipTimeout?: number;
 }
 
 export default function LogoutButton(props: LogoutSubmitProps) {
-  const {t} = useTranslation(props.lng);
+  const {t} = useTranslation(props.lng, 'components/button/LogoutButton');
   const [pending, setPending] = useState<undefined | true>();
   const [error, setError] = useState<undefined | string>();
   const [timeoutId, setTimeoutId] = useState<undefined | number>();
@@ -71,9 +70,9 @@ export default function LogoutButton(props: LogoutSubmitProps) {
         onClick={handleClick}
         data-disabled={pending}
         aria-disabled={pending}
-        aria-label={props.label}
+        aria-label={t('logout')}
       >
-        {pending ? <SvgSpinners270Ring /> : <span>{props.label}</span>}
+        {pending ? <SvgSpinners270Ring /> : <span>{t('logout')}</span>}
       </button>
     </div>
   );

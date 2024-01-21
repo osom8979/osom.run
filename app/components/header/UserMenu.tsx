@@ -1,18 +1,17 @@
 import {User} from '@supabase/supabase-js';
 import Link from 'next/link';
 import React from 'react';
-import LogoutButton from '@/app/components/data/input/LogoutButton';
+import LogoutButton from '@/app/components/button/LogoutButton';
 import MdiAccountCircle from '@/app/icons/mdi/MdiAccountCircle';
 
 interface UserMenuProps {
   lng: string;
   user: User;
   settingsLabel: string;
-  logoutLabel: string;
 }
 
 export default async function UserMenu(props: UserMenuProps) {
-  const {lng, user, settingsLabel, logoutLabel} = props;
+  const {lng, user, settingsLabel} = props;
 
   return (
     <div className="dropdown dropdown-end">
@@ -35,7 +34,7 @@ export default async function UserMenu(props: UserMenuProps) {
 
         <div className="divider m-0"></div>
         <li>
-          <LogoutButton label={logoutLabel} />
+          <LogoutButton lng={lng} />
         </li>
       </ul>
     </div>

@@ -1,6 +1,6 @@
 import {type I18nRouterProps} from '@/app/[lng]/params';
+import GoBackButton from '@/app/components/button/GoBackButton';
 import ReasonText from '@/app/components/data/display/ReasonText';
-import GoBackButton from '@/app/components/data/input/GoBackButton';
 import CenterDialog from '@/app/components/layout/CenterDialog';
 import MdiBarcodeOff from '@/app/icons/mdi/MdiBarcodeOff';
 import useTranslation from '@/app/libs/i18n/server';

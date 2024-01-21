@@ -21,7 +21,7 @@ interface OAuthLoginSubmitProps {
 }
 
 export default function OAuthLoginButton(props: OAuthLoginSubmitProps) {
-  const {t} = useTranslation(props.lng, 'components/data/input/OAuthLoginButton');
+  const {t} = useTranslation(props.lng, 'components/button/OAuthLoginButton');
   const [pending, setPending] = useState<undefined | true>();
   const [error, setError] = useState<undefined | string>();
   const [timeoutId, setTimeoutId] = useState<undefined | number>();

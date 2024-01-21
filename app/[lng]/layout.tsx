@@ -34,12 +34,7 @@ export default async function LngLayout(props: I18nLayoutProps) {
 
           <nav className="flex justify-end flex-1 px-2">
             {hasSession ? (
-              <UserMenu
-                lng={lng}
-                user={user.data.user}
-                settingsLabel={t('settings')}
-                logoutLabel={t('logout')}
-              />
+              <UserMenu lng={lng} user={user.data.user} settingsLabel={t('settings')} />
             ) : (
               <AnonymousMenu lng={lng} loginLabel={t('login')} />
             )}
