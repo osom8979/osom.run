@@ -30,6 +30,7 @@ type OnAsyncSubmit = (email: string, password: string) => Promise<void>;
 interface EmailPasswordFormProps {
   lng: string;
   nextHref: string;
+  noRefresh?: boolean;
   resetPasswordHref?: string;
   showPasswordValidation?: boolean;
   showResetPassword?: boolean;
@@ -156,7 +157,8 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
       }
       if (props.nextHref) {
         router.push(props.nextHref);
-      } else {
+      }
+      if (!props.noRefresh) {
         router.refresh();
       }
     } catch (e) {
