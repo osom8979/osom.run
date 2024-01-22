@@ -6,7 +6,7 @@ module.exports = {
   },
   plugins: [require('osom-ui/tailwind.plugin.osomui'), require('daisyui')],
   daisyui: {
-    themes: false,
+    themes: ['dark'],
     darkTheme: 'dark',
     base: true,
     styled: true,

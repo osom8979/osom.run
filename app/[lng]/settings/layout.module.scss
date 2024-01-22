@@ -1,5 +1,6 @@
 .settings {
   @apply container m-auto;
+  @apply lg:max-w-5xl;
   @apply flex flex-col;
 
   header {
@@ -61,6 +62,11 @@
         li {
           @apply max-sm:tooltip;
           @apply max-sm:tooltip-right;
+
+          [data-active=true] {
+            @apply bg-neutral;
+            @apply text-neutral-content;
+          }
 
           svg {
             @apply w-5 h-5;

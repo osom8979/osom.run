@@ -1,0 +1,12 @@
+{
+  "menus": {
+    "profile": "Profile",
+    "appearance": "Appearance",
+    "connection": "Connection"
+  },
+  "nameless": "[Nameless]",
+  "tiers": {
+    "free": "Free"
+  },
+  "go_main": "Go main page"
+}

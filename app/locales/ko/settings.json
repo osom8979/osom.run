@@ -1,0 +1,12 @@
+{
+  "menus": {
+    "profile": "프로필",
+    "appearance": "외관",
+    "connection": "연결"
+  },
+  "nameless": "[무명]",
+  "tiers": {
+    "free": "Free"
+  },
+  "go_main": "메인 페이지로"
+}
