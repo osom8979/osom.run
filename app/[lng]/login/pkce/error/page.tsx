@@ -1,5 +1,5 @@
 import PkceErrorReason from './PkceErrorReason';
-import {type I18nRouterProps} from '@/app/[lng]/params';
+import type {I18nRouterProps} from '@/app/[lng]/params';
 import GoBackButton from '@/app/components/button/GoBackButton';
 import CenterDialog from '@/app/components/layout/CenterDialog';
 import MdiBarcodeOff from '@/app/icons/mdi/MdiBarcodeOff';

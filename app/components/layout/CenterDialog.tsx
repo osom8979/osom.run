@@ -16,7 +16,7 @@ export default async function CenterDialog(props: CenterMainProps) {
       <div className={styles.dialogBody}>
         {showLogo && (
           <Link href={`/${lng ?? ''}`} hrefLang={lng}>
-            <Logo className="h-6" />
+            <Logo className="w-36" />
           </Link>
         )}
 
