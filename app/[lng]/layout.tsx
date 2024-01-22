@@ -25,10 +25,10 @@ export default async function LngLayout(props: I18nLayoutProps) {
   return (
     <html lang={lng} dir={dir(lng)}>
       <body className="min-h-screen flex flex-col">
-        <header className="navbar sticky top-0 min-h-fit bg-base-100 opacity-90 h-14 z-10">
-          <div className="flex-1">
+        <header className="navbar sticky top-0 min-h-fit bg-base-100 opacity-90 h-12 z-10">
+          <div className="flex-1 px-2">
             <Link href={`/${lng}/`} hrefLang={lng}>
-              <Logo className="h-5" />
+              <Logo className="h-4" />
             </Link>
           </div>
 

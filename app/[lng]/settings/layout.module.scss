@@ -1,0 +1,92 @@
+.settings {
+  @apply container m-auto;
+  @apply flex flex-col;
+
+  header {
+    @apply hidden;
+    @apply sm:flex sm:flex-row items-center justify-between;
+    @apply sm:h-16;
+    @apply sm:my-2;
+    @apply px-2;
+
+    .headerProfile {
+      @apply flex flex-row;
+
+      svg {
+        @apply w-14 h-14;
+      }
+
+      &Image {
+        @apply mr-4;
+      }
+
+      &Info {
+        @apply flex flex-col;
+        @apply space-y-1;
+
+        h3 {
+          @apply font-bold text-xl text-white;
+        }
+
+        p, span {
+          @apply font-normal text-sm;
+        }
+      }
+    }
+
+    .headerMenu {
+      @apply btn btn-sm btn-outline;
+    }
+  }
+
+  &Main {
+    @apply flex flex-row;
+    @apply space-x-4;
+
+    &Navi {
+      @apply bg-base-100;
+      @apply min-w-fit;
+      @apply sm:w-52;
+      @apply rounded-br-box;
+      @apply sm:rounded-box;
+
+      hr {
+        @apply border-gray-500/90;
+        @apply my-1;
+      }
+
+      ul {
+        @apply menu menu-vertical;
+
+        li {
+          @apply max-sm:tooltip;
+          @apply max-sm:tooltip-right;
+
+          svg {
+            @apply w-5 h-5;
+          }
+
+          span {
+            @apply hidden;
+            @apply sm:block;
+          }
+        }
+      }
+    }
+
+    &Content {
+      @apply flex-grow;
+
+      h2 {
+        @apply font-bold;
+        @apply text-xl;
+        @apply my-2;
+      }
+    }
+  }
+
+  .tier {
+    @apply badge badge-sm badge-primary;
+    @apply ml-2;
+  }
+}

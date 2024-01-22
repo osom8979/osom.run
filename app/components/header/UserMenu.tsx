@@ -27,7 +27,7 @@ export default async function UserMenu(props: UserMenuProps) {
         <div className="divider m-0"></div>
 
         <li>
-          <Link hrefLang={lng} href={`/${lng}/user/settings`}>
+          <Link hrefLang={lng} href={`/${lng}/settings/profile`}>
             {settingsLabel}
           </Link>
         </li>
