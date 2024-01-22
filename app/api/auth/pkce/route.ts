@@ -8,7 +8,7 @@ import {NextResponse} from 'next/server';
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
-  // The `/api/auth/callback` route is required for the server-side auth
+  // The `/api/auth/pkce` route is required for the server-side auth
   // flow implemented by the Auth Helpers package.
   // It exchanges an auth code for the user's session.
   // https://supabase.com/docs/guides/auth/auth-helpers/nextjs#managing-sign-in-with-code-exchange
@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    const nextUrl = new URL(`${origin}/pkce/fail`);
+    const nextUrl = new URL(`${origin}/login/pkce/error`);
     nextUrl.searchParams.set('reason', 'error');
     nextUrl.searchParams.set('name', error);
     if (errorCode) {
@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
   }
 
   if (!code) {
-    const nextUrl = new URL(`${origin}/pkce/fail`);
+    const nextUrl = new URL(`${origin}/login/pkce/error`);
     nextUrl.searchParams.set('reason', 'nocode');
     return NextResponse.redirect(nextUrl);
   }
@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
   if (exchangeCodeResult.error) {
     console.warn('Exchange code error', {code, error: exchangeCodeResult.error});
 
-    const nextUrl = new URL(`${origin}/pkce/fail`);
+    const nextUrl = new URL(`${origin}/login/pkce/error`);
     nextUrl.searchParams.set('reason', 'rejected');
     return NextResponse.redirect(nextUrl);
   }

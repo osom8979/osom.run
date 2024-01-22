@@ -13,7 +13,7 @@ export default function UpdatePasswordForm(props: UpdatePasswordFormProps) {
   const params = useSearchParams();
   const code = params.get('code');
   if (!code) {
-    redirect(`/${props.lng}/pkce/fail?reason=nocode`);
+    redirect(`/${props.lng}/login/pkce/error?reason=nocode`);
   }
 
   const handleSubmit = async (email: string, password: string) => {
