@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import type {I18nRouterProps} from '@/app/[lng]/params';
-import CenterDialog from '@/app/components/layout/CenterDialog';
+import CenterDialog from '@/app/components/CenterDialog';
 import UilEnvelopeCheck from '@/app/icons/uil/UilEnvelopeCheck';
 import useTranslation from '@/app/libs/i18n/server';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import CenterDialog from '@/app/components/layout/CenterDialog';
+import CenterDialog from '@/app/components/CenterDialog';
 import IcOutlineErrorOutline from '@/app/icons/ic/IcOutlineErrorOutline';
 import useTranslation from '@/app/libs/i18n/client';
 

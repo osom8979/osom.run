@@ -4,9 +4,9 @@ import Link from 'next/link';
 import {redirect} from 'next/navigation';
 import React from 'react';
 import {type I18nRouterProps} from '@/app/[lng]/params';
-import OAuthLoginButton from '@/app/components/button/OAuthLoginButton';
-import LoginForm from '@/app/components/data/form/LoginForm';
-import CenterDialog from '@/app/components/layout/CenterDialog';
+import CenterDialog from '@/app/components/CenterDialog';
+import LoginForm from '@/app/components/form/LoginForm';
+import OAuthLoginButton from '@/app/components/OAuthLoginButton';
 import useTranslation from '@/app/libs/i18n/server';
 import {ProviderValues} from '@/app/libs/schema/auth';
 

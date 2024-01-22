@@ -16,7 +16,7 @@ interface LogoutSubmitProps {
 }
 
 export default function LogoutButton(props: LogoutSubmitProps) {
-  const {t} = useTranslation(props.lng, 'components/button/LogoutButton');
+  const {t} = useTranslation(props.lng, 'logout-button');
   const [pending, setPending] = useState<undefined | true>();
   const [error, setError] = useState<undefined | string>();
   const [timeoutId, setTimeoutId] = useState<undefined | number>();

@@ -1,7 +1,7 @@
 import React from 'react';
 import type {I18nRouterProps} from '@/app/[lng]/params';
-import UpdatePasswordForm from '@/app/components/data/form/UpdatePasswordForm';
-import CenterDialog from '@/app/components/layout/CenterDialog';
+import CenterDialog from '@/app/components/CenterDialog';
+import UpdatePasswordForm from '@/app/components/form/UpdatePasswordForm';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function ResetPasswordUpdatePage(props: I18nRouterProps) {

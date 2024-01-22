@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
 import {type I18nRouterProps} from '@/app/[lng]/params';
-import ResetPasswordForm from '@/app/components/data/form/ResetPasswordForm';
-import CenterDialog from '@/app/components/layout/CenterDialog';
+import CenterDialog from '@/app/components/CenterDialog';
+import ResetPasswordForm from '@/app/components/form/ResetPasswordForm';
 import MaterialSymbolsLockResetRounded from '@/app/icons/ms/MaterialSymbolsLockResetRounded';
 import useTranslation from '@/app/libs/i18n/server';
 

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
 import {type I18nRouterProps} from '@/app/[lng]/params';
-import SignupForm from '@/app/components/data/form/SignupForm';
-import CenterDialog from '@/app/components/layout/CenterDialog';
+import CenterDialog from '@/app/components/CenterDialog';
+import SignupForm from '@/app/components/form/SignupForm';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function SignupPage(props: I18nRouterProps) {

@@ -1,7 +1,7 @@
-import PkceErrorReason from './PkceErrorReason';
+import PkceErrorReason from './_PkceErrorReason';
 import type {I18nRouterProps} from '@/app/[lng]/params';
-import GoBackButton from '@/app/components/button/GoBackButton';
-import CenterDialog from '@/app/components/layout/CenterDialog';
+import CenterDialog from '@/app/components/CenterDialog';
+import GoBackButton from '@/app/components/GoBackButton';
 import MdiBarcodeOff from '@/app/icons/mdi/MdiBarcodeOff';
 import useTranslation from '@/app/libs/i18n/server';
 

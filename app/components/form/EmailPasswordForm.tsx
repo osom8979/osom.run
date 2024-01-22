@@ -48,7 +48,7 @@ interface PasswordValidationItem {
 }
 
 export default function EmailPasswordForm(props: EmailPasswordFormProps) {
-  const {t} = useTranslation(props.lng, 'components/data/form/EmailPasswordForm');
+  const {t} = useTranslation(props.lng, 'email-password-form');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [showPassword, setShowPassword] = useState(false);

@@ -2,7 +2,7 @@
 
 import {redirect, useSearchParams} from 'next/navigation';
 import apiClient from '@/app/api/client';
-import EmailPasswordForm from '@/app/components/data/form/EmailPasswordForm';
+import EmailPasswordForm from '@/app/components/form/EmailPasswordForm';
 
 interface UpdatePasswordFormProps {
   lng: string;

@@ -1,7 +1,7 @@
 'use client';
 
 import apiClient from '@/app/api/client';
-import EmailPasswordForm from '@/app/components/data/form/EmailPasswordForm';
+import EmailPasswordForm from '@/app/components/form/EmailPasswordForm';
 
 interface ResetPasswordFormProps {
   lng: string;
