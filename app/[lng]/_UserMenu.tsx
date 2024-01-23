@@ -1,6 +1,9 @@
+'use client';
+
 import {User} from '@supabase/supabase-js';
 import Link from 'next/link';
-import React from 'react';
+import {useRouter} from 'next/navigation';
+import {type MouseEvent} from 'react';
 import LogoutButton from '@/app/components/LogoutButton';
 import MdiAccountCircle from '@/app/icons/mdi/MdiAccountCircle';
 
@@ -10,29 +13,40 @@ interface UserMenuProps {
   settingsLabel: string;
 }
 
-export default async function UserMenu(props: UserMenuProps) {
+export default function UserMenu(props: UserMenuProps) {
   const {lng, user, settingsLabel} = props;
+  const router = useRouter();
+  const handleLinkClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    router.push(e.currentTarget.href);
 
+    // dropdown-content disappears when it loses focus
+    e.currentTarget.blur();
+  };
+
+  // We can't use <button> here because Safari has a bug that prevents the button from
+  // being focused. <div role="button" tabindex="0"> is a workaround for this bug.
+  // It is accessible and works in all browsers.
+  // https://bugs.webkit.org/show_bug.cgi?id=22261
   return (
-    <div className="dropdown dropdown-end">
-      <div tabIndex={0} role="button" className="p-2">
-        <MdiAccountCircle className="w-6 h-6 fill-current" />
-      </div>
+    <div tabIndex={0} className="dropdown dropdown-end">
+      <MdiAccountCircle className="btn btn-sm btn-circle btn-ghost w-8 h-8" />
 
-      <ul
-        tabIndex={0}
-        className="menu dropdown-content z-[1] bg-base-100 shadow rounded-box w-52 mt-4 p-2"
-      >
+      <ul className="dropdown-content menu bg-base-100 shadow rounded-box z-[1] w-52 mt-4 p-2">
         <span className="text-center">{user.email}</span>
         <div className="divider m-0"></div>
 
         <li>
-          <Link hrefLang={lng} href={`/${lng}/settings/profile`}>
+          <Link
+            hrefLang={lng}
+            href={`/${lng}/settings/profile`}
+            onClick={handleLinkClick}
+          >
             {settingsLabel}
           </Link>
         </li>
 
-        <div className="divider m-0"></div>
+        <div className="divider m-0" />
+
         <li>
           <LogoutButton lng={lng} />
         </li>

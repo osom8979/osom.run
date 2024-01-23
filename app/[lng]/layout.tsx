@@ -25,14 +25,14 @@ export default async function LngLayout(props: I18nLayoutProps) {
   return (
     <html lang={lng} dir={dir(lng)}>
       <body className="min-h-screen flex flex-col">
-        <header className="navbar sticky top-0 min-h-fit bg-base-100 h-12 z-10">
-          <div className="flex-1 px-2">
+        <header className="navbar sticky top-0 min-h-fit bg-base-100 h-12 px-2 z-10">
+          <div className="flex-1">
             <Link href={`/${lng}/`} hrefLang={lng}>
               <Logo className="h-4" />
             </Link>
           </div>
 
-          <nav className="flex justify-end flex-1 px-2">
+          <nav className="flex justify-end">
             {hasSession ? (
               <UserMenu lng={lng} user={user.data.user} settingsLabel={t('settings')} />
             ) : (
