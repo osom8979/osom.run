@@ -1,27 +1,30 @@
 import Link from 'next/link';
-import {type ReactNode} from 'react';
+import type {HTMLAttributes, PropsWithChildren} from 'react';
 import styles from './CenterDialog.module.scss';
 import Logo from '@/app/components/Logo';
 
-interface CenterMainProps {
-  children?: ReactNode;
+interface CenterDialogProps
+  extends Omit<PropsWithChildren<HTMLAttributes<HTMLDivElement>>, 'className'> {
   lng?: string;
   showLogo?: boolean;
+  logoClassName?: string;
+  logoHref?: string;
 }
 
-export default async function CenterDialog(props: CenterMainProps) {
-  const {children, lng, showLogo} = props;
+export default async function CenterDialog(props: CenterDialogProps) {
+  const {children, lng, showLogo, logoClassName, logoHref, ...attrs} = props;
+  const finalLinkHref = logoHref ?? `/${lng ?? ''}`;
   return (
-    <section className={styles.dialog}>
+    <div className={styles.dialog} {...attrs}>
       <div className={styles.dialogBody}>
         {showLogo && (
-          <Link href={`/${lng ?? ''}`} hrefLang={lng}>
-            <Logo className="w-36" />
+          <Link href={finalLinkHref} hrefLang={lng}>
+            <Logo className={logoClassName ?? 'w-36'} />
           </Link>
         )}
 
         <div className={styles.dialogBodyContent}>{children}</div>
       </div>
-    </section>
+    </div>
   );
 }
