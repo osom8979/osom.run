@@ -6,6 +6,7 @@ import {useRouter} from 'next/navigation';
 import {type MouseEvent} from 'react';
 import LogoutButton from '@/app/components/LogoutButton';
 import MdiAccountCircle from '@/app/icons/mdi/MdiAccountCircle';
+import {appPaths} from '@/app/paths';
 
 interface UserMenuProps {
   lng: string;
@@ -38,7 +39,7 @@ export default function UserMenu(props: UserMenuProps) {
         <li>
           <Link
             hrefLang={lng}
-            href={`/${lng}/settings/profile`}
+            href={`/${lng}${appPaths.settingsProfile}`}
             onClick={handleLinkClick}
           >
             {settingsLabel}

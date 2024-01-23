@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import React from 'react';
+import SignupForm from './_SignupForm';
 import {type I18nRouterProps} from '@/app/[lng]/params';
 import CenterDialog from '@/app/components/CenterDialog';
-import SignupForm from '@/app/components/form/SignupForm';
 import useTranslation from '@/app/libs/i18n/server';
+import {appPaths} from '@/app/paths';
 
 export default async function SignupPage(props: I18nRouterProps) {
   const lng = props.params.lng;
@@ -19,7 +19,7 @@ export default async function SignupPage(props: I18nRouterProps) {
           <p className="text-sm text-center my-6">
             {t('have_account')}
             <Link
-              href={`/${lng}/login`}
+              href={`/${lng}${appPaths.login}`}
               hrefLang={lng}
               rel="noopener noreferrer"
               className="link link-primary ml-1"

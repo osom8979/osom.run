@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import React from 'react';
 import {type I18nRouterProps} from '@/app/[lng]/params';
 import Logo from '@/app/components/Logo';
 import useTranslation from '@/app/libs/i18n/server';

@@ -1,7 +1,7 @@
 import {StatusCodes} from 'http-status-codes';
 import type {EmptyResponse, LoginOAuthResponse} from '@/app/api/interface';
-import apiPaths from '@/app/api/paths';
 import {HttpStatusError, NoUrlError} from '@/app/exceptions';
+import {apiPaths} from '@/app/paths';
 
 export const DEFAULT_API_TIMEOUT_MILLISECONDS = 8_000;
 

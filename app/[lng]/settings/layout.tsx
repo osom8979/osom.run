@@ -2,7 +2,7 @@ import {createServerComponentClient} from '@supabase/auth-helpers-nextjs';
 import {cookies, headers} from 'next/headers';
 import Link from 'next/link';
 import {redirect} from 'next/navigation';
-import React, {type ReactNode} from 'react';
+import {type ReactNode} from 'react';
 import styles from './layout.module.scss';
 import {type I18nLayoutProps} from '@/app/[lng]/params';
 import MdiAccountCircle from '@/app/icons/mdi/MdiAccountCircle';
@@ -10,6 +10,7 @@ import MdiAccountOutline from '@/app/icons/mdi/MdiAccountOutline';
 import MdiBrushVariant from '@/app/icons/mdi/MdiBrushVariant';
 import MdiConnection from '@/app/icons/mdi/MdiConnection';
 import useTranslation from '@/app/libs/i18n/server';
+import {appPaths} from '@/app/paths';
 
 interface SettingsMenuItem {
   icon: ReactNode;
@@ -34,17 +35,17 @@ export default async function SettingsLayout(props: I18nLayoutProps) {
     {
       icon: <MdiAccountOutline />,
       text: t('menus.profile'),
-      href: `/${lng}/settings/profile`,
+      href: `/${lng}${appPaths.settingsProfile}`,
     },
     {
       icon: <MdiBrushVariant />,
       text: t('menus.appearance'),
-      href: `/${lng}/settings/appearance`,
+      href: `/${lng}${appPaths.settingsAppearance}`,
     },
     {
       icon: <MdiConnection />,
       text: t('menus.connection'),
-      href: `/${lng}/settings/connection`,
+      href: `/${lng}${appPaths.settingsConnection}`,
     },
   ] as Array<SettingsMenuItem>;
 

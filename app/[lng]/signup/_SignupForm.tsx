@@ -1,7 +1,8 @@
 'use client';
 
 import apiClient from '@/app/api/client';
-import EmailPasswordForm from '@/app/components/form/EmailPasswordForm';
+import EmailPasswordForm from '@/app/components/EmailPasswordForm';
+import {appPaths} from '@/app/paths';
 
 interface SignupFormProps {
   lng: string;
@@ -16,7 +17,7 @@ export default function SignupForm(props: SignupFormProps) {
   return (
     <EmailPasswordForm
       lng={props.lng}
-      nextHref={`/${props.lng}/signup/wait`}
+      nextHref={`/${props.lng}${appPaths.signupWait}`}
       showPasswordValidation={true}
       buttonLabel={props.buttonLabel}
       onSubmit={handleSubmit}

@@ -1,7 +1,8 @@
 'use client';
 
 import apiClient from '@/app/api/client';
-import EmailPasswordForm from '@/app/components/form/EmailPasswordForm';
+import EmailPasswordForm from '@/app/components/EmailPasswordForm';
+import {appPaths} from '@/app/paths';
 
 interface LoginFormProps {
   lng: string;
@@ -17,7 +18,7 @@ export default function LoginForm(props: LoginFormProps) {
     <EmailPasswordForm
       lng={props.lng}
       nextHref={`/${props.lng}`}
-      resetPasswordHref={`/${props.lng}/reset/password`}
+      resetPasswordHref={`/${props.lng}${appPaths.passwordResetRequest}`}
       showResetPassword={true}
       buttonLabel={props.buttonLabel}
       onSubmit={handleSubmit}

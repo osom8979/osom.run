@@ -5,8 +5,8 @@ import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
 import type {EmptyResponse} from '@/app/api/interface';
-import apiPaths from '@/app/api/paths';
 import {EmailSchema} from '@/app/libs/schema/auth';
+import {appPaths} from '@/app/paths';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,7 +23,7 @@ export async function POST(request: Request) {
   const email = validatedFields.data;
   const requestUrl = new URL(request.url);
   const {error} = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${requestUrl.origin}${apiPaths.passwordResetUpdate}`,
+    redirectTo: `${requestUrl.origin}${appPaths.passwordResetUpdate}`,
   });
 
   if (error !== null) {

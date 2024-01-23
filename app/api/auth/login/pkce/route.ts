@@ -4,6 +4,7 @@ import {createRouteHandlerClient} from '@supabase/auth-helpers-nextjs';
 import {cookies} from 'next/headers';
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
+import {appPaths} from '@/app/paths';
 
 export const dynamic = 'force-dynamic';
 
@@ -28,7 +29,7 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    const nextUrl = new URL(`${origin}/login/pkce/error`);
+    const nextUrl = new URL(`${origin}${appPaths.loginPkceError}`);
     nextUrl.searchParams.set('reason', 'error');
     nextUrl.searchParams.set('name', error);
     if (errorCode) {
@@ -41,7 +42,7 @@ export async function GET(request: NextRequest) {
   }
 
   if (!code) {
-    const nextUrl = new URL(`${origin}/login/pkce/error`);
+    const nextUrl = new URL(`${origin}${appPaths.loginPkceError}`);
     nextUrl.searchParams.set('reason', 'nocode');
     return NextResponse.redirect(nextUrl);
   }
@@ -51,7 +52,7 @@ export async function GET(request: NextRequest) {
   if (exchangeCodeResult.error) {
     console.error('Exchange code error', {code, error: exchangeCodeResult.error});
 
-    const nextUrl = new URL(`${origin}/login/pkce/error`);
+    const nextUrl = new URL(`${origin}${appPaths.loginPkceError}`);
     nextUrl.searchParams.set('reason', 'rejected');
     return NextResponse.redirect(nextUrl);
   }

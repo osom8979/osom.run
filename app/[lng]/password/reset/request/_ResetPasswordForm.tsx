@@ -1,7 +1,8 @@
 'use client';
 
 import apiClient from '@/app/api/client';
-import EmailPasswordForm from '@/app/components/form/EmailPasswordForm';
+import EmailPasswordForm from '@/app/components/EmailPasswordForm';
+import {appPaths} from '@/app/paths';
 
 interface ResetPasswordFormProps {
   lng: string;
@@ -16,7 +17,7 @@ export default function ResetPasswordForm(props: ResetPasswordFormProps) {
   return (
     <EmailPasswordForm
       lng={props.lng}
-      nextHref={`/${props.lng}/reset/password/wait`}
+      nextHref={`/${props.lng}${appPaths.passwordResetRequestWait}`}
       hidePassword={true}
       hideLabel={true}
       buttonLabel={props.buttonLabel}

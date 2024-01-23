@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React from 'react';
+import {appPaths} from '@/app/paths';
 
 interface AnonymousMenuProps {
   lng: string;
@@ -11,7 +11,7 @@ export default async function AnonymousMenu(props: AnonymousMenuProps) {
   return (
     <ul className="menu menu-horizontal p-0 font-bold">
       <li>
-        <Link href={`/${lng}/login`} hrefLang={lng}>
+        <Link href={`/${lng}${appPaths.login}`} hrefLang={lng}>
           {loginLabel}
         </Link>
       </li>

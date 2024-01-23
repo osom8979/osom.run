@@ -1,12 +1,11 @@
-import React from 'react';
+import UpdatePasswordForm from './_UpdatePasswordForm';
 import type {I18nRouterProps} from '@/app/[lng]/params';
 import CenterDialog from '@/app/components/CenterDialog';
-import UpdatePasswordForm from '@/app/components/form/UpdatePasswordForm';
 import useTranslation from '@/app/libs/i18n/server';
 
-export default async function ResetPasswordUpdatePage(props: I18nRouterProps) {
+export default async function PasswordResetUpdatePage(props: I18nRouterProps) {
   const lng = props.params.lng;
-  const {t} = await useTranslation(lng, 'update-password');
+  const {t} = await useTranslation(lng, 'password-reset-update');
   return (
     <CenterDialog lng={lng}>
       <div className="card bg-base-100 shadow-lg">

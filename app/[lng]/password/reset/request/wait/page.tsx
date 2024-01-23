@@ -1,13 +1,13 @@
 import Link from 'next/link';
-import React from 'react';
 import type {I18nRouterProps} from '@/app/[lng]/params';
 import CenterDialog from '@/app/components/CenterDialog';
 import UilEnvelopeCheck from '@/app/icons/uil/UilEnvelopeCheck';
 import useTranslation from '@/app/libs/i18n/server';
+import {appPaths} from '@/app/paths';
 
-export default async function ResetPasswordWaitPage(props: I18nRouterProps) {
+export default async function PasswordResetRequestWaitPage(props: I18nRouterProps) {
   const lng = props.params.lng;
-  const {t} = await useTranslation(lng, 'reset-password-wait');
+  const {t} = await useTranslation(lng, 'password-reset-request-wait');
   return (
     <CenterDialog lng={lng}>
       <div className="card bg-base-100 shadow-lg">
@@ -27,7 +27,7 @@ export default async function ResetPasswordWaitPage(props: I18nRouterProps) {
           <div className="card-actions mt-4">
             <p>
               <Link
-                href={`/${lng}/login`}
+                href={`/${lng}${appPaths.login}`}
                 hrefLang={lng}
                 className="link link-primary text-sm"
               >

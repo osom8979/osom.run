@@ -2,7 +2,6 @@ import {createServerComponentClient} from '@supabase/auth-helpers-nextjs';
 import {dir} from 'i18next';
 import {cookies} from 'next/headers';
 import Link from 'next/link';
-import React from 'react';
 import AnonymousMenu from './_AnonymousMenu';
 import UserMenu from './_UserMenu';
 import type {I18nLayoutProps} from '@/app/[lng]/params';

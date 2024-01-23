@@ -1,14 +1,14 @@
 import Link from 'next/link';
-import React from 'react';
+import ResetPasswordForm from './_ResetPasswordForm';
 import {type I18nRouterProps} from '@/app/[lng]/params';
 import CenterDialog from '@/app/components/CenterDialog';
-import ResetPasswordForm from '@/app/components/form/ResetPasswordForm';
 import MaterialSymbolsLockResetRounded from '@/app/icons/ms/MaterialSymbolsLockResetRounded';
 import useTranslation from '@/app/libs/i18n/server';
+import {appPaths} from '@/app/paths';
 
-export default async function ResetPasswordPage(props: I18nRouterProps) {
+export default async function PasswordResetRequestPage(props: I18nRouterProps) {
   const lng = props.params.lng;
-  const {t} = await useTranslation(lng, 'reset-password');
+  const {t} = await useTranslation(lng, 'password-reset-request');
   return (
     <CenterDialog lng={lng}>
       <div className="card bg-base-100 shadow-lg">
@@ -30,7 +30,7 @@ export default async function ResetPasswordPage(props: I18nRouterProps) {
           <p className="text-sm text-center my-6">
             {t('remember_password')}
             <Link
-              href={`/${lng}/login`}
+              href={`/${lng}${appPaths.login}`}
               hrefLang={lng}
               rel="noopener noreferrer"
               className="link link-primary ml-1"

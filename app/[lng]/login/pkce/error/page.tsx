@@ -5,7 +5,7 @@ import GoBackButton from '@/app/components/GoBackButton';
 import MdiBarcodeOff from '@/app/icons/mdi/MdiBarcodeOff';
 import useTranslation from '@/app/libs/i18n/server';
 
-export default async function PkceErrorPage(props: I18nRouterProps) {
+export default async function LoginPkceErrorPage(props: I18nRouterProps) {
   const lng = props.params.lng;
   const {t} = await useTranslation(lng, 'login-pkce-error');
   return (

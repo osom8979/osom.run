@@ -2,13 +2,13 @@ import {createServerComponentClient} from '@supabase/auth-helpers-nextjs';
 import {cookies} from 'next/headers';
 import Link from 'next/link';
 import {redirect} from 'next/navigation';
-import React from 'react';
+import LoginForm from './_LoginForm';
 import {type I18nRouterProps} from '@/app/[lng]/params';
 import CenterDialog from '@/app/components/CenterDialog';
-import LoginForm from '@/app/components/form/LoginForm';
 import OAuthLoginButton from '@/app/components/OAuthLoginButton';
 import useTranslation from '@/app/libs/i18n/server';
 import {ProviderValues} from '@/app/libs/schema/auth';
+import {appPaths} from '@/app/paths';
 
 export default async function LoginPage(props: I18nRouterProps) {
   const lng = props.params.lng;
@@ -44,7 +44,7 @@ export default async function LoginPage(props: I18nRouterProps) {
           <p className="text-sm text-center my-6">
             {t('no_account')}
             <Link
-              href={`/${lng}/signup`}
+              href={`/${lng}${appPaths.signup}`}
               hrefLang={lng}
               rel="noopener noreferrer"
               className="link link-primary ml-1"
