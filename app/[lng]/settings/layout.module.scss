@@ -41,7 +41,7 @@
   }
 
   &Main {
-    @apply flex flex-row;
+    @apply flex items-start;
     @apply space-x-4;
 
     &Navi {
@@ -77,12 +77,6 @@
 
     &Content {
       @apply flex-grow;
-
-      h2 {
-        @apply font-bold;
-        @apply text-xl;
-        @apply my-2;
-      }
     }
   }
 
