@@ -5,6 +5,7 @@ import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
 import type {LoginOAuthResponse} from '@/app/api/interface';
+import apiPaths from '@/app/api/paths';
 import {ProviderSchema} from '@/app/libs/schema/auth';
 
 export const dynamic = 'force-dynamic';
@@ -22,14 +23,14 @@ export async function POST(request: Request) {
   const {data, error} = await supabase.auth.signInWithOAuth({
     provider: validatedFields.data,
     options: {
-      redirectTo: `${origin}/api/auth/pkce`,
+      redirectTo: `${origin}${apiPaths.loginPkce}`,
       skipBrowserRedirect: true,
     },
   });
 
   const {provider, url} = data;
   if (error !== null) {
-    console.warn('OAuth log in request error', {provider, url, error});
+    console.error('OAuth log in request error', {provider, url, error});
     return NextResponse.json<LoginOAuthResponse>(
       {},
       {status: StatusCodes.UNAUTHORIZED}

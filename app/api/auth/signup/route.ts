@@ -5,6 +5,7 @@ import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
 import type {EmptyResponse} from '@/app/api/interface';
+import apiPaths from '@/app/api/paths';
 import {EmailPasswordSchema} from '@/app/libs/schema/auth';
 
 export const dynamic = 'force-dynamic';
@@ -27,11 +28,11 @@ export async function POST(request: Request) {
 
   // [INFORMATION] If signup is successful,
   // the exchange code for the session is added as a query-parameter.
-  const options = {emailRedirectTo: `${requestUrl.origin}/api/auth/pkce`};
+  const options = {emailRedirectTo: `${requestUrl.origin}${apiPaths.loginPkce}`};
   const {error} = await supabase.auth.signUp({email, password, options});
 
   if (error !== null) {
-    console.warn('Sign up request error', {email, error});
+    console.error('Sign up request error', {email, error});
     return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
   }
 

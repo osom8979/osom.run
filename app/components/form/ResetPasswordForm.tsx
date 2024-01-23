@@ -10,7 +10,7 @@ interface ResetPasswordFormProps {
 
 export default function ResetPasswordForm(props: ResetPasswordFormProps) {
   const handleSubmit = async (email: string) => {
-    await apiClient.resetPassword(email);
+    await apiClient.passwordResetRequest(email);
   };
 
   return (

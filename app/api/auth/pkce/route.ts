@@ -8,9 +8,8 @@ import {NextResponse} from 'next/server';
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
-  // The `/api/auth/pkce` route is required for the server-side auth
-  // flow implemented by the Auth Helpers package.
-  // It exchanges an auth code for the user's session.
+  // This route is required for the server-side auth flow implemented by the Auth
+  // Helpers package. It exchanges an auth code for the user's session.
   // https://supabase.com/docs/guides/auth/auth-helpers/nextjs#managing-sign-in-with-code-exchange
   const {origin, searchParams} = new URL(request.url);
   const code = searchParams.get('code');
@@ -21,7 +20,7 @@ export async function GET(request: NextRequest) {
   if (error) {
     const errorCode = searchParams.get('error_code');
     const errorDescription = searchParams.get('error_description');
-    console.warn('Exchange code request error', {
+    console.error('Exchange code request error', {
       error: {
         name: error,
         code: errorCode,
@@ -50,7 +49,7 @@ export async function GET(request: NextRequest) {
   const supabase = createRouteHandlerClient({cookies});
   const exchangeCodeResult = await supabase.auth.exchangeCodeForSession(code);
   if (exchangeCodeResult.error) {
-    console.warn('Exchange code error', {code, error: exchangeCodeResult.error});
+    console.error('Exchange code error', {code, error: exchangeCodeResult.error});
 
     const nextUrl = new URL(`${origin}/login/pkce/error`);
     nextUrl.searchParams.set('reason', 'rejected');

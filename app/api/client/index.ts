@@ -1,5 +1,6 @@
 import {StatusCodes} from 'http-status-codes';
 import type {EmptyResponse, LoginOAuthResponse} from '@/app/api/interface';
+import apiPaths from '@/app/api/paths';
 import {HttpStatusError, NoUrlError} from '@/app/exceptions';
 
 export const DEFAULT_API_TIMEOUT_MILLISECONDS = 8_000;
@@ -57,13 +58,13 @@ export class ApiClient {
     const body = new FormData();
     body.set('email', email);
     body.set('password', password);
-    return await this.post<EmptyResponse>('/api/auth/login', {body});
+    return await this.post<EmptyResponse>(apiPaths.login, {body});
   }
 
   async loginOAuth(provider: string) {
     const body = new FormData();
     body.set('provider', provider);
-    const {url} = await this.post<LoginOAuthResponse>('/api/auth/login/oauth', {body});
+    const {url} = await this.post<LoginOAuthResponse>(apiPaths.loginOAuth, {body});
     if (!url) {
       throw new NoUrlError();
     }
@@ -71,27 +72,27 @@ export class ApiClient {
   }
 
   async logout() {
-    return await this.post<EmptyResponse>('/api/auth/logout');
+    return await this.post<EmptyResponse>(apiPaths.logout);
   }
 
   async signup(email: string, password: string) {
     const body = new FormData();
     body.set('email', email);
     body.set('password', password);
-    return await this.post<EmptyResponse>('/api/auth/signup', {body});
+    return await this.post<EmptyResponse>(apiPaths.signup, {body});
   }
 
-  async resetPassword(email: string) {
+  async passwordResetRequest(email: string) {
     const body = new FormData();
     body.set('email', email);
-    return await this.post<EmptyResponse>('/api/auth/reset/password', {body});
+    return await this.post<EmptyResponse>(apiPaths.passwordResetRequest, {body});
   }
 
-  async updatePassword(code: string, password: string) {
+  async passwordResetUpdate(code: string, password: string) {
     const body = new FormData();
     body.set('code', code);
     body.set('password', password);
-    return await this.post<EmptyResponse>('/api/auth/update/password', {body});
+    return await this.post<EmptyResponse>(apiPaths.passwordResetUpdate, {body});
   }
 }
 

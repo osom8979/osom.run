@@ -16,14 +16,14 @@ export async function POST(request: Request) {
 
   const session = await supabase.auth.getSession();
   if (session.error !== null || session.data.session === null) {
-    console.warn('Log out session error');
+    console.error('Log out session error');
     return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
   }
 
   const email = session.data.session.user.email;
   const {error} = await supabase.auth.signOut();
   if (error !== null) {
-    console.warn('Log out request error', {email, error});
+    console.error('Log out request error', {email, error});
     return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
   }
 

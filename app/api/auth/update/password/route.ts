@@ -26,13 +26,13 @@ export async function POST(request: Request) {
 
   const exchangeResult = await supabase.auth.exchangeCodeForSession(code);
   if (exchangeResult.error !== null) {
-    console.warn('Exchange code error', {code, error: exchangeResult.error});
+    console.error('Exchange code error', {code, error: exchangeResult.error});
     return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
   }
 
   const updateResult = await supabase.auth.updateUser({password});
   if (updateResult.error !== null) {
-    console.warn('Update password request error', {error: updateResult.error});
+    console.error('Update password request error', {error: updateResult.error});
     return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
   }
 

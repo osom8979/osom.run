@@ -27,7 +27,7 @@ export async function POST(request: Request) {
   const {error} = await supabase.auth.signInWithPassword({email, password});
 
   if (error !== null) {
-    console.warn('Log in request error', {email, error});
+    console.error('Log in request error', {email, error});
     return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.UNAUTHORIZED});
   }
 

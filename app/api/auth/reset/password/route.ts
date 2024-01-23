@@ -5,6 +5,7 @@ import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
 import type {EmptyResponse} from '@/app/api/interface';
+import apiPaths from '@/app/api/paths';
 import {EmailSchema} from '@/app/libs/schema/auth';
 
 export const dynamic = 'force-dynamic';
@@ -22,11 +23,11 @@ export async function POST(request: Request) {
   const email = validatedFields.data;
   const requestUrl = new URL(request.url);
   const {error} = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${requestUrl.origin}/update/password`,
+    redirectTo: `${requestUrl.origin}${apiPaths.passwordResetUpdate}`,
   });
 
   if (error !== null) {
-    console.warn('Password reset request error', {email, error});
+    console.error('Password reset request error', {email, error});
     return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
   }
 

@@ -18,7 +18,7 @@ export default function UpdatePasswordForm(props: UpdatePasswordFormProps) {
 
   const handleSubmit = async (email: string, password: string) => {
     console.assert(!email);
-    await apiClient.updatePassword(code, password);
+    await apiClient.passwordResetUpdate(code, password);
   };
 
   return (
