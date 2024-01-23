@@ -54,10 +54,6 @@ export async function middleware(req: NextRequest) {
   upgradeI18nCookies(req, res);
   await upgradeSessionCookies(req, res);
 
-  // EXTRA HEADERS =====================================================================
-  res.headers.set('x-pathname', req.nextUrl.pathname);
-  // ===================================================================================
-
   console.debug(`middleware(req='${req.url}') -> ${res.status}`);
   return res;
 }

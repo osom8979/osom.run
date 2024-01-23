@@ -9,6 +9,7 @@ export const appPaths = {
   passwordResetRequest: '/password/reset/request',
   passwordResetRequestWait: '/password/reset/request/wait',
   passwordResetUpdate: '/password/reset/update',
+  settings: '/settings',
   settingsAppearance: '/settings/appearance',
   settingsConnection: '/settings/connection',
   settingsProfile: '/settings/profile',

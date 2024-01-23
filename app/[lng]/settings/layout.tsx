@@ -1,23 +1,12 @@
 import {createServerComponentClient} from '@supabase/auth-helpers-nextjs';
-import {cookies, headers} from 'next/headers';
+import {cookies} from 'next/headers';
 import Link from 'next/link';
 import {redirect} from 'next/navigation';
-import {type ReactNode} from 'react';
+import SettingsMenu from './_SettingsMenu';
 import styles from './layout.module.scss';
 import {type I18nLayoutProps} from '@/app/[lng]/params';
 import MdiAccountCircle from '@/app/icons/mdi/MdiAccountCircle';
-import MdiAccountOutline from '@/app/icons/mdi/MdiAccountOutline';
-import MdiBrushVariant from '@/app/icons/mdi/MdiBrushVariant';
-import MdiConnection from '@/app/icons/mdi/MdiConnection';
 import useTranslation from '@/app/libs/i18n/server';
-import {appPaths} from '@/app/paths';
-
-interface SettingsMenuItem {
-  icon: ReactNode;
-  text: string;
-  href: string;
-  lng?: string;
-}
 
 export default async function SettingsLayout(props: I18nLayoutProps) {
   const lng = props.params.lng;
@@ -29,25 +18,6 @@ export default async function SettingsLayout(props: I18nLayoutProps) {
   if (!hasSession) {
     redirect(`/${lng}`);
   }
-
-  const pathname = headers().get('x-pathname') ?? '';
-  const menuItems = [
-    {
-      icon: <MdiAccountOutline />,
-      text: t('menus.profile'),
-      href: `/${lng}${appPaths.settingsProfile}`,
-    },
-    {
-      icon: <MdiBrushVariant />,
-      text: t('menus.appearance'),
-      href: `/${lng}${appPaths.settingsAppearance}`,
-    },
-    {
-      icon: <MdiConnection />,
-      text: t('menus.connection'),
-      href: `/${lng}${appPaths.settingsConnection}`,
-    },
-  ] as Array<SettingsMenuItem>;
 
   return (
     <div className={styles.settings}>
@@ -69,22 +39,7 @@ export default async function SettingsLayout(props: I18nLayoutProps) {
 
       <div className={styles.settingsMain}>
         <nav className={styles.settingsMainNavi}>
-          <ul>
-            {menuItems.map((menu, index) => {
-              return (
-                <li key={index} data-tip={menu.text}>
-                  <Link
-                    href={menu.href}
-                    hrefLang={menu.lng ?? lng}
-                    data-active={pathname.startsWith(menu.href)}
-                  >
-                    {menu.icon}
-                    <span>{menu.text}</span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+          <SettingsMenu lng={lng} />
         </nav>
 
         <div className={styles.settingsMainContent}>{props.children}</div>
