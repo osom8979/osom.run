@@ -14,9 +14,10 @@ export default function LogoutButton(props: LogoutButtonProps) {
   };
   return (
     <RequestButton
+      className="btn btn-sm btn-outline btn-secondary w-full"
       lng={props.lng}
       onClick={handleClick}
-      className="btn btn-sm btn-outline btn-secondary w-full"
+      aria-label={props.label}
     >
       {props.label}
     </RequestButton>

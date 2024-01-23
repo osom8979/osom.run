@@ -3,11 +3,13 @@ import {cookies} from 'next/headers';
 import Link from 'next/link';
 import {redirect} from 'next/navigation';
 import LoginForm from './_LoginForm';
+import OAuthLoginButton from './_OAuthLoginButton';
 import {type I18nRouterProps} from '@/app/[lng]/params';
 import CenterDialog from '@/app/components/CenterDialog';
-import OAuthLoginButton from '@/app/components/OAuthLoginButton';
+import MdiDiscord from '@/app/icons/mdi/MdiDiscord';
+import MdiGithub from '@/app/icons/mdi/MdiGithub';
+import MdiGoogle from '@/app/icons/mdi/MdiGoogle';
 import useTranslation from '@/app/libs/i18n/server';
-import {ProviderValues} from '@/app/libs/schema/auth';
 import {appPaths} from '@/app/paths';
 
 export default async function LoginPage(props: I18nRouterProps) {
@@ -28,9 +30,20 @@ export default async function LoginPage(props: I18nRouterProps) {
           <h2 className="card-title mb-6 text-center">{t('title')}</h2>
 
           <div className="my-6 w-full space-y-4">
-            {ProviderValues.map(key => {
-              return <OAuthLoginButton key={key} provider={key} lng={lng} />;
-            })}
+            <OAuthLoginButton provider="google" lng={lng}>
+              <MdiGoogle className="w-6 h-6" />
+              <span>{t('oauth.login_google')}</span>
+            </OAuthLoginButton>
+
+            <OAuthLoginButton provider="github" lng={lng}>
+              <MdiGithub className="w-6 h-6" />
+              <span>{t('oauth.login_github')}</span>
+            </OAuthLoginButton>
+
+            <OAuthLoginButton provider="discord" lng={lng}>
+              <MdiDiscord className="w-6 h-6" />
+              <span>{t('oauth.login_discord')}</span>
+            </OAuthLoginButton>
           </div>
 
           <div className="flex items-center w-full my-4">

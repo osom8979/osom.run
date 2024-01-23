@@ -13,5 +13,11 @@
   "password_placeholder": "****",
   "forgot_password": "비밀번호를 잊으셨나요?",
   "bad_request": "이메일 또는 비밀번호가 잘못되었습니다.",
-  "unauthorized": "인증 정보가 잘못되었습니다."
+  "unauthorized": "인증 정보가 잘못되었습니다.",
+  "oauth": {
+    "login_google": "Google 계정으로 로그인",
+    "login_github": "Github 계정으로 로그인",
+    "login_discord": "Discord 계정으로 로그인",
+    "unknown_provider": "제공자를 알 수 없습니다"
+  }
 }

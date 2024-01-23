@@ -13,5 +13,11 @@
   "password_placeholder": "****",
   "forgot_password": "Forgot password?",
   "bad_request": "Your email or password is incorrect.",
-  "unauthorized": "Your authentication information is incorrect."
+  "unauthorized": "Your authentication information is incorrect.",
+  "oauth": {
+    "login_google": "Log in with Google",
+    "login_github": "Log in with Github",
+    "login_discord": "Log in with Discord",
+    "unknown_provider": "Unknown provider"
+  }
 }
