@@ -4,7 +4,7 @@ import {User} from '@supabase/supabase-js';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {type MouseEvent} from 'react';
-import LogoutButton from '@/app/components/LogoutButton';
+import LogoutButton from './_LogoutButton';
 import MdiAccountCircle from '@/app/icons/mdi/MdiAccountCircle';
 import {appPaths} from '@/app/paths';
 
@@ -12,6 +12,7 @@ interface UserMenuProps {
   lng: string;
   user: User;
   settingsLabel: string;
+  logoutLabel: string;
 }
 
 export default function UserMenu(props: UserMenuProps) {
@@ -49,7 +50,7 @@ export default function UserMenu(props: UserMenuProps) {
         <div className="divider m-0" />
 
         <li>
-          <LogoutButton lng={lng} />
+          <LogoutButton lng={lng} label={props.logoutLabel} />
         </li>
       </ul>
     </div>

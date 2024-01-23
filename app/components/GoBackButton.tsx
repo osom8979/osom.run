@@ -3,7 +3,7 @@
 import {useRouter} from 'next/navigation';
 import type {HTMLAttributes, PropsWithChildren} from 'react';
 
-type GoBackButtonProps = PropsWithChildren<HTMLAttributes<HTMLDivElement>>;
+type GoBackButtonProps = PropsWithChildren<HTMLAttributes<HTMLButtonElement>>;
 
 export default function GoBackButton(props: GoBackButtonProps) {
   const router = useRouter();
@@ -12,8 +12,8 @@ export default function GoBackButton(props: GoBackButtonProps) {
     router.back();
   };
   return (
-    <div role="button" onClick={handlerClick} {...attrs}>
+    <button role="button" onClick={handlerClick} {...attrs}>
       {children}
-    </div>
+    </button>
   );
 }

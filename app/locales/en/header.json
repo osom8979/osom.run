@@ -1,4 +1,5 @@
 {
+  "login": "Log in",
   "settings": "Edit Profile",
-  "login": "Log in"
+  "logout": "Log out"
 }

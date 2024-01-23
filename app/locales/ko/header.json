@@ -1,4 +1,5 @@
 {
+  "login": "로그인",
   "settings": "프로필 수정",
-  "login": "로그인"
+  "logout": "로그아웃"
 }

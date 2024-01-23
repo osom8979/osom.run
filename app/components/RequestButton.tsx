@@ -9,14 +9,14 @@ import React, {
   useState,
 } from 'react';
 import {HttpStatusError} from '@/app/exceptions';
-import MdiAlertCircleOutline from '@/app/icons/mdi/MdiAlertCircleOutline';
+import MdiCloseCircleOutline from '@/app/icons/mdi/MdiCloseCircleOutline';
 import SvgSpinners270Ring from '@/app/icons/spinners/SvgSpinners270Ring';
 import useTranslation from '@/app/libs/i18n/client';
 
 export const DEFAULT_ERROR_TIMEOUT_MILLISECONDS = 4_000;
 
 interface RequestButtonProps
-  extends Omit<PropsWithChildren<HTMLAttributes<HTMLDivElement>>, 'onClick'> {
+  extends Omit<PropsWithChildren<HTMLAttributes<HTMLButtonElement>>, 'onClick'> {
   lng?: string;
   errorTimeout?: number;
   noRefresh?: boolean;
@@ -91,30 +91,25 @@ export default function RequestButton(props: RequestButtonProps) {
 
   const ButtonBody = () => {
     if (pending) {
-      return <SvgSpinners270Ring className={spinnerClassName ?? 'w-6 h-6'} />;
+      return <SvgSpinners270Ring className={spinnerClassName} />;
     }
     if (error) {
       return (
         <Fragment>
-          <MdiAlertCircleOutline className={alertClassName ?? 'w-4 h-4'} />;
-          <span>{error}</span>
+          <MdiCloseCircleOutline className={alertClassName} />
+          <span className="text-clip">{error}</span>
         </Fragment>
       );
     }
     return children;
   };
 
-  const buttonClassName = [
-    'btn',
-    pending ? 'btn-disabled' : undefined,
-    error ? 'btn-error' : undefined,
-    className,
-  ]
+  const buttonClassName = ['btn', pending ? 'btn-disabled' : undefined, className]
     .filter(v => typeof v !== 'undefined')
     .join(' ');
 
   return (
-    <div
+    <button
       role="button"
       className={buttonClassName}
       onClick={handleClick}
@@ -124,6 +119,6 @@ export default function RequestButton(props: RequestButtonProps) {
       {...attrs}
     >
       <ButtonBody />
-    </div>
+    </button>
   );
 }
