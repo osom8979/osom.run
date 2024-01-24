@@ -1,4 +1,9 @@
 {
   "title": "Public Profile",
-  "subtitle": "This information is publicly exposed to other users."
+  "details": "This information is publicly exposed to other users.",
+  "user": {
+    "title": "Personal info",
+    "subtitle": "Update your photo and personal details",
+    "nickname": "Nickname"
+  }
 }

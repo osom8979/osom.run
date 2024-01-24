@@ -20,29 +20,30 @@ export default async function SettingsLayout(props: I18nLayoutProps) {
   }
 
   return (
-    <div className={styles.settings}>
-      <header>
+    <div className={styles.root}>
+      <header className={styles.header}>
         <div className={styles.headerProfile}>
           <MdiAccountCircle className={styles.headerProfileImage} />
           <div className={styles.headerProfileInfo}>
-            <h3>{user.data.user?.user_metadata?.full_name ?? t('nameless')}</h3>
+            <h2>{user.data.user?.user_metadata?.full_name ?? t('nameless')}</h2>
             <p>
               {user.data.user?.email}
               <span className={styles.tier}>{t('tiers.free')}</span>
             </p>
           </div>
         </div>
+
         <Link className={styles.headerMenu} href={`/${lng}/`} hrefLang={lng}>
           {t('go_main')}
         </Link>
       </header>
 
-      <div className={styles.settingsMain}>
-        <nav className={styles.settingsMainNavi}>
+      <div className={styles.main}>
+        <nav className={styles.mainNavi}>
           <SettingsMenu lng={lng} />
         </nav>
 
-        <div className={styles.settingsMainContent}>{props.children}</div>
+        <div className={styles.mainContent}>{props.children}</div>
       </div>
     </div>
   );

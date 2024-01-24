@@ -1,19 +1,17 @@
-$grid-gap: 4;
-
-.settings {
+.root {
   @apply container m-auto;
   @apply lg:max-w-5xl;
   @apply flex flex-col;
   @apply sm:mt-2;
-  @apply space-y-#{$grid-gap};
+  @apply sm:space-y-4;
 
-  header {
+  .header {
     @apply hidden;
     @apply sm:flex sm:flex-row items-center justify-between;
     @apply sm:h-16;
     @apply px-2;
 
-    .headerProfile {
+    &Profile {
       @apply flex flex-row;
 
       svg {
@@ -28,7 +26,7 @@ $grid-gap: 4;
         @apply flex flex-col;
         @apply space-y-1;
 
-        h3 {
+        h2 {
           @apply font-bold text-xl text-white;
         }
 
@@ -38,24 +36,22 @@ $grid-gap: 4;
       }
     }
 
-    .headerMenu {
+    &Menu {
       @apply btn btn-sm btn-outline;
     }
   }
 
-  &Main {
+  .main {
     @apply flex flex-row;
-    @apply space-x-#{$grid-gap};
+    @apply space-x-6;
 
     &Navi {
-      @apply bg-base-200;
-      @apply min-w-fit;
-      @apply sm:w-52;
-      @apply rounded-br-box;
-      @apply sm:rounded-box;
-
-      ul {
+      &>ul {
         @apply menu menu-vertical;
+        @apply sm:w-48;
+        @apply bg-base-200;
+        @apply rounded-br-box;
+        @apply sm:rounded-box;
 
         li {
           @apply max-sm:tooltip;
