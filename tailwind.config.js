@@ -4,9 +4,13 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require('osom-ui/tailwind.plugin.osomui'), require('daisyui')],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('osom-ui/tailwind.plugin.osomui'),
+    require('daisyui'),
+  ],
   daisyui: {
-    themes: ['pastel', 'business'],
+    themes: ['cupcake', 'business'],
     darkTheme: 'business',
     base: true,
     styled: true,
