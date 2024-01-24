@@ -10,13 +10,15 @@ export default async function SignupWaitPage(props: I18nRouterProps) {
   const {t} = await useTranslation(lng, 'signup-wait');
   return (
     <CenterDialog lng={lng}>
-      <div className="osom-card">
-        <div className="card-body items-center">
+      <section className="osom-card">
+        <div className="card-body items-center space-y-4">
           <figure>
             <UilEnvelopeCheck className="w-16 h-16" />
           </figure>
 
-          <h2 className="card-title mt-2 mb-6 text-center">{t('title')}</h2>
+          <div className="card-title">
+            <h2>{t('title')}</h2>
+          </div>
 
           <p className="text-center">
             {t('details_1')}
@@ -24,19 +26,19 @@ export default async function SignupWaitPage(props: I18nRouterProps) {
             {t('details_2')}
           </p>
 
-          <div className="card-actions mt-4">
-            <p>
+          <p>
+            <small>
               <Link
                 href={`/${lng}${appPaths.login}`}
                 hrefLang={lng}
-                className="link link-primary text-sm"
+                className="link link-primary"
               >
                 {t('login_link')}
               </Link>
-            </p>
-          </div>
+            </small>
+          </p>
         </div>
-      </div>
+      </section>
     </CenterDialog>
   );
 }

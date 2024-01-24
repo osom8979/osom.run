@@ -8,13 +8,17 @@ export default async function PasswordResetUpdatePage(props: I18nRouterProps) {
   const {t} = await useTranslation(lng, 'password-reset-update');
   return (
     <CenterDialog lng={lng}>
-      <div className="osom-card">
-        <div className="card-body items-center">
-          <h2 className="card-title mt-2 mb-6 text-center">{t('title')}</h2>
+      <section className="osom-card">
+        <div className="card-body items-center space-y-4">
+          <div className="card-title">
+            <h2>{t('title')}</h2>
+          </div>
+
+          <p>{t('details')}</p>
 
           <UpdatePasswordForm lng={lng} buttonLabel={t('update')} />
         </div>
-      </div>
+      </section>
     </CenterDialog>
   );
 }

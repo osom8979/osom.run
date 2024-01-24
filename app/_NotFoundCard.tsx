@@ -12,22 +12,24 @@ export interface NotFoundCardProps {
 export default function NotFoundCard(props: NotFoundCardProps) {
   const {t} = useTranslation(props.lng, 'not-found');
   return (
-    <div className="osom-card">
-      <div className="card-body items-center text-center">
+    <section className="osom-card">
+      <div className="card-body items-center space-y-4">
         <figure>
           <TablerError404 className="w-28 h-28" />
         </figure>
 
-        <h2 className="card-title my-2">{t('title')}</h2>
+        <div className="card-title">
+          <h2>{t('title')}</h2>
+        </div>
 
         <p>{t('details')}</p>
 
-        <div className="card-actions mt-6">
+        <div className="card-actions">
           <GoBackButton className="btn btn-primary">
             <span>{t('back')}</span>
           </GoBackButton>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

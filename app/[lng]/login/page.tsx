@@ -25,11 +25,13 @@ export default async function LoginPage(props: I18nRouterProps) {
   const {t} = await useTranslation(lng, 'login');
   return (
     <CenterDialog lng={lng}>
-      <div className="osom-card">
-        <div className="card-body items-center">
-          <h2 className="card-title mb-6 text-center">{t('title')}</h2>
+      <section className="osom-card">
+        <div className="card-body items-center space-y-4">
+          <div className="card-title">
+            <h2>{t('title')}</h2>
+          </div>
 
-          <div className="my-6 w-full space-y-4">
+          <div className="space-y-4">
             <OAuthLoginButton provider="google" lng={lng}>
               <MdiGoogle className="w-6 h-6" />
               <span>{t('oauth.login_google')}</span>
@@ -46,27 +48,26 @@ export default async function LoginPage(props: I18nRouterProps) {
             </OAuthLoginButton>
           </div>
 
-          <div className="flex items-center w-full my-4">
-            <hr className="w-full"></hr>
-            <span className="px-3 whitespace-nowrap">{t('or')}</span>
-            <hr className="w-full"></hr>
+          <div className="divider">
+            <span>{t('or')}</span>
           </div>
 
           <LoginForm lng={lng} buttonLabel={t('login')} />
 
-          <p className="text-sm text-center my-6">
-            {t('no_account')}
-            <Link
-              href={`/${lng}${appPaths.signup}`}
-              hrefLang={lng}
-              rel="noopener noreferrer"
-              className="link link-primary ml-1"
-            >
-              {t('signup_link')}
-            </Link>
+          <p>
+            <small>
+              {t('no_account')}
+              <Link
+                href={`/${lng}${appPaths.signup}`}
+                hrefLang={lng}
+                className="link link-primary ml-1"
+              >
+                {t('signup_link')}
+              </Link>
+            </small>
           </p>
         </div>
-      </div>
+      </section>
     </CenterDialog>
   );
 }

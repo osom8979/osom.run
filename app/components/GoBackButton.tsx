@@ -12,7 +12,7 @@ export default function GoBackButton(props: GoBackButtonProps) {
     router.back();
   };
   return (
-    <button role="button" onClick={handlerClick} {...attrs}>
+    <button type="button" role="button" onClick={handlerClick} {...attrs}>
       {children}
     </button>
   );

@@ -10,25 +10,28 @@ export default async function SignupPage(props: I18nRouterProps) {
   const {t} = await useTranslation(lng, 'signup');
   return (
     <CenterDialog lng={lng}>
-      <div className="osom-card">
-        <div className="card-body items-center">
-          <h2 className="card-title mb-6 text-center">{t('title')}</h2>
+      <section className="osom-card">
+        <div className="card-body items-center space-y-4">
+          <div className="card-title">
+            <h2>{t('title')}</h2>
+          </div>
 
           <SignupForm lng={lng} buttonLabel={t('signup')} />
 
-          <p className="text-sm text-center my-6">
-            {t('have_account')}
-            <Link
-              href={`/${lng}${appPaths.login}`}
-              hrefLang={lng}
-              rel="noopener noreferrer"
-              className="link link-primary ml-1"
-            >
-              {t('login_link')}
-            </Link>
+          <p>
+            <small>
+              {t('have_account')}
+              <Link
+                href={`/${lng}${appPaths.login}`}
+                hrefLang={lng}
+                className="link link-primary ml-1"
+              >
+                {t('login_link')}
+              </Link>
+            </small>
           </p>
         </div>
-      </div>
+      </section>
     </CenterDialog>
   );
 }

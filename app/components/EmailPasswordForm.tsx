@@ -231,7 +231,6 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
             <Link
               href={getResetPasswordHref()}
               hrefLang={props.lng}
-              rel="noopener noreferrer"
               hidden={!props.showResetPassword}
               aria-hidden={!props.showResetPassword}
             >
@@ -239,7 +238,7 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
             </Link>
           </div>
 
-          <div className="relative w-full">
+          <div className="relative">
             <input
               type={showPassword ? 'text' : 'password'}
               name="password"
@@ -256,9 +255,10 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
               aria-errormessage={passwordError}
             />
 
-            <div className="absolute inset-y-0 z-1 right-0 flex items-center px-3">
+            <div className="absolute inset-y-0 z-[1] right-0 flex items-center px-3">
               <button
                 type="button"
+                role="button"
                 className="btn btn-sm btn-circle btn-ghost"
                 onClick={() => setShowPassword(!showPassword)}
               >
@@ -279,13 +279,13 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
             >
               {passwordValidations.map((v, i) => {
                 return (
-                  <li key={`validations-password-${i}`} data-error={v.error}>
+                  <li key={i} data-error={v.error}>
                     {v.error ? (
                       <MdiCheckboxBlankCircleOutline />
                     ) : (
                       <MdiCheckboxMarkedCircleOutline />
                     )}
-                    <span>{v.message}</span>
+                    <small>{v.message}</small>
                   </li>
                 );
               })}

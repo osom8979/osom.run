@@ -19,29 +19,33 @@ export default function GlobalError(props: GlobalErrorProps) {
       <body className="min-h-screen flex flex-col">
         <main className="flex-grow h-0">
           <CenterDialog showLogo={true}>
-            <div className="osom-card">
-              <div className="card-body items-center text-center">
+            <section className="osom-card">
+              <div className="card-body items-center space-y-4">
                 <figure>
                   <IcOutlineErrorOutline className="w-28 h-28" />
                 </figure>
 
-                <h2 className="card-title my-2">{t('title')}</h2>
+                <div className="card-title">
+                  <h2>{t('title')}</h2>
+                </div>
+
+                <p>{props.error.message}</p>
 
                 <p>
-                  <span>{props.error.message}</span>
-                  <br />
-                  <span>{t('digest')}</span>
-                  <span>{t('colon')}</span>
-                  <span>{props.error.digest}</span>
+                  <small>
+                    <span>{t('digest')}</span>
+                    <span>{t('colon')}</span>
+                    <span>{props.error.digest}</span>
+                  </small>
                 </p>
 
-                <div className="card-actions mt-6">
+                <div className="card-actions">
                   <button onClick={handlerClick}>
                     <span>{t('try_again')}</span>
                   </button>
                 </div>
               </div>
-            </div>
+            </section>
           </CenterDialog>
         </main>
       </body>

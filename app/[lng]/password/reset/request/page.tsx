@@ -11,15 +11,17 @@ export default async function PasswordResetRequestPage(props: I18nRouterProps) {
   const {t} = await useTranslation(lng, 'password-reset-request');
   return (
     <CenterDialog lng={lng}>
-      <div className="osom-card">
-        <div className="card-body items-center">
+      <section className="osom-card">
+        <div className="card-body items-center space-y-4">
           <figure>
             <MaterialSymbolsLockResetRounded className="w-16 h-16" />
           </figure>
 
-          <h2 className="card-title mt-2 text-center">{t('title')}</h2>
+          <div className="card-title">
+            <h2>{t('title')}</h2>
+          </div>
 
-          <p className="text-center my-4">
+          <p className="text-center">
             {t('details_1')}
             <br />
             {t('details_2')}
@@ -27,19 +29,20 @@ export default async function PasswordResetRequestPage(props: I18nRouterProps) {
 
           <ResetPasswordForm lng={lng} buttonLabel={t('send')} />
 
-          <p className="text-sm text-center my-6">
-            {t('remember_password')}
-            <Link
-              href={`/${lng}${appPaths.login}`}
-              hrefLang={lng}
-              rel="noopener noreferrer"
-              className="link link-primary ml-1"
-            >
-              {t('login_link')}
-            </Link>
+          <p>
+            <small>
+              {t('remember_password')}
+              <Link
+                href={`/${lng}${appPaths.login}`}
+                hrefLang={lng}
+                className="link link-primary ml-1"
+              >
+                {t('login_link')}
+              </Link>
+            </small>
           </p>
         </div>
-      </div>
+      </section>
     </CenterDialog>
   );
 }

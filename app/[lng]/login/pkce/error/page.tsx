@@ -10,25 +10,27 @@ export default async function LoginPkceErrorPage(props: I18nRouterProps) {
   const {t} = await useTranslation(lng, 'login-pkce-error');
   return (
     <CenterDialog lng={lng}>
-      <div className="osom-card">
-        <div className="card-body items-center text-center">
+      <section className="osom-card">
+        <div className="card-body items-center space-y-4">
           <figure>
             <MdiBarcodeOff className="w-28 h-28" />
           </figure>
 
-          <h2 className="card-title my-2">{t('title')}</h2>
+          <div className="card-title">
+            <h2>{t('title')}</h2>
+          </div>
 
-          <p className="text-wrap">
+          <p>
             <PkceErrorReason lng={lng} />
           </p>
 
-          <div className="card-actions mt-6">
+          <div className="card-actions">
             <GoBackButton className="btn btn-primary">
               <span>{t('back')}</span>
             </GoBackButton>
           </div>
         </div>
-      </div>
+      </section>
     </CenterDialog>
   );
 }

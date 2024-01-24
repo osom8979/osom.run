@@ -14,19 +14,16 @@ export default async function SettingsProfilePage(props: I18nRouterProps) {
 
   return (
     <section>
-      <h2 className="text-sm">{t('title')}</h2>
+      <h2>{t('title')}</h2>
 
-      <div className="divider m-0" />
+      <div className="divider" />
 
-      <div className="flex flex-row justify-between">
-        <div className="flex flex-col">
-          <h3 className="text-lg text-base-content">{t('title')}</h3>
-          <p className="font-light text-sm text-base-content">{t('subtitle')}</p>
-        </div>
+      <article className="flex flex-row justify-between">
+        <p>{t('subtitle')}</p>
         <div className="flex items-center">
           <p>Content</p>
         </div>
-      </div>
+      </article>
     </section>
   );
 }
