@@ -21,8 +21,8 @@ function getRedirectUrl(options: Omit<CatchSessionIfYouCanOptions, 'redirectType
   }
 }
 
-export async function catchSessionIfYouCan(options: CatchSessionIfYouCanOptions) {
-  const {lng, redirectUrl, redirectType} = options;
+export async function catchSessionIfYouCan(options?: CatchSessionIfYouCanOptions) {
+  const {lng, redirectUrl, redirectType} = options ?? {};
   const cookieStore = cookies();
   const supabase = createServerComponentClient({cookies: () => cookieStore});
   const session = await supabase.auth.getSession();

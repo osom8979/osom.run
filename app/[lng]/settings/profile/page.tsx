@@ -1,8 +1,10 @@
 import {createServerComponentClient} from '@supabase/auth-helpers-nextjs';
 import {cookies} from 'next/headers';
-import {type I18nRouterProps} from '@/app/[lng]/params';
-import {type Database} from '@/app/api/supabase';
+import {redirect} from 'next/navigation';
+import type {I18nRouterProps} from '@/app/[lng]/params';
+import type {Database} from '@/app/api/supabase';
 import PreferenceLayout from '@/app/components/PreferenceLayout';
+import {getProfile} from '@/app/libs/auth/metadata';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function SettingsProfilePage(props: I18nRouterProps) {
@@ -10,8 +12,14 @@ export default async function SettingsProfilePage(props: I18nRouterProps) {
   const {t} = await useTranslation(lng, 'settings-profile');
   const cookieStore = cookies();
   const supabase = createServerComponentClient<Database>({cookies: () => cookieStore});
-  const result = await supabase.from('profiles').select('nickname, time_zone');
-  console.debug(result);
+  const userResponse = await supabase.auth.getUser();
+  const hasSession = userResponse.error === null;
+  if (!hasSession) {
+    redirect(`/${lng}`);
+  }
+
+  const profile = getProfile(userResponse.data.user);
+  const nickname = profile.nickname ?? '';
 
   return (
     <section className="pt-4 sm:pt-0 pr-4">
@@ -29,13 +37,35 @@ export default async function SettingsProfilePage(props: I18nRouterProps) {
           <div className="card-body space-y-4">
             <label className="flex flex-col w-full">
               <div className="label">
-                <span className="label-text">{t('user.nickname.label')}</span>
+                <span className="label-text text-neutral-content">
+                  {t('user.nickname.label')}
+                </span>
               </div>
               <input type="text" className="input input-sm input-bordered w-full" />
               <div className="label">
-                <span className="label-text-alt">{t('user.nickname.details')}</span>
+                <span className="label-text-alt text-neutral-content/70">
+                  {t('user.nickname.details')}
+                </span>
+              </div>
+              <div>
+                <p>{nickname}</p>
               </div>
             </label>
+          </div>
+
+          <div className="divider h-[1px] before:h-[1px] after:h-[1px] m-0" />
+
+          <div className="card-body space-y-4">
+            <div className="card-actions justify-end">
+              <div className="join join-horizontal">
+                <button type="button" className="join-item btn btn-sm">
+                  <span>Reset</span>
+                </button>
+                <button type="button" className="join-item btn btn-sm btn-success">
+                  <span>Save</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </PreferenceLayout>
