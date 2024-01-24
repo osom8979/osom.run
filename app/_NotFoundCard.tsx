@@ -12,7 +12,7 @@ export interface NotFoundCardProps {
 export default function NotFoundCard(props: NotFoundCardProps) {
   const {t} = useTranslation(props.lng, 'not-found');
   return (
-    <div className="card bg-base-100 shadow-lg">
+    <div className="osom-card">
       <div className="card-body items-center text-center">
         <figure>
           <TablerError404 className="w-28 h-28" />

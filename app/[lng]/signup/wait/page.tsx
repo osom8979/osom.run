@@ -10,7 +10,7 @@ export default async function SignupWaitPage(props: I18nRouterProps) {
   const {t} = await useTranslation(lng, 'signup-wait');
   return (
     <CenterDialog lng={lng}>
-      <div className="card bg-base-100 shadow-lg">
+      <div className="osom-card">
         <div className="card-body items-center">
           <figure>
             <UilEnvelopeCheck className="w-16 h-16" />

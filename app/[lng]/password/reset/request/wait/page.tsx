@@ -10,7 +10,7 @@ export default async function PasswordResetRequestWaitPage(props: I18nRouterProp
   const {t} = await useTranslation(lng, 'password-reset-request-wait');
   return (
     <CenterDialog lng={lng}>
-      <div className="card bg-base-100 shadow-lg">
+      <div className="osom-card">
         <div className="card-body items-center">
           <figure>
             <UilEnvelopeCheck className="w-16 h-16" />

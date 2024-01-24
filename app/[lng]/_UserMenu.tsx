@@ -33,7 +33,7 @@ export default function UserMenu(props: UserMenuProps) {
     <div tabIndex={0} className="dropdown dropdown-end">
       <MdiAccountCircle className="btn btn-sm btn-circle btn-ghost w-8 h-8" />
 
-      <ul className="dropdown-content menu bg-base-100 shadow rounded-box z-[1] w-52 mt-4 p-2">
+      <ul className="dropdown-content menu bg-base-200 shadow rounded-box z-[1] w-52 mt-4 p-2">
         <span className="text-center">{user.email}</span>
         <div className="divider m-0"></div>
 

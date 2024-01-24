@@ -1,13 +1,16 @@
+$grid-gap: 4;
+
 .settings {
   @apply container m-auto;
   @apply lg:max-w-5xl;
   @apply flex flex-col;
+  @apply sm:mt-2;
+  @apply space-y-#{$grid-gap};
 
   header {
     @apply hidden;
     @apply sm:flex sm:flex-row items-center justify-between;
     @apply sm:h-16;
-    @apply sm:my-2;
     @apply px-2;
 
     .headerProfile {
@@ -41,11 +44,11 @@
   }
 
   &Main {
-    @apply flex items-start;
-    @apply space-x-4;
+    @apply flex flex-row;
+    @apply space-x-#{$grid-gap};
 
     &Navi {
-      @apply bg-base-100;
+      @apply bg-base-200;
       @apply min-w-fit;
       @apply sm:w-52;
       @apply rounded-br-box;

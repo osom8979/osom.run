@@ -6,8 +6,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-base-200;
+@layer components {
+  .osom-card {
+    @apply card border border-base-content/50;
   }
 }

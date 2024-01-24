@@ -19,7 +19,7 @@ export default function GlobalError(props: GlobalErrorProps) {
       <body className="min-h-screen flex flex-col">
         <main className="flex-grow h-0">
           <CenterDialog showLogo={true}>
-            <div className="card bg-base-100 shadow-lg">
+            <div className="osom-card">
               <div className="card-body items-center text-center">
                 <figure>
                   <IcOutlineErrorOutline className="w-28 h-28" />

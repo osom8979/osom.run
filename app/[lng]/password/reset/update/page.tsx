@@ -8,7 +8,7 @@ export default async function PasswordResetUpdatePage(props: I18nRouterProps) {
   const {t} = await useTranslation(lng, 'password-reset-update');
   return (
     <CenterDialog lng={lng}>
-      <div className="card bg-base-100 shadow-lg">
+      <div className="osom-card">
         <div className="card-body items-center">
           <h2 className="card-title mt-2 mb-6 text-center">{t('title')}</h2>
 
