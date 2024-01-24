@@ -16,7 +16,7 @@ export default async function CenterLayout(props: CenterDialogProps) {
   const finalLinkHref = logoHref ?? `/${lng ?? ''}`;
   return (
     <div className={styles.root} {...attrs}>
-      <div className={styles.body}>
+      <div className={styles.main}>
         {showLogo && (
           <Link href={finalLinkHref} hrefLang={lng}>
             <Logo className={logoClassName ?? 'w-36'} />

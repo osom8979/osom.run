@@ -6,12 +6,12 @@
     @apply col-span-12 md:col-span-4;
     @apply flex flex-col items-start;
 
-    &Title {
+    .title {
       @apply block;
       @apply font-medium text-base text-neutral-content;
     }
 
-    &Subtitle {
+    .subtitle {
       @apply hidden;
       @apply sm:block;
       @apply font-light text-sm text-neutral-content/70;

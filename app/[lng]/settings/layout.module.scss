@@ -5,24 +5,26 @@
   @apply sm:mt-2;
   @apply sm:space-y-4;
 
+  .tier {
+    @apply badge badge-sm badge-primary;
+    @apply ml-2;
+  }
+
   .header {
     @apply hidden;
     @apply sm:flex sm:flex-row items-center justify-between;
     @apply sm:h-16;
     @apply px-2;
 
-    &Profile {
+    .headerProfile {
       @apply flex flex-row;
 
       svg {
         @apply w-14 h-14;
-      }
-
-      &Image {
         @apply mr-4;
       }
 
-      &Info {
+      .profileInfo {
         @apply flex flex-col;
         @apply space-y-1;
 
@@ -30,13 +32,13 @@
           @apply font-bold text-xl text-white;
         }
 
-        p, span {
+        p {
           @apply font-normal text-sm;
         }
       }
     }
 
-    &Menu {
+    .headerLink {
       @apply btn btn-sm btn-outline;
     }
   }
@@ -45,8 +47,8 @@
     @apply flex flex-row;
     @apply space-x-6;
 
-    &Navi {
-      &>ul {
+    .navi {
+      ul {
         @apply menu menu-vertical;
         @apply sm:w-48;
         @apply bg-base-200;
@@ -74,13 +76,8 @@
       }
     }
 
-    &Content {
+    .content {
       @apply flex-grow;
     }
-  }
-
-  .tier {
-    @apply badge badge-sm badge-primary;
-    @apply ml-2;
   }
 }

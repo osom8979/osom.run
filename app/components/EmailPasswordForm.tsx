@@ -180,9 +180,9 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
 
   return (
     <form className={styles.form} noValidate={true} onSubmit={handleSubmit}>
-      <div className={styles.formList}>
+      <div className={styles.list}>
         <div
-          className={styles.formItem}
+          className={styles.item}
           hidden={props.hideEmail}
           aria-hidden={props.hideEmail}
         >
@@ -207,7 +207,7 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
           />
 
           <p
-            className={styles.formError}
+            className={styles.error}
             data-error={emailError}
             aria-errormessage={emailError}
           >
@@ -216,7 +216,7 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
         </div>
 
         <div
-          className={styles.formItem}
+          className={styles.item}
           hidden={props.hidePassword}
           aria-hidden={props.hidePassword}
         >
@@ -273,7 +273,7 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
 
           {props.showPasswordValidation ? (
             <ul
-              className={styles.formValidation}
+              className={styles.validation}
               hidden={!props.showPasswordValidation}
               aria-hidden={!props.showPasswordValidation}
             >
@@ -292,7 +292,7 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
             </ul>
           ) : (
             <p
-              className={styles.formError}
+              className={styles.error}
               data-error={passwordError}
               aria-errormessage={passwordError}
             >
@@ -302,7 +302,7 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
         </div>
       </div>
 
-      <p className={styles.formError} data-error={error} aria-errormessage={error}>
+      <p className={styles.error} data-error={error} aria-errormessage={error}>
         {error}
       </p>
 

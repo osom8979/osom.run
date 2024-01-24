@@ -15,8 +15,8 @@ export default async function PreferenceLayout(props: PreferenceLayoutProps) {
   return (
     <div className={finalClassName} {...attrs}>
       <div className={styles.left}>
-        <div className={styles.leftTitle}>{leftTitle}</div>
-        <div className={styles.leftSubtitle}>{leftSubtitle}</div>
+        <div className={styles.title}>{leftTitle}</div>
+        <div className={styles.subtitle}>{leftSubtitle}</div>
       </div>
       <div className={styles.right}>{children}</div>
     </div>
