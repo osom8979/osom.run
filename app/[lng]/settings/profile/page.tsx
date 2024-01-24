@@ -19,7 +19,7 @@ export default async function SettingsProfilePage(props: I18nRouterProps) {
         <h2 className="font-medium text-2xl text-neutral-content">{t('title')}</h2>
       </div>
 
-      <div className="divider my-1" />
+      <div className="divider my-2" />
 
       <PreferenceLayout
         leftTitle={<p>{t('user.title')}</p>}
@@ -27,9 +27,14 @@ export default async function SettingsProfilePage(props: I18nRouterProps) {
       >
         <div className="osom-card card-compact">
           <div className="card-body space-y-4">
-            <label className="w-full">
-              {t('user.nickname')}
+            <label className="flex flex-col w-full">
+              <div className="label">
+                <span className="label-text">{t('user.nickname.label')}</span>
+              </div>
               <input type="text" className="input input-sm input-bordered w-full" />
+              <div className="label">
+                <span className="label-text-alt">{t('user.nickname.details')}</span>
+              </div>
             </label>
           </div>
         </div>

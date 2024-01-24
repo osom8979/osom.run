@@ -4,6 +4,9 @@
   "user": {
     "title": "Personal info",
     "subtitle": "Update your photo and personal details",
-    "nickname": "Nickname"
+    "nickname": {
+      "label": "Nickname",
+      "details": "A name that refers to you displayed on the screen."
+    }
   }
 }

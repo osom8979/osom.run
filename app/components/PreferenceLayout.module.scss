@@ -3,22 +3,19 @@
   @apply grid grid-cols-12 gap-4;
 
   .left {
-    @apply col-span-12 md:col-span-4;
+    @apply col-span-12 lg:col-span-4;
     @apply flex flex-col items-start;
 
     .title {
-      @apply block;
       @apply font-medium text-base text-neutral-content;
     }
 
     .subtitle {
-      @apply hidden;
-      @apply sm:block;
       @apply font-light text-sm text-neutral-content/70;
     }
   }
 
   .right {
-    @apply col-span-12 md:col-span-8;
+    @apply col-span-12 lg:col-span-8;
   }
 }
