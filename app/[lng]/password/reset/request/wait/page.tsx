@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type {I18nRouterProps} from '@/app/[lng]/params';
-import CenterDialog from '@/app/components/CenterDialog';
+import CenterLayout from '@/app/components/CenterLayout';
 import UilEnvelopeCheck from '@/app/icons/uil/UilEnvelopeCheck';
 import useTranslation from '@/app/libs/i18n/server';
 import {appPaths} from '@/app/paths';
@@ -9,7 +9,7 @@ export default async function PasswordResetRequestWaitPage(props: I18nRouterProp
   const lng = props.params.lng;
   const {t} = await useTranslation(lng, 'password-reset-request-wait');
   return (
-    <CenterDialog lng={lng}>
+    <CenterLayout lng={lng}>
       <section className="osom-card">
         <div className="card-body items-center space-y-4">
           <figure>
@@ -37,6 +37,6 @@ export default async function PasswordResetRequestWaitPage(props: I18nRouterProp
           </div>
         </div>
       </section>
-    </CenterDialog>
+    </CenterLayout>
   );
 }

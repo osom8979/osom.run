@@ -5,7 +5,7 @@ import {redirect} from 'next/navigation';
 import LoginForm from './_LoginForm';
 import OAuthLoginButton from './_OAuthLoginButton';
 import {type I18nRouterProps} from '@/app/[lng]/params';
-import CenterDialog from '@/app/components/CenterDialog';
+import CenterLayout from '@/app/components/CenterLayout';
 import MdiDiscord from '@/app/icons/mdi/MdiDiscord';
 import MdiGithub from '@/app/icons/mdi/MdiGithub';
 import MdiGoogle from '@/app/icons/mdi/MdiGoogle';
@@ -24,7 +24,7 @@ export default async function LoginPage(props: I18nRouterProps) {
 
   const {t} = await useTranslation(lng, 'login');
   return (
-    <CenterDialog lng={lng}>
+    <CenterLayout lng={lng}>
       <section className="osom-card">
         <div className="card-body items-center space-y-4">
           <div className="card-title">
@@ -68,6 +68,6 @@ export default async function LoginPage(props: I18nRouterProps) {
           </p>
         </div>
       </section>
-    </CenterDialog>
+    </CenterLayout>
   );
 }

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import ResetPasswordForm from './_ResetPasswordForm';
 import {type I18nRouterProps} from '@/app/[lng]/params';
-import CenterDialog from '@/app/components/CenterDialog';
+import CenterLayout from '@/app/components/CenterLayout';
 import MaterialSymbolsLockResetRounded from '@/app/icons/ms/MaterialSymbolsLockResetRounded';
 import useTranslation from '@/app/libs/i18n/server';
 import {appPaths} from '@/app/paths';
@@ -10,7 +10,7 @@ export default async function PasswordResetRequestPage(props: I18nRouterProps) {
   const lng = props.params.lng;
   const {t} = await useTranslation(lng, 'password-reset-request');
   return (
-    <CenterDialog lng={lng}>
+    <CenterLayout lng={lng}>
       <section className="osom-card">
         <div className="card-body items-center space-y-4">
           <figure>
@@ -43,6 +43,6 @@ export default async function PasswordResetRequestPage(props: I18nRouterProps) {
           </p>
         </div>
       </section>
-    </CenterDialog>
+    </CenterLayout>
   );
 }

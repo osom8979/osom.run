@@ -1,15 +1,15 @@
-.dialog {
+.root {
   @apply container;
   @apply h-full;
   @apply m-auto;
 
-  &Body {
+  .body {
     @apply flex flex-col;
     @apply justify-center items-center;
     @apply h-full;
     @apply space-y-8;
 
-    &Content {
+    .content {
       @apply sm:w-[512px];
     }
   }

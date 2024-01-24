@@ -1,6 +1,6 @@
 'use client';
 
-import CenterDialog from '@/app/components/CenterDialog';
+import CenterLayout from '@/app/components/CenterLayout';
 import IcOutlineErrorOutline from '@/app/icons/ic/IcOutlineErrorOutline';
 import useTranslation from '@/app/libs/i18n/client';
 
@@ -18,7 +18,7 @@ export default function GlobalError(props: GlobalErrorProps) {
     <html>
       <body className="min-h-screen flex flex-col">
         <main className="flex-grow h-0">
-          <CenterDialog showLogo={true}>
+          <CenterLayout showLogo={true}>
             <section className="osom-card">
               <div className="card-body items-center space-y-4">
                 <figure>
@@ -46,7 +46,7 @@ export default function GlobalError(props: GlobalErrorProps) {
                 </div>
               </div>
             </section>
-          </CenterDialog>
+          </CenterLayout>
         </main>
       </body>
     </html>

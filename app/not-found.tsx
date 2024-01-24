@@ -1,15 +1,15 @@
 import React from 'react';
 import NotFoundCard from './_NotFoundCard';
-import CenterDialog from '@/app/components/CenterDialog';
+import CenterLayout from '@/app/components/CenterLayout';
 
 export default async function RootNotFound() {
   return (
     <html>
       <body className="min-h-screen flex flex-col">
         <main className="flex-grow h-0">
-          <CenterDialog showLogo={true}>
+          <CenterLayout showLogo={true}>
             <NotFoundCard />
-          </CenterDialog>
+          </CenterLayout>
         </main>
       </body>
     </html>

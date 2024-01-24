@@ -1,13 +1,13 @@
 import UpdatePasswordForm from './_UpdatePasswordForm';
 import type {I18nRouterProps} from '@/app/[lng]/params';
-import CenterDialog from '@/app/components/CenterDialog';
+import CenterLayout from '@/app/components/CenterLayout';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function PasswordResetUpdatePage(props: I18nRouterProps) {
   const lng = props.params.lng;
   const {t} = await useTranslation(lng, 'password-reset-update');
   return (
-    <CenterDialog lng={lng}>
+    <CenterLayout lng={lng}>
       <section className="osom-card">
         <div className="card-body items-center space-y-4">
           <div className="card-title">
@@ -19,6 +19,6 @@ export default async function PasswordResetUpdatePage(props: I18nRouterProps) {
           <UpdatePasswordForm lng={lng} buttonLabel={t('update')} />
         </div>
       </section>
-    </CenterDialog>
+    </CenterLayout>
   );
 }

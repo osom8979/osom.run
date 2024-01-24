@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import SignupForm from './_SignupForm';
 import {type I18nRouterProps} from '@/app/[lng]/params';
-import CenterDialog from '@/app/components/CenterDialog';
+import CenterLayout from '@/app/components/CenterLayout';
 import useTranslation from '@/app/libs/i18n/server';
 import {appPaths} from '@/app/paths';
 
@@ -9,7 +9,7 @@ export default async function SignupPage(props: I18nRouterProps) {
   const lng = props.params.lng;
   const {t} = await useTranslation(lng, 'signup');
   return (
-    <CenterDialog lng={lng}>
+    <CenterLayout lng={lng}>
       <section className="osom-card">
         <div className="card-body items-center space-y-4">
           <div className="card-title">
@@ -32,6 +32,6 @@ export default async function SignupPage(props: I18nRouterProps) {
           </p>
         </div>
       </section>
-    </CenterDialog>
+    </CenterLayout>
   );
 }
