@@ -1,12 +1,14 @@
 {
   "title": "Profile",
-  "details": "This information is publicly exposed to other users.",
+  "detail": "This information is publicly exposed to other users.",
   "user": {
     "title": "Personal info",
     "subtitle": "Update your photo and personal details",
     "nickname": {
       "label": "Nickname",
-      "details": "A name that refers to you displayed on the screen."
+      "detail": "A name that refers to you displayed on the screen."
     }
-  }
+  },
+  "reset": "Reset",
+  "save": "Save"
 }

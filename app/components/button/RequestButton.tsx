@@ -6,6 +6,7 @@ import React, {
   type HTMLAttributes,
   type PropsWithChildren,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import {HttpStatusError} from '@/app/exceptions';
@@ -15,12 +16,27 @@ import useTranslation from '@/app/libs/i18n/client';
 
 export const DEFAULT_ERROR_TIMEOUT_MILLISECONDS = 4_000;
 
+type OnClick = () => Promise<void>;
+
+// eslint-disable-next-line no-unused-vars
+type OnChangePending = (pendingFlag: boolean) => Promise<void>;
+
+// eslint-disable-next-line no-unused-vars
+type OnError = (errorMessage: string) => Promise<void>;
+
 interface RequestButtonProps
-  extends Omit<PropsWithChildren<HTMLAttributes<HTMLButtonElement>>, 'onClick'> {
+  extends Omit<
+    PropsWithChildren<HTMLAttributes<HTMLButtonElement>>,
+    'onClick' | 'onError'
+  > {
   lng?: string;
   errorTimeout?: number;
+  disabled?: boolean;
   noRefresh?: boolean;
-  onClick?: () => Promise<void>;
+  noErrorFeedback?: boolean;
+  onClick?: OnClick;
+  onChangePending?: OnChangePending;
+  onError?: OnError;
   spinnerClassName?: string;
   alertClassName?: string;
 }
@@ -30,8 +46,12 @@ export default function RequestButton(props: RequestButtonProps) {
     children,
     lng,
     errorTimeout,
+    disabled,
     noRefresh,
+    noErrorFeedback,
     onClick,
+    onChangePending,
+    onError,
     spinnerClassName,
     alertClassName,
     className,
@@ -42,6 +62,10 @@ export default function RequestButton(props: RequestButtonProps) {
   const [error, setError] = useState<undefined | string>();
   const [errorTimeoutId, setErrorTimeoutId] = useState<undefined | number>();
   const router = useRouter();
+
+  const isDisabled = useMemo(() => {
+    return disabled || pending;
+  }, [disabled, pending]);
 
   useEffect(() => {
     return () => {
@@ -64,6 +88,12 @@ export default function RequestButton(props: RequestButtonProps) {
     }
 
     setPending(true);
+    if (onChangePending) {
+      await onChangePending(true);
+    }
+
+    console.assert(typeof error === 'undefined');
+    console.assert(typeof errorTimeoutId === 'undefined');
 
     try {
       if (onClick) {
@@ -73,19 +103,30 @@ export default function RequestButton(props: RequestButtonProps) {
         router.refresh();
       }
     } catch (e) {
-      setPending(undefined);
-
+      let errorMessage: string;
       if (e instanceof HttpStatusError) {
-        setError(t(`http_status.${e.code}`, {defaultValue: e.message}));
+        errorMessage = t(`http_status.${e.code}`, {defaultValue: e.message});
       } else {
-        setError(String(e));
+        errorMessage = String(e);
       }
 
-      const timeoutId = setTimeout(() => {
-        setError(undefined);
-        setErrorTimeoutId(undefined);
-      }, errorTimeout ?? DEFAULT_ERROR_TIMEOUT_MILLISECONDS);
-      setErrorTimeoutId(timeoutId as unknown as number);
+      if (onError) {
+        await onError(errorMessage);
+      }
+
+      if (!noErrorFeedback) {
+        setError(errorMessage);
+        const timeoutId = setTimeout(() => {
+          setError(undefined);
+          setErrorTimeoutId(undefined);
+        }, errorTimeout ?? DEFAULT_ERROR_TIMEOUT_MILLISECONDS);
+        setErrorTimeoutId(timeoutId as unknown as number);
+      }
+    } finally {
+      setPending(undefined);
+      if (onChangePending) {
+        await onChangePending(false);
+      }
     }
   };
 
@@ -104,9 +145,16 @@ export default function RequestButton(props: RequestButtonProps) {
     return children;
   };
 
-  const buttonClassName = ['btn', pending ? 'btn-disabled' : undefined, className]
-    .filter(v => typeof v !== 'undefined')
-    .join(' ');
+  const buttonClassName = useMemo(() => {
+    const classes = className?.split(' ').map(v => v.trim()) ?? [];
+    if (classes.findIndex(v => v === 'btn') === -1) {
+      classes.push('btn');
+    }
+    if (isDisabled && classes.findIndex(v => v === 'btn-disabled') === -1) {
+      classes.push('btn-disabled');
+    }
+    return classes.join(' ');
+  }, [className, isDisabled]);
 
   return (
     <button
@@ -114,8 +162,8 @@ export default function RequestButton(props: RequestButtonProps) {
       role="button"
       className={buttonClassName}
       onClick={handleClick}
-      data-disabled={pending}
-      aria-disabled={pending}
+      data-disabled={isDisabled}
+      aria-disabled={isDisabled}
       data-error={error}
       {...attrs}
     >

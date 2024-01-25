@@ -58,11 +58,11 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
   const [error, setError] = useState<undefined | string>();
   const router = useRouter();
 
-  const getResetPasswordHref = () => {
+  const resetPasswordHref = useMemo(() => {
     return (props.resetPasswordHref || '/') + (email ? `&email=${email}` : '');
-  };
+  }, [props.resetPasswordHref, email]);
 
-  const isDisabledSubmit = () => {
+  const isDisabledSubmit = useMemo(() => {
     if (!props.hideEmail) {
       if (!email || !!emailError) {
         return true;
@@ -74,7 +74,15 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
       }
     }
     return pending;
-  };
+  }, [
+    props.hideEmail,
+    props.hidePassword,
+    email,
+    emailError,
+    password,
+    passwordError,
+    pending,
+  ]);
 
   const passwordValidations = useMemo(() => {
     return [
@@ -229,7 +237,7 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
               {t('password')}
             </label>
             <Link
-              href={getResetPasswordHref()}
+              href={resetPasswordHref}
               hrefLang={props.lng}
               hidden={!props.showResetPassword}
               aria-hidden={!props.showResetPassword}
@@ -308,8 +316,8 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
 
       <button
         type="submit"
-        disabled={isDisabledSubmit()}
-        aria-disabled={isDisabledSubmit()}
+        disabled={isDisabledSubmit}
+        aria-disabled={isDisabledSubmit}
       >
         {pending ? (
           <SvgSpinners270Ring />

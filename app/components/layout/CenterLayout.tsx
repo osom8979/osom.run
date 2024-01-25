@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import type {HTMLAttributes, PropsWithChildren} from 'react';
 import styles from './CenterLayout.module.scss';
@@ -11,7 +13,7 @@ interface CenterDialogProps
   logoHref?: string;
 }
 
-export default async function CenterLayout(props: CenterDialogProps) {
+export default function CenterLayout(props: CenterDialogProps) {
   const {children, lng, showLogo, logoClassName, logoHref, ...attrs} = props;
   const finalLinkHref = logoHref ?? `/${lng ?? ''}`;
   return (

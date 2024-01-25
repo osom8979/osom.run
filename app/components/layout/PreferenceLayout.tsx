@@ -1,3 +1,5 @@
+'use client';
+
 import type {HTMLAttributes, PropsWithChildren, ReactNode} from 'react';
 import styles from './PreferenceLayout.module.scss';
 
@@ -7,7 +9,7 @@ interface PreferenceLayoutProps
   leftSubtitle?: ReactNode;
 }
 
-export default async function PreferenceLayout(props: PreferenceLayoutProps) {
+export default function PreferenceLayout(props: PreferenceLayoutProps) {
   const {leftTitle, leftSubtitle, children, className, ...attrs} = props;
   const finalClassName = [styles.root, className]
     .filter(v => typeof v !== 'undefined')
