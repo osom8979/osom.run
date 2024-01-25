@@ -5,7 +5,7 @@ import {redirect} from 'next/navigation';
 import LoginForm from './_LoginForm';
 import OAuthLoginButton from './_OAuthLoginButton';
 import {type I18nRouterProps} from '@/app/[lng]/params';
-import CenterLayout from '@/app/components/CenterLayout';
+import CenterLayout from '@/app/components/layout/CenterLayout';
 import MdiDiscord from '@/app/icons/mdi/MdiDiscord';
 import MdiGithub from '@/app/icons/mdi/MdiGithub';
 import MdiGoogle from '@/app/icons/mdi/MdiGoogle';

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import GoBackButton from '@/app/components/GoBackButton';
+import GoBackButton from '@/app/components/button/GoBackButton';
 import TablerError404 from '@/app/icons/tabler/TablerError404';
 import useTranslation from '@/app/libs/i18n/client';
 

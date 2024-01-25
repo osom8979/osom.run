@@ -3,8 +3,7 @@ import {cookies} from 'next/headers';
 import {redirect} from 'next/navigation';
 import type {I18nRouterProps} from '@/app/[lng]/params';
 import type {Database} from '@/app/api/supabase';
-import PreferenceLayout from '@/app/components/PreferenceLayout';
-import {getProfile} from '@/app/libs/auth/metadata';
+import PreferenceLayout from '@/app/components/layout/PreferenceLayout';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function SettingsProfilePage(props: I18nRouterProps) {
@@ -17,9 +16,6 @@ export default async function SettingsProfilePage(props: I18nRouterProps) {
   if (!hasSession) {
     redirect(`/${lng}`);
   }
-
-  const profile = getProfile(userResponse.data.user);
-  const nickname = profile.nickname ?? '';
 
   return (
     <section className="pt-4 sm:pt-0 pr-4">
@@ -35,20 +31,17 @@ export default async function SettingsProfilePage(props: I18nRouterProps) {
       >
         <div className="osom-card card-compact">
           <div className="card-body space-y-4">
-            <label className="flex flex-col w-full">
-              <div className="label">
+            <label className="flex flex-col w-full space-y-1">
+              <div className="label pl-0.5 py-0">
                 <span className="label-text text-neutral-content">
                   {t('user.nickname.label')}
                 </span>
               </div>
               <input type="text" className="input input-sm input-bordered w-full" />
-              <div className="label">
+              <div className="label pl-0.5 py-0">
                 <span className="label-text-alt text-neutral-content/70">
                   {t('user.nickname.details')}
                 </span>
-              </div>
-              <div>
-                <p>{nickname}</p>
               </div>
             </label>
           </div>

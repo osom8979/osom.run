@@ -3,7 +3,7 @@
 import {useRouter} from 'next/navigation';
 import {type ReactNode} from 'react';
 import apiClient from '@/app/api/client';
-import RequestButton from '@/app/components/RequestButton';
+import RequestButton from '@/app/components/button/RequestButton';
 import {type Providers} from '@/app/libs/schema/auth';
 
 interface OAuthLoginButtonProps {

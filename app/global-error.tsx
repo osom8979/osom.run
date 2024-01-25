@@ -1,6 +1,6 @@
 'use client';
 
-import CenterLayout from '@/app/components/CenterLayout';
+import CenterLayout from '@/app/components/layout/CenterLayout';
 import IcOutlineErrorOutline from '@/app/icons/ic/IcOutlineErrorOutline';
 import useTranslation from '@/app/libs/i18n/client';
 

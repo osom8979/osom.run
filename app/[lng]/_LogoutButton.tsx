@@ -1,7 +1,7 @@
 'use client';
 
 import apiClient from '@/app/api/client';
-import RequestButton from '@/app/components/RequestButton';
+import RequestButton from '@/app/components/button/RequestButton';
 
 interface LogoutButtonProps {
   lng: string;
