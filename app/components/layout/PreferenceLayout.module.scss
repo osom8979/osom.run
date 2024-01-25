@@ -7,11 +7,11 @@
     @apply flex flex-col items-start;
 
     .title {
-      @apply font-medium text-base text-neutral-content;
+      @apply font-medium text-base text-base-content;
     }
 
     .subtitle {
-      @apply font-light text-sm text-neutral-content/70;
+      @apply font-light text-sm text-base-content/70;
     }
   }
 
