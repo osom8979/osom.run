@@ -2,20 +2,28 @@
   @apply w-full;
   @apply grid grid-cols-12 gap-4;
 
-  .left {
+  > :nth-child(1) {
     @apply col-span-12 lg:col-span-4;
     @apply flex flex-col items-start;
 
-    .title {
+    > h2 {
+      @apply font-bold text-lg text-base-content;
+    }
+
+    > h3 {
       @apply font-medium text-base text-base-content;
     }
 
-    .subtitle {
+    > p {
       @apply font-light text-sm text-base-content/70;
     }
   }
 
-  .right {
+  > :nth-child(2) {
     @apply col-span-12 lg:col-span-8;
+  }
+
+  > :nth-child(n+3) {
+    @apply hidden;
   }
 }

@@ -94,6 +94,12 @@ export class ApiClient {
     body.set('password', password);
     return await this.post<EmptyResponse>(apiPaths.passwordResetUpdate, {body});
   }
+
+  async updateUserMetadata(data: any) {
+    return await this.put(apiPaths.userMetadata, {
+      body: JSON.stringify(data),
+    });
+  }
 }
 
 export const apiClient = new ApiClient();

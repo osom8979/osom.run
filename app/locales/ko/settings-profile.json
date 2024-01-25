@@ -10,5 +10,6 @@
     }
   },
   "reset": "초기화",
-  "save": "저장"
+  "save": "저장",
+  "save_successful": "저장에 성공했습니다."
 }

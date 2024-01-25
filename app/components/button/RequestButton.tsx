@@ -19,10 +19,12 @@ export const DEFAULT_ERROR_TIMEOUT_MILLISECONDS = 4_000;
 type OnClick = () => Promise<void>;
 
 // eslint-disable-next-line no-unused-vars
-type OnChangePending = (pendingFlag: boolean) => Promise<void>;
+type OnChangePending = (pending: boolean) => Promise<void>;
+
+type OnComplete = () => Promise<void>;
 
 // eslint-disable-next-line no-unused-vars
-type OnError = (errorMessage: string) => Promise<void>;
+type OnError = (error: string) => Promise<void>;
 
 interface RequestButtonProps
   extends Omit<
@@ -34,8 +36,10 @@ interface RequestButtonProps
   disabled?: boolean;
   noRefresh?: boolean;
   noErrorFeedback?: boolean;
+  recoverPendingState?: boolean;
   onClick?: OnClick;
   onChangePending?: OnChangePending;
+  onComplete?: OnComplete;
   onError?: OnError;
   spinnerClassName?: string;
   alertClassName?: string;
@@ -49,8 +53,10 @@ export default function RequestButton(props: RequestButtonProps) {
     disabled,
     noRefresh,
     noErrorFeedback,
+    recoverPendingState,
     onClick,
     onChangePending,
+    onComplete,
     onError,
     spinnerClassName,
     alertClassName,
@@ -99,10 +105,12 @@ export default function RequestButton(props: RequestButtonProps) {
       if (onClick) {
         await onClick();
       }
-      if (!noRefresh) {
-        router.refresh();
-      }
     } catch (e) {
+      setPending(undefined);
+      if (onChangePending) {
+        await onChangePending(false);
+      }
+
       let errorMessage: string;
       if (e instanceof HttpStatusError) {
         errorMessage = t(`http_status.${e.code}`, {defaultValue: e.message});
@@ -122,7 +130,16 @@ export default function RequestButton(props: RequestButtonProps) {
         }, errorTimeout ?? DEFAULT_ERROR_TIMEOUT_MILLISECONDS);
         setErrorTimeoutId(timeoutId as unknown as number);
       }
-    } finally {
+      return;
+    }
+
+    if (!noRefresh) {
+      router.refresh();
+    }
+    if (onComplete) {
+      await onComplete();
+    }
+    if (recoverPendingState) {
       setPending(undefined);
       if (onChangePending) {
         await onChangePending(false);

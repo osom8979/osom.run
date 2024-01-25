@@ -10,5 +10,6 @@
     }
   },
   "reset": "Reset",
-  "save": "Save"
+  "save": "Save",
+  "save_successful": "Save successful."
 }

@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import type {HTMLAttributes, PropsWithChildren} from 'react';
 import styles from './CenterLayout.module.scss';
@@ -20,9 +18,11 @@ export default function CenterLayout(props: CenterDialogProps) {
     <div className={styles.root} {...attrs}>
       <div className={styles.main}>
         {showLogo && (
-          <Link href={finalLinkHref} hrefLang={lng}>
-            <Logo className={logoClassName ?? 'w-36'} />
-          </Link>
+          <figure>
+            <Link href={finalLinkHref} hrefLang={lng}>
+              <Logo className={logoClassName ?? 'w-36'} />
+            </Link>
+          </figure>
         )}
 
         <div className={styles.content}>{children}</div>
