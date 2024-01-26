@@ -1,3 +1,14 @@
 {
-  "title": "Appearance"
+  "title": "Appearance",
+  "lng": {
+    "label": "Language",
+    "detail": "Set language"
+  },
+  "theme": {
+    "label": "Theme",
+    "detail": "Set theme"
+  },
+  "reset": "Reset",
+  "save": "Save",
+  "save_successful": "Save successful."
 }

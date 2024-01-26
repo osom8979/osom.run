@@ -29,8 +29,8 @@ export default async function SettingsProfilePage(props: I18nRouterProps) {
 
       <PreferenceLayout>
         <div>
-          <h3>{t('user.title')}</h3>
-          <p>{t('user.subtitle')}</p>
+          <h3>{t('basic.title')}</h3>
+          <p>{t('basic.subtitle')}</p>
         </div>
 
         <ProfileForm lng={lng} profile={profile} />

@@ -19,6 +19,11 @@ $border-color-opacity: 30;
     @apply flex flex-col;
     @apply w-full;
     @apply p-2;
+    @apply space-y-4;
+
+    .item {
+      @apply w-full;
+    }
   }
 
   .actions {

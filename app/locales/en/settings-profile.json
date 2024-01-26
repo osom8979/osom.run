@@ -1,9 +1,9 @@
 {
   "title": "Profile",
   "detail": "This information is publicly exposed to other users.",
-  "user": {
-    "title": "Personal info",
-    "subtitle": "Update your photo and personal details",
+  "basic": {
+    "title": "Basic info",
+    "subtitle": "Manage basic profile information to customize your experience.",
     "nickname": {
       "label": "Nickname",
       "detail": "A name that refers to you displayed on the screen."
