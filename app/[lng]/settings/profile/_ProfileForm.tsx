@@ -66,7 +66,7 @@ export default function ProfileForm(props: ProfileFormProps) {
   };
 
   return (
-    <div className={styles.root}>
+    <form noValidate={true} className={styles.root}>
       <div className={styles.list}>
         <label className="flex flex-col w-full space-y-1">
           <div className="label pl-0.5 py-0">
@@ -122,6 +122,6 @@ export default function ProfileForm(props: ProfileFormProps) {
           </RequestButton>
         </div>
       </div>
-    </div>
+    </form>
   );
 }

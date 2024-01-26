@@ -11,6 +11,9 @@ export const FALLBACK_LANGUAGE = en;
 export const USE_LANGUAGE = en;
 export const I18N_DEBUG = false;
 
+export const HEADER_ACCEPT_LANGUAGE_KEY = 'Accept-Language';
+export const HEADER_REFERER_KEY = 'referer';
+
 export const COOKIE_I18N_KEY = 'i18n';
 
 export function defaultServerOptions(

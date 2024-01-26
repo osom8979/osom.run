@@ -1,12 +1,15 @@
 import acceptLanguage from 'accept-language';
 import {RequestCookie} from 'next/dist/compiled/@edge-runtime/cookies';
 import {NextRequest, NextResponse} from 'next/server';
-import {COOKIE_I18N_KEY, FALLBACK_LANGUAGE, LANGUAGES} from '@/app/libs/i18n/settings';
+import {
+  COOKIE_I18N_KEY,
+  FALLBACK_LANGUAGE,
+  HEADER_ACCEPT_LANGUAGE_KEY,
+  HEADER_REFERER_KEY,
+  LANGUAGES,
+} from '@/app/libs/i18n/settings';
 
 acceptLanguage.languages(LANGUAGES);
-
-const HEADER_ACCEPT_LANGUAGE_KEY = 'Accept-Language';
-const HEADER_REFERER_KEY = 'referer';
 
 export function hasLng(req: NextRequest) {
   return LANGUAGES.some(lng => req.nextUrl.pathname.startsWith(`/${lng}`));

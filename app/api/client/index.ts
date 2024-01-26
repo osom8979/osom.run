@@ -4,6 +4,7 @@ import {StatusCodes} from 'http-status-codes';
 import type {EmptyResponse, LoginOAuthResponse} from '@/app/api/interface';
 import {HttpStatusError, NoUrlError} from '@/app/exceptions';
 import type {Profile} from '@/app/libs/auth/metadata';
+import {FALLBACK_LANGUAGE} from '@/app/libs/i18n/settings';
 import {apiPaths} from '@/app/paths';
 
 export const DEFAULT_API_TIMEOUT_MILLISECONDS = 8_000;
@@ -14,6 +15,7 @@ export const DEFAULT_SUCCESS_STATES = [
 ];
 
 export interface ApiClientOptions {
+  lng?: string;
   timeout?: number;
   successStates?: Array<number>;
 }
@@ -24,10 +26,12 @@ type RequestOptions = FetchParameters[1];
 type RequestOptionsWithoutMethod = Omit<RequestOptions, 'method'>;
 
 export class ApiClient {
+  lng: string;
   defaultTimeout: number;
   successStates: Array<number>;
 
   constructor(options?: ApiClientOptions) {
+    this.lng = options?.lng ?? FALLBACK_LANGUAGE;
     this.defaultTimeout = options?.timeout ?? DEFAULT_API_TIMEOUT_MILLISECONDS;
     this.successStates = options?.successStates ?? DEFAULT_SUCCESS_STATES;
   }
