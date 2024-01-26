@@ -25,5 +25,5 @@ export const apiPaths = {
   passwordResetRequest: '/api/auth/password/reset/request',
   passwordResetUpdate: '/api/auth/password/reset/update',
   signup: '/api/auth/signup',
-  userMetadata: '/api/auth/user/metadata',
+  userProfile: '/api/auth/user/profile',
 };

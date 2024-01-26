@@ -33,7 +33,10 @@ export async function POST(request: Request) {
 
   if (error !== null) {
     console.error('Sign up request error', {email, error});
-    return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
+    return NextResponse.json<EmptyResponse>(
+      {},
+      {status: StatusCodes.INTERNAL_SERVER_ERROR}
+    );
   }
 
   console.info('Sign up OK', {email});

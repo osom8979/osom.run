@@ -27,13 +27,16 @@ export async function POST(request: Request) {
   const exchangeResult = await supabase.auth.exchangeCodeForSession(code);
   if (exchangeResult.error !== null) {
     console.error('Exchange code error', {code, error: exchangeResult.error});
-    return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
+    return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.UNAUTHORIZED});
   }
 
   const updateResult = await supabase.auth.updateUser({password});
   if (updateResult.error !== null) {
     console.error('Update password request error', {error: updateResult.error});
-    return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
+    return NextResponse.json<EmptyResponse>(
+      {},
+      {status: StatusCodes.INTERNAL_SERVER_ERROR}
+    );
   }
 
   console.info('Update password OK', {email: exchangeResult.data.user.email});

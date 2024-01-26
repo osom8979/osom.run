@@ -38,5 +38,11 @@ export const CodePasswordSchema = z.object({
 });
 
 export const ProviderValues = ['google', 'github', 'discord'] as const;
+export type Providers = (typeof ProviderValues)[number];
 export const ProviderSchema = z.enum(ProviderValues);
-export type Providers = z.infer<typeof ProviderSchema>;
+
+export const MAXIMUM_NICKNAME_LENGTH = 68;
+export const NicknameSchema = z.string().max(MAXIMUM_NICKNAME_LENGTH);
+export const ProfileSchema = z.object({
+  nickname: NicknameSchema,
+});

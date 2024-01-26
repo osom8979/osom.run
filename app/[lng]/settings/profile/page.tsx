@@ -4,7 +4,7 @@ import {redirect} from 'next/navigation';
 import ProfileForm from './_ProfileForm';
 import type {I18nRouterProps} from '@/app/[lng]/params';
 import PreferenceLayout from '@/app/components/layout/PreferenceLayout';
-import {getSettings} from '@/app/libs/auth/metadata';
+import {getProfile} from '@/app/libs/auth/metadata';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function SettingsProfilePage(props: I18nRouterProps) {
@@ -18,7 +18,7 @@ export default async function SettingsProfilePage(props: I18nRouterProps) {
     redirect(`/${lng}`);
   }
 
-  const profile = getSettings(userResponse.data.user).profile ?? {};
+  const profile = getProfile(userResponse.data.user);
   return (
     <section className="pt-4 sm:pt-0 pr-4">
       <header>

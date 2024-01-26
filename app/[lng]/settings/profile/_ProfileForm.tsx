@@ -7,6 +7,11 @@ import apiClient from '@/app/api/client';
 import RequestButton from '@/app/components/button/RequestButton';
 import type {Profile} from '@/app/libs/auth/metadata';
 import useTranslation from '@/app/libs/i18n/client';
+import {MAXIMUM_NICKNAME_LENGTH} from '@/app/libs/schema/auth';
+
+const MESSAGE_STATE_HIDDEN = 'hidden';
+const MESSAGE_STATE_ERROR = 'error';
+const MESSAGE_STATE_SUCCESS = 'success';
 
 interface ProfileFormProps {
   lng: string;
@@ -14,17 +19,16 @@ interface ProfileFormProps {
 }
 
 export default function ProfileForm(props: ProfileFormProps) {
-  const [error, setError] = useState<undefined | string>();
-  const [complete, setComplete] = useState<undefined | string>();
+  const original = useMemo(() => {
+    return {...props.profile} as Profile;
+  }, [props.profile]);
+  const [modified, setModified] = useState(cloneDeep(original));
+  const [messageState, setMessageState] = useState<string>(MESSAGE_STATE_HIDDEN);
+  const [message, setMessage] = useState<undefined | string>();
   const [pending, setPending] = useState<undefined | true>();
   const {t} = useTranslation(props.lng, 'settings-profile');
 
-  const original = useMemo(() => {
-    return {nickname: '', ...props.profile} as Required<Profile>;
-  }, [props.profile]);
-  const [modified, setModified] = useState(cloneDeep(original));
-
-  const isDisabled = useMemo(() => {
+  const isDisabledSaveButton = useMemo(() => {
     return pending || isEqual(modified, original);
   }, [original, pending, modified]);
 
@@ -35,34 +39,30 @@ export default function ProfileForm(props: ProfileFormProps) {
   };
 
   const handleResetClick = async () => {
-    setPending(true);
-    try {
-      setModified(cloneDeep(original));
-    } finally {
-      setPending(undefined);
-    }
+    setModified(cloneDeep(original));
+    setMessageState(MESSAGE_STATE_HIDDEN);
+    setMessage(undefined);
+    setPending(undefined);
   };
 
   const handleSaveClick = async () => {
-    setError(undefined);
-    setComplete(undefined);
-
-    console.debug(modified);
-    await apiClient.updateUserMetadata(modified);
+    setMessageState(MESSAGE_STATE_HIDDEN);
+    setMessage(undefined);
+    await apiClient.updateProfile(modified);
   };
 
-  const handleChangePending = async (pendingFlag: boolean) => {
-    setPending(pendingFlag ? true : undefined);
+  const handleChangePending = async (flag: boolean) => {
+    setPending(flag ? true : undefined);
   };
 
   const handleComplete = async () => {
-    setError(undefined);
-    setComplete(t('save_successful'));
+    setMessageState(MESSAGE_STATE_SUCCESS);
+    setMessage(t('save_successful'));
   };
 
-  const handleError = async (errorMessage: string) => {
-    setError(errorMessage);
-    setComplete(undefined);
+  const handleError = async (message: string) => {
+    setMessageState(MESSAGE_STATE_ERROR);
+    setMessage(message);
   };
 
   return (
@@ -84,7 +84,7 @@ export default function ProfileForm(props: ProfileFormProps) {
           />
           <div className="label pl-0.5 py-0">
             <span className="label-text-alt text-base-content/70">
-              {t('user.nickname.detail')}
+              {t('user.nickname.detail', {max: MAXIMUM_NICKNAME_LENGTH})}
             </span>
           </div>
         </label>
@@ -93,21 +93,15 @@ export default function ProfileForm(props: ProfileFormProps) {
       <hr className={styles.divider} />
 
       <div className={styles.actions}>
-        <p
-          className={styles.info}
-          data-success={complete}
-          data-error={error}
-          aria-errormessage={error}
-        >
-          {error}
-          {complete}
+        <p className={styles.info} data-state={messageState}>
+          {message}
         </p>
 
-        <div className="join join-horizontal">
+        <div className={styles.buttons}>
           <button
             type="button"
             role="button"
-            className="join-item btn btn-xs btn-neutral w-20"
+            className="btn btn-xs btn-neutral"
             onClick={handleResetClick}
           >
             <span>{t('reset')}</span>
@@ -115,8 +109,8 @@ export default function ProfileForm(props: ProfileFormProps) {
 
           <RequestButton
             lng={props.lng}
-            className="join-item btn btn-xs btn-success w-20"
-            disabled={isDisabled}
+            className="btn btn-xs btn-success"
+            disabled={isDisabledSaveButton}
             noErrorFeedback={true}
             recoverPendingState={true}
             onClick={handleSaveClick}

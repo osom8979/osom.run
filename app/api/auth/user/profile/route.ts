@@ -5,14 +5,16 @@ import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
 import type {EmptyResponse} from '@/app/api/interface';
-import {EmailSchema} from '@/app/libs/schema/auth';
-import {appPaths} from '@/app/paths';
+import type {Profile} from '@/app/libs/auth/metadata';
+import {ProfileSchema} from '@/app/libs/schema/auth';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
   const formData = await request.formData();
-  const validatedFields = EmailSchema.safeParse(formData.get('email'));
+  const validatedFields = ProfileSchema.safeParse({
+    nickname: formData.get('nickname'),
+  });
 
   if (!validatedFields.success) {
     return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
@@ -20,20 +22,26 @@ export async function POST(request: Request) {
 
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({cookies: () => cookieStore});
-  const email = validatedFields.data;
-  const requestUrl = new URL(request.url);
-  const {error} = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${requestUrl.origin}${appPaths.passwordResetUpdate}`,
-  });
+  const session = await supabase.auth.getSession();
+  if (session.error !== null || session.data.session === null) {
+    console.error('No authenticated session exists');
+    return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.UNAUTHORIZED});
+  }
 
+  const email = session.data.session.user.email;
+  console.assert(email);
+
+  const {nickname} = validatedFields.data;
+  const profile = {nickname} as Profile;
+  const {error} = await supabase.auth.updateUser({data: {profile}});
   if (error !== null) {
-    console.error('Password reset request error', {email, error});
+    console.error('Update profile request error', {email, error});
     return NextResponse.json<EmptyResponse>(
       {},
       {status: StatusCodes.INTERNAL_SERVER_ERROR}
     );
   }
 
-  console.info('Password reset OK', {email});
+  console.info('Update profile OK', {email, profile});
   return NextResponse.json<EmptyResponse>({});
 }

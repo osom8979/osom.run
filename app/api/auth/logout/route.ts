@@ -16,15 +16,20 @@ export async function POST(request: Request) {
 
   const session = await supabase.auth.getSession();
   if (session.error !== null || session.data.session === null) {
-    console.error('Log out session error');
-    return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
+    console.error('No authenticated session exists');
+    return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.UNAUTHORIZED});
   }
 
   const email = session.data.session.user.email;
+  console.assert(email);
+
   const {error} = await supabase.auth.signOut();
   if (error !== null) {
     console.error('Log out request error', {email, error});
-    return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
+    return NextResponse.json<EmptyResponse>(
+      {},
+      {status: StatusCodes.INTERNAL_SERVER_ERROR}
+    );
   }
 
   console.info('Log out OK', {email});

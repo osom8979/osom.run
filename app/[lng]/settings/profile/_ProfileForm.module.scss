@@ -25,22 +25,31 @@ $border-color-opacity: 30;
     @apply flex flex-row justify-end items-center;
     @apply w-full;
     @apply p-2;
+    @apply space-x-2;
 
     .info {
       @apply flex-1;
       @apply pl-2;
-      @apply text-sm;
+      @apply text-xs;
 
-      &:not(&[data-error]):not(&[data-success]) {
+      &[data-state=hidden] {
         @apply hidden;
       }
-      &[data-success] {
+      &[data-state=success] {
         @apply block;
         @apply text-success;
       }
-      &[data-error] {
+      &[data-state=error] {
         @apply block;
         @apply text-error;
+      }
+    }
+
+    .buttons {
+      @apply space-x-2;
+
+      button {
+        @apply w-20;
       }
     }
   }

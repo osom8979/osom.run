@@ -1,12 +1,21 @@
+'use client';
+
 import {StatusCodes} from 'http-status-codes';
 import type {EmptyResponse, LoginOAuthResponse} from '@/app/api/interface';
 import {HttpStatusError, NoUrlError} from '@/app/exceptions';
+import type {Profile} from '@/app/libs/auth/metadata';
 import {apiPaths} from '@/app/paths';
 
 export const DEFAULT_API_TIMEOUT_MILLISECONDS = 8_000;
+export const DEFAULT_SUCCESS_STATES = [
+  StatusCodes.OK,
+  StatusCodes.CREATED,
+  StatusCodes.NO_CONTENT,
+];
 
 export interface ApiClientOptions {
   timeout?: number;
+  successStates?: Array<number>;
 }
 
 type FetchParameters = Parameters<typeof fetch>;
@@ -16,9 +25,11 @@ type RequestOptionsWithoutMethod = Omit<RequestOptions, 'method'>;
 
 export class ApiClient {
   defaultTimeout: number;
+  successStates: Array<number>;
 
   constructor(options?: ApiClientOptions) {
     this.defaultTimeout = options?.timeout ?? DEFAULT_API_TIMEOUT_MILLISECONDS;
+    this.successStates = options?.successStates ?? DEFAULT_SUCCESS_STATES;
   }
 
   async request<T = any>(input: RequestInput, init?: RequestOptions) {
@@ -28,7 +39,7 @@ export class ApiClient {
 
     try {
       const response = await fetch(input, {signal, ...init});
-      if (response.status != StatusCodes.OK) {
+      if (!this.successStates.includes(response.status)) {
         throw new HttpStatusError(response.status);
       }
       const result = await response.json();
@@ -95,10 +106,10 @@ export class ApiClient {
     return await this.post<EmptyResponse>(apiPaths.passwordResetUpdate, {body});
   }
 
-  async updateUserMetadata(data: any) {
-    return await this.put(apiPaths.userMetadata, {
-      body: JSON.stringify(data),
-    });
+  async updateProfile(profile: Profile) {
+    const body = new FormData();
+    body.set('nickname', profile.nickname);
+    return await this.post<EmptyResponse>(apiPaths.userProfile, {body});
   }
 }
 
