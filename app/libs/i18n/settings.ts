@@ -14,7 +14,7 @@ export const I18N_DEBUG = false;
 export const HEADER_ACCEPT_LANGUAGE_KEY = 'Accept-Language';
 export const HEADER_REFERER_KEY = 'referer';
 
-export const COOKIE_I18N_KEY = 'i18n';
+export const COOKIE_I18N_KEY = 'osom-lng';
 
 export function defaultServerOptions(
   lng: string = USE_LANGUAGE,
@@ -43,6 +43,8 @@ export function defaultClientOptions(
     lng: undefined, // let detect the language on client side
     detection: {
       order: ['path', 'htmlTag', 'cookie', 'navigator'],
+      lookupCookie: COOKIE_I18N_KEY,
+      lookupFromPathIndex: 0,
     },
     preload: runsOnServerSide ? LANGUAGES : [],
   } as InitOptions;
