@@ -7,6 +7,10 @@
     "nickname": {
       "label": "별명",
       "detail": "화면에 표시되는 당신을 지칭하는 이름입니다."
+    },
+    "timezone": {
+      "label": "시간대",
+      "detail": "현지 시간대를 설정하세요."
     }
   },
   "reset": "초기화",

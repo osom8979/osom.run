@@ -7,6 +7,10 @@
     "nickname": {
       "label": "Nickname",
       "detail": "A name that refers to you displayed on the screen."
+    },
+    "timezone": {
+      "label": "Timezone",
+      "detail": "Set your local time zone."
     }
   },
   "reset": "Reset",
