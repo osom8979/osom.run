@@ -7,6 +7,7 @@ import PreferenceForm, {
 } from '@/app/components/form/PreferenceForm';
 import type {Appearance} from '@/app/libs/auth/metadata';
 import useTranslation from '@/app/libs/i18n/client';
+import {ThemeValues} from '@/app/libs/schema/settings';
 
 interface AppearanceFormProps {
   lng: string;
@@ -19,16 +20,16 @@ export default function AppearanceForm(props: AppearanceFormProps) {
   const fields = useMemo(() => {
     return [
       {
-        key: 'lng',
-        type: 'text',
-        label: t('lng.label'),
-        detail: t('lng.detail'),
-      },
-      {
         key: 'theme',
-        type: 'text',
-        label: t('theme.label'),
-        detail: t('theme.detail'),
+        type: 'select',
+        label: t('style.theme.label'),
+        detail: t('style.theme.detail'),
+        select: ThemeValues.map(theme => {
+          return {
+            value: theme,
+            label: t(`style.theme.select.${theme}`),
+          };
+        }),
       },
     ] as Array<PreferenceField>;
   }, [t]);

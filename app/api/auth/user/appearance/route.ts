@@ -6,14 +6,13 @@ import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
 import type {EmptyResponse} from '@/app/api/interface';
 import type {Appearance} from '@/app/libs/auth/metadata';
-import {AppearanceSchema} from '@/app/libs/schema/auth';
+import {AppearanceSchema} from '@/app/libs/schema/settings';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
   const formData = await request.formData();
   const validatedFields = AppearanceSchema.safeParse({
-    lng: formData.get('lng'),
     theme: formData.get('theme'),
   });
 
@@ -30,10 +29,7 @@ export async function POST(request: Request) {
   }
 
   const email = session.data.session.user.email;
-  console.assert(email);
-
-  const {lng, theme} = validatedFields.data;
-  const appearance = {lng, theme} as Appearance;
+  const appearance = validatedFields.data as Appearance;
   const {error} = await supabase.auth.updateUser({data: {appearance}});
   if (error !== null) {
     console.error('Update appearance request error', {email, error});

@@ -6,7 +6,7 @@ import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
 import type {EmptyResponse} from '@/app/api/interface';
 import type {Profile} from '@/app/libs/auth/metadata';
-import {ProfileSchema} from '@/app/libs/schema/auth';
+import {ProfileSchema} from '@/app/libs/schema/settings';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,6 +15,7 @@ export async function POST(request: Request) {
   const validatedFields = ProfileSchema.safeParse({
     nickname: formData.get('nickname'),
     timezone: formData.get('timezone'),
+    lng: formData.get('lng'),
   });
 
   if (!validatedFields.success) {
@@ -30,10 +31,7 @@ export async function POST(request: Request) {
   }
 
   const email = session.data.session.user.email;
-  console.assert(email);
-
-  const {nickname} = validatedFields.data;
-  const profile = {nickname} as Profile;
+  const profile = validatedFields.data as Profile;
   const {error} = await supabase.auth.updateUser({data: {profile}});
   if (error !== null) {
     console.error('Update profile request error', {email, error});

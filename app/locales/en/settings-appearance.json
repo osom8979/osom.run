@@ -1,12 +1,18 @@
 {
   "title": "Appearance",
-  "lng": {
-    "label": "Language",
-    "detail": "Set language"
-  },
-  "theme": {
-    "label": "Theme",
-    "detail": "Set theme"
+  "detail": "Change the look through theme, color, and design settings.",
+  "style": {
+    "title": "Style",
+    "subtitle": "Choose a visual style for your application.",
+    "theme": {
+      "label": "Theme",
+      "detail": "Choose the screen color and design to suit your preference.",
+      "select": {
+        "system": "System-wide settings",
+        "light": "Light mode",
+        "dark": "Dark mode"
+      }
+    }
   },
   "reset": "Reset",
   "save": "Save",

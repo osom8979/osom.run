@@ -114,12 +114,12 @@ export class ApiClient {
     const body = new FormData();
     body.set('nickname', profile.nickname);
     body.set('timezone', profile.timezone);
+    body.set('lng', profile.lng);
     return await this.post<EmptyResponse>(apiPaths.userProfile, {body});
   }
 
   async updateAppearance(appearance: Appearance) {
     const body = new FormData();
-    body.set('lng', appearance.lng);
     body.set('theme', appearance.theme);
     return await this.post<EmptyResponse>(apiPaths.userAppearance, {body});
   }

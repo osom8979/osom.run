@@ -7,6 +7,7 @@ import PreferenceForm, {
 } from '@/app/components/form/PreferenceForm';
 import type {Profile} from '@/app/libs/auth/metadata';
 import useTranslation from '@/app/libs/i18n/client';
+import {LANGUAGES} from '@/app/libs/i18n/settings';
 
 interface ProfileFormProps {
   lng: string;
@@ -23,6 +24,24 @@ export default function ProfileForm(props: ProfileFormProps) {
         type: 'text',
         label: t('basic.nickname.label'),
         detail: t('basic.nickname.detail'),
+      },
+      {
+        key: 'timezone',
+        type: 'text',
+        label: t('basic.timezone.label'),
+        detail: t('basic.timezone.detail'),
+      },
+      {
+        key: 'lng',
+        type: 'select',
+        label: t('basic.lng.label'),
+        detail: t('basic.lng.detail'),
+        select: LANGUAGES.map(lng => {
+          return {
+            value: lng,
+            label: t(`basic.lng.select.${lng}`),
+          };
+        }),
       },
     ] as Array<PreferenceField>;
   }, [t]);

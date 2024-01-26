@@ -29,8 +29,8 @@ export default async function SettingsAppearancePage(props: I18nRouterProps) {
 
       <PreferenceLayout>
         <div>
-          <h3>{t('user.title')}</h3>
-          <p>{t('user.subtitle')}</p>
+          <h3>{t('style.title')}</h3>
+          <p>{t('style.subtitle')}</p>
         </div>
 
         <AppearanceForm lng={lng} appearance={appearance} />

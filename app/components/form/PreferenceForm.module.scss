@@ -23,6 +23,7 @@ $border-color-opacity: 30;
 
     .item {
       @apply w-full;
+      @apply space-y-1;
     }
   }
 

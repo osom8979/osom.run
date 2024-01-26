@@ -12,13 +12,19 @@ const MESSAGE_STATE_SUCCESS = 'success';
 // eslint-disable-next-line no-unused-vars
 type OnClick = (data: Record<string, any>) => Promise<void>;
 
-type PreferenceFieldType = 'text';
+type PreferenceFieldType = 'text' | 'select';
+
+export interface ChoiceItem {
+  value: number | string;
+  label?: string;
+}
 
 export interface PreferenceField {
   key: string;
   type: PreferenceFieldType;
   label?: string;
   detail?: string;
+  select?: Array<ChoiceItem>;
 }
 
 interface PreferenceFormProps {
@@ -105,6 +111,29 @@ export default function PreferenceForm(props: PreferenceFormProps) {
                       </p>
                     </div>
                   </label>
+                </div>
+              );
+            case 'select':
+              return (
+                <div key={field.key} className={styles.item}>
+                  <div className="label pl-0.5 py-0">
+                    <p className="label-text text-base-content">{field.label}</p>
+                  </div>
+                  <select className="select select-sm select-bordered w-full">
+                    {field.select &&
+                      field.select.map(c => {
+                        return (
+                          <option key={c.value} value={c.value}>
+                            {c.label}
+                          </option>
+                        );
+                      })}
+                  </select>
+                  <div className="label pl-0.5 py-0">
+                    <p className="label-text-alt text-base-content/70">
+                      {field.detail}
+                    </p>
+                  </div>
                 </div>
               );
             default:
