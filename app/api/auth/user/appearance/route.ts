@@ -5,16 +5,16 @@ import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
 import type {EmptyResponse} from '@/app/api/interface';
-import type {Profile} from '@/app/libs/auth/metadata';
-import {ProfileSchema} from '@/app/libs/schema/auth';
+import type {Appearance} from '@/app/libs/auth/metadata';
+import {AppearanceSchema} from '@/app/libs/schema/auth';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
   const formData = await request.formData();
-  const validatedFields = ProfileSchema.safeParse({
-    nickname: formData.get('nickname'),
-    timezone: formData.get('timezone'),
+  const validatedFields = AppearanceSchema.safeParse({
+    lng: formData.get('lng'),
+    theme: formData.get('theme'),
   });
 
   if (!validatedFields.success) {
@@ -32,17 +32,17 @@ export async function POST(request: Request) {
   const email = session.data.session.user.email;
   console.assert(email);
 
-  const {nickname} = validatedFields.data;
-  const profile = {nickname} as Profile;
-  const {error} = await supabase.auth.updateUser({data: {profile}});
+  const {lng, theme} = validatedFields.data;
+  const appearance = {lng, theme} as Appearance;
+  const {error} = await supabase.auth.updateUser({data: {appearance}});
   if (error !== null) {
-    console.error('Update profile request error', {email, error});
+    console.error('Update appearance request error', {email, error});
     return NextResponse.json<EmptyResponse>(
       {},
       {status: StatusCodes.INTERNAL_SERVER_ERROR}
     );
   }
 
-  console.info('Update profile OK', {email, profile});
+  console.info('Update appearance OK', {email, appearance});
   return NextResponse.json<EmptyResponse>({});
 }

@@ -42,7 +42,23 @@ export type Providers = (typeof ProviderValues)[number];
 export const ProviderSchema = z.enum(ProviderValues);
 
 export const MAXIMUM_NICKNAME_LENGTH = 68;
+export const MAXIMUM_TIMEZONE_LENGTH = 68;
+
 export const NicknameSchema = z.string().max(MAXIMUM_NICKNAME_LENGTH);
+export const TimezoneSchema = z.string().max(MAXIMUM_TIMEZONE_LENGTH);
+
 export const ProfileSchema = z.object({
   nickname: NicknameSchema,
+  timezone: TimezoneSchema,
+});
+
+export const LanguagesValues = ['en', 'ko'] as const;
+export const LngSchema = z.enum(LanguagesValues);
+
+export const ThemeValues = ['system', 'light', 'dark'] as const;
+export const ThemeSchema = z.enum(ThemeValues);
+
+export const AppearanceSchema = z.object({
+  lng: LngSchema,
+  theme: ThemeSchema,
 });

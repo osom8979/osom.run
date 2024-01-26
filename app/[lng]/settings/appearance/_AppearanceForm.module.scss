@@ -1,0 +1,56 @@
+$border-size: 1px;
+$border-color-opacity: 30;
+
+.root {
+  @apply flex flex-col;
+  @apply border-[#{$border-size}];
+  @apply border-base-content/#{$border-color-opacity};
+  @apply bg-base-200;
+  @apply rounded;
+  @apply shadow;
+  @apply font-normal;
+
+  .divider {
+    @apply border-t-[#{$border-size}];
+    @apply border-base-content/#{$border-color-opacity};
+  }
+
+  .list {
+    @apply flex flex-col;
+    @apply w-full;
+    @apply p-2;
+  }
+
+  .actions {
+    @apply flex flex-row justify-end items-center;
+    @apply w-full;
+    @apply p-2;
+    @apply space-x-2;
+
+    .info {
+      @apply flex-1;
+      @apply pl-2;
+      @apply text-xs;
+
+      &[data-state=hidden] {
+        @apply hidden;
+      }
+      &[data-state=success] {
+        @apply block;
+        @apply text-success;
+      }
+      &[data-state=error] {
+        @apply block;
+        @apply text-error;
+      }
+    }
+
+    .buttons {
+      @apply space-x-2;
+
+      button {
+        @apply w-20;
+      }
+    }
+  }
+}

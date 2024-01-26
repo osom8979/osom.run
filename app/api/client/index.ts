@@ -3,7 +3,7 @@
 import {StatusCodes} from 'http-status-codes';
 import type {EmptyResponse, LoginOAuthResponse} from '@/app/api/interface';
 import {HttpStatusError, NoUrlError} from '@/app/exceptions';
-import type {Profile} from '@/app/libs/auth/metadata';
+import type {Appearance, Profile} from '@/app/libs/auth/metadata';
 import {FALLBACK_LANGUAGE} from '@/app/libs/i18n/settings';
 import {apiPaths} from '@/app/paths';
 
@@ -113,7 +113,15 @@ export class ApiClient {
   async updateProfile(profile: Profile) {
     const body = new FormData();
     body.set('nickname', profile.nickname);
+    body.set('timezone', profile.timezone);
     return await this.post<EmptyResponse>(apiPaths.userProfile, {body});
+  }
+
+  async updateAppearance(appearance: Appearance) {
+    const body = new FormData();
+    body.set('lng', appearance.lng);
+    body.set('theme', appearance.theme);
+    return await this.post<EmptyResponse>(apiPaths.userAppearance, {body});
   }
 }
 
