@@ -4,6 +4,7 @@ import {cloneDeep, isEqual} from 'lodash';
 import {useMemo, useState} from 'react';
 import styles from './PreferenceForm.module.scss';
 import RequestButton from '@/app/components/button/RequestButton';
+import Radio, {type RadioOptions} from '@/app/components/input/Radio';
 import Select, {type SelectOptions} from '@/app/components/input/Select';
 import TextInput from '@/app/components/input/TextInput';
 
@@ -14,15 +15,26 @@ const MESSAGE_STATE_SUCCESS = 'success';
 // eslint-disable-next-line no-unused-vars
 type OnClick = (data: Record<string, any>) => Promise<void>;
 
-type PreferenceFieldType = 'text' | 'select';
-
-export interface PreferenceField {
+interface PreferenceFieldCommon {
   key: string;
-  type: PreferenceFieldType;
   label?: string;
   detail?: string;
-  options?: Array<SelectOptions>;
 }
+
+type PreferenceFieldSpecialize =
+  | {
+      type: 'text';
+    }
+  | {
+      type: 'select';
+      options?: Array<SelectOptions>;
+    }
+  | {
+      type: 'radio';
+      options?: Array<RadioOptions>;
+    };
+
+export type PreferenceField = PreferenceFieldCommon & PreferenceFieldSpecialize;
 
 interface PreferenceFormProps {
   lng: string;
@@ -91,6 +103,7 @@ export default function PreferenceForm(props: PreferenceFormProps) {
               return (
                 <div key={field.key} className={styles.item}>
                   <TextInput
+                    lng={props.lng}
                     className="input input-sm input-bordered w-full"
                     disabled={pending}
                     topLabel={field.label}
@@ -104,6 +117,7 @@ export default function PreferenceForm(props: PreferenceFormProps) {
               return (
                 <div key={field.key} className={styles.item}>
                   <Select
+                    lng={props.lng}
                     className="select select-sm select-bordered w-full"
                     disabled={pending}
                     topLabel={field.label}
@@ -114,8 +128,27 @@ export default function PreferenceForm(props: PreferenceFormProps) {
                   />
                 </div>
               );
+            case 'radio':
+              return (
+                <div key={field.key} className={styles.item}>
+                  <Radio
+                    lng={props.lng}
+                    name={field.key}
+                    className="radio radio-xs w-full"
+                    topLabel={field.label}
+                    bottomLabel={field.detail}
+                    options={field.options}
+                    value={modified[field.key]}
+                    onChange={e => {
+                      if (e.currentTarget.checked) {
+                        handleChange(field.key, e.currentTarget.value);
+                      }
+                    }}
+                  />
+                </div>
+              );
             default:
-              console.error('Unknown preference field type:', field.type);
+              console.error('Unknown preference field type');
               return <div hidden />;
           }
         })}

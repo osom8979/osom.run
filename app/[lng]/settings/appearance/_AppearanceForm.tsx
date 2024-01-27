@@ -21,7 +21,7 @@ export default function AppearanceForm(props: AppearanceFormProps) {
     return [
       {
         key: 'theme',
-        type: 'select',
+        type: 'radio',
         label: t('style.theme.label'),
         detail: t('style.theme.detail'),
         options: ThemeValues.map(theme => {

@@ -1,14 +1,15 @@
 'use client';
 
-import {ChangeEvent, type HTMLAttributes, type PropsWithChildren, useMemo} from 'react';
+import {type ChangeEvent, type HTMLAttributes, useMemo} from 'react';
 
 // eslint-disable-next-line no-unused-vars
-type OnChange = (event: ChangeEvent<HTMLInputElement>) => void | Promise<void>;
+type OnChange = (event: ChangeEvent<HTMLInputElement>) => void;
 
 interface TextInputProps
   extends Omit<
-    PropsWithChildren<HTMLAttributes<HTMLInputElement>>,
+    HTMLAttributes<HTMLInputElement>,
     | 'type'
+    | 'lang'
     | 'className'
     | 'required'
     | 'aria-required'
@@ -21,6 +22,7 @@ interface TextInputProps
     | 'value'
     | 'onChange'
   > {
+  lng?: string;
   className?: string;
   required?: boolean;
   readOnly?: boolean;
@@ -34,6 +36,7 @@ interface TextInputProps
 
 export default function TextInput(props: TextInputProps) {
   const {
+    lng,
     className,
     required,
     readOnly,
@@ -61,6 +64,7 @@ export default function TextInput(props: TextInputProps) {
       </div>
       <input
         type="text"
+        lang={lng}
         className={inputClassName}
         required={required}
         aria-required={required}

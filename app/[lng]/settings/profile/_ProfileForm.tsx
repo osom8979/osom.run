@@ -19,6 +19,14 @@ interface ProfileFormProps {
 export default function ProfileForm(props: ProfileFormProps) {
   const {t} = useTranslation(props.lng, 'settings-profile');
   const [profile, setProfile] = useState(props.profile);
+
+  const timezoneOptions = useMemo(() => {
+    return SupportZones.map(tz => {
+      const zz = DateTime.local().setZone(tz).toFormat('ZZ');
+      return {value: tz, label: tz + ` (${zz})`};
+    });
+  }, []);
+
   const fields = useMemo(() => {
     return [
       {
@@ -32,10 +40,7 @@ export default function ProfileForm(props: ProfileFormProps) {
         type: 'select',
         label: t('basic.timezone.label'),
         detail: t('basic.timezone.detail'),
-        options: SupportZones.map(tz => {
-          const zz = DateTime.local().setZone(tz).toFormat('ZZ');
-          return {value: tz, label: tz + ` (${zz})`};
-        }),
+        options: timezoneOptions,
       },
       {
         key: 'lng',
@@ -47,7 +52,7 @@ export default function ProfileForm(props: ProfileFormProps) {
         }),
       },
     ] as Array<PreferenceField>;
-  }, [t]);
+  }, [t, timezoneOptions]);
 
   const handleClick = async (value: Record<string, any>) => {
     const modified = value as Profile;

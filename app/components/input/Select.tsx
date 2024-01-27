@@ -1,21 +1,19 @@
 'use client';
 
-import {ChangeEvent, type HTMLAttributes, type PropsWithChildren, useMemo} from 'react';
+import {type ChangeEvent, type HTMLAttributes, useMemo} from 'react';
 
 // eslint-disable-next-line no-unused-vars
-type OnChange = (event: ChangeEvent<HTMLSelectElement>) => void | Promise<void>;
+type OnChange = (event: ChangeEvent<HTMLSelectElement>) => void;
 
 export interface SelectOptions {
-  key: number | string;
   value: number | string;
   label?: string;
   disabled?: boolean;
-  selected?: boolean;
 }
 
 interface SelectProps
   extends Omit<
-    PropsWithChildren<HTMLAttributes<HTMLSelectElement>>,
+    HTMLAttributes<HTMLSelectElement>,
     | 'lang'
     | 'className'
     | 'required'
@@ -84,8 +82,8 @@ export default function Select(props: SelectProps) {
                 aria-label={o.label}
                 disabled={o.disabled}
                 aria-disabled={o.disabled}
-                selected={o.selected}
-                aria-selected={o.selected}
+                selected={o.value === value}
+                aria-selected={o.value === value}
               >
                 {o.label}
               </option>
