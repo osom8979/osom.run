@@ -27,3 +27,17 @@ export function getAppearance(user?: User): Appearance {
   const theme = appearance.theme || ThemeValues[0];
   return {theme};
 }
+
+export interface Connection {
+  google: boolean;
+  github: boolean;
+  discord: boolean;
+}
+
+export function getConnection(user?: User): Connection {
+  const identities = user?.identities ?? [];
+  const google = identities.findIndex(x => x.provider === 'google') != -1;
+  const github = identities.findIndex(x => x.provider === 'github') != -1;
+  const discord = identities.findIndex(x => x.provider === 'discord') != -1;
+  return {google, github, discord};
+}
