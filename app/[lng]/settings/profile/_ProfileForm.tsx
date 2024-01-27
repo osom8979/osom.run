@@ -36,10 +36,10 @@ export default function ProfileForm(props: ProfileFormProps) {
         type: 'select',
         label: t('basic.lng.label'),
         detail: t('basic.lng.detail'),
-        select: LANGUAGES.map(lng => {
+        options: LANGUAGES.map(lng => {
           return {
             value: lng,
-            label: t(`basic.lng.select.${lng}`),
+            label: t(`language.title.${lng}`),
           };
         }),
       },

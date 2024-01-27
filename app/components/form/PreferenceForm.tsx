@@ -4,6 +4,7 @@ import {cloneDeep, isEqual} from 'lodash';
 import {useMemo, useState} from 'react';
 import styles from './PreferenceForm.module.scss';
 import RequestButton from '@/app/components/button/RequestButton';
+import Select, {type SelectOptions} from '@/app/components/input/Select';
 import TextInput from '@/app/components/input/TextInput';
 
 const MESSAGE_STATE_HIDDEN = 'hidden';
@@ -15,17 +16,12 @@ type OnClick = (data: Record<string, any>) => Promise<void>;
 
 type PreferenceFieldType = 'text' | 'select';
 
-export interface ChoiceItem {
-  value: number | string;
-  label?: string;
-}
-
 export interface PreferenceField {
   key: string;
   type: PreferenceFieldType;
   label?: string;
   detail?: string;
-  select?: Array<ChoiceItem>;
+  options?: Array<SelectOptions>;
 }
 
 interface PreferenceFormProps {
@@ -107,24 +103,15 @@ export default function PreferenceForm(props: PreferenceFormProps) {
             case 'select':
               return (
                 <div key={field.key} className={styles.item}>
-                  <div className="label pl-0.5 py-0">
-                    <p className="label-text text-base-content">{field.label}</p>
-                  </div>
-                  <select className="select select-sm select-bordered w-full">
-                    {field.select &&
-                      field.select.map(c => {
-                        return (
-                          <option key={c.value} value={c.value}>
-                            {c.label}
-                          </option>
-                        );
-                      })}
-                  </select>
-                  <div className="label pl-0.5 py-0">
-                    <p className="label-text-alt text-base-content/70">
-                      {field.detail}
-                    </p>
-                  </div>
+                  <Select
+                    className="select select-sm select-bordered w-full"
+                    disabled={pending}
+                    topLabel={field.label}
+                    bottomLabel={field.detail}
+                    options={field.options}
+                    value={modified[field.key]}
+                    onChange={e => handleChange(field.key, e.currentTarget.value)}
+                  />
                 </div>
               );
             default:
