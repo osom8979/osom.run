@@ -4,6 +4,7 @@ import {cloneDeep, isEqual} from 'lodash';
 import {useMemo, useState} from 'react';
 import styles from './PreferenceForm.module.scss';
 import RequestButton from '@/app/components/button/RequestButton';
+import TextInput from '@/app/components/input/TextInput';
 
 const MESSAGE_STATE_HIDDEN = 'hidden';
 const MESSAGE_STATE_ERROR = 'error';
@@ -93,24 +94,14 @@ export default function PreferenceForm(props: PreferenceFormProps) {
             case 'text':
               return (
                 <div key={field.key} className={styles.item}>
-                  <label className="flex flex-col w-full space-y-1">
-                    <div className="label pl-0.5 py-0">
-                      <p className="label-text text-base-content">{field.label}</p>
-                    </div>
-                    <input
-                      type="text"
-                      className="input input-sm input-bordered w-full"
-                      disabled={pending}
-                      aria-disabled={pending}
-                      value={modified[field.key]}
-                      onChange={e => handleChange(field.key, e.currentTarget.value)}
-                    />
-                    <div className="label pl-0.5 py-0">
-                      <p className="label-text-alt text-base-content/70">
-                        {field.detail}
-                      </p>
-                    </div>
-                  </label>
+                  <TextInput
+                    className="input input-sm input-bordered w-full"
+                    disabled={pending}
+                    topLabel={field.label}
+                    bottomLabel={field.detail}
+                    value={modified[field.key]}
+                    onChange={e => handleChange(field.key, e.currentTarget.value)}
+                  />
                 </div>
               );
             case 'select':
