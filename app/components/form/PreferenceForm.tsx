@@ -7,6 +7,7 @@ import RequestButton from '@/app/components/button/RequestButton';
 import Radio, {type RadioOptions} from '@/app/components/input/Radio';
 import Select, {type SelectOptions} from '@/app/components/input/Select';
 import TextInput from '@/app/components/input/TextInput';
+import Toggle from '@/app/components/input/Toggle';
 
 const MESSAGE_STATE_HIDDEN = 'hidden';
 const MESSAGE_STATE_ERROR = 'error';
@@ -32,6 +33,11 @@ type PreferenceFieldSpecialize =
   | {
       type: 'radio';
       options?: Array<RadioOptions>;
+    }
+  | {
+      type: 'toggle';
+      offLabel?: string;
+      onLabel?: string;
     };
 
 export type PreferenceField = PreferenceFieldCommon & PreferenceFieldSpecialize;
@@ -59,7 +65,7 @@ export default function PreferenceForm(props: PreferenceFormProps) {
     return pending || isEqual(modified, original);
   }, [original, pending, modified]);
 
-  const handleChange = (key: string, value: string) => {
+  const handleChange = (key: string, value: boolean | number | string) => {
     setModified(prevState => {
       return {...prevState, [key]: value};
     });
@@ -144,6 +150,21 @@ export default function PreferenceForm(props: PreferenceFormProps) {
                         handleChange(field.key, e.currentTarget.value);
                       }
                     }}
+                  />
+                </div>
+              );
+            case 'toggle':
+              return (
+                <div key={field.key} className={styles.item}>
+                  <Toggle
+                    lng={props.lng}
+                    className="toggle toggle-sm w-full"
+                    topLabel={field.label}
+                    bottomLabel={field.detail}
+                    leftLabel={field.offLabel}
+                    rightLabel={field.onLabel}
+                    value={modified[field.key]}
+                    onChange={e => handleChange(field.key, e.currentTarget.checked)}
                   />
                 </div>
               );

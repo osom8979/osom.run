@@ -27,6 +27,8 @@ interface ToggleProps
   disabled?: boolean;
   topLabel?: string;
   bottomLabel?: string;
+  leftLabel?: string;
+  rightLabel?: string;
   value?: boolean;
   onChange?: OnChange;
 }
@@ -40,6 +42,8 @@ export default function Toggle(props: ToggleProps) {
     disabled,
     topLabel,
     bottomLabel,
+    leftLabel,
+    rightLabel,
     value,
     onChange,
     ...attrs
@@ -54,24 +58,31 @@ export default function Toggle(props: ToggleProps) {
   }, [className]);
 
   return (
-    <label className="flex flex-col w-full space-y-1 cursor-pointer">
-      <span className="text-sm text-base-content">{topLabel}</span>
-      <input
-        type="checkbox"
-        lang={lng}
-        className={inputClassName}
-        required={required}
-        aria-required={required}
-        readOnly={readOnly}
-        aria-readonly={readOnly}
-        disabled={disabled}
-        aria-disabled={disabled}
-        checked={value}
-        aria-checked={value}
-        onChange={onChange}
-        {...attrs}
-      />
-      <span className="text-sm text-base-content">{bottomLabel}</span>
+    <label className="flex flex-col w-full pl-0.5 py-0 space-y-2">
+      <div className="flex flex-col w-full space-y-0.5">
+        <p className="text-sm text-base-content">{topLabel}</p>
+        <p className="text-xs text-base-content/70">{bottomLabel}</p>
+      </div>
+
+      <div className="flex flex-row items-center text-xs text-base-content space-x-2">
+        <span className="text-base-content/70">{leftLabel}</span>
+        <input
+          type="checkbox"
+          lang={lng}
+          className={inputClassName}
+          required={required}
+          aria-required={required}
+          readOnly={readOnly}
+          aria-readonly={readOnly}
+          disabled={disabled}
+          aria-disabled={disabled}
+          checked={value}
+          aria-checked={value}
+          onChange={onChange}
+          {...attrs}
+        />
+        <span className="text-base-content">{rightLabel}</span>
+      </div>
     </label>
   );
 }

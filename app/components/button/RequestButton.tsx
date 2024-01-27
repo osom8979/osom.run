@@ -29,7 +29,7 @@ type OnError = (error: string) => Promise<void>;
 interface RequestButtonProps
   extends Omit<
     PropsWithChildren<HTMLAttributes<HTMLButtonElement>>,
-    'onClick' | 'onError'
+    'lang' | 'onClick' | 'onError'
   > {
   lng?: string;
   errorTimeout?: number;
@@ -177,6 +177,7 @@ export default function RequestButton(props: RequestButtonProps) {
     <button
       type="button"
       role="button"
+      lang={lng}
       className={buttonClassName}
       onClick={handleClick}
       data-disabled={isDisabled}

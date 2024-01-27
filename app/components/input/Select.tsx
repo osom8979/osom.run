@@ -82,8 +82,6 @@ export default function Select(props: SelectProps) {
                 aria-label={o.label}
                 disabled={o.disabled}
                 aria-disabled={o.disabled}
-                selected={o.value === value}
-                aria-selected={o.value === value}
               >
                 {o.label}
               </option>

@@ -6,6 +6,12 @@ export class OsomError extends Error {
   }
 }
 
+export class UnsupportedError extends OsomError {
+  constructor(message?: string, options?: ErrorOptions) {
+    super(message ?? 'Unsupported features', options);
+  }
+}
+
 export class NotImplementedError extends OsomError {
   constructor(message?: string, options?: ErrorOptions) {
     super(message ?? 'Not implemented', options);

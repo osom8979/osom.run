@@ -1,3 +1,20 @@
 {
-  "title": "계정 연결"
+  "title": "계정 연결",
+  "detail": "타사 서비스 또는 플랫폼과 연동하여 다양한 기능 및 데이터를 공유하고 관리합니다.",
+  "oauth": {
+    "title": "소셜 인증",
+    "subtitle": "타사 서비스에 연결된 로그인 방법을 제공합니다.",
+    "google": "구글",
+    "github": "깃허브",
+    "discord": "디스코드"
+  },
+  "link": "연결",
+  "unlink": "연결 해제",
+  "reset": "초기화",
+  "save": "저장",
+  "save_successful": "저장에 성공했습니다.",
+  "created": "{{datetime}} 연결",
+  "errors": {
+    "unsupported_manual_link": "수동 연결은 지원하지 않습니다."
+  }
 }

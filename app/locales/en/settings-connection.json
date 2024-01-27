@@ -1,3 +1,20 @@
 {
-  "title": "Account connection"
+  "title": "Account connection",
+  "detail": "Share and manage various functions and data by linking with third-party services or platforms.",
+  "oauth": {
+    "title": "Social Auth",
+    "subtitle": "Provides a login method linked to third-party services.",
+    "google": "Google",
+    "github": "Github",
+    "discord": "Discord"
+  },
+  "link": "Link",
+  "unlink": "Unlink",
+  "reset": "Reset",
+  "save": "Save",
+  "save_successful": "Save successful.",
+  "created_prefix": "Created at {{datetime}}",
+  "errors": {
+    "unsupported_manual_link": "Manual connections are not supported."
+  }
 }
