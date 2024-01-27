@@ -1,3 +1,24 @@
 {
-  "title": "osom.run"
+  "titles": {
+    "lower": "osom.run",
+    "upper": "OSOM.RUN"
+  },
+  "language": {
+    "emoji": {
+      "en": "$t(emoji.flag.US)",
+      "ko": "$t(emoji.flag.KR)"
+    },
+    "region": {
+      "en": "United States of America",
+      "ko": "Republic of Korea"
+    },
+    "name": {
+      "en": "English",
+      "ko": "Korean"
+    },
+    "title": {
+      "en": "$t(language.emoji.en) $t(language.region.en) - $t(language.name.en)",
+      "ko": "$t(language.emoji.ko) $t(language.region.ko) - $t(language.name.ko)"
+    }
+  }
 }

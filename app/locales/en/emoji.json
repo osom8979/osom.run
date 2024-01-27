@@ -1,0 +1,23 @@
+{
+  "emoji": {
+    "flag": {
+      "US": "\uD83C\uDDFA\uD83C\uDDF8",
+      "KR": "\uD83C\uDDF0\uD83C\uDDF7"
+    },
+    "clock": {
+      "0": "\uD83D\uDD5B",
+      "1": "\uD83D\uDD50",
+      "2": "\uD83D\uDD51",
+      "3": "\uD83D\uDD52",
+      "4": "\uD83D\uDD53",
+      "5": "\uD83D\uDD54",
+      "6": "\uD83D\uDD55",
+      "7": "\uD83D\uDD56",
+      "8": "\uD83D\uDD57",
+      "9": "\uD83D\uDD58",
+      "10": "\uD83D\uDD59",
+      "11": "\uD83D\uDD5A",
+      "12": "\uD83D\uDD5B"
+    }
+  }
+}

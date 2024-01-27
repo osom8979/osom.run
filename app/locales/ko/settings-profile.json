@@ -16,8 +16,8 @@
       "label": "언어",
       "detail": "화면에 표시할 언어입니다.",
       "select": {
-        "en": "\uD83C\uDDFA\uD83C\uDDF8 영어 (English)",
-        "ko": "\uD83C\uDDF0\uD83C\uDDF7 한국어 (한국어)"
+        "en": "$t(languages.emoji.en) 영어 ($t(languages.name.en))",
+        "ko": "$t(languages.emoji.ko) 한국어 ($t(languages.name.ko))"
       }
     }
   },

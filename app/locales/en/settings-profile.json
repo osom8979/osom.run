@@ -16,8 +16,8 @@
       "label": "Language",
       "detail": "The language to display on the screen.",
       "select": {
-        "en": "\uD83C\uDDFA\uD83C\uDDF8 English (English)",
-        "ko": "\uD83C\uDDF0\uD83C\uDDF7 Korean (한국어)"
+        "en": "$t(languages.emoji.en) English ($t(languages.names.en))",
+        "ko": "$t(languages.emoji.ko) Korean ($t(languages.names.ko))"
       }
     }
   },

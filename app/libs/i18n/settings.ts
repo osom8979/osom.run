@@ -3,7 +3,7 @@ import {type InitOptions} from 'i18next/typescript/options';
 export const en = 'en';
 export const ko = 'ko';
 
-export const FALLBACK_NAMESPACE = ['common', 'http-status'];
+export const FALLBACK_NAMESPACE = ['common', 'http-status', 'emoji'];
 export const DEFAULT_NAMESPACE = FALLBACK_NAMESPACE;
 export const LOAD_NAMESPACES = DEFAULT_NAMESPACE;
 export const LANGUAGES = [en, ko];
