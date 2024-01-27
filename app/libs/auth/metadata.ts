@@ -1,24 +1,21 @@
 import 'server-only';
 
 import type {User} from '@supabase/gotrue-js';
+import {SupportZones} from '@/app/libs/chrono/zone';
 import {LanguagesValues, ThemeValues} from '@/app/libs/schema/settings';
-
-export const NO_NICKNAME = '';
-export const NO_TIMEZONE = '';
 
 export interface Profile {
   nickname: string;
-  lng: string;
   timezone: string;
+  lng: string;
 }
 
 export function getProfile(user?: User): Profile {
-  return {
-    nickname: NO_NICKNAME,
-    lng: LanguagesValues[0],
-    timezone: NO_TIMEZONE,
-    ...user?.user_metadata?.profile,
-  };
+  const profile = user?.user_metadata?.profile ?? {};
+  const nickname = profile.nickname || user?.user_metadata?.full_name;
+  const timezone = profile.timezone || SupportZones[0];
+  const lng = LanguagesValues[0];
+  return {nickname, timezone, lng};
 }
 
 export interface Appearance {
@@ -26,8 +23,7 @@ export interface Appearance {
 }
 
 export function getAppearance(user?: User): Appearance {
-  return {
-    theme: ThemeValues[0],
-    ...user?.user_metadata?.appearance,
-  };
+  const appearance = user?.user_metadata?.appearance ?? {};
+  const theme = appearance.theme || ThemeValues[0];
+  return {theme};
 }

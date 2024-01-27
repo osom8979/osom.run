@@ -19,6 +19,7 @@ export async function POST(request: Request) {
   });
 
   if (!validatedFields.success) {
+    console.error(validatedFields.error);
     return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
   }
 

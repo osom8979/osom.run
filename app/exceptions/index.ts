@@ -24,6 +24,12 @@ export class NoUrlError extends OsomError {
   }
 }
 
+export class InvalidTimezoneError extends OsomError {
+  constructor(message?: string, options?: ErrorOptions) {
+    super(message ?? 'Invalid timezone', options);
+  }
+}
+
 export function getReasonPhraseSafe(code: number | string) {
   try {
     return getReasonPhrase(code);

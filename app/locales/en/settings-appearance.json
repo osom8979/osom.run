@@ -8,7 +8,7 @@
       "label": "Theme",
       "detail": "Choose the screen color and design to suit your preference.",
       "select": {
-        "system": "System-wide settings",
+        "system": "System",
         "light": "Light mode",
         "dark": "Dark mode"
       }

@@ -1,11 +1,13 @@
 'use client';
 
+import {DateTime} from 'luxon';
 import {useMemo, useState} from 'react';
 import apiClient from '@/app/api/client';
 import PreferenceForm, {
   type PreferenceField,
 } from '@/app/components/form/PreferenceForm';
 import type {Profile} from '@/app/libs/auth/metadata';
+import {SupportZones} from '@/app/libs/chrono/zone';
 import useTranslation from '@/app/libs/i18n/client';
 import {LANGUAGES} from '@/app/libs/i18n/settings';
 
@@ -27,9 +29,13 @@ export default function ProfileForm(props: ProfileFormProps) {
       },
       {
         key: 'timezone',
-        type: 'text',
+        type: 'select',
         label: t('basic.timezone.label'),
         detail: t('basic.timezone.detail'),
+        options: SupportZones.map(tz => {
+          const zz = DateTime.local().setZone(tz).toFormat('ZZ');
+          return {value: tz, label: tz + ` (${zz})`};
+        }),
       },
       {
         key: 'lng',
@@ -37,10 +43,7 @@ export default function ProfileForm(props: ProfileFormProps) {
         label: t('basic.lng.label'),
         detail: t('basic.lng.detail'),
         options: LANGUAGES.map(lng => {
-          return {
-            value: lng,
-            label: t(`language.title.${lng}`),
-          };
+          return {value: lng, label: t(`language.title.${lng}`)};
         }),
       },
     ] as Array<PreferenceField>;
