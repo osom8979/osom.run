@@ -1,12 +1,11 @@
+import {createMiddlewareClient} from '@supabase/auth-helpers-nextjs';
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
-import {upgradeSessionCookies} from '@/app/libs/auth/middle';
 import {
   findNextLanguage,
   invalidLngPath,
   upgradeI18nCookies,
 } from '@/app/libs/i18n/middle';
-import {NextURL} from 'next/dist/server/web/next-url';
 
 export const config = {
   matcher: [
@@ -23,7 +22,7 @@ export const config = {
   ],
 };
 
-const progressRunnerMatcher = /^\/progress\/runner\/[0-9A-Za-z-_]*/;
+const progressRunnerMatcher = /^\/progress\/[0-9A-Za-z-_]*/;
 const matchers = config.matcher.map(pattern => new RegExp(pattern));
 
 function validMiddlewareRequest(req: NextRequest) {
@@ -57,14 +56,20 @@ export async function middleware(req: NextRequest) {
     const pathname = req.nextUrl.pathname.substring(3);
     if (pathname.match(progressRunnerMatcher)) {
       const rewriteUrl = new URL(`/api${pathname}`, req.url);
-      console.debug(`rewrite() -> ${rewriteUrl.toString()}`);
+      console.debug(`middleware(req='${req.url}') rewrite ${rewriteUrl.toString()}`);
       return NextResponse.rewrite(rewriteUrl);
     }
   }
 
   const res = NextResponse.next();
+  const supabase = createMiddlewareClient({req, res});
+  const session = await supabase.auth.getSession();
+  if (!session.error) {
+    console.error(`middleware(req='${req.url}') session error ${session.error}`);
+    // TODO: Error response ... ?
+  }
+
   upgradeI18nCookies(req, res);
-  await upgradeSessionCookies(req, res);
 
   console.debug(`middleware(req='${req.url}') -> ${res.status}`);
   return res;

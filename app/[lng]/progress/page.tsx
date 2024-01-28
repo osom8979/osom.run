@@ -3,6 +3,7 @@ import styles from './page.module.scss';
 import {type I18nRouterProps} from '@/app/[lng]/params';
 import Logo from '@/app/components/Logo';
 import useTranslation from '@/app/libs/i18n/server';
+import {appPaths} from '@/app/paths';
 
 export default async function ProgressPage(props: I18nRouterProps) {
   const lng = props.params.lng;
@@ -18,7 +19,7 @@ export default async function ProgressPage(props: I18nRouterProps) {
         </div>
 
         <div className={styles.titleBox}>
-          <h1>{t('title')}</h1>
+          <h2>{t('title')}</h2>
           <h3>{t('subtitle')}</h3>
         </div>
 
@@ -26,7 +27,7 @@ export default async function ProgressPage(props: I18nRouterProps) {
 
         <div className={styles.actions}>
           <button className="btn btn-md btn-primary w-36">
-            <Link href="#" hrefLang={lng}>
+            <Link href={`/${lng}${appPaths.progress}`} hrefLang={lng}>
               {t('get_started')}
             </Link>
           </button>

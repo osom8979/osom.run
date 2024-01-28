@@ -1,4 +1,4 @@
-import {PropsWithChildren} from 'react';
+import type {PropsWithChildren} from 'react';
 
 export interface I18nParams {
   lng: string;
@@ -12,6 +12,4 @@ export interface I18nRouterProps extends I18nCommonProps {
   searchParams: URLSearchParams;
 }
 
-export interface I18nLayoutProps extends PropsWithChildren<I18nCommonProps> {
-  // EMPTY.
-}
+export type I18nLayoutProps = PropsWithChildren<I18nCommonProps>;
