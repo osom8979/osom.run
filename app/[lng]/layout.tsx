@@ -1,5 +1,6 @@
 import {createServerComponentClient} from '@supabase/auth-helpers-nextjs';
 import {Analytics} from '@vercel/analytics/react';
+import {SpeedInsights} from '@vercel/speed-insights/next';
 import {dir} from 'i18next';
 import {cookies} from 'next/headers';
 import Link from 'next/link';
@@ -48,6 +49,7 @@ export default async function LngLayout(props: I18nLayoutProps) {
 
         <main className="flex-grow h-0">{props.children}</main>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
