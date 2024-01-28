@@ -9,7 +9,7 @@ import {
   LANGUAGES,
 } from '@/app/libs/i18n/settings';
 
-acceptLanguage.languages(LANGUAGES);
+acceptLanguage.languages([...LANGUAGES]);
 
 export function hasLng(req: NextRequest) {
   return LANGUAGES.some(lng => req.nextUrl.pathname.startsWith(`/${lng}`));

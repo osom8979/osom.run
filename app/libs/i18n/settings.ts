@@ -1,14 +1,11 @@
 import {type InitOptions} from 'i18next/typescript/options';
 
-export const en = 'en';
-export const ko = 'ko';
-
 export const FALLBACK_NAMESPACE = ['common', 'http-status', 'emoji'];
 export const DEFAULT_NAMESPACE = FALLBACK_NAMESPACE;
 export const LOAD_NAMESPACES = DEFAULT_NAMESPACE;
-export const LANGUAGES = [en, ko];
-export const FALLBACK_LANGUAGE = en;
-export const USE_LANGUAGE = en;
+export const LANGUAGES = ['en', 'ko'] as const;
+export const FALLBACK_LANGUAGE = LANGUAGES[0];
+export const USE_LANGUAGE = LANGUAGES[0];
 export const I18N_DEBUG = false;
 
 export const HEADER_ACCEPT_LANGUAGE_KEY = 'Accept-Language';
