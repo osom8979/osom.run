@@ -6,6 +6,7 @@ import {
   invalidLngPath,
   upgradeI18nCookies,
 } from '@/app/libs/i18n/middle';
+import {NextURL} from 'next/dist/server/web/next-url';
 
 export const config = {
   matcher: [
@@ -22,6 +23,7 @@ export const config = {
   ],
 };
 
+const progressRunnerMatcher = /^\/progress\/runner\/[0-9A-Za-z-_]*/;
 const matchers = config.matcher.map(pattern => new RegExp(pattern));
 
 function validMiddlewareRequest(req: NextRequest) {
@@ -48,6 +50,16 @@ export async function middleware(req: NextRequest) {
 
     console.debug(`middleware(req='${req.url}') redirect '${redirectUrl}'`);
     return NextResponse.redirect(redirectUrl);
+  }
+
+  const method = req.method.toUpperCase();
+  if (method === 'POST') {
+    const pathname = req.nextUrl.pathname.substring(3);
+    if (pathname.match(progressRunnerMatcher)) {
+      const rewriteUrl = new URL(`/api${pathname}`, req.url);
+      console.debug(`rewrite() -> ${rewriteUrl.toString()}`);
+      return NextResponse.rewrite(rewriteUrl);
+    }
   }
 
   const res = NextResponse.next();
