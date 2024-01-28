@@ -682,6 +682,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vercel/analytics@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@vercel/analytics@npm:1.1.2"
+  dependencies:
+    server-only: "npm:^0.0.1"
+  checksum: 01d2d4b9a178d33b913ea94a872ca3d0fd98ba951fc4002d2f5e722a367af0188c81a42a133de472125279dcb5b8eb7cf953682e2b0bf34ebdb0563ba890553e
+  languageName: node
+  linkType: hard
+
 "abbrev@npm:^2.0.0":
   version: 2.0.0
   resolution: "abbrev@npm:2.0.0"
@@ -3565,6 +3574,7 @@ __metadata:
     "@types/react-dom": "npm:^18.2.7"
     "@typescript-eslint/eslint-plugin": "npm:^6.13.1"
     "@typescript-eslint/parser": "npm:^6.13.1"
+    "@vercel/analytics": "npm:^1.1.2"
     accept-language: "npm:^3.0.18"
     autoprefixer: "npm:^10.4.16"
     daisyui: "npm:^4.6.0"
