@@ -14,6 +14,9 @@
   "forgot_password": "Forgot password?",
   "bad_request": "Your email or password is incorrect.",
   "unauthorized": "Your authentication information is incorrect.",
+  "tooltip": {
+    "login_google": "Currently, Google Sign-in is only available to registered testers."
+  },
   "oauth": {
     "login_google": "Log in with Google",
     "login_github": "Log in with Github",

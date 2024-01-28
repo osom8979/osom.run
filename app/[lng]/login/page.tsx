@@ -32,10 +32,15 @@ export default async function LoginPage(props: I18nRouterProps) {
           </div>
 
           <div className="space-y-4">
-            <OAuthLoginButton provider="google" lng={lng}>
-              <MdiGoogle className="w-6 h-6" />
-              <span>{t('oauth.login_google')}</span>
-            </OAuthLoginButton>
+            <div
+              className="tooltip tooltip-secondary w-full"
+              data-tip={t('tooltip.login_google')}
+            >
+              <OAuthLoginButton provider="google" lng={lng}>
+                <MdiGoogle className="w-6 h-6" />
+                <span>{t('oauth.login_google')}</span>
+              </OAuthLoginButton>
+            </div>
 
             <OAuthLoginButton provider="github" lng={lng}>
               <MdiGithub className="w-6 h-6" />
