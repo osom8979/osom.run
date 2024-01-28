@@ -1,4 +1,5 @@
 import {createServerComponentClient} from '@supabase/auth-helpers-nextjs';
+import {Analytics} from '@vercel/analytics/react';
 import {dir} from 'i18next';
 import {cookies} from 'next/headers';
 import Link from 'next/link';
@@ -46,6 +47,7 @@ export default async function LngLayout(props: I18nLayoutProps) {
         </header>
 
         <main className="flex-grow h-0">{props.children}</main>
+        <Analytics />
       </body>
     </html>
   );
