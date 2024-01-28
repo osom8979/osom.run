@@ -1,4 +1,6 @@
 {
+  "logo": "osom.run",
+  "progress": "Progress",
   "login": "로그인",
   "settings": "프로필 수정",
   "logout": "로그아웃"

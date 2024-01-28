@@ -2,7 +2,12 @@
 module.exports = {
   content: ['./app/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
-    extend: {},
+    extend: {
+      spacing: {
+        osomHeader: '3rem',
+        osomMain: 'calc(100vh - theme(spacing.osomHeader))',
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/typography'),

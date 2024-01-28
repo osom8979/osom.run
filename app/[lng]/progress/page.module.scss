@@ -1,0 +1,68 @@
+$gradient-start: green-300;
+$gradient-via: blue-500;
+$gradient-end: purple-600;
+
+.root {
+  @apply container mx-auto;
+  @apply max-w-screen-xl;
+  @apply px-4 py-32;
+
+  @screen lg {
+    @apply flex items-center;
+    @apply h-osomMain;
+  }
+
+  .centerBox {
+    @apply text-center;
+    @apply max-w-3xl;
+    @apply mx-auto;
+
+    .logoBox {
+      @apply flex justify-center items-center;
+      @apply w-full;
+      @apply my-2;
+      @apply space-x-2;
+
+      a {
+        @apply w-28;
+
+        svg {
+          @apply w-full;
+        }
+      }
+    }
+
+    .titleBox {
+      @apply font-extrabold text-3xl;
+
+      @apply bg-gradient-to-r;
+      @apply from-#{$gradient-start};
+      @apply via-#{$gradient-via};
+      @apply to-#{$gradient-end};
+
+      @apply bg-clip-text;
+      @apply text-transparent;
+
+      h1 {
+        @apply text-3xl sm:text-5xl;
+      }
+
+      h3 {
+        @apply text-xl sm:text-2xl;
+      }
+    }
+
+    .detailBox {
+      @apply mx-auto mt-4;
+      @apply max-w-xl;
+      @apply text-base;
+    }
+
+    .actions {
+      @apply flex flex-wrap justify-center;
+      @apply gap-4;
+      @apply mt-8;
+      @apply text-sm font-medium;
+    }
+  }
+}
