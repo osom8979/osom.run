@@ -27,7 +27,7 @@ export default async function ProgressPage(props: I18nPageProps) {
 
         <div className={styles.actions}>
           <button className="btn btn-md btn-primary w-36">
-            <Link href={`/${lng}${appPaths.progress}`} hrefLang={lng}>
+            <Link href={`/${lng}${appPaths.progress}/temp`} hrefLang={lng}>
               {t('get_started')}
             </Link>
           </button>

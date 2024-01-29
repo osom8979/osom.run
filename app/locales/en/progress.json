@@ -6,5 +6,8 @@
   "feature_2": "Chatbot Notifications",
   "feature_3": "Log messages with progress",
   "get_started": "Get Started",
-  "learn_more": "Learn More"
+  "learn_more": "Learn More",
+  "progressing": "Progressing",
+  "complete": "Complete",
+  "abort": "Abort"
 }
