@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import {type I18nRouterProps} from '@/app/[lng]/params';
+import {type I18nPageProps} from '@/app/[lng]/params';
 import Logo from '@/app/components/Logo';
 import useTranslation from '@/app/libs/i18n/server';
 
-export default async function ProgressPage(props: I18nRouterProps) {
+export default async function ProgressPage(props: I18nPageProps) {
   const lng = props.params.lng;
   const {t} = await useTranslation(lng, 'progress-runner');
 

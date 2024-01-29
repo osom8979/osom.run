@@ -4,7 +4,7 @@ import Link from 'next/link';
 import {redirect} from 'next/navigation';
 import LoginForm from './_LoginForm';
 import OAuthLoginButton from './_OAuthLoginButton';
-import {type I18nRouterProps} from '@/app/[lng]/params';
+import {type I18nPageProps} from '@/app/[lng]/params';
 import CenterLayout from '@/app/components/layout/CenterLayout';
 import MdiDiscord from '@/app/icons/mdi/MdiDiscord';
 import MdiGithub from '@/app/icons/mdi/MdiGithub';
@@ -12,7 +12,7 @@ import MdiGoogle from '@/app/icons/mdi/MdiGoogle';
 import useTranslation from '@/app/libs/i18n/server';
 import {appPaths} from '@/app/paths';
 
-export default async function LoginPage(props: I18nRouterProps) {
+export default async function LoginPage(props: I18nPageProps) {
   const lng = props.params.lng;
   const cookieStore = cookies();
   const supabase = createServerComponentClient({cookies: () => cookieStore});

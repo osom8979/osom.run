@@ -2,12 +2,12 @@ import {createServerComponentClient} from '@supabase/auth-helpers-nextjs';
 import {cookies} from 'next/headers';
 import {redirect} from 'next/navigation';
 import AppearanceForm from './_AppearanceForm';
-import type {I18nRouterProps} from '@/app/[lng]/params';
+import type {I18nPageProps} from '@/app/[lng]/params';
 import PreferenceLayout from '@/app/components/layout/PreferenceLayout';
 import {getAppearance} from '@/app/libs/auth/metadata';
 import useTranslation from '@/app/libs/i18n/server';
 
-export default async function SettingsAppearancePage(props: I18nRouterProps) {
+export default async function SettingsAppearancePage(props: I18nPageProps) {
   const lng = props.params.lng;
   const {t} = await useTranslation(lng, 'settings-appearance');
   const cookieStore = cookies();

@@ -8,8 +8,8 @@ export interface I18nCommonProps {
   params: I18nParams;
 }
 
-export interface I18nRouterProps extends I18nCommonProps {
+export type I18nLayoutProps = PropsWithChildren<I18nCommonProps>;
+
+export interface I18nPageProps extends I18nCommonProps {
   searchParams: URLSearchParams;
 }
-
-export type I18nLayoutProps = PropsWithChildren<I18nCommonProps>;

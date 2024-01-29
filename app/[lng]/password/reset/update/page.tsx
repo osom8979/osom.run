@@ -1,9 +1,9 @@
 import UpdatePasswordForm from './_UpdatePasswordForm';
-import type {I18nRouterProps} from '@/app/[lng]/params';
+import type {I18nPageProps} from '@/app/[lng]/params';
 import CenterLayout from '@/app/components/layout/CenterLayout';
 import useTranslation from '@/app/libs/i18n/server';
 
-export default async function PasswordResetUpdatePage(props: I18nRouterProps) {
+export default async function PasswordResetUpdatePage(props: I18nPageProps) {
   const lng = props.params.lng;
   const {t} = await useTranslation(lng, 'password-reset-update');
   return (

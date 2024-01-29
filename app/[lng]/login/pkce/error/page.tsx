@@ -1,11 +1,11 @@
 import PkceErrorReason from './_PkceErrorReason';
-import type {I18nRouterProps} from '@/app/[lng]/params';
+import type {I18nPageProps} from '@/app/[lng]/params';
 import GoBackButton from '@/app/components/button/GoBackButton';
 import CenterLayout from '@/app/components/layout/CenterLayout';
 import MdiBarcodeOff from '@/app/icons/mdi/MdiBarcodeOff';
 import useTranslation from '@/app/libs/i18n/server';
 
-export default async function LoginPkceErrorPage(props: I18nRouterProps) {
+export default async function LoginPkceErrorPage(props: I18nPageProps) {
   const lng = props.params.lng;
   const {t} = await useTranslation(lng, 'login-pkce-error');
   return (

@@ -1,16 +1,16 @@
 import type {PropsWithChildren} from 'react';
 import type {I18nParams} from '@/app/[lng]/params';
 
-export interface ProgressParams extends I18nParams {
+export interface ProgressParams {
   code: string;
 }
 
 export interface ProgressProps {
-  params: ProgressParams;
+  params: I18nParams & ProgressParams;
 }
 
-export interface ProgressRouterProps extends ProgressProps {
+export type ProgressLayoutProps = PropsWithChildren<ProgressProps>;
+
+export interface ProgressPageProps extends ProgressProps {
   searchParams: URLSearchParams;
 }
-
-export type ProgressLayoutProps = PropsWithChildren<ProgressRouterProps>;

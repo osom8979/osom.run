@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import SignupForm from './_SignupForm';
-import {type I18nRouterProps} from '@/app/[lng]/params';
+import {type I18nPageProps} from '@/app/[lng]/params';
 import CenterLayout from '@/app/components/layout/CenterLayout';
 import useTranslation from '@/app/libs/i18n/server';
 import {appPaths} from '@/app/paths';
 
-export default async function SignupPage(props: I18nRouterProps) {
+export default async function SignupPage(props: I18nPageProps) {
   const lng = props.params.lng;
   const {t} = await useTranslation(lng, 'signup');
   return (
