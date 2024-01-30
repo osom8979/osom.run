@@ -8,6 +8,9 @@
   "get_started": "시작합니다",
   "learn_more": "더 알아보기",
   "progressing": "진행중",
+  "copy": "URL 복사",
   "complete": "완료",
-  "abort": "취소"
+  "abort": "취소",
+  "more_info": "더 많은 정보가 필요한가요?",
+  "document_link": "문서를 확인하세요!"
 }

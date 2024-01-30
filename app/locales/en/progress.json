@@ -8,6 +8,9 @@
   "get_started": "Get Started",
   "learn_more": "Learn More",
   "progressing": "Progressing",
+  "copy": "Copy URL",
   "complete": "Complete",
-  "abort": "Abort"
+  "abort": "Abort",
+  "more_info": "More information?",
+  "document_link": "Check documentation!"
 }
