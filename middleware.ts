@@ -56,15 +56,15 @@ export async function middleware(req: NextRequest) {
       const userLng = getProfile(session.data.session.user).lng;
       if (userLng && languageValues.includes(userLng)) {
         const redirectUrl = new URL(`/${userLng}${pathname}${search}`, req.url);
-        console.debug(`middleware(req='${req.url}') session rewrite '${redirectUrl}'`);
-        return NextResponse.rewrite(redirectUrl);
+        console.debug(`middleware(req='${req.url}') session redirect '${redirectUrl}'`);
+        return NextResponse.redirect(redirectUrl);
       }
     }
 
     const lng = findNextLanguage(req);
     const redirectUrl = new URL(`/${lng}${pathname}${search}`, req.url);
-    console.debug(`middleware(req='${req.url}') lng rewrite '${redirectUrl}'`);
-    return NextResponse.rewrite(redirectUrl);
+    console.debug(`middleware(req='${req.url}') lng redirect '${redirectUrl}'`);
+    return NextResponse.redirect(redirectUrl);
   }
 
   const method = req.method.toUpperCase();

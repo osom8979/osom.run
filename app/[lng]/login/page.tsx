@@ -18,8 +18,8 @@ export default async function LoginPage(props: I18nPageProps) {
 
   const cookieStore = cookies();
   const supabase = createServerComponentClient({cookies: () => cookieStore});
-  const session = await supabase.auth.getSession();
-  if (session.error === null) {
+  const user = await supabase.auth.getUser();
+  if (user.error === null) {
     redirect(`/${lng}`);
   }
 
