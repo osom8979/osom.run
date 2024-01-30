@@ -17,12 +17,13 @@ export async function generateStaticParams() {
 }
 
 export default async function LngLayout(props: I18nLayoutProps) {
-  const lng = props.params.lng;
-  const {t} = await useTranslation(lng, 'root-layout');
   const cookieStore = cookies();
   const supabase = createServerComponentClient({cookies: () => cookieStore});
   const user = await supabase.auth.getUser();
   const hasSession = user.error === null;
+
+  const {lng} = props.params;
+  const {t} = await useTranslation(lng, 'root-layout');
 
   return (
     <html lang={lng} dir={dir(lng)}>
@@ -59,6 +60,7 @@ export default async function LngLayout(props: I18nLayoutProps) {
         </header>
 
         <main className="flex-grow h-0">{props.children}</main>
+
         <Analytics />
         <SpeedInsights />
       </body>

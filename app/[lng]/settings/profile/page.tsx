@@ -1,24 +1,14 @@
-import {createServerComponentClient} from '@supabase/auth-helpers-nextjs';
-import {cookies} from 'next/headers';
-import {redirect} from 'next/navigation';
 import ProfileForm from './_ProfileForm';
 import type {I18nPageProps} from '@/app/[lng]/params';
+import {catchMeIfYouCan} from '@/app/[lng]/session';
 import PreferenceLayout from '@/app/components/layout/PreferenceLayout';
-import {getProfile} from '@/app/libs/auth/metadata';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function SettingsProfilePage(props: I18nPageProps) {
-  const lng = props.params.lng;
+  const {profile} = await catchMeIfYouCan();
+  const {lng} = props.params;
   const {t} = await useTranslation(lng, 'settings-profile');
-  const cookieStore = cookies();
-  const supabase = createServerComponentClient({cookies: () => cookieStore});
-  const userResponse = await supabase.auth.getUser();
-  const hasSession = userResponse.error === null;
-  if (!hasSession) {
-    redirect(`/${lng}`);
-  }
 
-  const profile = getProfile(userResponse.data.user);
   return (
     <section className="pt-4 sm:pt-0 pr-4">
       <header>

@@ -4,7 +4,7 @@ import Logo from '@/app/components/Logo';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function LngPage(props: I18nPageProps) {
-  const lng = props.params.lng;
+  const {lng} = props.params;
   const {t} = await useTranslation(lng, 'root');
 
   return (

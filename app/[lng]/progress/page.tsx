@@ -6,7 +6,7 @@ import useTranslation from '@/app/libs/i18n/server';
 import {appPaths} from '@/app/paths';
 
 export default async function ProgressPage(props: I18nPageProps) {
-  const lng = props.params.lng;
+  const {lng} = props.params;
   const {t} = await useTranslation(lng, 'progress');
 
   return (

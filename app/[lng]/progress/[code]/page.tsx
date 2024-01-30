@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import {type I18nPageProps} from '@/app/[lng]/params';
+import {type ProgressPageProps} from '@/app/[lng]/progress/[code]/params';
 import CenterLayout from '@/app/components/layout/CenterLayout';
 import SvgSpinners3DotsFade from '@/app/icons/spinners/SvgSpinners3DotsFade';
 import useTranslation from '@/app/libs/i18n/server';
 import {appPaths} from '@/app/paths';
 
-export default async function ProgressPage(props: I18nPageProps) {
-  const lng = props.params.lng;
+export default async function ProgressPage(props: ProgressPageProps) {
+  const {lng, code} = props.params;
   const {t} = await useTranslation(lng, 'progress');
   const progress = 50;
 
@@ -42,7 +42,7 @@ export default async function ProgressPage(props: I18nPageProps) {
 
           <div className="card-actions gap-4">
             <button className="btn btn-md btn-primary w-full sm:w-36">
-              <Link href={`/${lng}${appPaths.progress}/temp`} hrefLang={lng}>
+              <Link href={`/${lng}${appPaths.progress}/${code}`} hrefLang={lng}>
                 {t('complete')}
               </Link>
             </button>

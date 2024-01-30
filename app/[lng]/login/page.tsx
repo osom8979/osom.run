@@ -13,16 +13,16 @@ import useTranslation from '@/app/libs/i18n/server';
 import {appPaths} from '@/app/paths';
 
 export default async function LoginPage(props: I18nPageProps) {
-  const lng = props.params.lng;
+  const {lng} = props.params;
+  const {t} = await useTranslation(lng, 'login');
+
   const cookieStore = cookies();
   const supabase = createServerComponentClient({cookies: () => cookieStore});
-  const user = await supabase.auth.getUser();
-  const hasSession = user.error === null;
-  if (hasSession) {
+  const session = await supabase.auth.getSession();
+  if (session.error === null) {
     redirect(`/${lng}`);
   }
 
-  const {t} = await useTranslation(lng, 'login');
   return (
     <CenterLayout lng={lng}>
       <section className="osom-card">

@@ -6,8 +6,9 @@ import useTranslation from '@/app/libs/i18n/server';
 import {appPaths} from '@/app/paths';
 
 export default async function SignupWaitPage(props: I18nPageProps) {
-  const lng = props.params.lng;
+  const {lng} = props.params;
   const {t} = await useTranslation(lng, 'signup-wait');
+
   return (
     <CenterLayout lng={lng}>
       <section className="osom-card">

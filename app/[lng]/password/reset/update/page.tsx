@@ -4,8 +4,9 @@ import CenterLayout from '@/app/components/layout/CenterLayout';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function PasswordResetUpdatePage(props: I18nPageProps) {
-  const lng = props.params.lng;
+  const {lng} = props.params;
   const {t} = await useTranslation(lng, 'password-reset-update');
+
   return (
     <CenterLayout lng={lng}>
       <section className="osom-card">

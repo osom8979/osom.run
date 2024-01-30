@@ -6,8 +6,9 @@ import MdiBarcodeOff from '@/app/icons/mdi/MdiBarcodeOff';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function LoginPkceErrorPage(props: I18nPageProps) {
-  const lng = props.params.lng;
+  const {lng} = props.params;
   const {t} = await useTranslation(lng, 'login-pkce-error');
+
   return (
     <CenterLayout lng={lng}>
       <section className="osom-card">
