@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
-        osomHeader: '3rem',
-        osomMain: 'calc(100vh - theme(spacing.osomHeader))',
+        'osom-header': '3rem',
+        'osom-main': 'calc(100vh - theme(spacing.osom-header))',
       },
     },
   },
@@ -22,6 +22,6 @@ module.exports = {
     utils: true,
     rtl: false,
     prefix: '',
-    logs: true,
+    logs: false,
   },
 };
