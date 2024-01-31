@@ -39,7 +39,11 @@ export default async function ProgressPage(props: ProgressPageProps) {
           </div>
 
           <div className="card-actions gap-4">
-            <CopyUrlButton className="btn btn-sm btn-secondary rounded-3xl w-full sm:w-36">
+            <CopyUrlButton
+              className="btn btn-sm btn-secondary rounded-3xl w-full sm:w-36"
+              successLabel={t('copy_success')}
+              errorLabel={t('copy_error')}
+            >
               <p>{t('copy')}</p>
             </CopyUrlButton>
 

@@ -4,6 +4,7 @@ import {SpeedInsights} from '@vercel/speed-insights/next';
 import {dir} from 'i18next';
 import {cookies} from 'next/headers';
 import Link from 'next/link';
+import {Toaster} from 'react-hot-toast';
 import AnonymousMenu from './_AnonymousMenu';
 import UserMenu from './_UserMenu';
 import type {I18nLayoutProps} from '@/app/[lng]/params';
@@ -63,6 +64,7 @@ export default async function LngLayout(props: I18nLayoutProps) {
 
         <Analytics />
         <SpeedInsights />
+        <Toaster position="bottom-center" reverseOrder={false} />
       </body>
     </html>
   );

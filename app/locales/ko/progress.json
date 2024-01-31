@@ -9,6 +9,8 @@
   "learn_more": "더 알아보기",
   "progressing": "진행중",
   "copy": "URL 복사",
+  "copy_success": "클립보드에 복사하였습니다.",
+  "copy_error": "복사에 실패했습니다.",
   "complete": "완료",
   "abort": "취소",
   "more_info": "더 많은 정보가 필요한가요?",

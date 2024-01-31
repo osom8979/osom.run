@@ -9,6 +9,8 @@
   "learn_more": "Learn More",
   "progressing": "Progressing",
   "copy": "Copy URL",
+  "copy_success": "Copied to clipboard.",
+  "copy_error": "Copy failed.",
   "complete": "Complete",
   "abort": "Abort",
   "more_info": "More information?",
