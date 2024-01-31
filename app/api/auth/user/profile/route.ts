@@ -5,8 +5,8 @@ import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
 import type {EmptyResponse} from '@/app/api/interface';
-import type {Profile} from '@/app/libs/auth/metadata';
-import {ProfileSchema} from '@/app/libs/schema/settings';
+import type {Profile} from '@/app/libs/supabase/metadata';
+import {ProfileSchema} from '@/app/libs/zod/settings';
 
 export const dynamic = 'force-dynamic';
 

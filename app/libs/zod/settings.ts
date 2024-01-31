@@ -1,6 +1,6 @@
 import {z} from 'zod';
-import {SupportZones} from '@/app/libs/chrono/zone';
 import {LANGUAGES} from '@/app/libs/i18n/settings';
+import {SupportZones} from '@/app/libs/tz/zone';
 
 export const MAXIMUM_NICKNAME_LENGTH = 68;
 

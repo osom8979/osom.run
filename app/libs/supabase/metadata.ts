@@ -1,9 +1,9 @@
 import 'server-only';
 
 import type {User} from '@supabase/gotrue-js';
-import {SupportZones} from '@/app/libs/chrono/zone';
 import {LANGUAGES} from '@/app/libs/i18n/settings';
-import {ThemeValues} from '@/app/libs/schema/settings';
+import {SupportZones} from '@/app/libs/tz/zone';
+import {ThemeValues} from '@/app/libs/zod/settings';
 
 export interface Profile {
   nickname: string;

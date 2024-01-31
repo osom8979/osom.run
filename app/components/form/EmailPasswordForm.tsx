@@ -22,7 +22,7 @@ import {
   MINIMUM_PASSWORD_LENGTH,
   EmailSchema,
   PasswordSchema,
-} from '@/app/libs/schema/auth';
+} from '@/app/libs/zod/auth';
 
 // eslint-disable-next-line no-unused-vars
 type OnAsyncSubmit = (email: string, password: string) => Promise<void>;

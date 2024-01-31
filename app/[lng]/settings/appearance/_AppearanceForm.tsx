@@ -5,9 +5,9 @@ import apiClient from '@/app/api/client';
 import PreferenceForm, {
   type PreferenceField,
 } from '@/app/components/form/PreferenceForm';
-import type {Appearance} from '@/app/libs/auth/metadata';
 import useTranslation from '@/app/libs/i18n/client';
-import {ThemeValues} from '@/app/libs/schema/settings';
+import type {Appearance} from '@/app/libs/supabase/metadata';
+import {ThemeValues} from '@/app/libs/zod/settings';
 
 interface AppearanceFormProps {
   lng: string;

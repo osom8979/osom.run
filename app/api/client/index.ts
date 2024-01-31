@@ -3,8 +3,8 @@
 import {StatusCodes} from 'http-status-codes';
 import type {EmptyResponse, LoginOAuthResponse} from '@/app/api/interface';
 import {HttpStatusError, NoUrlError} from '@/app/exceptions';
-import type {Appearance, Profile} from '@/app/libs/auth/metadata';
 import {FALLBACK_LANGUAGE} from '@/app/libs/i18n/settings';
+import type {Appearance, Profile} from '@/app/libs/supabase/metadata';
 import {apiPaths} from '@/app/paths';
 
 export const DEFAULT_API_TIMEOUT_MILLISECONDS = 8_000;

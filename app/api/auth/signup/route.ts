@@ -5,7 +5,7 @@ import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
 import type {EmptyResponse} from '@/app/api/interface';
-import {EmailPasswordSchema} from '@/app/libs/schema/auth';
+import {EmailPasswordSchema} from '@/app/libs/zod/auth';
 import {apiPaths} from '@/app/paths';
 
 export const dynamic = 'force-dynamic';

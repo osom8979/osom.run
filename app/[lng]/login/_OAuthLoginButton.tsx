@@ -4,7 +4,7 @@ import {useRouter} from 'next/navigation';
 import {type ReactNode} from 'react';
 import apiClient from '@/app/api/client';
 import RequestButton from '@/app/components/button/RequestButton';
-import {type Providers} from '@/app/libs/schema/auth';
+import {type Providers} from '@/app/libs/zod/auth';
 
 interface OAuthLoginButtonProps {
   children: ReactNode;

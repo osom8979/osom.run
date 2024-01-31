@@ -6,10 +6,10 @@ import apiClient from '@/app/api/client';
 import PreferenceForm, {
   type PreferenceField,
 } from '@/app/components/form/PreferenceForm';
-import type {Profile} from '@/app/libs/auth/metadata';
-import {SupportZones} from '@/app/libs/chrono/zone';
 import useTranslation from '@/app/libs/i18n/client';
 import {LANGUAGES} from '@/app/libs/i18n/settings';
+import type {Profile} from '@/app/libs/supabase/metadata';
+import {SupportZones} from '@/app/libs/tz/zone';
 
 interface ProfileFormProps {
   lng: string;

@@ -5,7 +5,7 @@ import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
 import type {LoginOAuthResponse} from '@/app/api/interface';
-import {ProviderSchema} from '@/app/libs/schema/auth';
+import {ProviderSchema} from '@/app/libs/zod/auth';
 import {apiPaths} from '@/app/paths';
 
 export const dynamic = 'force-dynamic';

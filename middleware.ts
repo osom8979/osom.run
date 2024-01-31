@@ -1,7 +1,7 @@
 import {createMiddlewareClient} from '@supabase/auth-helpers-nextjs';
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
-import {getProfile} from '@/app/libs/auth/metadata';
+import {getProfile} from '@/app/libs/supabase/metadata';
 import {
   findNextLanguage,
   invalidLngPath,

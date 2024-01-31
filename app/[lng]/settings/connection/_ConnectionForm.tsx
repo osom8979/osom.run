@@ -9,8 +9,8 @@ import CiLinkHorizontalOff from '@/app/icons/ci/CiLinkHorizontalOff';
 import MdiDiscord from '@/app/icons/mdi/MdiDiscord';
 import MdiGithub from '@/app/icons/mdi/MdiGithub';
 import MdiGoogle from '@/app/icons/mdi/MdiGoogle';
-import type {Profile} from '@/app/libs/auth/metadata';
 import useTranslation from '@/app/libs/i18n/client';
+import type {Profile} from '@/app/libs/supabase/metadata';
 
 interface ConnectionItem {
   key: string;
