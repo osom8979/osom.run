@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import {type ProgressPageProps} from '@/app/[lng]/progress/[code]/params';
+import CopyUrlButton from '@/app/components/button/CopyUrlButton';
 import CenterLayout from '@/app/components/layout/CenterLayout';
 import SvgNumber from '@/app/components/SvgNumber';
 import SvgSpinners3DotsFade from '@/app/icons/spinners/SvgSpinners3DotsFade';
@@ -38,11 +39,9 @@ export default async function ProgressPage(props: ProgressPageProps) {
           </div>
 
           <div className="card-actions gap-4">
-            <button className="btn btn-sm btn-secondary rounded-3xl w-full sm:w-36">
-              <Link href="#" hrefLang={lng}>
-                <p>{t('copy')}</p>
-              </Link>
-            </button>
+            <CopyUrlButton className="btn btn-sm btn-secondary rounded-3xl w-full sm:w-36">
+              <p>{t('copy')}</p>
+            </CopyUrlButton>
 
             <button className="btn btn-sm btn-error btn-outline w-full sm:w-36">
               <Link href="#" hrefLang={lng}>
