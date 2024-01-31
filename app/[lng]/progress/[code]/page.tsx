@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import {type ProgressPageProps} from '@/app/[lng]/progress/[code]/params';
 import CopyUrlButton from '@/app/components/button/CopyUrlButton';
+import ModalButton from '@/app/components/button/ModalButton';
 import CenterLayout from '@/app/components/layout/CenterLayout';
 import SvgNumber from '@/app/components/SvgNumber';
 import SvgSpinners3DotsFade from '@/app/icons/spinners/SvgSpinners3DotsFade';
@@ -47,11 +48,9 @@ export default async function ProgressPage(props: ProgressPageProps) {
               <p>{t('copy')}</p>
             </CopyUrlButton>
 
-            <button className="btn btn-sm btn-error btn-outline w-full sm:w-36">
-              <Link href="#" hrefLang={lng}>
-                <p>{t('abort')}</p>
-              </Link>
-            </button>
+            <ModalButton className="btn btn-sm btn-error btn-outline w-full sm:w-36">
+              <p>{t('abort')}</p>
+            </ModalButton>
           </div>
 
           <p>
