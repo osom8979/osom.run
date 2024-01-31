@@ -1,0 +1,42 @@
+.root {
+  @apply max-w-sm w-full;
+  @apply pointer-events-auto;
+  @apply hover:cursor-pointer;
+  @apply py-3;
+  @apply px-4;
+  @apply text-sm text-base-content;
+
+  @keyframes enter {
+    0% {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes leave {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+  }
+
+  &[data-visible=true] {
+    animation: enter 200ms ease-out;
+  }
+
+  &[data-visible=false] {
+    animation: leave 150ms ease-in forwards;
+  }
+
+  svg {
+    @apply w-6 h-6;
+  }
+}

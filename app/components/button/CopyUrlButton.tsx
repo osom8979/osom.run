@@ -1,7 +1,7 @@
 'use client';
 
 import type {HTMLAttributes, PropsWithChildren} from 'react';
-import toast from 'react-hot-toast';
+import {toastError, toastSuccess} from '@/app/components/toast';
 
 interface CopyUrlButtonProps
   extends PropsWithChildren<HTMLAttributes<HTMLButtonElement>> {
@@ -14,12 +14,14 @@ export default function CopyUrlButton(props: CopyUrlButtonProps) {
   const handlerClick = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
+
       if (successLabel) {
-        toast.success(successLabel);
+        toastSuccess(successLabel);
       }
     } catch (e) {
+      console.error(e);
       if (errorLabel) {
-        toast.error(errorLabel);
+        toastError(errorLabel);
       }
     }
   };
