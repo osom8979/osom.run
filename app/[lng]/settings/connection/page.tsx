@@ -5,7 +5,8 @@ import PreferenceLayout from '@/app/components/layout/PreferenceLayout';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function SettingsConnectionPage(props: I18nPageProps) {
-  const {user, profile} = await catchMeIfYouCan();
+  const {supabase, profile} = await catchMeIfYouCan();
+  const identities = await supabase.auth.getUserIdentities();
   const {lng} = props.params;
   const {t} = await useTranslation(lng, 'settings-connection');
 
@@ -23,7 +24,11 @@ export default async function SettingsConnectionPage(props: I18nPageProps) {
           <p>{t('oauth.subtitle')}</p>
         </div>
 
-        <ConnectionForm lng={lng} profile={profile} identities={user?.identities} />
+        <ConnectionForm
+          lng={lng}
+          profile={profile}
+          identities={identities.data?.identities}
+        />
       </PreferenceLayout>
     </section>
   );

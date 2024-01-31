@@ -2,7 +2,7 @@
 
 import type {UserIdentity} from '@supabase/gotrue-js';
 import {DateTime} from 'luxon';
-import {type ReactNode, useCallback, useMemo} from 'react';
+import {type ReactNode, useMemo} from 'react';
 import RequestButton from '@/app/components/button/RequestButton';
 import CiLinkHorizontal from '@/app/icons/ci/CiLinkHorizontal';
 import CiLinkHorizontalOff from '@/app/icons/ci/CiLinkHorizontalOff';
@@ -29,27 +29,22 @@ interface ConnectionFormProps {
 export default function ConnectionForm(props: ConnectionFormProps) {
   const {t} = useTranslation(props.lng, 'settings-connection');
 
-  const getCreatedAt = useCallback(
-    (provider: string) => {
-      const identities = props.identities ?? [];
-      const index = identities.findIndex(x => x.provider === provider);
-      if (index === -1) {
-        return undefined;
-      }
-
-      const createdAt = identities[index].created_at;
+  const createdAt = useMemo(() => {
+    const result = {} as Record<string, string>;
+    const identities = props.identities ?? [];
+    identities.forEach(identity => {
+      const provider = identity.provider;
+      const createdAt = identity.created_at;
       if (!createdAt) {
-        return undefined;
+        return;
       }
-
-      const isoCreatedAt = DateTime.fromISO(createdAt)
+      result[provider] = DateTime.fromISO(createdAt)
         .setLocale(props.profile.lng)
         .setZone(props.profile.timezone)
         .toLocaleString(DateTime.DATE_FULL);
-      return isoCreatedAt || undefined;
-    },
-    [props.identities, props.profile]
-  );
+    });
+    return result;
+  }, [props.profile, props.identities]);
 
   const fields = useMemo(() => {
     return [
@@ -57,22 +52,22 @@ export default function ConnectionForm(props: ConnectionFormProps) {
         key: 'google',
         icon: <MdiGoogle className="w-7 h-7" />,
         label: t('oauth.google'),
-        datetime: getCreatedAt('google'),
+        datetime: createdAt['google'],
       },
       {
         key: 'github',
         icon: <MdiGithub className="w-7 h-7" />,
         label: t('oauth.github'),
-        datetime: getCreatedAt('github'),
+        datetime: createdAt['github'],
       },
       {
         key: 'discord',
         icon: <MdiDiscord className="w-7 h-7" />,
         label: t('oauth.discord'),
-        datetime: getCreatedAt('discord'),
+        datetime: createdAt['discord'],
       },
     ] as Array<ConnectionItem>;
-  }, [t, getCreatedAt]);
+  }, [t, createdAt]);
 
   const handleUnlink = async (item: ConnectionItem) => {
     console.assert(item);

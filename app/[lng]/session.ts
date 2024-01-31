@@ -23,10 +23,14 @@ function getRedirectUrl(options: Omit<CatchSessionIfYouCanOptions, 'redirectType
   }
 }
 
+export function createSupabaseClient() {
+  const cookieStore = cookies();
+  return createServerComponentClient<Database>({cookies: () => cookieStore});
+}
+
 export async function catchMeIfYouCan(options?: CatchSessionIfYouCanOptions) {
   const {lng, redirectUrl, redirectType} = options ?? {};
-  const cookieStore = cookies();
-  const supabase = createServerComponentClient<Database>({cookies: () => cookieStore});
+  const supabase = createSupabaseClient();
   const response = await supabase.auth.getUser();
   if (response.error !== null) {
     redirect(getRedirectUrl({lng, redirectUrl}), redirectType);

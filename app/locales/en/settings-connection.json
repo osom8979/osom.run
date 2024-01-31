@@ -13,7 +13,7 @@
   "reset": "Reset",
   "save": "Save",
   "save_successful": "Save successful.",
-  "created_prefix": "Created at {{datetime}}",
+  "created": "Created at {{datetime}}",
   "errors": {
     "unsupported_manual_link": "Manual connections are not supported."
   }
