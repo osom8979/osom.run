@@ -13,6 +13,9 @@
   "copy_error": "Copy failed.",
   "complete": "Complete",
   "abort": "Abort",
+  "abort_title": "Confirm abort",
+  "abort_detail": "Do we really want to abort work in progress?",
+  "abort_ok": "Yes, abort!",
   "more_info": "More information?",
   "document_link": "Check documentation!"
 }

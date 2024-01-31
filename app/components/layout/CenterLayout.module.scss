@@ -10,7 +10,7 @@
     @apply space-y-8;
 
     .content {
-      @apply sm:w-[512px];
+      @apply sm:w-[480px] md:w-[640px];
     }
   }
 }

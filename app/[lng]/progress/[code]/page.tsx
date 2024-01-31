@@ -39,7 +39,7 @@ export default async function ProgressPage(props: ProgressPageProps) {
             ></progress>
           </div>
 
-          <div className="card-actions gap-4">
+          <div className="card-actions justify-center w-full gap-4">
             <CopyUrlButton
               className="btn btn-sm btn-secondary rounded-3xl w-full sm:w-36"
               successLabel={t('copy_success')}
@@ -48,12 +48,17 @@ export default async function ProgressPage(props: ProgressPageProps) {
               <p>{t('copy')}</p>
             </CopyUrlButton>
 
-            <ModalButton className="btn btn-sm btn-error btn-outline w-full sm:w-36">
+            <ModalButton
+              className="btn btn-sm btn-error btn-outline w-full sm:w-36"
+              title={t('abort_title')}
+              detail={t('abort_detail')}
+              ok={t('abort_ok')}
+            >
               <p>{t('abort')}</p>
             </ModalButton>
           </div>
 
-          <p>
+          <p className="text-center">
             <small>
               {t('more_info')}
               <Link href="#" hrefLang={lng} className="link link-primary ml-1">

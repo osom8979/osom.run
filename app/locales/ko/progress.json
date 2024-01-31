@@ -12,7 +12,10 @@
   "copy_success": "클립보드에 복사하였습니다.",
   "copy_error": "복사에 실패했습니다.",
   "complete": "완료",
-  "abort": "취소",
+  "abort": "중단",
+  "abort_title": "중단 확인",
+  "abort_detail": "정말로 진행중인 작업을 중단할까요?",
+  "abort_ok": "네, 작업을 중단합니다",
   "more_info": "더 많은 정보가 필요한가요?",
   "document_link": "문서를 확인하세요!"
 }

@@ -13,7 +13,7 @@ export default function NotFoundCard(props: NotFoundCardProps) {
   const {t} = useTranslation(props.lng, 'not-found');
   return (
     <section className="osom-card">
-      <div className="card-body items-center space-y-4">
+      <div className="card-body items-center text-center space-y-4">
         <figure>
           <TablerError404 className="w-28 h-28" />
         </figure>
