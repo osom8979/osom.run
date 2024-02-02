@@ -3649,16 +3649,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"osom-ui@npm:^0.0.19":
-  version: 0.0.19
-  resolution: "osom-ui@npm:0.0.19"
+"osom-ui@npm:^0.0.21":
+  version: 0.0.21
+  resolution: "osom-ui@npm:0.0.21"
   dependencies:
     "@fontsource-variable/hahmlet": "npm:^5.0.7"
     "@fontsource-variable/noto-sans-kr": "npm:^5.0.4"
     "@fontsource/nanum-gothic-coding": "npm:^5.0.7"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
-  checksum: 4c947cf7990f1a540f5ee6c3212db645b6c46b6eeecc2befc456902a304ff2daf7d82c80841050598c5121b9e9f03828e7467947897f3420073edcb7444a36ea
+  checksum: 308ac61fc195d1c661e3af91a88ea4a69e314856c12afd8db0c29e4a7583fd527c65f410436e74acad617daea1c98454d10ed0c1f70924452ceb425788ec79df
   languageName: node
   linkType: hard
 
@@ -3699,7 +3699,7 @@ __metadata:
     lodash: "npm:^4.17.21"
     luxon: "npm:^3.4.4"
     next: "npm:^14.0.3"
-    osom-ui: "npm:^0.0.19"
+    osom-ui: "npm:^0.0.21"
     postcss: "npm:^8.4.31"
     prettier: "npm:^3.1.0"
     react: "npm:^18.2.0"
