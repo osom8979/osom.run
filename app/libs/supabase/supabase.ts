@@ -37,6 +37,41 @@ export interface Database {
           },
         ];
       };
+      progress: {
+        Row: {
+          created_at: string;
+          expired_at: string | null;
+          id: string;
+          owner: string | null;
+          updated_at: string | null;
+          value: number;
+        };
+        Insert: {
+          created_at?: string;
+          expired_at?: string | null;
+          id?: string;
+          owner?: string | null;
+          updated_at?: string | null;
+          value?: number;
+        };
+        Update: {
+          created_at?: string;
+          expired_at?: string | null;
+          id?: string;
+          owner?: string | null;
+          updated_at?: string | null;
+          value?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'progress_owner_fkey';
+            columns: ['owner'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
     };
     Views: {
       [_ in never]: never;
