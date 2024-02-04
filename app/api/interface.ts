@@ -5,3 +5,7 @@ export interface EmptyResponse {
 export interface LoginOAuthResponse {
   url?: string;
 }
+
+export interface NewProgress {
+  id?: string;
+}

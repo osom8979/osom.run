@@ -10,6 +10,7 @@ export const appPaths = {
   passwordResetRequestWait: '/password/reset/request/wait',
   passwordResetUpdate: '/password/reset/update',
   progress: '/progress',
+  progressCode: (code: string) => appPaths.progress + `/${code}`,
   settings: '/settings',
   settingsAppearance: '/settings/appearance',
   settingsConnection: '/settings/connection',
@@ -28,4 +29,5 @@ export const apiPaths = {
   signup: '/api/auth/signup',
   userProfile: '/api/auth/user/profile',
   userAppearance: '/api/auth/user/appearance',
+  progress: '/api/progress',
 };

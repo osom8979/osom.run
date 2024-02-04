@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import styles from './page.module.scss';
 import {type I18nPageProps} from '@/app/[lng]/params';
+import NewProgressButton from '@/app/[lng]/progress/_NewProgressButton';
 import Logo from '@/app/components/Logo';
 import useTranslation from '@/app/libs/i18n/server';
-import {appPaths} from '@/app/paths';
 
 export default async function ProgressPage(props: I18nPageProps) {
   const {lng} = props.params;
@@ -26,13 +26,11 @@ export default async function ProgressPage(props: I18nPageProps) {
         <p className={styles.detailBox}>{t('detail')}</p>
 
         <div className={styles.actions}>
-          <Link
-            href={`/${lng}${appPaths.progress}/temp`}
-            hrefLang={lng}
+          <NewProgressButton
+            lng={lng}
+            label={t('new_progress')}
             className="btn btn-md btn-primary w-32 sm:w-48"
-          >
-            {t('get_started')}
-          </Link>
+          />
 
           <Link
             href="#"

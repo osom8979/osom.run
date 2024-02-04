@@ -1,7 +1,7 @@
 'use client';
 
 import {StatusCodes} from 'http-status-codes';
-import type {EmptyResponse, LoginOAuthResponse} from '@/app/api/interface';
+import type {EmptyResponse, LoginOAuthResponse, NewProgress} from '@/app/api/interface';
 import {HttpStatusError, NoUrlError} from '@/app/exceptions';
 import {FALLBACK_LANGUAGE} from '@/app/libs/i18n/settings';
 import type {Appearance, Profile} from '@/app/libs/supabase/metadata';
@@ -122,6 +122,10 @@ export class ApiClient {
     const body = new FormData();
     body.set('theme', appearance.theme);
     return await this.post<EmptyResponse>(apiPaths.userAppearance, {body});
+  }
+
+  async newProgress() {
+    return await this.post<NewProgress>(apiPaths.progress);
   }
 }
 
