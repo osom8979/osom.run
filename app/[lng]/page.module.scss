@@ -1,6 +1,6 @@
-$gradient-start: green-300;
-$gradient-via: blue-500;
-$gradient-end: purple-600;
+$gradient-start: base-content;
+$gradient-via: base-content/90;
+$gradient-end: base-content/80;
 
 .root {
   @apply container mx-auto;
@@ -16,11 +16,11 @@ $gradient-end: purple-600;
     @apply text-center;
     @apply max-w-3xl;
     @apply mx-auto;
+    @apply space-y-4;
 
     .logoBox {
       @apply flex justify-center items-center;
       @apply w-full;
-      @apply my-3;
       @apply space-x-2;
 
       a {
@@ -35,7 +35,7 @@ $gradient-end: purple-600;
     .titleBox {
       @apply font-extrabold text-3xl;
 
-      @apply bg-gradient-to-r;
+      @apply bg-gradient-to-b;
       @apply from-#{$gradient-start};
       @apply via-#{$gradient-via};
       @apply to-#{$gradient-end};
@@ -46,23 +46,43 @@ $gradient-end: purple-600;
       h2 {
         @apply text-3xl sm:text-5xl;
       }
-
-      h3 {
-        @apply text-xl sm:text-2xl;
-      }
     }
 
     .detailBox {
-      @apply mx-auto mt-4;
+      @apply mx-auto;
       @apply max-w-xl;
-      @apply text-base;
+      @apply font-normal sm:font-medium;
+      @apply text-base sm:text-lg;
+      @apply text-base-content/70;
+    }
+
+    .featureBox {
+      @apply flex justify-center;
+      @apply w-full;
+      @apply text-base-content/60;
+      @apply py-4 sm:py-8;
+
+      .featureIcon {
+        @apply flex flex-col justify-center items-center;
+        @apply tooltip;
+
+        svg {
+          @apply w-7 h-7;
+          @apply text-base-content/50;
+        }
+      }
     }
 
     .actions {
-      @apply flex flex-wrap justify-center;
+      @apply flex flex-wrap justify-center items-center;
+      @apply flex-col sm:flex-row;
       @apply gap-4;
-      @apply mt-8;
       @apply text-sm font-medium;
+
+      a {
+        @apply w-full sm:max-w-sm;
+        @apply min-w-max;
+      }
     }
   }
 }

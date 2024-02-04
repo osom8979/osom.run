@@ -1,4 +1,8 @@
 {
-  "abstractor": "Create your own workspace!",
-  "start": "Get Started"
+  "title": "Serverless Web Component Toolkit",
+  "abstractor": "Connect your local environment to the global web with just a URL request, without complicated setup!",
+  "features": {
+    "progress": "Progress"
+  },
+  "login_now": "Login now"
 }
