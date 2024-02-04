@@ -65,7 +65,7 @@ export default function SvgNumber(props: SvgNumberProps) {
     return text.split('');
   }, [value]);
 
-  const finalClassName = ['flex', 'flex-row', 'space-x-[-1.4rem]', className]
+  const finalClassName = ['flex', 'flex-row', 'space-x-[-1.6rem]', className]
     .filter(v => typeof v !== 'undefined')
     .join(' ');
 

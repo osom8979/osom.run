@@ -25,6 +25,8 @@ export default async function LngPage(props: I18nPageProps) {
 
         <p className={styles.detailBox}>{t('abstractor')}</p>
 
+        <div className={styles.dividerLine} />
+
         <div className={styles.featureBox}>
           <div className={styles.featureIcon} data-tip={t('features.progress')}>
             <Link
@@ -36,6 +38,8 @@ export default async function LngPage(props: I18nPageProps) {
             </Link>
           </div>
         </div>
+
+        <div className={styles.dividerLine} />
 
         <div className={styles.actions}>
           <Link

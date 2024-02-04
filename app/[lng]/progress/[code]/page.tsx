@@ -18,12 +18,12 @@ export default async function ProgressPage(props: ProgressPageProps) {
       <section className="osom-card rounded-3xl bg-base-200 bg-gradient-to-b shadow-md shadow-base-content/10">
         <div className="card-body items-center space-y-4">
           <div className="flex flex-col space-y-2">
-            <div className="flex justify-center items-end w-full space-x-[-0.6rem]">
+            <div className="flex justify-center items-end w-full space-x-[-0.8rem]">
               <SvgNumber value={50} />
               <TdesignPercent className="w-7 h-7 mb-2" />
             </div>
 
-            <p className="flex flex-row items-center text-center animate-pulse">
+            <p className="flex justify-center items-center text-center animate-pulse">
               <span>{t('progressing')}</span>
               <span className="ml-1 self-end">
                 <SvgSpinners3DotsFade />

@@ -2,6 +2,10 @@ $gradient-start: base-content;
 $gradient-via: base-content/90;
 $gradient-end: base-content/80;
 
+$divider-start: base-content/0;
+$divider-via: base-content/60;
+$divider-end: base-content/0;
+
 .root {
   @apply container mx-auto;
   @apply max-w-screen-xl;
@@ -16,10 +20,23 @@ $gradient-end: base-content/80;
     @apply text-center;
     @apply max-w-3xl;
     @apply mx-auto;
-    @apply space-y-4;
+    @apply w-full;
+
+    .dividerLine {
+      @apply hidden;
+
+      @apply my-0 p-0;
+      @apply w-full h-px;
+
+      @apply bg-gradient-to-r;
+      @apply from-#{$divider-start};
+      @apply via-#{$divider-via};
+      @apply to-#{$divider-end};
+    }
 
     .logoBox {
       @apply flex justify-center items-center;
+      @apply my-4 p-0;
       @apply w-full;
       @apply space-x-2;
 
@@ -34,6 +51,7 @@ $gradient-end: base-content/80;
 
     .titleBox {
       @apply font-extrabold text-3xl;
+      @apply my-4 p-0;
 
       @apply bg-gradient-to-b;
       @apply from-#{$gradient-start};
@@ -49,6 +67,7 @@ $gradient-end: base-content/80;
     }
 
     .detailBox {
+      @apply mb-8 p-0;
       @apply mx-auto;
       @apply max-w-xl;
       @apply font-normal sm:font-medium;
@@ -58,9 +77,9 @@ $gradient-end: base-content/80;
 
     .featureBox {
       @apply flex justify-center;
+      @apply my-4 p-0;
       @apply w-full;
       @apply text-base-content/60;
-      @apply py-4 sm:py-8;
 
       .featureIcon {
         @apply flex flex-col justify-center items-center;
@@ -76,11 +95,12 @@ $gradient-end: base-content/80;
     .actions {
       @apply flex flex-wrap justify-center items-center;
       @apply flex-col sm:flex-row;
+      @apply mt-8 p-0;
       @apply gap-4;
       @apply text-sm font-medium;
 
       a {
-        @apply w-full sm:max-w-sm;
+        @apply w-40 sm:w-52 md:w-64 lg:w-80;
         @apply min-w-max;
       }
     }
