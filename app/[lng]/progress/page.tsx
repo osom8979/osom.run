@@ -26,17 +26,21 @@ export default async function ProgressPage(props: I18nPageProps) {
         <p className={styles.detailBox}>{t('detail')}</p>
 
         <div className={styles.actions}>
-          <button className="btn btn-md btn-primary w-36">
-            <Link href={`/${lng}${appPaths.progress}/temp`} hrefLang={lng}>
-              {t('get_started')}
-            </Link>
-          </button>
+          <Link
+            href={`/${lng}${appPaths.progress}/temp`}
+            hrefLang={lng}
+            className="btn btn-md btn-primary w-32 sm:w-48"
+          >
+            {t('get_started')}
+          </Link>
 
-          <button className="btn btn-md btn-primary btn-outline w-36">
-            <Link href="#" hrefLang={lng}>
-              <p>{t('learn_more')}</p>
-            </Link>
-          </button>
+          <Link
+            href="#"
+            hrefLang={lng}
+            className="btn btn-md btn-primary btn-outline w-32 sm:w-48"
+          >
+            <p>{t('learn_more')}</p>
+          </Link>
         </div>
       </div>
     </section>
