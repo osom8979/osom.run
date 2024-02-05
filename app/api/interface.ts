@@ -7,5 +7,5 @@ export interface LoginOAuthResponse {
 }
 
 export interface NewProgress {
-  id?: string;
+  uuid?: string;
 }
