@@ -7,9 +7,7 @@ export const DEFAULT_TIMEOUT_SECONDS = 8;
 export const mqPaths = {
   osomApiQueueCommon: '/osom/api/queue/common',
   osomApiResponse: '/osom/api/queue/response',
-  osomApiResponseMessage: (messageId: string) => {
-    return `${mqPaths.osomApiResponse}/${messageId}`;
-  },
+  osomApiResponseMessage: (id: string) => `${mqPaths.osomApiResponse}/${id}`,
 };
 
 export const WorkerApiValues = ['/progress/create'] as const;
@@ -17,7 +15,7 @@ export type WorkerApis = (typeof WorkerApiValues)[number];
 
 export interface WorkerRequest {
   api: WorkerApis;
-  messageId?: string;
+  id: string;
 }
 
 export type CreateProgressResponse =
@@ -33,11 +31,11 @@ export type CreateProgressResponse =
     };
 
 export async function createProgress(timeout = DEFAULT_TIMEOUT_SECONDS) {
-  const messageId = uuid();
+  const id = uuid();
   const redis = await createRedisClient();
-  const request = {api: '/progress/create', messageId} as WorkerRequest;
+  const request = {api: '/progress/create', id} as WorkerRequest;
   await redis.lPush(mqPaths.osomApiQueueCommon, JSON.stringify(request));
-  const result = await redis.brPop(mqPaths.osomApiResponseMessage(messageId), timeout);
+  const result = await redis.brPop(mqPaths.osomApiResponseMessage(id), timeout);
   if (result === null) {
     return {error: 'Timeout Error', data: null};
   }
