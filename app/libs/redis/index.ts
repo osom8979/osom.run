@@ -1,13 +1,10 @@
 import 'server-only';
+
 import {createClient} from 'redis';
 
-export async function testRedisCount() {
-  console.debug('Redis URL', process.env.REDIS_URL);
-  const client = createClient({
-    url: process.env.REDIS_URL,
-  });
-  client.on('error', err => console.log('Redis Client Error', err));
+export async function createRedisClient() {
+  const client = createClient({url: process.env['REDIS_URL']});
+  client.on('error', error => console.error('Redis Client Error', {error}));
   await client.connect();
-  const value = await client.get('count');
-  console.debug('Redis current count', value);
+  return client;
 }
