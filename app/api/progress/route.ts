@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const uuid = response.data.uuid;
-  console.info('Create progress OK', {uuid});
-  return NextResponse.json<NewProgress>({uuid: uuid});
+  const id = response.data.id;
+  console.info('Create progress OK', {id});
+  return NextResponse.json<NewProgress>({uuid: id});
 }

@@ -6,7 +6,7 @@ export const DEFAULT_TIMEOUT_SECONDS = 8;
 
 export const mqPaths = {
   osomApiQueueCommon: '/osom/api/queue/common',
-  osomApiResponse: '/osom/api/queue/response',
+  osomApiResponse: '/osom/api/response',
   osomApiResponseMessage: (id: string) => `${mqPaths.osomApiResponse}/${id}`,
 };
 
@@ -26,7 +26,7 @@ export type CreateProgressResponse =
   | {
       error: null;
       data: {
-        uuid: string;
+        id: string;
       };
     };
 
@@ -39,5 +39,5 @@ export async function createProgress(timeout = DEFAULT_TIMEOUT_SECONDS) {
   if (result === null) {
     return {error: 'Timeout Error', data: null};
   }
-  return JSON.parse(result.element) as CreateProgressResponse;
+  return {data: {id: JSON.parse(result.element).id}, error: null};
 }
