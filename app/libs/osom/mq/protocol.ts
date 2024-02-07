@@ -15,29 +15,20 @@ export type WorkerApis = (typeof WorkerApiValues)[number];
 
 export interface WorkerRequest {
   api: WorkerApis;
-  id: string;
+  msg: string;
+  data?: any;
 }
 
-export type CreateProgressResponse =
-  | {
-      error: string;
-      data: null;
-    }
-  | {
-      error: null;
-      data: {
-        id: string;
-      };
-    };
-
-export async function createProgress(timeout = DEFAULT_TIMEOUT_SECONDS) {
-  const id = uuid();
+export async function progressCreate(timeout = DEFAULT_TIMEOUT_SECONDS) {
+  const messageId = uuid();
   const redis = await createRedisClient();
-  const request = {api: '/progress/create', id} as WorkerRequest;
+  const request = {api: '/progress/create', msg: messageId} as WorkerRequest;
   await redis.lPush(mqPaths.osomApiQueueCommon, JSON.stringify(request));
-  const result = await redis.brPop(mqPaths.osomApiResponseMessage(id), timeout);
+  const result = await redis.brPop(mqPaths.osomApiResponseMessage(messageId), timeout);
+
   if (result === null) {
-    return {error: 'Timeout Error', data: null};
+    return {data: null, error: 'Result response failed'};
+  } else {
+    return {data: {id: JSON.parse(result.element).id}, error: null};
   }
-  return {data: {id: JSON.parse(result.element).id}, error: null};
 }
