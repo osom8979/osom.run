@@ -1,7 +1,12 @@
 'use client';
 
 import {StatusCodes} from 'http-status-codes';
-import type {EmptyResponse, LoginOAuthResponse, NewProgress} from '@/app/api/interface';
+import type {
+  EmptyResponse,
+  GetProgress,
+  LoginOAuthResponse,
+  NewProgress,
+} from '@/app/api/interface';
 import {HttpStatusError, NoUrlError} from '@/app/exceptions';
 import {FALLBACK_LANGUAGE} from '@/app/libs/i18n/settings';
 import type {Appearance, Profile} from '@/app/libs/supabase/metadata';
@@ -126,6 +131,10 @@ export class ApiClient {
 
   async newProgress() {
     return await this.post<NewProgress>(apiPaths.progress);
+  }
+
+  async getProgress(code: string) {
+    return await this.get<GetProgress>(apiPaths.progressCode(code));
   }
 }
 

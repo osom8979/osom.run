@@ -30,4 +30,5 @@ export const apiPaths = {
   userProfile: '/api/auth/user/profile',
   userAppearance: '/api/auth/user/appearance',
   progress: '/api/progress',
+  progressCode: (code: string) => apiPaths.progress + `/${code}`,
 };

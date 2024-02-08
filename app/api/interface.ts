@@ -9,3 +9,7 @@ export interface LoginOAuthResponse {
 export interface NewProgress {
   id?: string;
 }
+
+export interface GetProgress {
+  value?: number;
+}

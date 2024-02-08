@@ -1,8 +1,8 @@
 'use client';
 
-import {createClientComponentClient} from '@supabase/auth-helpers-nextjs';
 import Link from 'next/link';
 import {useEffect, useState} from 'react';
+import apiClient from '@/app/api/client';
 import CopyUrlButton from '@/app/components/button/CopyUrlButton';
 import ModalButton from '@/app/components/button/ModalButton';
 import SvgNumber from '@/app/components/SvgNumber';
@@ -19,21 +19,17 @@ export default function ProgressCard(props: ProgressCardProps) {
   const {t} = useTranslation(props.lng, 'progress');
   const [value, setValue] = useState(0);
   const [error, setError] = useState<string | undefined>();
-  const supabase = createClientComponentClient();
 
   useEffect(() => {
     (async () => {
-      const response = await supabase
-        .from('progress')
-        .select('value')
-        .eq('id', props.code);
-      if (response.error !== null) {
-        setError(`${response.error}`);
+      const response = await apiClient.getProgress(props.code);
+      if (response.value) {
+        setValue(response.value);
       } else {
-        setValue(response.data[0].value);
+        setError('Response error');
       }
     })();
-  }, [props.code, supabase]);
+  }, [props.code]);
 
   return (
     <section className="osom-card rounded-3xl bg-base-200 bg-gradient-to-b shadow-md shadow-base-content/10">
