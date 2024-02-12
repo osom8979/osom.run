@@ -3,9 +3,10 @@
 import {StatusCodes} from 'http-status-codes';
 import type {
   EmptyResponse,
-  GetProgress,
+  SelectProgress,
   LoginOAuthResponse,
-  NewProgress,
+  InsertProgress,
+  IncreaseProgress,
 } from '@/app/api/interface';
 import {HttpStatusError, NoUrlError} from '@/app/exceptions';
 import {FALLBACK_LANGUAGE} from '@/app/libs/i18n/settings';
@@ -66,12 +67,12 @@ export class ApiClient {
     return await this.request<T>(input, {method: 'POST', ...init});
   }
 
-  async put(input: RequestInput, init?: RequestOptionsWithoutMethod) {
-    await this.request(input, {method: 'PUT', ...init});
+  async put<T = any>(input: RequestInput, init?: RequestOptionsWithoutMethod) {
+    return await this.request<T>(input, {method: 'PUT', ...init});
   }
 
-  async delete(input: RequestInput, init?: RequestOptionsWithoutMethod) {
-    await this.request(input, {method: 'DELETE', ...init});
+  async delete<T = any>(input: RequestInput, init?: RequestOptionsWithoutMethod) {
+    return await this.request<T>(input, {method: 'DELETE', ...init});
   }
 
   async login(email: string, password: string) {
@@ -129,12 +130,16 @@ export class ApiClient {
     return await this.post<EmptyResponse>(apiPaths.userAppearance, {body});
   }
 
-  async newProgress() {
-    return await this.post<NewProgress>(apiPaths.progress);
+  async createAnonymousProgress() {
+    return await this.put<InsertProgress>(apiPaths.anonymousProgress);
   }
 
-  async getProgress(code: string) {
-    return await this.get<GetProgress>(apiPaths.progressCode(code));
+  async readAnonymousProgress(code: string) {
+    return await this.get<SelectProgress>(apiPaths.anonymousProgressCode(code));
+  }
+
+  async increaseAnonymousProgress(code: string) {
+    return await this.post<IncreaseProgress>(apiPaths.anonymousProgressCode(code));
   }
 }
 

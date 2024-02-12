@@ -22,8 +22,8 @@ export default function ProgressCard(props: ProgressCardProps) {
 
   useEffect(() => {
     (async () => {
-      const response = await apiClient.getProgress(props.code);
-      if (response.value) {
+      const response = await apiClient.readAnonymousProgress(props.code);
+      if (typeof response.value === 'number') {
         setValue(response.value);
       } else {
         setError('Response error');

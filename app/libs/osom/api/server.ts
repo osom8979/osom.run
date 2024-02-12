@@ -1,6 +1,12 @@
 import 'server-only';
 
 import {StatusCodes} from 'http-status-codes';
+import type {
+  HealthResponse,
+  IncreaseProgress,
+  InsertProgress,
+  SelectProgress,
+} from '@/app/api/interface';
 import {HttpStatusError} from '@/app/exceptions';
 
 export const DEFAULT_API_TIMEOUT_MILLISECONDS = 8_000;
@@ -9,24 +15,6 @@ export const DEFAULT_SUCCESS_STATES = [
   StatusCodes.CREATED,
   StatusCodes.NO_CONTENT,
 ];
-
-export const osomApiPaths = {
-  health: '/health',
-  progressCreate: '/progress/create',
-  progressIncrease: '/progress/increase',
-};
-
-export interface HealthResponse {
-  mq: boolean;
-}
-
-export interface ProgressCreateResponse {
-  id: string;
-}
-
-export interface ProgressIncreaseResponse {
-  value: number;
-}
 
 export interface ApiClientOptions {
   timeout?: number;
@@ -37,7 +25,7 @@ export interface ApiClientOptions {
 
 type FetchParameters = Parameters<typeof fetch>;
 type RequestOptions = FetchParameters[1];
-type RequestOptionsWithoutMethod = Omit<RequestOptions, 'method'>;
+type RequestOptionsWithoutMethod = Omit<RequestOptions, 'method' | 'body'>;
 
 export class OsomApiServerSideClient {
   defaultTimeout: number;
@@ -79,27 +67,29 @@ export class OsomApiServerSideClient {
     return await this.request<T>(pathname, {method: 'POST', ...init});
   }
 
-  async put(pathname: string, init?: RequestOptionsWithoutMethod) {
-    await this.request(pathname, {method: 'PUT', ...init});
+  async put<T = any>(pathname: string, init?: RequestOptionsWithoutMethod) {
+    return await this.request<T>(pathname, {method: 'PUT', ...init});
   }
 
-  async delete(pathname: string, init?: RequestOptionsWithoutMethod) {
-    await this.request(pathname, {method: 'DELETE', ...init});
+  async delete<T = any>(pathname: string, init?: RequestOptionsWithoutMethod) {
+    return await this.request<T>(pathname, {method: 'DELETE', ...init});
   }
 
   async health() {
-    return await this.post<HealthResponse>(osomApiPaths.health);
+    return await this.post<HealthResponse>('/health');
   }
 
-  async progressCreate() {
-    return await this.post<ProgressCreateResponse>(osomApiPaths.progressCreate);
+  async anonymousProgressCreate() {
+    return await this.put<InsertProgress>('/anonymous/progress');
   }
 
-  async progressIncrease(progressId: string, increaseValue?: number) {
-    const data = {progress_id: progressId, increase_value: increaseValue};
-    const body = JSON.stringify(data);
-    return await this.post<ProgressIncreaseResponse>(osomApiPaths.progressIncrease, {
-      body,
+  async anonymousProgressRead(code: string) {
+    return await this.get<SelectProgress>(`/anonymous/progress/${code}`);
+  }
+
+  async anonymousProgressIncrease(code: string, options?: IncreaseProgress) {
+    return await this.post<SelectProgress>(`/anonymous/progress/${code}/increase`, {
+      body: options ? JSON.stringify(options) : undefined,
     });
   }
 }

@@ -14,7 +14,7 @@ interface NewProgressButtonProps {
 export default function NewProgressButton(props: NewProgressButtonProps) {
   const router = useRouter();
   const handleClick = async () => {
-    const {id} = await apiClient.newProgress();
+    const {id} = await apiClient.createAnonymousProgress();
     if (id) {
       router.push(appPaths.progressCode(id));
     } else {

@@ -1,13 +1,13 @@
 import {createMiddlewareClient} from '@supabase/auth-helpers-nextjs';
 import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
-import {getProfile} from '@/app/libs/supabase/metadata';
 import {
   findNextLanguage,
   invalidLngPath,
   upgradeI18nCookies,
 } from '@/app/libs/i18n/middle';
 import {LANGUAGES} from '@/app/libs/i18n/settings';
+import {getProfile} from '@/app/libs/supabase/metadata';
 
 export const config = {
   matcher: [
@@ -25,7 +25,8 @@ export const config = {
 };
 
 const languageValues = [...LANGUAGES] as Array<string>;
-const progressRunnerMatcher = /^\/progress\/[0-9A-Za-z-_]*/;
+const progressMatcher = /^\/progress\/[0-9A-Za-z-_]*/;
+const progressRewritePrefix = '/api/anonymous';
 const matchers = config.matcher.map(pattern => new RegExp(pattern));
 
 function validMiddlewareRequest(req: NextRequest) {
@@ -70,8 +71,8 @@ export async function middleware(req: NextRequest) {
   const method = req.method.toUpperCase();
   if (method === 'POST') {
     const pathname = req.nextUrl.pathname.substring(3);
-    if (pathname.match(progressRunnerMatcher)) {
-      const rewriteUrl = new URL(`/api${pathname}`, req.url);
+    if (pathname.match(progressMatcher)) {
+      const rewriteUrl = new URL(`${progressRewritePrefix}${pathname}`, req.url);
       console.debug(`middleware(req='${req.url}') api rewrite '${rewriteUrl}'`);
       return NextResponse.rewrite(rewriteUrl);
     }
