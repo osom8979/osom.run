@@ -1,6 +1,6 @@
 import 'server-only';
 import {uuid} from '@/app/libs/crypto/uuid';
-import {createRedisClient} from '@/app/libs/redis';
+import {createRedisServerSideClient} from '@/app/libs/redis';
 
 export const DEFAULT_TIMEOUT_SECONDS = 8;
 
@@ -21,7 +21,7 @@ export interface WorkerRequest {
 
 export async function progressCreate(timeout = DEFAULT_TIMEOUT_SECONDS) {
   const messageId = uuid();
-  const redis = await createRedisClient();
+  const redis = await createRedisServerSideClient();
   const request = {api: '/progress/create', msg: messageId} as WorkerRequest;
   await redis.lPush(mqPaths.osomApiQueueCommon, JSON.stringify(request));
   const result = await redis.brPop(mqPaths.osomApiResponseMessage(messageId), timeout);
