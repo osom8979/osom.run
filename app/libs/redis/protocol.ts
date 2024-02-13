@@ -1,6 +1,7 @@
 import 'server-only';
+
 import {uuid} from '@/app/libs/crypto/uuid';
-import {createRedisServerSideClient} from '@/app/libs/redis';
+import {createRedisServerSideClient} from '@/app/libs/redis/server';
 
 export const DEFAULT_TIMEOUT_SECONDS = 8;
 

@@ -1,7 +1,7 @@
 import 'server-only';
 
 import {NextResponse} from 'next/server';
-import createOsomApiServerSideClient from '@/app/libs/osom/api/server';
+import createOsomApiServerSideClient from '@/app/libs/osom/server';
 
 export const dynamic = 'force-dynamic';
 
