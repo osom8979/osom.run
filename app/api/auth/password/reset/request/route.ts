@@ -1,39 +1,35 @@
 import 'server-only';
 
 import {createRouteHandlerClient} from '@supabase/auth-helpers-nextjs';
-import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
-import {NextResponse} from 'next/server';
-import type {EmptyResponse} from '@/app/api/interface';
+import {NextRequest} from 'next/server';
+import {badRequest, internalServerError, ok} from '@/app/api/response';
 import {EmailSchema} from '@/app/libs/zod/auth';
 import {appPaths} from '@/app/paths';
 
 export const dynamic = 'force-dynamic';
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   const formData = await request.formData();
   const validatedFields = EmailSchema.safeParse(formData.get('email'));
 
   if (!validatedFields.success) {
-    return NextResponse.json<EmptyResponse>({}, {status: StatusCodes.BAD_REQUEST});
+    return badRequest();
   }
 
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({cookies: () => cookieStore});
   const email = validatedFields.data;
-  const requestUrl = new URL(request.url);
+  const redirectTo = new URL(appPaths.passwordResetUpdate, request.url);
   const {error} = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${requestUrl.origin}${appPaths.passwordResetUpdate}`,
+    redirectTo: redirectTo.href,
   });
 
   if (error !== null) {
     console.error('Password reset request error', {email, error});
-    return NextResponse.json<EmptyResponse>(
-      {},
-      {status: StatusCodes.INTERNAL_SERVER_ERROR}
-    );
+    return internalServerError();
   }
 
   console.info('Password reset OK', {email});
-  return NextResponse.json<EmptyResponse>({});
+  return ok();
 }

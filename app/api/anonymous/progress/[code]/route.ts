@@ -1,20 +1,23 @@
 import 'server-only';
 
-import {NextResponse} from 'next/server';
+import {NextRequest} from 'next/server';
+import {ok} from '@/app/api/response';
 import createOsomApiServerSideClient from '@/app/libs/osom/server';
 
 export const dynamic = 'force-dynamic';
 
-export async function POST(request: Request, {params}: {params: {code: string}}) {
+export async function POST(request: NextRequest, {params}: {params: {code: string}}) {
   console.assert(request);
   const osomApi = createOsomApiServerSideClient();
   const result = await osomApi.anonymousProgressIncrease(params.code);
-  return NextResponse.json(result);
+  console.info('Increase progress OK', result);
+  return ok(result);
 }
 
-export async function GET(request: Request, {params}: {params: {code: string}}) {
+export async function GET(request: NextRequest, {params}: {params: {code: string}}) {
   console.assert(request);
   const osomApi = createOsomApiServerSideClient();
   const result = await osomApi.anonymousProgressRead(params.code);
-  return NextResponse.json(result);
+  console.info('Read progress OK', result);
+  return ok(result);
 }

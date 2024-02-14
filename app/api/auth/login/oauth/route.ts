@@ -1,20 +1,20 @@
 import 'server-only';
 
 import {createRouteHandlerClient} from '@supabase/auth-helpers-nextjs';
-import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
-import {NextResponse} from 'next/server';
+import {NextRequest} from 'next/server';
 import type {LoginOAuthResponse} from '@/app/api/interface';
 import {apiPaths} from '@/app/api/path';
+import {badRequest, ok, unauthorized} from '@/app/api/response';
 import {ProviderSchema} from '@/app/libs/zod/auth';
 
 export const dynamic = 'force-dynamic';
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   const formData = await request.formData();
   const validatedFields = ProviderSchema.safeParse(formData.get('provider'));
   if (!validatedFields.success) {
-    return NextResponse.json<LoginOAuthResponse>({}, {status: StatusCodes.BAD_REQUEST});
+    return badRequest<LoginOAuthResponse>({});
   }
 
   const redirectTo = new URL(apiPaths.authLoginPkce, request.url);
@@ -31,12 +31,9 @@ export async function POST(request: Request) {
   const {provider, url} = data;
   if (error !== null) {
     console.error('OAuth log in request error', {provider, url, error});
-    return NextResponse.json<LoginOAuthResponse>(
-      {},
-      {status: StatusCodes.UNAUTHORIZED}
-    );
+    return unauthorized<LoginOAuthResponse>({});
   }
 
   console.info('OAuth log in OK', {provider, url});
-  return NextResponse.json<LoginOAuthResponse>({url: url || undefined});
+  return ok<LoginOAuthResponse>({url: url || undefined});
 }

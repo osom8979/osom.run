@@ -2,8 +2,8 @@ import 'server-only';
 
 import {createRouteHandlerClient} from '@supabase/auth-helpers-nextjs';
 import {cookies} from 'next/headers';
-import type {NextRequest} from 'next/server';
-import {NextResponse} from 'next/server';
+import {NextRequest} from 'next/server';
+import {redirect} from '@/app/api/response';
 import {appPaths} from '@/app/paths';
 
 export const dynamic = 'force-dynamic';
@@ -38,13 +38,13 @@ export async function GET(request: NextRequest) {
     if (errorDescription) {
       nextUrl.searchParams.set('description', errorDescription);
     }
-    return NextResponse.redirect(nextUrl);
+    return redirect(nextUrl);
   }
 
   if (!code) {
-    const nextUrl = new URL(`${origin}${appPaths.loginPkceError}`);
+    const nextUrl = new URL(appPaths.loginPkceError, origin);
     nextUrl.searchParams.set('reason', 'nocode');
-    return NextResponse.redirect(nextUrl);
+    return redirect(nextUrl);
   }
 
   const supabase = createRouteHandlerClient({cookies});
@@ -52,13 +52,13 @@ export async function GET(request: NextRequest) {
   if (exchangeCodeResult.error) {
     console.error('Exchange code error', {code, error: exchangeCodeResult.error});
 
-    const nextUrl = new URL(`${origin}${appPaths.loginPkceError}`);
+    const nextUrl = new URL(appPaths.loginPkceError, origin);
     nextUrl.searchParams.set('reason', 'rejected');
-    return NextResponse.redirect(nextUrl);
+    return redirect(nextUrl);
   }
 
   // URL to redirect to after sign in process completes
   console.info('Exchange code OK', {code});
   console.assert(redirectPath.startsWith('/'));
-  return NextResponse.redirect(`${origin}${redirectPath}`);
+  return redirect(new URL(redirectPath, origin));
 }
