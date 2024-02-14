@@ -1,8 +1,7 @@
 import 'server-only';
 
 import {StatusCodes} from 'http-status-codes';
-import type {ProgressValue, ProgressId, ProgressRow} from '@/app/api/interface';
-import {HttpStatusError} from '@/app/exceptions';
+import {HttpStatusError, type OsomErrorOptions} from '@/app/exceptions';
 
 export const DEFAULT_API_TIMEOUT_MILLISECONDS = 8_000;
 export const DEFAULT_SUCCESS_STATES = [
@@ -39,17 +38,29 @@ class OsomApiServerSideClient {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), this.defaultTimeout);
     const signal = controller.signal;
-    const headers = {authorization: `Bearer ${this.key}`};
+    const headers = {
+      accept: 'application/json',
+      authorization: `Bearer ${this.key}`,
+      ...init?.headers,
+    };
     const body = data ? JSON.stringify(data) : undefined;
 
     try {
       const input = new URL(pathname, this.url);
       const response = await fetch(input, {signal, body, ...init, headers});
+      const json = await response.json();
+
       if (!this.successStates.includes(response.status)) {
-        throw new HttpStatusError(response.status);
+        const options = {
+          code: json.code,
+          details: json.details,
+          hint: json.hint,
+          message: json.message,
+        } as OsomErrorOptions;
+        throw new HttpStatusError(response.status, options);
       }
-      const result = await response.json();
-      return result as T;
+
+      return json as T;
     } finally {
       clearTimeout(timeoutId);
     }
@@ -72,18 +83,15 @@ class OsomApiServerSideClient {
   }
 
   async anonymousProgressCreate() {
-    return await this.put<ProgressId>('/anonymous/progress');
+    return await this.put('/anonymous/progress');
   }
 
   async anonymousProgressRead(code: string) {
-    return await this.get<ProgressRow>(`/anonymous/progress/${code}`);
+    return await this.get(`/anonymous/progress/${code}`);
   }
 
-  async anonymousProgressIncrease(code: string, options?: ProgressValue) {
-    return await this.post<ProgressRow>(
-      `/anonymous/progress/${code}/increase`,
-      options
-    );
+  async anonymousProgressIncrease(code: string, value?: number) {
+    return await this.post(`/anonymous/progress/${code}/increase`, {value});
   }
 }
 
