@@ -8,7 +8,7 @@ export interface OsomErrorOptions extends ErrorOptions {
 }
 
 export class OsomError extends Error {
-  error: OsomErrorOptions;
+  error: Omit<OsomErrorOptions, 'cause'>;
 
   constructor(message?: string, options?: OsomErrorOptions) {
     super(message, options);

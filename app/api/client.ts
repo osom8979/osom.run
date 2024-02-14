@@ -46,9 +46,13 @@ export class ApiClient {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), this.defaultTimeout);
     const signal = controller.signal;
+    const headers = {
+      ['content-type']: 'application/x-www-form-urlencoded',
+      ...init?.headers,
+    };
 
     try {
-      const response = await fetch(input, {signal, ...init});
+      const response = await fetch(input, {signal, ...init, headers});
       if (!this.successStates.includes(response.status)) {
         throw new HttpStatusError(response.status);
       }
@@ -138,7 +142,11 @@ export class ApiClient {
     return await this.get<ProgressRow>(apiPaths.anonymousProgressCode(code));
   }
 
-  async increaseAnonymousProgress(code: string) {
+  async updateAnonymousProgress(code: string, modifier?: string) {
+    const body = new FormData();
+    if (typeof modifier !== 'undefined') {
+      body.set('modifier', modifier);
+    }
     return await this.post<ProgressValue>(apiPaths.anonymousProgressCode(code));
   }
 }

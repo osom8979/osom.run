@@ -173,12 +173,12 @@ export default function EmailPasswordForm(props: EmailPasswordFormProps) {
       setPending(undefined);
 
       if (e instanceof HttpStatusError) {
-        if (e.code === StatusCodes.BAD_REQUEST) {
+        if (e.statusCode === StatusCodes.BAD_REQUEST) {
           setError(t(`errors.bad_request`));
-        } else if (e.code === StatusCodes.UNAUTHORIZED) {
+        } else if (e.statusCode === StatusCodes.UNAUTHORIZED) {
           setError(t(`errors.unauthorized`));
         } else {
-          setError(t(`http_status.${e.code}`, {defaultValue: e.message}));
+          setError(t(`http_status.${e.statusCode}`, {defaultValue: e.message}));
         }
       } else {
         setError(String(e));

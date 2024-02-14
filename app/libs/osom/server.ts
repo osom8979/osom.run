@@ -1,6 +1,8 @@
 import 'server-only';
 
 import {StatusCodes} from 'http-status-codes';
+import type {EmptyResponse} from '@/app/api/interface';
+import {internalServerError, json, ok} from '@/app/api/response';
 import {HttpStatusError, type OsomErrorOptions} from '@/app/exceptions';
 
 export const DEFAULT_API_TIMEOUT_MILLISECONDS = 8_000;
@@ -9,6 +11,33 @@ export const DEFAULT_SUCCESS_STATES = [
   StatusCodes.CREATED,
   StatusCodes.NO_CONTENT,
 ];
+
+export interface InsertProgressResponse {
+  id: string;
+}
+
+export interface SelectProgressResponse {
+  value: number;
+  expired_at: string;
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface UpdateProgressRequest {
+  value: number;
+}
+
+export interface IncreaseProgressRequest {
+  value?: number;
+}
+
+export const osomApiPath = {
+  anonymousProgress: '/anonymous/progress',
+  anonymousProgressCode: (code: string) => osomApiPath.anonymousProgress + `/${code}`,
+  anonymousProgressCodeIncrease: (code: string) => {
+    return osomApiPath.anonymousProgressCode(code) + `/increase`;
+  },
+};
 
 export interface ApiClientOptions {
   timeout?: number;
@@ -41,6 +70,7 @@ class OsomApiServerSideClient {
     const headers = {
       accept: 'application/json',
       authorization: `Bearer ${this.key}`,
+      ['content-type']: 'application/json',
       ...init?.headers,
     };
     const body = data ? JSON.stringify(data) : undefined;
@@ -83,18 +113,54 @@ class OsomApiServerSideClient {
   }
 
   async anonymousProgressCreate() {
-    return await this.put('/anonymous/progress');
+    return await this.put<InsertProgressResponse>(osomApiPath.anonymousProgress);
   }
 
   async anonymousProgressRead(code: string) {
-    return await this.get(`/anonymous/progress/${code}`);
+    return await this.get<SelectProgressResponse>(
+      osomApiPath.anonymousProgressCode(code)
+    );
   }
 
-  async anonymousProgressIncrease(code: string, value?: number) {
-    return await this.post(`/anonymous/progress/${code}/increase`, {value});
+  async anonymousProgressUpdate(code: string, body: UpdateProgressRequest) {
+    return await this.post<SelectProgressResponse>(
+      osomApiPath.anonymousProgressCode(code),
+      body
+    );
+  }
+
+  async anonymousProgressIncrease(code: string, body?: IncreaseProgressRequest) {
+    return await this.post<SelectProgressResponse>(
+      osomApiPath.anonymousProgressCodeIncrease(code),
+      body
+    );
   }
 }
 
-export default function createOsomApiServerSideClient(options?: ApiClientOptions) {
+export function createOsomApiServerSideClient(options?: ApiClientOptions) {
   return new OsomApiServerSideClient(options);
+}
+
+export async function requestOsomApi<T = EmptyResponse>(
+  // eslint-disable-next-line no-unused-vars
+  callback: (osomApi: OsomApiServerSideClient) => Promise<T>,
+  options?: ApiClientOptions & {prefix?: string}
+) {
+  const prefix = options?.prefix ?? '';
+  try {
+    const osomApi = createOsomApiServerSideClient(options);
+    const result = await callback(osomApi);
+    if (prefix) {
+      console.info(`${prefix} OK`, result);
+    }
+    return ok<T>(result);
+  } catch (e) {
+    if (e instanceof HttpStatusError) {
+      console.error(`${prefix} error`, {status: e.statusCode, error: e.error});
+      return json(e.error, e.statusCode);
+    } else {
+      console.error(`${prefix} unknown error`, {error: String(e)});
+      return internalServerError(String(e));
+    }
+  }
 }

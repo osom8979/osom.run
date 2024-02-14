@@ -113,7 +113,7 @@ export default function RequestButton(props: RequestButtonProps) {
 
       let errorMessage: string;
       if (e instanceof HttpStatusError) {
-        errorMessage = t(`http_status.${e.code}`, {defaultValue: e.message});
+        errorMessage = t(`http_status.${e.statusCode}`, {defaultValue: e.message});
       } else {
         errorMessage = String(e);
       }
