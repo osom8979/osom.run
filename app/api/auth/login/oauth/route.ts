@@ -5,8 +5,8 @@ import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
 import type {LoginOAuthResponse} from '@/app/api/interface';
+import {apiPaths} from '@/app/api/path';
 import {ProviderSchema} from '@/app/libs/zod/auth';
-import {apiPaths} from '@/app/paths';
 
 export const dynamic = 'force-dynamic';
 
@@ -17,13 +17,13 @@ export async function POST(request: Request) {
     return NextResponse.json<LoginOAuthResponse>({}, {status: StatusCodes.BAD_REQUEST});
   }
 
-  const {origin} = new URL(request.url);
+  const redirectTo = new URL(apiPaths.authLoginPkce, request.url);
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({cookies: () => cookieStore});
   const {data, error} = await supabase.auth.signInWithOAuth({
     provider: validatedFields.data,
     options: {
-      redirectTo: `${origin}${apiPaths.loginPkce}`,
+      redirectTo: redirectTo.href,
       skipBrowserRedirect: true,
     },
   });

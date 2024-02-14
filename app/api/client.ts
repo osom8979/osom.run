@@ -3,15 +3,15 @@
 import {StatusCodes} from 'http-status-codes';
 import type {
   EmptyResponse,
-  SelectProgress,
   LoginOAuthResponse,
-  InsertProgress,
-  IncreaseProgress,
+  ProgressId,
+  ProgressRow,
+  ProgressValue,
 } from '@/app/api/interface';
+import {apiPaths} from '@/app/api/path';
 import {HttpStatusError, NoUrlError} from '@/app/exceptions';
 import {FALLBACK_LANGUAGE} from '@/app/libs/i18n/settings';
 import type {Appearance, Profile} from '@/app/libs/supabase/metadata';
-import {apiPaths} from '@/app/paths';
 
 export const DEFAULT_API_TIMEOUT_MILLISECONDS = 8_000;
 export const DEFAULT_SUCCESS_STATES = [
@@ -79,13 +79,13 @@ export class ApiClient {
     const body = new FormData();
     body.set('email', email);
     body.set('password', password);
-    return await this.post<EmptyResponse>(apiPaths.login, {body});
+    return await this.post<EmptyResponse>(apiPaths.authLogin, {body});
   }
 
   async loginOAuth(provider: string) {
     const body = new FormData();
     body.set('provider', provider);
-    const {url} = await this.post<LoginOAuthResponse>(apiPaths.loginOAuth, {body});
+    const {url} = await this.post<LoginOAuthResponse>(apiPaths.authLoginOAuth, {body});
     if (!url) {
       throw new NoUrlError();
     }
@@ -93,27 +93,27 @@ export class ApiClient {
   }
 
   async logout() {
-    return await this.post<EmptyResponse>(apiPaths.logout);
+    return await this.post<EmptyResponse>(apiPaths.authLogout);
   }
 
   async signup(email: string, password: string) {
     const body = new FormData();
     body.set('email', email);
     body.set('password', password);
-    return await this.post<EmptyResponse>(apiPaths.signup, {body});
+    return await this.post<EmptyResponse>(apiPaths.authSignup, {body});
   }
 
   async passwordResetRequest(email: string) {
     const body = new FormData();
     body.set('email', email);
-    return await this.post<EmptyResponse>(apiPaths.passwordResetRequest, {body});
+    return await this.post<EmptyResponse>(apiPaths.authPasswordResetRequest, {body});
   }
 
   async passwordResetUpdate(code: string, password: string) {
     const body = new FormData();
     body.set('code', code);
     body.set('password', password);
-    return await this.post<EmptyResponse>(apiPaths.passwordResetUpdate, {body});
+    return await this.post<EmptyResponse>(apiPaths.authPasswordResetUpdate, {body});
   }
 
   async updateProfile(profile: Profile) {
@@ -121,25 +121,25 @@ export class ApiClient {
     body.set('nickname', profile.nickname);
     body.set('timezone', profile.timezone);
     body.set('lng', profile.lng);
-    return await this.post<EmptyResponse>(apiPaths.userProfile, {body});
+    return await this.post<EmptyResponse>(apiPaths.authUserProfile, {body});
   }
 
   async updateAppearance(appearance: Appearance) {
     const body = new FormData();
     body.set('theme', appearance.theme);
-    return await this.post<EmptyResponse>(apiPaths.userAppearance, {body});
+    return await this.post<EmptyResponse>(apiPaths.authUserAppearance, {body});
   }
 
   async createAnonymousProgress() {
-    return await this.put<InsertProgress>(apiPaths.anonymousProgress);
+    return await this.put<ProgressId>(apiPaths.anonymousProgress);
   }
 
   async readAnonymousProgress(code: string) {
-    return await this.get<SelectProgress>(apiPaths.anonymousProgressCode(code));
+    return await this.get<ProgressRow>(apiPaths.anonymousProgressCode(code));
   }
 
   async increaseAnonymousProgress(code: string) {
-    return await this.post<IncreaseProgress>(apiPaths.anonymousProgressCode(code));
+    return await this.post<ProgressValue>(apiPaths.anonymousProgressCode(code));
   }
 }
 

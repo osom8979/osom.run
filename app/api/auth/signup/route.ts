@@ -5,8 +5,8 @@ import {StatusCodes} from 'http-status-codes';
 import {cookies} from 'next/headers';
 import {NextResponse} from 'next/server';
 import type {EmptyResponse} from '@/app/api/interface';
+import {apiPaths} from '@/app/api/path';
 import {EmailPasswordSchema} from '@/app/libs/zod/auth';
-import {apiPaths} from '@/app/paths';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,11 +24,11 @@ export async function POST(request: Request) {
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({cookies: () => cookieStore});
   const {email, password} = validatedFields.data;
-  const requestUrl = new URL(request.url);
+  const redirectTo = new URL(apiPaths.authLoginPkce, request.url);
 
   // [INFORMATION] If signup is successful,
   // the exchange code for the session is added as a query-parameter.
-  const options = {emailRedirectTo: `${requestUrl.origin}${apiPaths.loginPkce}`};
+  const options = {emailRedirectTo: redirectTo.href};
   const {error} = await supabase.auth.signUp({email, password, options});
 
   if (error !== null) {

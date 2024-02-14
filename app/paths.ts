@@ -18,17 +18,3 @@ export const appPaths = {
   signup: '/signup',
   signupWait: '/signup/wait',
 };
-
-export const apiPaths = {
-  login: '/api/auth/login',
-  loginOAuth: '/api/auth/login/oauth',
-  loginPkce: '/api/auth/login/pkce',
-  logout: '/api/auth/logout',
-  passwordResetRequest: '/api/auth/password/reset/request',
-  passwordResetUpdate: '/api/auth/password/reset/update',
-  signup: '/api/auth/signup',
-  userProfile: '/api/auth/user/profile',
-  userAppearance: '/api/auth/user/appearance',
-  anonymousProgress: '/api/anonymous/progress',
-  anonymousProgressCode: (code: string) => apiPaths.anonymousProgress + `/${code}`,
-};
