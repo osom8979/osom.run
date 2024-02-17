@@ -7,6 +7,7 @@ import PreferenceForm, {
 } from '@/app/components/form/PreferenceForm';
 import useTranslation from '@/app/libs/i18n/client';
 import type {Appearance} from '@/app/libs/supabase/metadata';
+import changeTheme from '@/app/libs/theme';
 import {ThemeValues} from '@/app/libs/zod/settings';
 
 interface AppearanceFormProps {
@@ -38,6 +39,7 @@ export default function AppearanceForm(props: AppearanceFormProps) {
     const modified = value as Appearance;
     await apiClient.updateAppearance(modified);
     setAppearance(modified);
+    changeTheme(modified.theme);
   };
 
   return (
