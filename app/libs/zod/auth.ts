@@ -37,6 +37,6 @@ export const CodePasswordSchema = z.object({
   password: PasswordSchema,
 });
 
-export const ProviderValues = ['google', 'github', 'discord'] as const;
+export const ProviderValues = ['google', 'github', 'discord', 'kakao'] as const;
 export type Providers = (typeof ProviderValues)[number];
 export const ProviderSchema = z.enum(ProviderValues);

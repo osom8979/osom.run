@@ -47,7 +47,6 @@ export class ApiClient {
     const timeoutId = setTimeout(() => controller.abort(), this.defaultTimeout);
     const signal = controller.signal;
     const headers = {
-      ['content-type']: 'application/x-www-form-urlencoded',
       ...init?.headers,
     };
 

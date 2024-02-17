@@ -21,6 +21,7 @@
     "login_google": "Google 계정으로 로그인",
     "login_github": "Github 계정으로 로그인",
     "login_discord": "Discord 계정으로 로그인",
+    "login_kakao": "Kakao 계정으로 로그인",
     "unknown_provider": "제공자를 알 수 없습니다"
   }
 }

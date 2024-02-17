@@ -21,6 +21,7 @@
     "login_google": "Log in with Google",
     "login_github": "Log in with Github",
     "login_discord": "Log in with Discord",
+    "login_kakao": "Log in with Kakao",
     "unknown_provider": "Unknown provider"
   }
 }
