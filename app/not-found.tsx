@@ -1,5 +1,5 @@
 import React from 'react';
-import NotFoundCard from './_NotFoundCard';
+import NotFoundCard from '@/app/_NotFoundCard';
 import CenterLayout from '@/app/components/layout/CenterLayout';
 
 export default async function RootNotFound() {

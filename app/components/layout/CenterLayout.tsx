@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type {HTMLAttributes, PropsWithChildren} from 'react';
-import styles from './CenterLayout.module.scss';
+import styles from '@/app/components/layout/CenterLayout.module.scss';
 import Logo from '@/app/components/Logo';
 
 interface CenterDialogProps

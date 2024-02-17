@@ -2,7 +2,7 @@
 
 import type {HTMLAttributes, PropsWithChildren} from 'react';
 import {toast as toastOri, type Toast} from 'react-hot-toast';
-import styles from './ToastBox.module.scss';
+import styles from '@/app/components/toast/ToastBox.module.scss';
 
 interface ToastBoxProps
   extends Omit<

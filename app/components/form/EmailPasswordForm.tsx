@@ -5,7 +5,7 @@ import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React, {useMemo, useState} from 'react';
 import {z} from 'zod';
-import styles from './EmailPasswordForm.module.scss';
+import styles from '@/app/components/form/EmailPasswordForm.module.scss';
 import {HttpStatusError} from '@/app/exceptions';
 import MdiCheckboxBlankCircleOutline from '@/app/icons/mdi/MdiCheckboxBlankCircleOutline';
 import MdiCheckboxMarkedCircleOutline from '@/app/icons/mdi/MdiCheckboxMarkedCircleOutline';

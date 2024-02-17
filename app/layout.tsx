@@ -2,7 +2,7 @@ import {Metadata} from 'next';
 import {ReactNode} from 'react';
 
 // These styles apply to every route in the application
-import './globals.scss';
+import '@/app/globals.scss';
 
 export const metadata: Metadata = {
   title: 'osom.run',

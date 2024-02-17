@@ -1,4 +1,4 @@
-import PkceErrorReason from './_PkceErrorReason';
+import PkceErrorReason from '@/app/[lng]/login/pkce/error/_PkceErrorReason';
 import type {I18nPageProps} from '@/app/[lng]/params';
 import GoBackButton from '@/app/components/button/GoBackButton';
 import CenterLayout from '@/app/components/layout/CenterLayout';

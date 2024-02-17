@@ -1,6 +1,6 @@
-import AppearanceForm from './_AppearanceForm';
 import type {I18nPageProps} from '@/app/[lng]/params';
 import {catchMeIfYouCan} from '@/app/[lng]/session';
+import AppearanceForm from '@/app/[lng]/settings/appearance/_AppearanceForm';
 import PreferenceLayout from '@/app/components/layout/PreferenceLayout';
 import useTranslation from '@/app/libs/i18n/server';
 

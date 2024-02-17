@@ -1,7 +1,7 @@
 'use client';
 
 import {User} from '@supabase/supabase-js';
-import UserDropdown from './_UserDropdown';
+import UserDropdown from '@/app/[lng]/_UserDropdown';
 import IonNotifications from '@/app/icons/ion/IonNotifications';
 
 interface UserMenuProps {
@@ -16,7 +16,7 @@ export default function UserMenu(props: UserMenuProps) {
   return (
     <div className="flex items-center gap-2">
       <button className="btn btn-sm btn-circle btn-ghost">
-        <IonNotifications className="w-7 h-7" />
+        <IonNotifications className="w-6 h-6" />
       </button>
 
       <UserDropdown

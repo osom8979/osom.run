@@ -1,4 +1,4 @@
-import ProgressCard from './_ProgressCard';
+import ProgressCard from '@/app/[lng]/progress/[code]/_ProgressCard';
 import {type ProgressPageProps} from '@/app/[lng]/progress/[code]/params';
 import CenterLayout from '@/app/components/layout/CenterLayout';
 

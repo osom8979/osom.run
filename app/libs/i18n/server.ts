@@ -1,8 +1,12 @@
 import 'server-only';
 import {createInstance} from 'i18next';
 import {initReactI18next} from 'react-i18next/initReactI18next';
-import backendJsonModule from './backend';
-import {DEFAULT_NAMESPACE, defaultServerOptions, FALLBACK_LANGUAGE} from './settings';
+import backendJsonModule from '@/app/libs/i18n/backend';
+import {
+  DEFAULT_NAMESPACE,
+  defaultServerOptions,
+  FALLBACK_LANGUAGE,
+} from '@/app/libs/i18n/settings';
 
 async function initI18next(language?: string, namespace?: string | readonly string[]) {
   const i18n = createInstance();

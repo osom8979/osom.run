@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import styles from './page.module.scss';
 import {type I18nPageProps} from '@/app/[lng]/params';
 import NewProgressButton from '@/app/[lng]/progress/_NewProgressButton';
+import styles from '@/app/[lng]/progress/page.module.scss';
 import Logo from '@/app/components/Logo';
 import useTranslation from '@/app/libs/i18n/server';
 

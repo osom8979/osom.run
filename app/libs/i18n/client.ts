@@ -5,9 +5,9 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import Cookies from 'js-cookie';
 import {useEffect, useState} from 'react';
 import {initReactI18next, useTranslation as useTranslationOrg} from 'react-i18next';
-import backendJsonModule from './backend';
-import {defaultClientOptions, COOKIE_I18N_KEY} from './settings';
+import backendJsonModule from '@/app/libs/i18n/backend';
 import {TranslationOptions} from '@/app/libs/i18n/server';
+import {defaultClientOptions, COOKIE_I18N_KEY} from '@/app/libs/i18n/settings';
 
 i18next
   .use(initReactI18next)

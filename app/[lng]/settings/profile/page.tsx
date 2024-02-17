@@ -1,6 +1,6 @@
-import ProfileForm from './_ProfileForm';
 import type {I18nPageProps} from '@/app/[lng]/params';
 import {catchMeIfYouCan} from '@/app/[lng]/session';
+import ProfileForm from '@/app/[lng]/settings/profile/_ProfileForm';
 import PreferenceLayout from '@/app/components/layout/PreferenceLayout';
 import useTranslation from '@/app/libs/i18n/server';
 

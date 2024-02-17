@@ -1,5 +1,5 @@
-import UpdatePasswordForm from './_UpdatePasswordForm';
 import type {I18nPageProps} from '@/app/[lng]/params';
+import UpdatePasswordForm from '@/app/[lng]/password/reset/update/_UpdatePasswordForm';
 import CenterLayout from '@/app/components/layout/CenterLayout';
 import useTranslation from '@/app/libs/i18n/server';
 

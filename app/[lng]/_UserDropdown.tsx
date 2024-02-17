@@ -4,7 +4,7 @@ import {User} from '@supabase/supabase-js';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {type MouseEvent} from 'react';
-import LogoutButton from './_LogoutButton';
+import LogoutButton from '@/app/[lng]/_LogoutButton';
 import IonPersonCircle from '@/app/icons/ion/IonPersonCircle';
 import {appPaths} from '@/app/paths';
 
@@ -31,7 +31,7 @@ export default function UserDropdown(props: UserDropdownProps) {
   // https://bugs.webkit.org/show_bug.cgi?id=22261
   return (
     <div tabIndex={0} className="dropdown dropdown-end p-0 m-0">
-      <IonPersonCircle className="btn btn-sm btn-circle btn-ghost w-8 h-8" />
+      <IonPersonCircle className="btn btn-sm btn-circle btn-ghost w-7 h-7" />
 
       <ul className="dropdown-content menu bg-base-200 shadow rounded-box z-[1] w-52 mt-4 p-2">
         <span className="text-center">{user.email}</span>

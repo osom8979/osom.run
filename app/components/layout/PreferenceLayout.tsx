@@ -1,5 +1,5 @@
 import type {HTMLAttributes, PropsWithChildren} from 'react';
-import styles from './PreferenceLayout.module.scss';
+import styles from '@/app/components/layout/PreferenceLayout.module.scss';
 
 type PreferenceLayoutProps = PropsWithChildren<HTMLAttributes<HTMLDivElement>>;
 

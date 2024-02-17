@@ -1,6 +1,6 @@
-import ConnectionForm from './_ConnectionForm';
 import type {I18nPageProps} from '@/app/[lng]/params';
 import {catchMeIfYouCan} from '@/app/[lng]/session';
+import ConnectionForm from '@/app/[lng]/settings/connection/_ConnectionForm';
 import PreferenceLayout from '@/app/components/layout/PreferenceLayout';
 import useTranslation from '@/app/libs/i18n/server';
 

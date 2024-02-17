@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import SettingsMenu from './_SettingsMenu';
-import styles from './layout.module.scss';
 import {type I18nLayoutProps} from '@/app/[lng]/params';
 import {catchMeIfYouCan} from '@/app/[lng]/session';
+import SettingsMenu from '@/app/[lng]/settings/_SettingsMenu';
+import styles from '@/app/[lng]/settings/layout.module.scss';
 import MdiAccountCircle from '@/app/icons/mdi/MdiAccountCircle';
 import useTranslation from '@/app/libs/i18n/server';
 

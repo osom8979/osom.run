@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import ResetPasswordForm from './_ResetPasswordForm';
 import {type I18nPageProps} from '@/app/[lng]/params';
+import ResetPasswordForm from '@/app/[lng]/password/reset/request/_ResetPasswordForm';
 import CenterLayout from '@/app/components/layout/CenterLayout';
 import MaterialSymbolsLockResetRounded from '@/app/icons/ms/MaterialSymbolsLockResetRounded';
 import useTranslation from '@/app/libs/i18n/server';

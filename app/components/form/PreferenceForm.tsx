@@ -2,8 +2,8 @@
 
 import {cloneDeep, isEqual} from 'lodash';
 import {useMemo, useState} from 'react';
-import styles from './PreferenceForm.module.scss';
 import RequestButton from '@/app/components/button/RequestButton';
+import styles from '@/app/components/form/PreferenceForm.module.scss';
 import Radio, {type RadioOptions} from '@/app/components/input/Radio';
 import Select, {type SelectOptions} from '@/app/components/input/Select';
 import TextInput from '@/app/components/input/TextInput';
