@@ -7,7 +7,7 @@ import MdiAccountCircle from '@/app/icons/mdi/MdiAccountCircle';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function SettingsLayout(props: I18nLayoutProps) {
-  const {user} = await catchMeIfYouCan();
+  const {user, profile} = await catchMeIfYouCan();
   const {lng} = props.params;
   const {t} = await useTranslation(lng, 'settings');
 
@@ -18,7 +18,7 @@ export default async function SettingsLayout(props: I18nLayoutProps) {
           <MdiAccountCircle />
 
           <div className={styles.profileInfo}>
-            <h2>{user?.user_metadata?.full_name ?? t('nameless')}</h2>
+            <h2>{profile?.nickname ?? t('nameless')}</h2>
             <p>
               {user?.email}
               <span className={styles.tier}>{t('tiers.free')}</span>

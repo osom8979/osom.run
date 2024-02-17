@@ -1,6 +1,6 @@
 'use client';
 
-import {redirect, useSearchParams} from 'next/navigation';
+import {useSearchParams, useRouter} from 'next/navigation';
 import apiClient from '@/app/api/client';
 import EmailPasswordForm from '@/app/components/form/EmailPasswordForm';
 import {appPaths} from '@/app/paths';
@@ -12,9 +12,11 @@ interface UpdatePasswordFormProps {
 
 export default function UpdatePasswordForm(props: UpdatePasswordFormProps) {
   const params = useSearchParams();
+  const router = useRouter();
   const code = params.get('code');
   if (!code) {
-    redirect(`/${props.lng}${appPaths.loginPkceErrorWithReason('nocode')}`);
+    router.push(`/${props.lng}${appPaths.loginPkceErrorWithReason('nocode')}`);
+    return;
   }
 
   const handleSubmit = async (email: string, password: string) => {

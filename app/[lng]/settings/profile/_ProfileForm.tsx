@@ -1,15 +1,17 @@
 'use client';
 
 import {DateTime} from 'luxon';
-import {useMemo, useState} from 'react';
+import {useRouter} from 'next/navigation';
+import {useEffect, useMemo, useState} from 'react';
 import apiClient from '@/app/api/client';
 import PreferenceForm, {
   type PreferenceField,
 } from '@/app/components/form/PreferenceForm';
-import useTranslation from '@/app/libs/i18n/client';
+import useTranslation, {setI18nCookie} from '@/app/libs/i18n/client';
 import {LANGUAGES} from '@/app/libs/i18n/settings';
 import type {Profile} from '@/app/libs/supabase/metadata';
 import {SupportZones} from '@/app/libs/tz/zone';
+import {appPaths} from '@/app/paths';
 
 interface ProfileFormProps {
   lng: string;
@@ -18,6 +20,7 @@ interface ProfileFormProps {
 
 export default function ProfileForm(props: ProfileFormProps) {
   const {t} = useTranslation(props.lng, 'settings-profile');
+  const router = useRouter();
   const [profile, setProfile] = useState(props.profile);
 
   const timezoneOptions = useMemo(() => {
@@ -54,10 +57,36 @@ export default function ProfileForm(props: ProfileFormProps) {
     ] as Array<PreferenceField>;
   }, [t, timezoneOptions]);
 
+  useEffect(() => {
+    LANGUAGES.map(lng => {
+      router.prefetch(`/${lng}${appPaths.settingsProfile}`);
+    });
+  }, [router]);
+
   const handleClick = async (value: Record<string, any>) => {
     const modified = value as Profile;
     await apiClient.updateProfile(modified);
+    const updatedNickname = profile.nickname !== modified.nickname;
+    const updatedLng = profile.lng !== modified.lng;
+
+    // [IMPORTANT] ---------------------
+    // Don't change your code placement!
     setProfile(modified);
+    // ---------------------------------
+
+    if (updatedLng) {
+      setI18nCookie(modified.lng);
+
+      // The page needs to be updated.
+      router.push(`/${modified.lng}${appPaths.settingsProfile}`);
+      return;
+    }
+
+    if (updatedNickname) {
+      // The page needs to be updated.
+      router.refresh();
+      return;
+    }
   };
 
   return (

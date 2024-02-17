@@ -21,6 +21,12 @@ i18next
     console.error(`i18next initialization failed: ${error}`);
   });
 
+export function setI18nCookie(language: string) {
+  if (language && Cookies.get(COOKIE_I18N_KEY) !== language) {
+    Cookies.set(COOKIE_I18N_KEY, language, {path: '/'});
+  }
+}
+
 export function useTranslation(
   language?: string,
   namespace?: string,
@@ -61,8 +67,8 @@ export function useTranslation(
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    if (language && Cookies.get(COOKIE_I18N_KEY) !== language) {
-      Cookies.set(COOKIE_I18N_KEY, language, {path: '/'});
+    if (language) {
+      setI18nCookie(language);
     }
   }, [language]);
 
