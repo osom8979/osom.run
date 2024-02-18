@@ -63,11 +63,13 @@ export default function ProgressCard(props: ProgressCardProps) {
 
           <ModalButton
             className="btn btn-sm btn-error btn-outline w-full sm:w-36"
+            label={t('abort')}
             title={t('abort_title')}
             detail={t('abort_detail')}
-            ok={t('abort_ok')}
           >
-            <p>{t('abort')}</p>
+            <button className="btn btn-sm btn-accent px-6">
+              <p>{t('abort_ok')}</p>
+            </button>
           </ModalButton>
         </div>
 

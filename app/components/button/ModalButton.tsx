@@ -5,14 +5,14 @@ import MaterialSymbolsCloseRounded from '@/app/icons/ms/MaterialSymbolsCloseRoun
 import TablerAlertCircle from '@/app/icons/tabler/TablerAlertCircle';
 
 interface ModalButtonProps
-  extends PropsWithChildren<HTMLAttributes<HTMLButtonElement>> {
+  extends PropsWithChildren<Omit<HTMLAttributes<HTMLButtonElement>, 'onClick'>> {
+  label?: string;
   title?: string;
   detail?: string;
-  ok?: string;
 }
 
 export default function ModalButton(props: ModalButtonProps) {
-  const {children, title, detail, ok, ...attrs} = props;
+  const {children, label, title, detail, ...attrs} = props;
   const dialog = useRef<HTMLDialogElement>(null);
   const handlerClick = async () => {
     if (!dialog.current) {
@@ -24,7 +24,7 @@ export default function ModalButton(props: ModalButtonProps) {
   return (
     <Fragment>
       <button type="button" role="button" onClick={handlerClick} {...attrs}>
-        {children}
+        <p>{label}</p>
       </button>
 
       <dialog ref={dialog} className="modal">
@@ -44,11 +44,7 @@ export default function ModalButton(props: ModalButtonProps) {
             <p>{detail}</p>
           </div>
 
-          <div className="modal-action">
-            <button className="btn btn-sm btn-accent px-6">
-              <p>{ok}</p>
-            </button>
-          </div>
+          <div className="modal-action">{children}</div>
         </div>
 
         <form method="dialog" className="modal-backdrop">
