@@ -10,6 +10,11 @@
   },
   "link": "Link",
   "unlink": "Unlink",
+  "unlink_confirm": {
+    "title": "Confirm unlink",
+    "detail": "Are you sure you want to unlink?",
+    "ok": "Yes, unlink"
+  },
   "reset": "Reset",
   "save": "Save",
   "save_successful": "Save successful.",

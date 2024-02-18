@@ -7,6 +7,7 @@ import CopyUrlButton from '@/app/components/button/CopyUrlButton';
 import ModalButton from '@/app/components/button/ModalButton';
 import SvgNumber from '@/app/components/SvgNumber';
 import SvgSpinners3DotsFade from '@/app/icons/spinners/SvgSpinners3DotsFade';
+import TablerAlertCircle from '@/app/icons/tabler/TablerAlertCircle';
 import TdesignPercent from '@/app/icons/tdesign/TdesignPercent';
 import useTranslation from '@/app/libs/i18n/client';
 
@@ -64,6 +65,7 @@ export default function ProgressCard(props: ProgressCardProps) {
           <ModalButton
             className="btn btn-sm btn-error btn-outline w-full sm:w-36"
             label={t('abort')}
+            icon={<TablerAlertCircle className="w-12 h-12 text-accent" />}
             title={t('abort_title')}
             detail={t('abort_detail')}
           >

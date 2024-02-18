@@ -1,14 +1,19 @@
 'use client';
 
+import {createClientComponentClient} from '@supabase/auth-helpers-nextjs';
 import type {UserIdentity} from '@supabase/gotrue-js';
 import {DateTime} from 'luxon';
-import {type ReactNode, useMemo} from 'react';
+import {useRouter} from 'next/navigation';
+import {Fragment, type ReactNode, useMemo} from 'react';
+import ModalButton from '@/app/components/button/ModalButton';
 import RequestButton from '@/app/components/button/RequestButton';
+import {UnsupportedError} from '@/app/exceptions';
 import CiLinkHorizontal from '@/app/icons/ci/CiLinkHorizontal';
 import CiLinkHorizontalOff from '@/app/icons/ci/CiLinkHorizontalOff';
 import MdiDiscord from '@/app/icons/mdi/MdiDiscord';
 import MdiGithub from '@/app/icons/mdi/MdiGithub';
 import MdiGoogle from '@/app/icons/mdi/MdiGoogle';
+import TablerAlertCircle from '@/app/icons/tabler/TablerAlertCircle';
 import useTranslation from '@/app/libs/i18n/client';
 import type {Profile} from '@/app/libs/supabase/metadata';
 
@@ -17,6 +22,7 @@ interface ConnectionItem {
   icon: ReactNode;
   label: string;
   datetime?: string;
+  identity?: UserIdentity;
 }
 
 interface ConnectionFormProps {
@@ -28,6 +34,8 @@ interface ConnectionFormProps {
 
 export default function ConnectionForm(props: ConnectionFormProps) {
   const {t} = useTranslation(props.lng, 'settings-connection');
+  const router = useRouter();
+  const supabase = createClientComponentClient();
 
   const createdAt = useMemo(() => {
     const result = {} as Record<string, string>;
@@ -53,28 +61,39 @@ export default function ConnectionForm(props: ConnectionFormProps) {
         icon: <MdiGoogle className="w-7 h-7" />,
         label: t('oauth.google'),
         datetime: createdAt['google'],
+        identity: props.identities?.find(i => i.provider === 'google'),
       },
       {
         key: 'github',
         icon: <MdiGithub className="w-7 h-7" />,
         label: t('oauth.github'),
         datetime: createdAt['github'],
+        identity: props.identities?.find(i => i.provider === 'github'),
       },
       {
         key: 'discord',
         icon: <MdiDiscord className="w-7 h-7" />,
         label: t('oauth.discord'),
         datetime: createdAt['discord'],
+        identity: props.identities?.find(i => i.provider === 'discord'),
       },
     ] as Array<ConnectionItem>;
-  }, [t, createdAt]);
+  }, [props.identities, t, createdAt]);
 
   const handleUnlink = async (item: ConnectionItem) => {
-    console.assert(item);
+    if (!item.identity) {
+      throw new Error('Not found identity property');
+    }
+    const {error} = await supabase.auth.unlinkIdentity(item.identity);
+    if (error !== null) {
+      throw error;
+    }
+    router.refresh();
   };
 
   const handleLink = async (item: ConnectionItem) => {
     console.assert(item);
+    throw new UnsupportedError();
   };
 
   return (
@@ -105,14 +124,26 @@ export default function ConnectionForm(props: ConnectionFormProps) {
 
                   <div className="flex flex-row items-center w-36">
                     {field.datetime ? (
-                      <RequestButton
-                        lng={props.lng}
-                        className="btn btn-sm btn-accent btn-outline w-full"
-                        onClick={() => handleUnlink(field)}
+                      <ModalButton
+                        className="btn btn-sm btn-error btn-outline w-full sm:w-36"
+                        label={
+                          <Fragment>
+                            <CiLinkHorizontalOff className="w-6 h-6" />
+                            <p>{t('unlink')}</p>
+                          </Fragment>
+                        }
+                        icon={<TablerAlertCircle className="w-12 h-12 text-accent" />}
+                        title={t('unlink_confirm.title')}
+                        detail={t('unlink_confirm.detail')}
                       >
-                        <CiLinkHorizontalOff className="w-6 h-6" />
-                        <p>{t('unlink')}</p>
-                      </RequestButton>
+                        <RequestButton
+                          lng={props.lng}
+                          className="btn btn-sm btn-accent btn-outline min-w-[12rem]"
+                          onClick={() => handleUnlink(field)}
+                        >
+                          <p>{t('unlink_confirm.ok')}</p>
+                        </RequestButton>
+                      </ModalButton>
                     ) : (
                       <div
                         className="tooltip tooltip-accent w-full"

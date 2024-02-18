@@ -1,36 +1,44 @@
 'use client';
 
-import {Fragment, type HTMLAttributes, type PropsWithChildren, useRef} from 'react';
+import {
+  Fragment,
+  type HTMLAttributes,
+  type PropsWithChildren,
+  type ReactNode,
+  useRef,
+} from 'react';
 import MaterialSymbolsCloseRounded from '@/app/icons/ms/MaterialSymbolsCloseRounded';
-import TablerAlertCircle from '@/app/icons/tabler/TablerAlertCircle';
 
 interface ModalButtonProps
-  extends PropsWithChildren<Omit<HTMLAttributes<HTMLButtonElement>, 'onClick'>> {
-  label?: string;
-  title?: string;
-  detail?: string;
+  extends PropsWithChildren<
+    Omit<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'title'>
+  > {
+  label?: ReactNode;
+  icon?: ReactNode;
+  title?: ReactNode;
+  detail?: ReactNode;
 }
 
 export default function ModalButton(props: ModalButtonProps) {
-  const {children, label, title, detail, ...attrs} = props;
+  const {children, label, icon, title, detail, ...attrs} = props;
   const dialog = useRef<HTMLDialogElement>(null);
+
   const handlerClick = async () => {
-    if (!dialog.current) {
-      return;
+    if (dialog.current) {
+      dialog.current.showModal();
     }
-    dialog.current.showModal();
   };
 
   return (
     <Fragment>
       <button type="button" role="button" onClick={handlerClick} {...attrs}>
-        <p>{label}</p>
+        {label}
       </button>
 
       <dialog ref={dialog} className="modal">
         <div className="modal-box">
           <div className="flex justify-between w-full">
-            <TablerAlertCircle className="w-12 h-12 text-accent" />
+            {icon}
 
             <form method="dialog">
               <button className="btn btn-ghost btn-circle btn-sm">
