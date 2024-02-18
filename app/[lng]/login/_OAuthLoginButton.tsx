@@ -22,7 +22,6 @@ export default function OAuthLoginButton(props: OAuthLoginButtonProps) {
     <RequestButton
       className="btn w-full"
       spinnerClassName="w-6 h-6"
-      alertClassName="w-6 h-6"
       lng={props.lng}
       onClick={handleClick}
     >

@@ -2,15 +2,14 @@
 
 import {useRouter} from 'next/navigation';
 import {
-  Fragment,
   type HTMLAttributes,
   type PropsWithChildren,
   useEffect,
   useMemo,
   useState,
 } from 'react';
+import {toastError} from '@/app/components/toast';
 import {HttpStatusError} from '@/app/exceptions';
-import MdiCloseCircleOutline from '@/app/icons/mdi/MdiCloseCircleOutline';
 import SvgSpinners270Ring from '@/app/icons/spinners/SvgSpinners270Ring';
 import useTranslation from '@/app/libs/i18n/client';
 
@@ -26,6 +25,8 @@ type OnComplete = () => Promise<void>;
 // eslint-disable-next-line no-unused-vars
 type OnError = (error: string) => Promise<void>;
 
+type ErrorFeedbackType = 'label' | 'toast';
+
 interface RequestButtonProps
   extends Omit<
     PropsWithChildren<HTMLAttributes<HTMLButtonElement>>,
@@ -35,6 +36,7 @@ interface RequestButtonProps
   errorTimeout?: number;
   disabled?: boolean;
   noRefresh?: boolean;
+  errorFeedbackType?: ErrorFeedbackType;
   noErrorFeedback?: boolean;
   recoverPendingState?: boolean;
   onClick?: OnClick;
@@ -42,7 +44,6 @@ interface RequestButtonProps
   onComplete?: OnComplete;
   onError?: OnError;
   spinnerClassName?: string;
-  alertClassName?: string;
 }
 
 export default function RequestButton(props: RequestButtonProps) {
@@ -52,6 +53,7 @@ export default function RequestButton(props: RequestButtonProps) {
     errorTimeout,
     disabled,
     noRefresh,
+    errorFeedbackType,
     noErrorFeedback,
     recoverPendingState,
     onClick,
@@ -59,7 +61,6 @@ export default function RequestButton(props: RequestButtonProps) {
     onComplete,
     onError,
     spinnerClassName,
-    alertClassName,
     className,
     ...attrs
   } = props;
@@ -123,12 +124,16 @@ export default function RequestButton(props: RequestButtonProps) {
       }
 
       if (!noErrorFeedback) {
-        setError(errorMessage);
-        const timeoutId = setTimeout(() => {
-          setError(undefined);
-          setErrorTimeoutId(undefined);
-        }, errorTimeout ?? DEFAULT_ERROR_TIMEOUT_MILLISECONDS);
-        setErrorTimeoutId(timeoutId as unknown as number);
+        if (errorFeedbackType === 'label') {
+          setError(errorMessage);
+          const timeoutId = setTimeout(() => {
+            setError(undefined);
+            setErrorTimeoutId(undefined);
+          }, errorTimeout ?? DEFAULT_ERROR_TIMEOUT_MILLISECONDS);
+          setErrorTimeoutId(timeoutId as unknown as number);
+        } else {
+          toastError(errorMessage);
+        }
       }
       return;
     }
@@ -152,12 +157,7 @@ export default function RequestButton(props: RequestButtonProps) {
       return <SvgSpinners270Ring className={spinnerClassName} />;
     }
     if (error) {
-      return (
-        <Fragment>
-          <MdiCloseCircleOutline className={alertClassName} />
-          <span className="text-clip">{error}</span>
-        </Fragment>
-      );
+      return <p className="text-clip">{error}</p>;
     }
     return children;
   };
