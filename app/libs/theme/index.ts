@@ -1,41 +1,60 @@
 'use client';
 
 import Cookies from 'js-cookie';
-
-export const COOKIE_THEME_KEY = 'osom-theme';
+import {
+  COOKIE_THEME_KEY,
+  DARK_THEME_CLASS,
+  DARK_THEME_COOKIE,
+  DARK_THEME_NAME,
+  LIGHT_THEME_CLASS,
+  LIGHT_THEME_COOKIE,
+  LIGHT_THEME_NAME,
+  SYSTEM_THEME_COOKIE,
+  THEME_QUALIFIED_NAME,
+} from '@/app/libs/theme/settings';
 
 export function setThemeCookie(theme: string) {
   Cookies.set(COOKIE_THEME_KEY, theme, {path: '/'});
 }
 
 export function setLightThemeCookie() {
-  setThemeCookie('light');
+  setThemeCookie(LIGHT_THEME_COOKIE);
 }
 
 export function setDarkThemeCookie() {
-  setThemeCookie('dark');
+  setThemeCookie(DARK_THEME_COOKIE);
 }
 
-export function removeThemeCookie() {
-  if (Cookies.get(COOKIE_THEME_KEY)) {
-    Cookies.remove(COOKIE_THEME_KEY);
-  }
-}
-
-export class UnknownThemeNameError extends Error {
-  constructor(message?: string, options?: ErrorOptions) {
-    super(message, options);
-  }
+export function setSystemThemeCookie() {
+  setThemeCookie(SYSTEM_THEME_COOKIE);
 }
 
 export function setLightTheme() {
-  document.documentElement.classList.remove('dark');
-  document.documentElement.setAttribute('data-theme', 'cupcake');
+  const elem = document.documentElement;
+  console.assert(elem.tagName === 'html');
+
+  if (LIGHT_THEME_CLASS) {
+    elem.classList.add(LIGHT_THEME_CLASS);
+  }
+  if (DARK_THEME_CLASS) {
+    elem.classList.remove(DARK_THEME_CLASS);
+  }
+
+  elem.setAttribute(THEME_QUALIFIED_NAME, LIGHT_THEME_NAME);
 }
 
 export function setDarkTheme() {
-  document.documentElement.classList.add('dark');
-  document.documentElement.setAttribute('data-theme', 'business');
+  const elem = document.documentElement;
+  console.assert(elem.tagName === 'html');
+
+  if (LIGHT_THEME_CLASS) {
+    elem.classList.remove(LIGHT_THEME_CLASS);
+  }
+  if (DARK_THEME_CLASS) {
+    elem.classList.add(DARK_THEME_CLASS);
+  }
+
+  elem.setAttribute(THEME_QUALIFIED_NAME, DARK_THEME_NAME);
 }
 
 export function matchDarkColorScheme() {
@@ -51,6 +70,12 @@ export function setSystemTheme() {
   }
 }
 
+export class UnknownThemeNameError extends Error {
+  constructor(message?: string, options?: ErrorOptions) {
+    super(message, options);
+  }
+}
+
 export default function changeTheme(theme: string) {
   if (theme === 'light') {
     setLightTheme();
@@ -60,7 +85,7 @@ export default function changeTheme(theme: string) {
     setDarkThemeCookie();
   } else if (theme === 'system') {
     setSystemTheme();
-    removeThemeCookie();
+    setSystemThemeCookie();
   } else {
     throw new UnknownThemeNameError();
   }

@@ -11,6 +11,14 @@ import type {I18nLayoutProps} from '@/app/[lng]/params';
 import Logo from '@/app/components/Logo';
 import useTranslation from '@/app/libs/i18n/server';
 import {LANGUAGES} from '@/app/libs/i18n/settings';
+import {getAppearance} from '@/app/libs/supabase/metadata';
+import {
+  COOKIE_THEME_KEY,
+  DARK_THEME_CLASS,
+  DARK_THEME_NAME,
+  LIGHT_THEME_CLASS,
+  LIGHT_THEME_NAME,
+} from '@/app/libs/theme/settings';
 import {appPaths} from '@/app/paths';
 
 export async function generateStaticParams() {
@@ -26,8 +34,32 @@ export default async function LngLayout(props: I18nLayoutProps) {
   const {lng} = props.params;
   const {t} = await useTranslation(lng, 'root-layout');
 
+  let themeName = '';
+  if (hasSession) {
+    const appearance = getAppearance(user.data.user);
+    themeName = appearance.theme;
+  } else {
+    const themeCookie = cookieStore.get(COOKIE_THEME_KEY);
+    themeName = themeCookie?.value ?? '';
+  }
+
+  let htmlClassName = '';
+  let htmlDataTheme = '';
+  if (themeName === 'light') {
+    htmlClassName = LIGHT_THEME_CLASS;
+    htmlDataTheme = LIGHT_THEME_NAME;
+  } else if (themeName === 'dark') {
+    htmlClassName = DARK_THEME_CLASS;
+    htmlDataTheme = DARK_THEME_NAME;
+  }
+
   return (
-    <html lang={lng} dir={dir(lng)}>
+    <html
+      className={htmlClassName}
+      lang={lng}
+      dir={dir(lng)}
+      data-theme={htmlDataTheme}
+    >
       <body className="min-h-screen flex flex-col">
         <header className="navbar sticky top-0 min-h-fit bg-base-200 h-osom-header px-2 z-10">
           <div className="flex-1 flex flex-row justify-between items-center flex-nowrap">

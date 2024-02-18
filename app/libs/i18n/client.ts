@@ -47,22 +47,18 @@ export function useTranslation(
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    if (activeLng === i18n.resolvedLanguage) {
-      return;
+    if (activeLng !== i18n.resolvedLanguage) {
+      setActiveLng(i18n.resolvedLanguage);
     }
-
-    setActiveLng(i18n.resolvedLanguage);
   }, [activeLng, i18n.resolvedLanguage]);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    if (!language || i18n.resolvedLanguage === language) {
-      return;
+    if (language && i18n.resolvedLanguage !== language) {
+      (async () => {
+        await i18n.changeLanguage(language);
+      })();
     }
-
-    (async () => {
-      await i18n.changeLanguage(language);
-    })();
   }, [language, i18n]);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
