@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import SignupForm from '@/app/[lng]/_SignupForm';
 import {type I18nPageProps} from '@/app/[lng]/params';
+import SignupForm from '@/app/[lng]/signup/_SignupForm';
 import CenterLayout from '@/app/components/layout/CenterLayout';
 import useTranslation from '@/app/libs/i18n/server';
 import {appPaths} from '@/app/paths';
