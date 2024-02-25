@@ -6,10 +6,10 @@ import {cookies} from 'next/headers';
 import Link from 'next/link';
 import {Toaster} from 'react-hot-toast';
 import AnonymousMenu from '@/app/[lng]/_AnonymousMenu';
-import MenuButton from '@/app/[lng]/_MenuButton';
 import UserMenu from '@/app/[lng]/_UserMenu';
 import type {I18nLayoutProps} from '@/app/[lng]/params';
 import Logo from '@/app/components/Logo';
+import MaterialSymbolsMenuRounded from '@/app/icons/ms/MaterialSymbolsMenuRounded';
 import useTranslation from '@/app/libs/i18n/server';
 import {LANGUAGES} from '@/app/libs/i18n/settings';
 import {getAppearance} from '@/app/libs/supabase/metadata';
@@ -21,6 +21,8 @@ import {
   LIGHT_THEME_NAME,
 } from '@/app/libs/theme/settings';
 import {appPaths} from '@/app/paths';
+
+const osomMenuButtonId = 'osom-menu-button';
 
 export async function generateStaticParams() {
   return LANGUAGES.map(lng => ({lng}));
@@ -62,40 +64,71 @@ export default async function LngLayout(props: I18nLayoutProps) {
       data-theme={htmlDataTheme}
     >
       <body className="min-h-screen flex flex-col">
-        <header className="navbar sticky top-0 min-h-fit bg-base-200 h-osom-header px-2 z-10">
-          <div className="flex-1 flex flex-row justify-between items-center flex-nowrap">
-            <div className="flex items-center space-x-2">
-              <MenuButton />
+        <div className="drawer">
+          <input id={osomMenuButtonId} type="checkbox" className="drawer-toggle" />
 
-              <Link href={`/${lng}/`} hrefLang={lng}>
-                <Logo className="h-4" />
-              </Link>
+          <div className="drawer-content flex flex-col">
+            <header className="navbar min-h-fit w-full h-osom-header bg-base-200 px-2">
+              <div className="flex-1 flex flex-row justify-between items-center flex-nowrap">
+                <div className="flex items-center space-x-2">
+                  <div className="flex-none sm:hidden">
+                    <label
+                      htmlFor={osomMenuButtonId}
+                      aria-label="open sidebar"
+                      className="btn btn-sm btn-circle btn-ghost"
+                    >
+                      <MaterialSymbolsMenuRounded className="w-6 h-6" />
+                    </label>
+                  </div>
 
-              <Link
-                href={`/${lng}${appPaths.progress}`}
-                hrefLang={lng}
-                className="btn btn-sm btn-ghost rounded-lg"
-              >
-                <span>{t('progress')}</span>
-              </Link>
-            </div>
+                  <Link href={`/${lng}/`} hrefLang={lng}>
+                    <Logo className="h-4" />
+                  </Link>
 
-            <nav className="flex justify-end">
-              {hasSession ? (
-                <UserMenu
-                  lng={lng}
-                  user={user.data.user}
-                  settingsLabel={t('settings')}
-                  logoutLabel={t('logout')}
-                />
-              ) : (
-                <AnonymousMenu lng={lng} loginLabel={t('login')} />
-              )}
-            </nav>
+                  <Link
+                    href={`/${lng}${appPaths.progress}`}
+                    hrefLang={lng}
+                    className="btn btn-sm btn-ghost rounded-lg"
+                  >
+                    <span>{t('progress')}</span>
+                  </Link>
+                </div>
+
+                <nav className="flex-none hidden sm:flex sm:justify-end">
+                  {hasSession ? (
+                    <UserMenu
+                      lng={lng}
+                      user={user.data.user}
+                      settingsLabel={t('settings')}
+                      logoutLabel={t('logout')}
+                    />
+                  ) : (
+                    <AnonymousMenu lng={lng} loginLabel={t('login')} />
+                  )}
+                </nav>
+              </div>
+            </header>
+
+            <main className="h-osom-main">{props.children}</main>
           </div>
-        </header>
 
-        <main className="flex-grow h-0">{props.children}</main>
+          <div className="drawer-side">
+            <label
+              htmlFor={osomMenuButtonId}
+              aria-label="close sidebar"
+              className="drawer-overlay"
+            ></label>
+            <ul className="menu p-4 w-80 min-h-full bg-base-200">
+              {/* Sidebar content here */}
+              <li>
+                <a>Sidebar Item 1</a>
+              </li>
+              <li>
+                <a>Sidebar Item 2</a>
+              </li>
+            </ul>
+          </div>
+        </div>
 
         <Analytics />
         <SpeedInsights />
