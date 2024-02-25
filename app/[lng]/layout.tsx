@@ -6,6 +6,7 @@ import {cookies} from 'next/headers';
 import Link from 'next/link';
 import {Toaster} from 'react-hot-toast';
 import AnonymousMenu from '@/app/[lng]/_AnonymousMenu';
+import MenuButton from '@/app/[lng]/_MenuButton';
 import UserMenu from '@/app/[lng]/_UserMenu';
 import type {I18nLayoutProps} from '@/app/[lng]/params';
 import Logo from '@/app/components/Logo';
@@ -64,6 +65,8 @@ export default async function LngLayout(props: I18nLayoutProps) {
         <header className="navbar sticky top-0 min-h-fit bg-base-200 h-osom-header px-2 z-10">
           <div className="flex-1 flex flex-row justify-between items-center flex-nowrap">
             <div className="flex items-center space-x-2">
+              <MenuButton />
+
               <Link href={`/${lng}/`} hrefLang={lng}>
                 <Logo className="h-4" />
               </Link>
