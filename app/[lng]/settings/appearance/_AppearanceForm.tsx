@@ -7,7 +7,7 @@ import PreferenceForm, {
 } from '@/app/components/form/PreferenceForm';
 import useTranslation from '@/app/libs/i18n/client';
 import type {Appearance} from '@/app/libs/supabase/metadata';
-import changeTheme from '@/app/libs/theme';
+import changeTheme from '@/app/libs/theme/client';
 import {ThemeValues} from '@/app/libs/zod/settings';
 
 interface AppearanceFormProps {

@@ -1,33 +1,21 @@
 'use client';
 
-import Cookies from 'js-cookie';
+import {UnknownThemeNameError} from '@/app/exceptions';
 import {
-  COOKIE_THEME_KEY,
   DARK_THEME_CLASS,
-  DARK_THEME_COOKIE,
   DARK_THEME_NAME,
+  DARK_DAISYUI_THEME_NAME,
   LIGHT_THEME_CLASS,
-  LIGHT_THEME_COOKIE,
   LIGHT_THEME_NAME,
-  SYSTEM_THEME_COOKIE,
+  LIGHT_DAISYUI_THEME_NAME,
+  SYSTEM_THEME_NAME,
   THEME_QUALIFIED_NAME,
-} from '@/app/libs/theme/settings';
-
-export function setThemeCookie(theme: string) {
-  Cookies.set(COOKIE_THEME_KEY, theme, {path: '/'});
-}
-
-export function setLightThemeCookie() {
-  setThemeCookie(LIGHT_THEME_COOKIE);
-}
-
-export function setDarkThemeCookie() {
-  setThemeCookie(DARK_THEME_COOKIE);
-}
-
-export function setSystemThemeCookie() {
-  setThemeCookie(SYSTEM_THEME_COOKIE);
-}
+} from '@/app/libs/theme/common';
+import {
+  setDarkThemeCookie,
+  setLightThemeCookie,
+  setSystemThemeCookie,
+} from '@/app/libs/theme/cookie';
 
 export function setLightTheme() {
   const elem = document.documentElement;
@@ -40,7 +28,7 @@ export function setLightTheme() {
     elem.classList.remove(DARK_THEME_CLASS);
   }
 
-  elem.setAttribute(THEME_QUALIFIED_NAME, LIGHT_THEME_NAME);
+  elem.setAttribute(THEME_QUALIFIED_NAME, LIGHT_DAISYUI_THEME_NAME);
 }
 
 export function setDarkTheme() {
@@ -54,7 +42,7 @@ export function setDarkTheme() {
     elem.classList.add(DARK_THEME_CLASS);
   }
 
-  elem.setAttribute(THEME_QUALIFIED_NAME, DARK_THEME_NAME);
+  elem.setAttribute(THEME_QUALIFIED_NAME, DARK_DAISYUI_THEME_NAME);
 }
 
 export function matchDarkColorScheme() {
@@ -70,23 +58,17 @@ export function setSystemTheme() {
   }
 }
 
-export class UnknownThemeNameError extends Error {
-  constructor(message?: string, options?: ErrorOptions) {
-    super(message, options);
-  }
-}
-
-export default function changeTheme(theme: string) {
-  if (theme === 'light') {
+export default function changeTheme(themeKey: string) {
+  if (themeKey === LIGHT_THEME_NAME) {
     setLightTheme();
     setLightThemeCookie();
-  } else if (theme === 'dark') {
+  } else if (themeKey === DARK_THEME_NAME) {
     setDarkTheme();
     setDarkThemeCookie();
-  } else if (theme === 'system') {
+  } else if (themeKey === SYSTEM_THEME_NAME) {
     setSystemTheme();
     setSystemThemeCookie();
   } else {
-    throw new UnknownThemeNameError();
+    throw new UnknownThemeNameError(`Unknown theme name: '${themeKey}'`);
   }
 }

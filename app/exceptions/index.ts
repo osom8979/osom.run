@@ -46,6 +46,12 @@ export class InvalidTimezoneError extends OsomError {
   }
 }
 
+export class UnknownThemeNameError extends OsomError {
+  constructor(message?: string, options?: ErrorOptions) {
+    super(message, options);
+  }
+}
+
 export function getReasonPhraseSafe(code: number | string) {
   try {
     return getReasonPhrase(code);

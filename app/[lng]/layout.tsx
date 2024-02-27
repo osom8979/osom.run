@@ -13,16 +13,10 @@ import MaterialSymbolsMenuRounded from '@/app/icons/ms/MaterialSymbolsMenuRounde
 import useTranslation from '@/app/libs/i18n/server';
 import {LANGUAGES} from '@/app/libs/i18n/settings';
 import {getAppearance} from '@/app/libs/supabase/metadata';
-import {
-  COOKIE_THEME_KEY,
-  DARK_THEME_CLASS,
-  DARK_THEME_NAME,
-  LIGHT_THEME_CLASS,
-  LIGHT_THEME_NAME,
-} from '@/app/libs/theme/settings';
+import {THEME_COOKIE_KEY, getThemeInfo} from '@/app/libs/theme/common';
 import {appPaths} from '@/app/paths';
 
-const osomMenuButtonId = 'osom-menu-button';
+const OSOM_MENU_BUTTON_ID = 'osom-menu-button';
 
 export async function generateStaticParams() {
   return LANGUAGES.map(lng => ({lng}));
@@ -39,33 +33,24 @@ export default async function LngLayout(props: I18nLayoutProps) {
 
   let themeName = '';
   if (hasSession) {
-    const appearance = getAppearance(user.data.user);
-    themeName = appearance.theme;
+    themeName = getAppearance(user.data.user).theme;
   } else {
-    const themeCookie = cookieStore.get(COOKIE_THEME_KEY);
+    const themeCookie = cookieStore.get(THEME_COOKIE_KEY);
     themeName = themeCookie?.value ?? '';
   }
 
-  let htmlClassName = '';
-  let htmlDataTheme = '';
-  if (themeName === 'light') {
-    htmlClassName = LIGHT_THEME_CLASS;
-    htmlDataTheme = LIGHT_THEME_NAME;
-  } else if (themeName === 'dark') {
-    htmlClassName = DARK_THEME_CLASS;
-    htmlDataTheme = DARK_THEME_NAME;
-  }
+  const themeInfo = getThemeInfo(themeName);
 
   return (
     <html
-      className={htmlClassName}
+      className={themeInfo.className}
       lang={lng}
       dir={dir(lng)}
-      data-theme={htmlDataTheme}
+      data-theme={themeInfo.dataTheme}
     >
-      <body className="min-h-screen flex flex-col">
+      <body>
         <div className="drawer">
-          <input id={osomMenuButtonId} type="checkbox" className="drawer-toggle" />
+          <input id={OSOM_MENU_BUTTON_ID} type="checkbox" className="drawer-toggle" />
 
           <div className="drawer-content flex flex-col">
             <header className="navbar min-h-fit w-full h-osom-header bg-base-200 px-2">
@@ -73,7 +58,7 @@ export default async function LngLayout(props: I18nLayoutProps) {
                 <div className="flex items-center space-x-2">
                   <div className="flex-none sm:hidden">
                     <label
-                      htmlFor={osomMenuButtonId}
+                      htmlFor={OSOM_MENU_BUTTON_ID}
                       aria-label="open sidebar"
                       className="btn btn-sm btn-circle btn-ghost"
                     >
@@ -114,7 +99,7 @@ export default async function LngLayout(props: I18nLayoutProps) {
 
           <div className="drawer-side">
             <label
-              htmlFor={osomMenuButtonId}
+              htmlFor={OSOM_MENU_BUTTON_ID}
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
