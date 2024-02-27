@@ -27,18 +27,6 @@ export default async function LngPage(props: I18nPageProps) {
 
         <div className={styles.dividerLine} />
 
-        <div className={styles.featureBox}>
-          <div className={styles.featureIcon} data-tip={t('features.progress')}>
-            <Link
-              href={`/${lng}${appPaths.progress}`}
-              hrefLang={lng}
-              className="btn btn-circle"
-            >
-              <PajamasProgress />
-            </Link>
-          </div>
-        </div>
-
         <div className={styles.dividerLine} />
 
         <div className={styles.actions}>

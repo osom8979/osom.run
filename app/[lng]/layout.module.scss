@@ -1,75 +1,127 @@
-.body {
-  @apply min-h-screen;
-  @apply max-h-screen;
-  @apply h-screen;
-  @apply p-0;
-  @apply m-0;
-  @apply overflow-hidden;
-
-  /* Hide scrollbar for Chrome, Safari and Opera */
+@mixin hide-scrollbar {
+  /* Chrome, Safari, Opera */
   &::-webkit-scrollbar {
     @apply hidden;
   }
 
-  /* Hide scrollbar for IE, Edge and Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  /* IE, Edge */
+  -ms-overflow-style: none;
 
-  .side {
-    @apply hidden;
-    @apply sm:block;
-    @apply h-osom-main;
-    @apply bg-base-200;
-    @apply overflow-y-auto;
+  /* Firefox */
+  scrollbar-width: none;
+}
 
-    ul {
-      @apply menu menu-vertical;
-      @apply md:w-48;
+.body {
+  @include hide-scrollbar;
+  @apply overflow-y-hidden;
 
-      li {
-        @apply max-md:tooltip;
-        @apply max-md:tooltip-right;
+  @apply h-screen;
+  @apply w-full;
 
-        [data-active=true] {
-          @apply bg-neutral;
-          @apply text-neutral-content;
-        }
+  @apply p-0;
+  @apply m-0;
+}
 
-        svg {
-          @apply w-5 h-5;
-        }
+.content {
+  @apply flex flex-row;
+}
 
-        span {
-          @apply hidden;
-          @apply md:block;
-        }
+.contentLeft {
+  @apply hidden;
+  @apply sm:block;
+
+  @apply h-screen;
+  @apply bg-base-200;
+  @apply overflow-y-auto;
+  @apply overflow-x-hidden;
+
+  ul {
+    @apply menu menu-sm menu-vertical;
+    @apply w-40;
+    @apply p-1;
+
+    li {
+      [data-active=true] {
+        @apply bg-neutral;
+        @apply text-neutral-content;
+      }
+
+      svg {
+        @apply w-5 h-5;
+      }
+
+      span {
+        @apply block;
       }
     }
   }
+}
 
-  .overlay {
-    @apply min-h-full;
-    @apply bg-base-200;
-    @apply overflow-y-auto;
+.contentRight {
+  @apply flex-grow;
+  @apply h-screen;
+  @apply overflow-y-auto;
 
-    ul {
-      @apply menu menu-vertical;
-      @apply w-48;
-      @apply p-2;
+  & > header {
+    @apply sticky;
+    @apply top-0;
 
-      li {
-        [data-active=true] {
-          @apply bg-neutral;
-          @apply text-neutral-content;
-        }
+    @apply h-osom-header;
+    @apply w-full;
+    @apply p-1;
+    @apply z-10;
+  }
 
-        svg {
-          @apply w-5 h-5;
-        }
+  & > main {
+    @apply h-osom-main;
+  }
+}
 
-        span {
-          @apply block;
-        }
+.headerLayout {
+  @apply flex-1;
+  @apply flex flex-row;
+  @apply justify-between items-center;
+  @apply flex-nowrap;
+}
+
+.headerLeft {
+  @apply flex flex-row;
+  @apply items-center;
+  @apply space-x-2;
+}
+
+.headerCenter {
+  @apply flex-1;
+  @apply flex flex-row;
+}
+
+.headerRight {
+  @apply hidden;
+  @apply sm:flex sm:flex-row;
+}
+
+.overlay {
+  @apply min-h-full;
+  @apply bg-base-200;
+  @apply overflow-y-auto;
+
+  ul {
+    @apply menu menu-sm menu-vertical;
+    @apply w-40;
+    @apply p-1;
+
+    li {
+      [data-active=true] {
+        @apply bg-neutral;
+        @apply text-neutral-content;
+      }
+
+      svg {
+        @apply w-5 h-5;
+      }
+
+      span {
+        @apply block;
       }
     }
   }

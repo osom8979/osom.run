@@ -3,45 +3,33 @@
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import type {ReactNode} from 'react';
-import MdiAccountOutline from '@/app/icons/mdi/MdiAccountOutline';
-import MdiBrushVariant from '@/app/icons/mdi/MdiBrushVariant';
-import MdiConnection from '@/app/icons/mdi/MdiConnection';
+import PajamasProgress from '@/app/icons/pajamas/PajamasProgress';
 import useTranslation from '@/app/libs/i18n/client';
 import {appPaths} from '@/app/paths';
 
-interface MenuNaviProps {
+interface MainMenuProps {
   lng: string;
 }
 
-interface MenuNaviItem {
+interface MainMenuItem {
   icon: ReactNode;
   text: string;
   href: string;
   lng?: string;
 }
 
-export default function MenuNavi(props: MenuNaviProps) {
+export default function MainMenu(props: MainMenuProps) {
   const {lng} = props;
-  const {t} = useTranslation(lng, 'settings');
+  const {t} = useTranslation(lng, 'root');
   const pathname = usePathname();
 
   const menuItems = [
     {
-      icon: <MdiAccountOutline />,
-      text: t('menus.profile'),
-      href: `/${lng}${appPaths.settingsProfile}`,
+      icon: <PajamasProgress />,
+      text: t('menus.progress'),
+      href: `/${lng}${appPaths.progress}`,
     },
-    {
-      icon: <MdiBrushVariant />,
-      text: t('menus.appearance'),
-      href: `/${lng}${appPaths.settingsAppearance}`,
-    },
-    {
-      icon: <MdiConnection />,
-      text: t('menus.connection'),
-      href: `/${lng}${appPaths.settingsConnection}`,
-    },
-  ] as Array<MenuNaviItem>;
+  ] as Array<MainMenuItem>;
 
   return (
     <ul>

@@ -1,7 +1,7 @@
 {
   "title": "DevToolkit",
   "abstractor": "Rich toolset for developers",
-  "features": {
+  "menus": {
     "progress": "Progress"
   },
   "login_now": "Login now",

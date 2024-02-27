@@ -6,6 +6,7 @@ import {cookies} from 'next/headers';
 import Link from 'next/link';
 import {Toaster} from 'react-hot-toast';
 import AnonymousMenu from '@/app/[lng]/_AnonymousMenu';
+import MainMenu from '@/app/[lng]/_MainMenu';
 import UserMenu from '@/app/[lng]/_UserMenu';
 import styles from '@/app/[lng]/layout.module.scss';
 import type {I18nLayoutProps} from '@/app/[lng]/params';
@@ -16,7 +17,6 @@ import {LANGUAGES} from '@/app/libs/i18n/settings';
 import {getAppearance} from '@/app/libs/supabase/metadata';
 import {THEME_COOKIE_KEY, getThemeInfo} from '@/app/libs/theme/common';
 import {appPaths} from '@/app/paths';
-import SettingsMenu from '@/app/[lng]/settings/_SettingsMenu';
 
 const OSOM_MAIN_MENU_BUTTON_ID = 'osom-main-menu-button';
 
@@ -33,7 +33,7 @@ export default async function LngLayout(props: I18nLayoutProps) {
   const {lng} = props.params;
   const {t} = await useTranslation(lng, 'root-layout');
 
-  let themeName = '';
+  let themeName: string;
   if (hasSession) {
     themeName = getAppearance(user.data.user).theme;
   } else {
@@ -59,55 +59,49 @@ export default async function LngLayout(props: I18nLayoutProps) {
           />
 
           <div className="drawer-content">
-            <header className="flex flex-col z-10 w-full h-osom-header px-2 bg-base-200">
-              <div className="flex-1 flex flex-row justify-between items-center flex-nowrap">
-                <div className="flex items-center space-x-2">
-                  <div className="flex-none sm:hidden">
-                    <label
-                      htmlFor={OSOM_MAIN_MENU_BUTTON_ID}
-                      aria-label={t('open_drawer')}
-                      className="btn btn-sm btn-circle btn-ghost"
-                    >
-                      <MaterialSymbolsMenuRounded className="w-6 h-6" />
-                    </label>
-                  </div>
-
-                  <Link href={`/${lng}/`} hrefLang={lng}>
-                    <Logo className="h-4" />
-                  </Link>
-
-                  <Link
-                    href={`/${lng}${appPaths.progress}`}
-                    hrefLang={lng}
-                    className="btn btn-sm btn-ghost rounded-lg"
-                  >
-                    <span>{t('progress')}</span>
-                  </Link>
-                </div>
-
-                <nav className="flex-none hidden sm:flex sm:justify-end">
-                  {hasSession ? (
-                    <UserMenu
-                      lng={lng}
-                      user={user.data.user}
-                      settingsLabel={t('settings')}
-                      logoutLabel={t('logout')}
-                    />
-                  ) : (
-                    <AnonymousMenu lng={lng} loginLabel={t('login')} />
-                  )}
-                </nav>
-              </div>
-            </header>
-
-            <div className="flex flex-row space-x-6">
-              <nav className={styles.side}>
-                <SettingsMenu lng={lng} />
+            <div className={styles.content}>
+              <nav className={styles.contentLeft}>
+                <MainMenu lng={lng} />
               </nav>
 
-              <main className="h-osom-main flex-grow overflow-y-auto">
-                {props.children}
-              </main>
+              <div className={styles.contentRight}>
+                <header>
+                  <div className={styles.headerLayout}>
+                    <div className={styles.headerLeft}>
+                      <div className="flex-none sm:hidden">
+                        <label
+                          htmlFor={OSOM_MAIN_MENU_BUTTON_ID}
+                          aria-label={t('open_drawer')}
+                          className="btn btn-sm btn-circle btn-ghost"
+                        >
+                          <MaterialSymbolsMenuRounded className="w-6 h-6" />
+                        </label>
+                      </div>
+
+                      <Link href={`/${lng}/`} hrefLang={lng}>
+                        <Logo className="h-4" />
+                      </Link>
+                    </div>
+
+                    <div className={styles.headerCenter}></div>
+
+                    <div className={styles.headerRight}>
+                      {hasSession ? (
+                        <UserMenu
+                          lng={lng}
+                          user={user.data.user}
+                          settingsLabel={t('settings')}
+                          logoutLabel={t('logout')}
+                        />
+                      ) : (
+                        <AnonymousMenu lng={lng} loginLabel={t('login')} />
+                      )}
+                    </div>
+                  </div>
+                </header>
+
+                <main>{props.children}</main>
+              </div>
             </div>
           </div>
 
@@ -119,7 +113,7 @@ export default async function LngLayout(props: I18nLayoutProps) {
             ></label>
 
             <nav className={styles.overlay}>
-              <SettingsMenu lng={lng} />
+              <MainMenu lng={lng} />
             </nav>
           </div>
         </div>
