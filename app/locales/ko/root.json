@@ -4,5 +4,7 @@
   "features": {
     "progress": "프로그래스"
   },
-  "login_now": "로그인 하세요!"
+  "login_now": "로그인 하세요!",
+  "open_drawer": "Open drawer",
+  "close_drawer": "Close drawer"
 }

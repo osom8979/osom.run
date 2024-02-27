@@ -62,7 +62,7 @@ $divider-end: base-content/0;
       @apply text-transparent;
 
       h2 {
-        @apply text-3xl sm:text-5xl;
+        @apply text-5xl;
       }
     }
 
@@ -70,8 +70,8 @@ $divider-end: base-content/0;
       @apply mb-8 p-0;
       @apply mx-auto;
       @apply max-w-xl;
-      @apply font-normal sm:font-medium;
-      @apply text-base sm:text-lg;
+      @apply font-medium;
+      @apply text-lg;
       @apply text-base-content/70;
     }
 

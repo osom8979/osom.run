@@ -4,5 +4,7 @@
   "features": {
     "progress": "Progress"
   },
-  "login_now": "Login now"
+  "login_now": "Login now",
+  "open_drawer": "Open drawer",
+  "close_drawer": "Close drawer"
 }
