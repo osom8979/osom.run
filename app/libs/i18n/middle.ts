@@ -1,4 +1,4 @@
-import type {Session} from '@supabase/gotrue-js';
+import type {User} from '@supabase/gotrue-js';
 import acceptLanguage from 'accept-language';
 import type {RequestCookie} from 'next/dist/compiled/@edge-runtime/cookies';
 import {NextRequest, NextResponse} from 'next/server';
@@ -23,7 +23,7 @@ export function invalidLngPathname(req: NextRequest) {
 
 export interface FindNextLanguageOptions {
   req?: NextRequest;
-  session?: Session;
+  user?: User;
   i18nCookieKey?: string;
 }
 
@@ -31,8 +31,8 @@ export function findNextLanguage(options?: FindNextLanguageOptions): string {
   let lng: string | null | undefined;
 
   // Step 01. Authenticated session
-  if (!lng && options?.session) {
-    const profile = getRawProfile(options.session.user);
+  if (!lng && options?.user) {
+    const profile = getRawProfile(options.user);
     lng = acceptLanguage.get(profile.lng);
     if (lng) {
       console.debug(`Use session lng: '${lng}'`);

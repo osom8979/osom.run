@@ -21,7 +21,7 @@ export interface ThemeInfo {
   dataTheme: string;
 }
 
-export function asThemesType(theme: string) {
+export function asThemesType(theme?: string) {
   if (!theme) {
     return SYSTEM_THEME_NAME as Themes;
   }
@@ -32,12 +32,12 @@ export function asThemesType(theme: string) {
     return LIGHT_THEME_NAME as Themes;
   } else if (theme === DARK_THEME_NAME) {
     return DARK_THEME_NAME as Themes;
-  } else {
-    throw new UnknownThemeNameError(`Unknown theme name: '${theme}'`);
   }
+
+  throw new UnknownThemeNameError(`Unknown theme name: '${theme}'`);
 }
 
-export function getThemeInfo(themeName: string): ThemeInfo {
+export function getThemeInfo(themeName?: string): ThemeInfo {
   const theme = asThemesType(themeName);
   if (theme === LIGHT_THEME_NAME) {
     return {className: LIGHT_THEME_CLASS, dataTheme: LIGHT_DAISYUI_THEME_NAME};

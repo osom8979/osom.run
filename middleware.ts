@@ -22,13 +22,23 @@ export const config = {
   ],
 };
 
-const progressMatcher = /^\/progress\/[0-9A-Za-z-_]*/;
-const progressRewritePrefix = '/api/anonymous';
-const matchers = config.matcher.map(pattern => new RegExp(pattern));
+interface RewriteMatcher {
+  matcher: RegExp;
+  prefix: string;
+}
+
+const POST_REWRITE_MATCHERS = [
+  {
+    matcher: /^\/progress\/[0-9A-Za-z-_]*/,
+    prefix: '/api/anonymous',
+  },
+] as Array<RewriteMatcher>;
+
+const VALID_MATCHERS = config.matcher.map(pattern => new RegExp(pattern));
 
 function validMiddlewareRequest(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
-  for (const re of matchers) {
+  for (const re of VALID_MATCHERS) {
     if (re.test(pathname)) {
       return true;
     }
@@ -41,12 +51,12 @@ export async function middleware(req: NextRequest) {
 
   const res = NextResponse.next();
   const supabase = createMiddlewareClient({req, res});
-  const sessionResponse = await supabase.auth.getSession();
-  const session = sessionResponse?.data?.session ?? undefined;
+  const sessionResult = await supabase.auth.getSession();
+  const user = sessionResult?.data?.session?.user;
 
   // Redirect if 'lng' is not in the pathname.
   if (invalidLngPathname(req)) {
-    const lng = findNextLanguage({req, session});
+    const lng = findNextLanguage({req, user});
     const pathname = req.nextUrl.pathname;
     const search = req.nextUrl.search;
 
@@ -57,13 +67,15 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(redirectUrl);
   }
 
-  const method = req.method.toUpperCase();
-  if (method === 'POST') {
-    const pathname = req.nextUrl.pathname.substring(3);
-    if (pathname.match(progressMatcher)) {
-      const rewriteUrl = new URL(`${progressRewritePrefix}${pathname}`, req.url);
-      console.debug(`middleware(req='${req.url}') api rewrite '${rewriteUrl}'`);
-      return NextResponse.rewrite(rewriteUrl);
+  // Some 'POST' requests require rewriting.
+  if (req.method.toUpperCase() === 'POST') {
+    const pathnameWithoutLng = req.nextUrl.pathname.substring(3);
+    for (const prm of POST_REWRITE_MATCHERS) {
+      if (pathnameWithoutLng.match(prm.matcher)) {
+        const rewriteUrl = new URL(`${prm.prefix}${pathnameWithoutLng}`, req.url);
+        console.debug(`middleware(req='${req.url}') post rewrite '${rewriteUrl}'`);
+        return NextResponse.rewrite(rewriteUrl);
+      }
     }
   }
 

@@ -1,6 +1,6 @@
 {
-  "title": "Serverless Web Component Toolkit",
-  "abstractor": "Connect your local environment to the global web with just a URL request, without complicated setup!",
+  "title": "DevToolkit",
+  "abstractor": "Rich toolset for developers",
   "features": {
     "progress": "Progress"
   },
