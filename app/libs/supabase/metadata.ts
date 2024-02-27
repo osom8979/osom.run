@@ -1,9 +1,9 @@
 import 'server-only';
 
 import type {User} from '@supabase/gotrue-js';
-import {LANGUAGES} from '@/app/libs/i18n/settings';
-import {SupportZones} from '@/app/libs/tz/zone';
-import {ThemeValues} from '@/app/libs/zod/settings';
+import {FALLBACK_LANGUAGE} from '@/app/libs/i18n/settings';
+import {SYSTEM_THEME_NAME} from '@/app/libs/theme/common';
+import {ZONE_LUXON_SYSTEM} from '@/app/libs/tz/zone';
 
 export interface Profile {
   nickname: string;
@@ -11,11 +11,15 @@ export interface Profile {
   lng: string;
 }
 
+export function getRawProfile(user?: User): Partial<Profile> {
+  return user?.user_metadata?.profile ?? {};
+}
+
 export function getProfile(user?: User): Profile {
-  const profile = user?.user_metadata?.profile ?? {};
+  const profile = getRawProfile(user);
   const nickname = profile.nickname || user?.user_metadata?.full_name;
-  const timezone = profile.timezone || SupportZones[0];
-  const lng = profile.lng || LANGUAGES[0];
+  const timezone = profile.timezone || ZONE_LUXON_SYSTEM;
+  const lng = profile.lng || FALLBACK_LANGUAGE;
   return {nickname, timezone, lng};
 }
 
@@ -25,6 +29,6 @@ export interface Appearance {
 
 export function getAppearance(user?: User): Appearance {
   const appearance = user?.user_metadata?.appearance ?? {};
-  const theme = appearance.theme || ThemeValues[0];
+  const theme = appearance.theme || SYSTEM_THEME_NAME;
   return {theme};
 }

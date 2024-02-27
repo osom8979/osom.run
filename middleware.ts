@@ -3,11 +3,9 @@ import type {NextRequest} from 'next/server';
 import {NextResponse} from 'next/server';
 import {
   findNextLanguage,
-  invalidLngPath,
+  invalidLngPathname,
   upgradeI18nCookies,
 } from '@/app/libs/i18n/middle';
-import {LANGUAGES} from '@/app/libs/i18n/settings';
-import {getProfile} from '@/app/libs/supabase/metadata';
 
 export const config = {
   matcher: [
@@ -24,7 +22,6 @@ export const config = {
   ],
 };
 
-const languageValues = [...LANGUAGES] as Array<string>;
 const progressMatcher = /^\/progress\/[0-9A-Za-z-_]*/;
 const progressRewritePrefix = '/api/anonymous';
 const matchers = config.matcher.map(pattern => new RegExp(pattern));
@@ -44,26 +41,18 @@ export async function middleware(req: NextRequest) {
 
   const res = NextResponse.next();
   const supabase = createMiddlewareClient({req, res});
-  const session = await supabase.auth.getSession();
-  const hasSession = session.error === null;
+  const sessionResponse = await supabase.auth.getSession();
+  const session = sessionResponse?.data?.session ?? undefined;
 
-  // Redirect if lng in path is not supported
-  if (invalidLngPath(req)) {
-    const search = req.nextUrl.search;
+  // Redirect if 'lng' is not in the pathname.
+  if (invalidLngPathname(req)) {
+    const lng = findNextLanguage({req, session});
     const pathname = req.nextUrl.pathname;
+    const search = req.nextUrl.search;
+
     console.assert(pathname.startsWith('/'));
-
-    if (hasSession && session.data !== null && session.data.session !== null) {
-      const userLng = getProfile(session.data.session.user).lng;
-      if (userLng && languageValues.includes(userLng)) {
-        const redirectUrl = new URL(`/${userLng}${pathname}${search}`, req.url);
-        console.debug(`middleware(req='${req.url}') session redirect '${redirectUrl}'`);
-        return NextResponse.redirect(redirectUrl);
-      }
-    }
-
-    const lng = findNextLanguage(req);
     const redirectUrl = new URL(`/${lng}${pathname}${search}`, req.url);
+
     console.debug(`middleware(req='${req.url}') lng redirect '${redirectUrl}'`);
     return NextResponse.redirect(redirectUrl);
   }
