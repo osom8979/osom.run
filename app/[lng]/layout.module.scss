@@ -1,3 +1,5 @@
+$navi-width: 60;
+
 @mixin hide-scrollbar {
   /* Chrome, Safari, Opera */
   &::-webkit-scrollbar {
@@ -22,6 +24,13 @@
   @apply m-0;
 }
 
+.logo {
+  @apply flex flex-row;
+  @apply justify-center items-center;
+  @apply m-0 p-1;
+  @apply w-full;
+}
+
 .content {
   @apply flex flex-row;
 }
@@ -31,13 +40,18 @@
   @apply sm:block;
 
   @apply h-screen;
+  @apply w-#{$navi-width};
+
   @apply bg-base-200;
   @apply overflow-y-auto;
   @apply overflow-x-hidden;
 
+  hr {
+    @apply border-base-100;
+  }
+
   ul {
     @apply menu menu-sm menu-vertical;
-    @apply w-40;
     @apply p-1;
 
     li {
@@ -107,12 +121,17 @@
 
 .overlay {
   @apply min-h-full;
+  @apply w-#{$navi-width};
+
   @apply bg-base-200;
   @apply overflow-y-auto;
 
+  hr {
+    @apply border-base-100;
+  }
+
   ul {
     @apply menu menu-sm menu-vertical;
-    @apply w-40;
     @apply p-1;
 
     li {

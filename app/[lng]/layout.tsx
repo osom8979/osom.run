@@ -60,6 +60,10 @@ export default async function LngLayout(props: I18nLayoutProps) {
           <div className="drawer-content">
             <div className={styles.content}>
               <nav className={styles.contentLeft}>
+                <Link className={styles.logo} href={`/${lng}`} hrefLang={lng}>
+                  <Logo />
+                </Link>
+
                 <MainMenu lng={lng} />
               </nav>
 
@@ -76,10 +80,6 @@ export default async function LngLayout(props: I18nLayoutProps) {
                           <MaterialSymbolsMenuRounded className="w-6 h-6" />
                         </label>
                       </div>
-
-                      <Link href={`/${lng}/`} hrefLang={lng}>
-                        <Logo className="h-4" />
-                      </Link>
                     </div>
 
                     <div className={styles.headerCenter}></div>
@@ -112,6 +112,10 @@ export default async function LngLayout(props: I18nLayoutProps) {
             ></label>
 
             <nav className={styles.overlay}>
+              <Link className={styles.logo} href={`/${lng}`} hrefLang={lng}>
+                <Logo />
+              </Link>
+
               <MainMenu lng={lng} />
             </nav>
           </div>

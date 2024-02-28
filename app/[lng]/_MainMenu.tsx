@@ -39,10 +39,10 @@ export default function MainMenu(props: MainMenuProps) {
             <Link
               href={menu.href}
               hrefLang={menu.lng ?? lng}
-              data-active={pathname.startsWith(menu.href)}
+              data-active={pathname == menu.href}
             >
               {menu.icon}
-              <span>{menu.text}</span>
+              {menu.text && <span>{menu.text}</span>}
             </Link>
           </li>
         );

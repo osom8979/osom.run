@@ -13,7 +13,7 @@ export default async function LngPage(props: I18nPageProps) {
     <section className={styles.root}>
       <div className={styles.centerBox}>
         <div className={styles.logoBox}>
-          <Link href={`/${lng}/`} hrefLang={lng}>
+          <Link href={`/${lng}`} hrefLang={lng}>
             <Logo />
           </Link>
         </div>
