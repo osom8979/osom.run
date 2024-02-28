@@ -59,27 +59,37 @@ export default async function LngLayout(props: I18nLayoutProps) {
 
           <div className="drawer-content">
             <div className={styles.content}>
-              <nav className={styles.contentLeft}>
-                <Link className={styles.logo} href={`/${lng}`} hrefLang={lng}>
-                  <Logo />
-                </Link>
+              {hasSession && (
+                <nav className={styles.contentLeft}>
+                  <Link className={styles.logo} href={`/${lng}`} hrefLang={lng}>
+                    <Logo />
+                  </Link>
 
-                <MainMenu lng={lng} />
-              </nav>
+                  <MainMenu lng={lng} />
+                </nav>
+              )}
 
               <div className={styles.contentRight}>
                 <header>
                   <div className={styles.headerLayout}>
                     <div className={styles.headerLeft}>
-                      <div className="flex-none sm:hidden">
-                        <label
-                          htmlFor={OSOM_MAIN_MENU_BUTTON_ID}
-                          aria-label={t('open_drawer')}
-                          className="btn btn-sm btn-circle btn-ghost"
-                        >
-                          <MaterialSymbolsMenuRounded className="w-6 h-6" />
-                        </label>
-                      </div>
+                      {hasSession && (
+                        <div className="flex-none sm:hidden">
+                          <label
+                            htmlFor={OSOM_MAIN_MENU_BUTTON_ID}
+                            aria-label={t('open_drawer')}
+                            className="btn btn-sm btn-circle btn-ghost"
+                          >
+                            <MaterialSymbolsMenuRounded className="w-6 h-6" />
+                          </label>
+                        </div>
+                      )}
+
+                      {!hasSession && (
+                        <Link className={styles.logo} href={`/${lng}`} hrefLang={lng}>
+                          <Logo />
+                        </Link>
+                      )}
                     </div>
 
                     <div className={styles.headerCenter}></div>
@@ -93,7 +103,11 @@ export default async function LngLayout(props: I18nLayoutProps) {
                           logoutLabel={t('logout')}
                         />
                       ) : (
-                        <AnonymousMenu lng={lng} loginLabel={t('login')} />
+                        <AnonymousMenu
+                          lng={lng}
+                          loginLabel={t('login')}
+                          signupLabel={t('signup')}
+                        />
                       )}
                     </div>
                   </div>
@@ -104,21 +118,23 @@ export default async function LngLayout(props: I18nLayoutProps) {
             </div>
           </div>
 
-          <div className="drawer-side z-20">
-            <label
-              htmlFor={OSOM_MAIN_MENU_BUTTON_ID}
-              aria-label={t('close_drawer')}
-              className="drawer-overlay"
-            ></label>
+          {hasSession && (
+            <div className="drawer-side z-20">
+              <label
+                htmlFor={OSOM_MAIN_MENU_BUTTON_ID}
+                aria-label={t('close_drawer')}
+                className="drawer-overlay"
+              ></label>
 
-            <nav className={styles.overlay}>
-              <Link className={styles.logo} href={`/${lng}`} hrefLang={lng}>
-                <Logo />
-              </Link>
+              <nav className={styles.overlay}>
+                <Link className={styles.logo} href={`/${lng}`} hrefLang={lng}>
+                  <Logo />
+                </Link>
 
-              <MainMenu lng={lng} />
-            </nav>
-          </div>
+                <MainMenu lng={lng} />
+              </nav>
+            </div>
+          )}
         </div>
 
         <Analytics />

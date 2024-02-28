@@ -2,6 +2,7 @@
   "logo": "osom.run",
   "progress": "Progress",
   "login": "Log in",
+  "signup": "Sign up",
   "settings": "Edit Profile",
   "logout": "Log out"
 }

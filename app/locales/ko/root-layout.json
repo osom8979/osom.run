@@ -2,6 +2,7 @@
   "logo": "osom.run",
   "progress": "Progress",
   "login": "로그인",
+  "signup": "가입하기",
   "settings": "프로필 수정",
   "logout": "로그아웃"
 }
