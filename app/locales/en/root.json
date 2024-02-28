@@ -2,7 +2,16 @@
   "title": "DevToolkit",
   "abstractor": "Rich toolset for developers",
   "menus": {
-    "progress": "Progress"
+    "home": "Home",
+    "notification": "Notification",
+    "search": "Search",
+    "starred": "Starred",
+    "teams": "Teams",
+    "files": "Files",
+    "new": "New file",
+    "settings": "Settings",
+    "trash": "Trash",
+    "logout": "Log out"
   },
   "login_now": "Login now",
   "open_drawer": "Open drawer",

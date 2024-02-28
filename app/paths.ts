@@ -6,6 +6,7 @@ export const appPaths = {
   loginPkceErrorWithReason: (reason?: ReasonType) => {
     return appPaths.loginPkceError + (reason ? `?reason=${reason}` : '');
   },
+  notification: '/notification',
   passwordResetRequest: '/password/reset/request',
   passwordResetRequestWait: '/password/reset/request/wait',
   passwordResetUpdate: '/password/reset/update',
