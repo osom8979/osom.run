@@ -16,7 +16,6 @@ import useTranslation from '@/app/libs/i18n/server';
 import {LANGUAGES} from '@/app/libs/i18n/settings';
 import {getAppearance} from '@/app/libs/supabase/metadata';
 import {THEME_COOKIE_KEY, getThemeInfo} from '@/app/libs/theme/common';
-import {appPaths} from '@/app/paths';
 
 const OSOM_MAIN_MENU_BUTTON_ID = 'osom-main-menu-button';
 

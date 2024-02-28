@@ -2,7 +2,6 @@ import Link from 'next/link';
 import styles from '@/app/[lng]/page.module.scss';
 import type {I18nPageProps} from '@/app/[lng]/params';
 import Logo from '@/app/components/Logo';
-import PajamasProgress from '@/app/icons/pajamas/PajamasProgress';
 import useTranslation from '@/app/libs/i18n/server';
 import {appPaths} from '@/app/paths';
 
