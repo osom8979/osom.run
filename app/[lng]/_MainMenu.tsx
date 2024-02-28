@@ -1,14 +1,19 @@
 'use client';
 
+import type {User} from '@supabase/supabase-js';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import type {ReactNode} from 'react';
+import FlowbiteChevronDownSolid from '@/app/icons/flowbite/FlowbiteChevronDownSolid';
+import MdiAccountCircle from '@/app/icons/mdi/MdiAccountCircle';
 import PajamasProgress from '@/app/icons/pajamas/PajamasProgress';
 import useTranslation from '@/app/libs/i18n/client';
+import {getProfile} from '@/app/libs/supabase/metadata';
 import {appPaths} from '@/app/paths';
 
 interface MainMenuProps {
   lng: string;
+  user: User;
 }
 
 interface MainMenuItem {
@@ -19,9 +24,10 @@ interface MainMenuItem {
 }
 
 export default function MainMenu(props: MainMenuProps) {
-  const {lng} = props;
+  const {lng, user} = props;
   const {t} = useTranslation(lng, 'root');
   const pathname = usePathname();
+  const profile = getProfile(user);
 
   const menuItems = [
     {
@@ -33,6 +39,14 @@ export default function MainMenu(props: MainMenuProps) {
 
   return (
     <ul>
+      <div className="flex flex-row items-center justify-between btn btn-ghost px-2">
+        <MdiAccountCircle className="w-7 h-7" />
+        <div className="flex-1 flex flex-row items-center">
+          <p>{profile.nickname ?? t('nameless')}</p>
+        </div>
+        <FlowbiteChevronDownSolid className="w-6 h-6" />
+      </div>
+
       {menuItems.map((menu, index) => {
         return (
           <li key={index} data-tip={menu.text}>

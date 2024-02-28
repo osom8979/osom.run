@@ -1,5 +1,3 @@
-import 'server-only';
-
 import type {User} from '@supabase/gotrue-js';
 import {FALLBACK_LANGUAGE} from '@/app/libs/i18n/settings';
 import {SYSTEM_THEME_NAME} from '@/app/libs/theme/common';

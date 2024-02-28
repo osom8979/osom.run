@@ -61,11 +61,7 @@ export default async function LngLayout(props: I18nLayoutProps) {
             <div className={styles.content}>
               {hasSession && (
                 <nav className={styles.contentLeft}>
-                  <Link className={styles.logo} href={`/${lng}`} hrefLang={lng}>
-                    <Logo />
-                  </Link>
-
-                  <MainMenu lng={lng} />
+                  <MainMenu lng={lng} user={user.data.user} />
                 </nav>
               )}
 
@@ -127,11 +123,7 @@ export default async function LngLayout(props: I18nLayoutProps) {
               ></label>
 
               <nav className={styles.overlay}>
-                <Link className={styles.logo} href={`/${lng}`} hrefLang={lng}>
-                  <Logo />
-                </Link>
-
-                <MainMenu lng={lng} />
+                <MainMenu lng={lng} user={user.data.user} />
               </nav>
             </div>
           )}

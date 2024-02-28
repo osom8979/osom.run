@@ -1,5 +1,3 @@
-$navi-width: 60;
-
 @mixin hide-scrollbar {
   /* Chrome, Safari, Opera */
   &::-webkit-scrollbar {
@@ -24,13 +22,6 @@ $navi-width: 60;
   @apply m-0;
 }
 
-.logo {
-  @apply flex flex-row;
-  @apply justify-center items-center;
-  @apply m-0 p-1;
-  @apply w-full;
-}
-
 .content {
   @apply flex flex-row;
 }
@@ -40,15 +31,11 @@ $navi-width: 60;
   @apply sm:block;
 
   @apply h-screen;
-  @apply w-#{$navi-width};
+  @apply w-60;
 
   @apply bg-base-200;
   @apply overflow-y-auto;
   @apply overflow-x-hidden;
-
-  hr {
-    @apply border-base-100;
-  }
 
   ul {
     @apply menu menu-sm menu-vertical;
@@ -121,17 +108,13 @@ $navi-width: 60;
 
 .overlay {
   @apply min-h-full;
-  @apply w-#{$navi-width};
+  @apply w-9/12;
 
   @apply bg-base-200;
   @apply overflow-y-auto;
 
-  hr {
-    @apply border-base-100;
-  }
-
   ul {
-    @apply menu menu-sm menu-vertical;
+    @apply menu menu-vertical;
     @apply p-1;
 
     li {
@@ -141,7 +124,7 @@ $navi-width: 60;
       }
 
       svg {
-        @apply w-5 h-5;
+        @apply w-6 h-6;
       }
 
       span {

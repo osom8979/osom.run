@@ -1,8 +1,7 @@
 'use client';
 
 import {User} from '@supabase/supabase-js';
-import UserDropdown from '@/app/[lng]/_UserDropdown';
-import IonNotifications from '@/app/icons/ion/IonNotifications';
+import MdiDotsHorizontal from '@/app/icons/mdi/MdiDotsHorizontal';
 
 interface UserMenuProps {
   lng: string;
@@ -12,19 +11,22 @@ interface UserMenuProps {
 }
 
 export default function UserMenu(props: UserMenuProps) {
-  const {lng, user, settingsLabel, logoutLabel} = props;
+  console.assert(props);
+
   return (
     <div className="flex items-center gap-2">
       <button className="btn btn-sm btn-circle btn-ghost">
-        <IonNotifications className="w-6 h-6" />
+        <MdiDotsHorizontal className="w-6 h-6" />
       </button>
 
-      <UserDropdown
-        lng={lng}
-        user={user}
-        settingsLabel={settingsLabel}
-        logoutLabel={logoutLabel}
-      />
+      {/*<IonNotifications className="w-6 h-6" />*/}
+      {/*<UserDropdown*/}
+      {/*  lng={lng}*/}
+      {/*  user={user}*/}
+      {/*  settingsLabel={settingsLabel}*/}
+      {/*  logoutLabel={logoutLabel}*/}
+      {/*/>*/}
+      {/*<MdiDotsHorizontal className="w-6 h-6" />*/}
     </div>
   );
 }
