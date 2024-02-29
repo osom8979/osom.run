@@ -1,6 +1,4 @@
 {
-  "title": "DevToolkit",
-  "abstractor": "개발자를 위한 잡다한 도구 모음",
   "menus": {
     "home": "홈 페이지",
     "notification": "수신함",
@@ -12,8 +10,5 @@
     "settings": "설정",
     "trash": "휴지통",
     "logout": "로그아웃"
-  },
-  "login_now": "로그인 하세요!",
-  "open_drawer": "Open drawer",
-  "close_drawer": "Close drawer"
+  }
 }

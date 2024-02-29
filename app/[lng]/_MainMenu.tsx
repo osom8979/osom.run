@@ -34,7 +34,7 @@ interface MainMenuItem {
 
 export default function MainMenu(props: MainMenuProps) {
   const {lng, user} = props;
-  const {t} = useTranslation(lng, 'root');
+  const {t} = useTranslation(lng, '[lng].MainMenu');
   const pathname = usePathname();
   const profile = getProfile(user);
 

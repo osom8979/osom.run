@@ -1,3 +1,5 @@
+$menu-side-width: 15rem;
+
 @mixin hide-scrollbar {
   /* Chrome, Safari, Opera */
   &::-webkit-scrollbar {
@@ -13,10 +15,10 @@
 
 .body {
   @include hide-scrollbar;
-  @apply overflow-y-hidden;
+  @apply overflow-hidden;
 
   @apply h-screen;
-  @apply w-full;
+  @apply w-screen;
 
   @apply p-0;
   @apply m-0;
@@ -26,22 +28,25 @@
   @apply flex flex-row;
 }
 
-.contentLeft {
+.menuSide {
   @apply hidden;
   @apply sm:block;
 
   @apply h-screen;
-  @apply w-60;
+  @apply w-[#{$menu-side-width}];
+  @apply min-w-[#{$menu-side-width}];
+  @apply max-w-[#{$menu-side-width}];
 
   @apply bg-base-200;
-  @apply overflow-y-auto;
-  @apply overflow-x-hidden;
 
   ul {
     @apply menu menu-sm menu-vertical;
     @apply p-1;
 
     li {
+      @apply tooltip;
+      @apply tooltip-right;
+
       [data-active=true] {
         @apply bg-neutral;
         @apply text-neutral-content;
@@ -58,10 +63,11 @@
   }
 }
 
-.contentRight {
+.contentMain {
   @apply flex-grow;
   @apply h-screen;
-  @apply overflow-y-auto;
+  @apply w-full;
+  @apply overflow-auto;
 
   & > header {
     @apply sticky;
@@ -69,14 +75,21 @@
 
     @apply h-osom-header;
     @apply w-full;
+
     @apply m-0;
-    @apply p-1;
+    @apply py-2 px-3 sm:p-1;
     @apply z-10;
+
+    svg {
+      @apply w-8 h-8;
+      @apply sm:w-6 sm:h-6;
+    }
   }
 
   & > main {
     @apply h-osom-main;
     @apply w-full;
+
     @apply m-0;
     @apply p-0;
     @apply z-0;
@@ -102,16 +115,15 @@
 }
 
 .headerRight {
-  @apply hidden;
-  @apply sm:flex sm:flex-row;
+  @apply flex flex-row;
+  @apply items-center;
+  @apply space-x-2;
 }
 
-.overlay {
+.menuOverlay {
   @apply min-h-full;
   @apply w-9/12;
-
   @apply bg-base-200;
-  @apply overflow-y-auto;
 
   ul {
     @apply menu menu-vertical;

@@ -4,20 +4,19 @@ import {SpeedInsights} from '@vercel/speed-insights/next';
 import {dir} from 'i18next';
 import {cookies} from 'next/headers';
 import Link from 'next/link';
+import {Fragment} from 'react';
 import {Toaster} from 'react-hot-toast';
-import AnonymousMenu from '@/app/[lng]/_AnonymousMenu';
 import MainMenu from '@/app/[lng]/_MainMenu';
-import UserMenu from '@/app/[lng]/_UserMenu';
 import styles from '@/app/[lng]/layout.module.scss';
 import type {I18nLayoutProps} from '@/app/[lng]/params';
 import Logo from '@/app/components/Logo';
+import MdiDotsHorizontal from '@/app/icons/mdi/MdiDotsHorizontal';
 import MaterialSymbolsMenuRounded from '@/app/icons/ms/MaterialSymbolsMenuRounded';
+import {OSOM_MAIN_MENU_BUTTON_ID} from '@/app/ids';
 import useTranslation from '@/app/libs/i18n/server';
 import {LANGUAGES} from '@/app/libs/i18n/settings';
-import {getAppearance} from '@/app/libs/supabase/metadata';
-import {THEME_COOKIE_KEY, getThemeInfo} from '@/app/libs/theme/common';
-
-const OSOM_MAIN_MENU_BUTTON_ID = 'osom-main-menu-button';
+import {appPaths} from '@/app/paths';
+import {findThemeInfo} from '@/app/theme';
 
 export async function generateStaticParams() {
   return LANGUAGES.map(lng => ({lng}));
@@ -26,28 +25,18 @@ export async function generateStaticParams() {
 export default async function LngLayout(props: I18nLayoutProps) {
   const cookieStore = cookies();
   const supabase = createServerComponentClient({cookies: () => cookieStore});
-  const user = await supabase.auth.getUser();
-  const hasSession = user.error === null;
-
+  const userResponse = await supabase.auth.getUser();
+  const hasSession = userResponse.error === null;
   const {lng} = props.params;
-  const {t} = await useTranslation(lng, 'root-layout');
-
-  let themeName: string;
-  if (hasSession) {
-    themeName = getAppearance(user.data.user).theme;
-  } else {
-    const themeCookie = cookieStore.get(THEME_COOKIE_KEY);
-    themeName = themeCookie?.value ?? '';
-  }
-
-  const themeInfo = getThemeInfo(themeName);
+  const {t} = await useTranslation(lng, '[lng].layout');
+  const theme = findThemeInfo(userResponse);
 
   return (
     <html
-      className={themeInfo.className}
+      className={theme.className}
       lang={lng}
       dir={dir(lng)}
-      data-theme={themeInfo.dataTheme}
+      data-theme={theme.dataTheme}
     >
       <body className={styles.body}>
         <div className="drawer overflow-hidden">
@@ -60,12 +49,12 @@ export default async function LngLayout(props: I18nLayoutProps) {
           <div className="drawer-content">
             <div className={styles.content}>
               {hasSession && (
-                <nav className={styles.contentLeft}>
-                  <MainMenu lng={lng} user={user.data.user} />
+                <nav className={styles.menuSide}>
+                  <MainMenu lng={lng} user={userResponse.data.user} />
                 </nav>
               )}
 
-              <div className={styles.contentRight}>
+              <div className={styles.contentMain}>
                 <header>
                   <div className={styles.headerLayout}>
                     <div className={styles.headerLeft}>
@@ -76,7 +65,7 @@ export default async function LngLayout(props: I18nLayoutProps) {
                             aria-label={t('open_drawer')}
                             className="btn btn-sm btn-circle btn-ghost"
                           >
-                            <MaterialSymbolsMenuRounded className="w-6 h-6" />
+                            <MaterialSymbolsMenuRounded />
                           </label>
                         </div>
                       )}
@@ -92,18 +81,28 @@ export default async function LngLayout(props: I18nLayoutProps) {
 
                     <div className={styles.headerRight}>
                       {hasSession ? (
-                        <UserMenu
-                          lng={lng}
-                          user={user.data.user}
-                          settingsLabel={t('settings')}
-                          logoutLabel={t('logout')}
-                        />
+                        <Fragment>
+                          <button className="btn btn-sm btn-ghost btn-circle">
+                            <MdiDotsHorizontal />
+                          </button>
+                        </Fragment>
                       ) : (
-                        <AnonymousMenu
-                          lng={lng}
-                          loginLabel={t('login')}
-                          signupLabel={t('signup')}
-                        />
+                        <Fragment>
+                          <Link
+                            className="btn btn-sm btn-ghost"
+                            href={`/${lng}${appPaths.login}`}
+                            hrefLang={lng}
+                          >
+                            {t('login')}
+                          </Link>
+                          <Link
+                            className="btn btn-sm btn-neutral"
+                            href={`/${lng}${appPaths.signup}`}
+                            hrefLang={lng}
+                          >
+                            {t('signup')}
+                          </Link>
+                        </Fragment>
                       )}
                     </div>
                   </div>
@@ -122,8 +121,8 @@ export default async function LngLayout(props: I18nLayoutProps) {
                 className="drawer-overlay"
               ></label>
 
-              <nav className={styles.overlay}>
-                <MainMenu lng={lng} user={user.data.user} />
+              <nav className={styles.menuOverlay}>
+                <MainMenu lng={lng} user={userResponse.data.user} />
               </nav>
             </div>
           )}

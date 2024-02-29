@@ -7,7 +7,7 @@ import {appPaths} from '@/app/paths';
 
 export default async function LngPage(props: I18nPageProps) {
   const {lng} = props.params;
-  const {t} = await useTranslation(lng, 'root');
+  const {t} = await useTranslation(lng, '[lng].page');
 
   return (
     <section className={styles.root}>

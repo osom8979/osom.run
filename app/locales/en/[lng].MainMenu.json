@@ -1,6 +1,4 @@
 {
-  "title": "DevToolkit",
-  "abstractor": "Rich toolset for developers",
   "menus": {
     "home": "Home",
     "notification": "Notification",
@@ -12,8 +10,5 @@
     "settings": "Settings",
     "trash": "Trash",
     "logout": "Log out"
-  },
-  "login_now": "Login now",
-  "open_drawer": "Open drawer",
-  "close_drawer": "Close drawer"
+  }
 }
