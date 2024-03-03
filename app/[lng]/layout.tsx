@@ -71,9 +71,11 @@ export default async function LngLayout(props: I18nLayoutProps) {
                       )}
 
                       {!hasSession && (
-                        <Link className={styles.logo} href={`/${lng}`} hrefLang={lng}>
-                          <Logo />
-                        </Link>
+                        <div className={styles.logoBox}>
+                          <Link href={`/${lng}`} hrefLang={lng}>
+                            <Logo />
+                          </Link>
+                        </div>
                       )}
                     </div>
 
