@@ -93,7 +93,7 @@ export default function MainMenu(props: MainMenuProps) {
 
   return (
     <Fragment>
-      <div className="flex flex-row items-center justify-between btn btn-ghost px-2">
+      <div className="flex flex-row items-center justify-between btn btn-ghost no-animation px-2 mx-2 mt-2 mb-1">
         <MdiAccountCircle className="w-7 h-7" />
         <div className="flex-1 flex flex-row items-center">
           <p>{profile.nickname ?? t('nameless')}</p>
