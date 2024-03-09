@@ -1,4 +1,5 @@
 $menu-side-width: 12rem;
+$menu-overlay-width: 12rem;
 
 @mixin hide-scrollbar {
   /* Chrome, Safari, Opera */
@@ -39,7 +40,7 @@ $menu-side-width: 12rem;
 
   @apply bg-base-200;
 
-  ul {
+  > ul {
     @apply menu menu-sm menu-vertical;
     @apply p-1;
 
@@ -134,13 +135,18 @@ $menu-side-width: 12rem;
 }
 
 .menuOverlay {
-  @apply min-h-full;
-  @apply w-9/12;
+  @apply w-[#{$menu-overlay-width}];
+  @apply h-screen;
+  @apply min-h-screen;
+  @apply max-h-screen;
   @apply bg-base-200;
+  @apply overflow-x-hidden;
+  @apply overflow-y-auto;
 
-  ul {
+  > ul {
     @apply menu menu-vertical;
     @apply p-1;
+    @apply flex-nowrap;
 
     li {
       [data-active=true] {

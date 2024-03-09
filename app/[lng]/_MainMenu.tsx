@@ -117,6 +117,16 @@ export default function MainMenu(props: MainMenuProps) {
           );
         })}
       </ul>
+
+      <div className="fixed bottom-0 w-full">
+        <div className="flex flex-row items-center justify-between">
+          <MdiAccountCircle className="w-7 h-7" />
+          <div className="flex-1 flex flex-row items-center">
+            <p>{profile.nickname ?? t('nameless')}</p>
+          </div>
+          <FlowbiteChevronDownSolid className="w-6 h-6" />
+        </div>
+      </div>
     </Fragment>
   );
 }
