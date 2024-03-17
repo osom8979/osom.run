@@ -3606,10 +3606,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"osom-ui@npm:^0.0.25":
-  version: 0.0.25
-  resolution: "osom-ui@npm:0.0.25"
-  checksum: 4c4f62cd7357e3f0496334271171a7426be05a17a015df0a391f3a6d3baaf8e56cee45d2db95790ee24213bb39719bbccbbe5edc936a3062ae559fc4a6b14b07
+"osom-ui@npm:^0.0.26":
+  version: 0.0.26
+  resolution: "osom-ui@npm:0.0.26"
+  checksum: 27b2ec1831dea001c9ec34f42a8b636dbbf7ca2f676b42c88b3cf6fe61e6ce985eccfcdd78a53e53966286a0e6c6767a474f377ace6f8d608a9dc19b2385b06a
   languageName: node
   linkType: hard
 
@@ -3649,7 +3649,7 @@ __metadata:
     lodash: "npm:^4.17.21"
     luxon: "npm:^3.4.4"
     next: "npm:^14.0.3"
-    osom-ui: "npm:^0.0.25"
+    osom-ui: "npm:^0.0.26"
     postcss: "npm:^8.4.31"
     prettier: "npm:^3.1.0"
     react: "npm:^18.2.0"
