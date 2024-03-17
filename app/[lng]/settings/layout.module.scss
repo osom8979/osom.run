@@ -6,7 +6,8 @@
   @apply sm:space-y-4;
 
   .tier {
-    @apply badge badge-sm badge-primary;
+    @apply osom-badge osom-badge-primary;
+    //@apply badge-sm
     @apply ml-2;
   }
 
@@ -39,7 +40,8 @@
     }
 
     .headerLink {
-      @apply btn btn-sm btn-outline;
+      @apply osom-btn osom-btn-outline;
+      //@apply btn-sm;
     }
   }
 
@@ -49,15 +51,15 @@
 
     .navi {
       ul {
-        @apply menu menu-vertical;
+        @apply osom-menu osom-menu-vertical;
         @apply sm:w-48;
         @apply bg-base-200;
         @apply rounded-br-box;
         @apply sm:rounded-box;
 
         li {
-          @apply max-sm:tooltip;
-          @apply max-sm:tooltip-right;
+          @apply max-sm:osom-tooltip;
+          //@apply max-sm:osom-tooltip-right;
 
           [data-active=true] {
             @apply bg-neutral;

@@ -13,8 +13,8 @@ export const DARK_THEME_NAME = ThemeValues[2];
 export const LIGHT_THEME_CLASS = '';
 export const DARK_THEME_CLASS = 'dark';
 
-export const LIGHT_DAISYUI_THEME_NAME = 'cupcake';
-export const DARK_DAISYUI_THEME_NAME = 'business';
+export const LIGHT_DAISYUI_THEME_NAME = 'light';
+export const DARK_DAISYUI_THEME_NAME = 'dark';
 
 export interface ThemeInfo {
   className: string;

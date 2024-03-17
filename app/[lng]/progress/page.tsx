@@ -2,7 +2,7 @@ import Link from 'next/link';
 import {type I18nPageProps} from '@/app/[lng]/params';
 import NewProgressButton from '@/app/[lng]/progress/_NewProgressButton';
 import styles from '@/app/[lng]/progress/page.module.scss';
-import Logo from '@/app/components/Logo';
+import OsomLogo from '@/app/icons/osom/OsomLogo';
 import useTranslation from '@/app/libs/i18n/server';
 
 export default async function ProgressPage(props: I18nPageProps) {
@@ -14,7 +14,7 @@ export default async function ProgressPage(props: I18nPageProps) {
       <div className={styles.centerBox}>
         <div className={styles.logoBox}>
           <Link href={`/${lng}/`} hrefLang={lng}>
-            <Logo />
+            <OsomLogo />
           </Link>
         </div>
 

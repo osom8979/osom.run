@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styles from '@/app/[lng]/page.module.scss';
 import type {I18nPageProps} from '@/app/[lng]/params';
-import Logo from '@/app/components/Logo';
+import OsomLogo from '@/app/icons/osom/OsomLogo';
 import useTranslation from '@/app/libs/i18n/server';
 import {appPaths} from '@/app/paths';
 
@@ -14,7 +14,7 @@ export default async function LngPage(props: I18nPageProps) {
       <div className={styles.centerBox}>
         <div className={styles.logoBox}>
           <Link href={`/${lng}`} hrefLang={lng}>
-            <Logo />
+            <OsomLogo />
           </Link>
         </div>
 

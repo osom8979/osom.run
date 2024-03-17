@@ -9,9 +9,9 @@ import {Toaster} from 'react-hot-toast';
 import MainMenu from '@/app/[lng]/_MainMenu';
 import styles from '@/app/[lng]/layout.module.scss';
 import type {I18nLayoutProps} from '@/app/[lng]/params';
-import Logo from '@/app/components/Logo';
 import MdiDotsHorizontal from '@/app/icons/mdi/MdiDotsHorizontal';
 import MaterialSymbolsMenuRounded from '@/app/icons/ms/MaterialSymbolsMenuRounded';
+import OsomLogo from '@/app/icons/osom/OsomLogo';
 import {OSOM_MAIN_MENU_BUTTON_ID} from '@/app/ids';
 import useTranslation from '@/app/libs/i18n/server';
 import {LANGUAGES} from '@/app/libs/i18n/settings';
@@ -73,7 +73,7 @@ export default async function LngLayout(props: I18nLayoutProps) {
                       {!hasSession && (
                         <div className={styles.logoBox}>
                           <Link href={`/${lng}`} hrefLang={lng}>
-                            <Logo />
+                            <OsomLogo />
                           </Link>
                         </div>
                       )}

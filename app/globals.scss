@@ -5,9 +5,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer components {
-  .osom-card {
-    @apply card border border-base-content/20;
-  }
-}

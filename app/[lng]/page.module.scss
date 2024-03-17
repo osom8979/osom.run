@@ -13,7 +13,8 @@ $divider-end: base-content/0;
 
   @screen lg {
     @apply flex items-center;
-    @apply h-osom-main;
+    //@apply h-osom-main;
+    height: calc(100vh - 3rem);
   }
 
   .centerBox {
@@ -83,7 +84,7 @@ $divider-end: base-content/0;
 
       .featureIcon {
         @apply flex flex-col justify-center items-center;
-        @apply tooltip;
+        @apply osom-tooltip;
 
         svg {
           @apply w-7 h-7;

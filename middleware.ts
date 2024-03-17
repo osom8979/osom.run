@@ -48,7 +48,6 @@ function validMiddlewareRequest(req: NextRequest) {
 
 export async function middleware(req: NextRequest) {
   console.assert(validMiddlewareRequest(req));
-
   const res = NextResponse.next();
   const supabase = createMiddlewareClient({req, res});
   const sessionResult = await supabase.auth.getSession();

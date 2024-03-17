@@ -5,7 +5,6 @@ import {redirect} from 'next/navigation';
 import LoginForm from '@/app/[lng]/login/_LoginForm';
 import OAuthLoginButton from '@/app/[lng]/login/_OAuthLoginButton';
 import {type I18nPageProps} from '@/app/[lng]/params';
-import CenterLayout from '@/app/components/layout/CenterLayout';
 import MdiDiscord from '@/app/icons/mdi/MdiDiscord';
 import MdiGithub from '@/app/icons/mdi/MdiGithub';
 import MdiGoogle from '@/app/icons/mdi/MdiGoogle';
@@ -24,7 +23,7 @@ export default async function LoginPage(props: I18nPageProps) {
   }
 
   return (
-    <CenterLayout lng={lng}>
+    <div className="osom-center">
       <section className="osom-card">
         <div className="card-body items-center space-y-4">
           <div className="card-title">
@@ -73,6 +72,6 @@ export default async function LoginPage(props: I18nPageProps) {
           </p>
         </div>
       </section>
-    </CenterLayout>
+    </div>
   );
 }

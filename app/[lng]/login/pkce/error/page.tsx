@@ -1,7 +1,6 @@
 import PkceErrorReason from '@/app/[lng]/login/pkce/error/_PkceErrorReason';
 import type {I18nPageProps} from '@/app/[lng]/params';
 import GoBackButton from '@/app/components/button/GoBackButton';
-import CenterLayout from '@/app/components/layout/CenterLayout';
 import MdiBarcodeOff from '@/app/icons/mdi/MdiBarcodeOff';
 import useTranslation from '@/app/libs/i18n/server';
 
@@ -10,7 +9,7 @@ export default async function LoginPkceErrorPage(props: I18nPageProps) {
   const {t} = await useTranslation(lng, 'login-pkce-error');
 
   return (
-    <CenterLayout lng={lng}>
+    <div className="osom-center">
       <section className="osom-card">
         <div className="card-body items-center space-y-4">
           <figure>
@@ -32,6 +31,6 @@ export default async function LoginPkceErrorPage(props: I18nPageProps) {
           </div>
         </div>
       </section>
-    </CenterLayout>
+    </div>
   );
 }

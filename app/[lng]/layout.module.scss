@@ -41,12 +41,13 @@ $menu-overlay-width: 12rem;
   @apply bg-base-200;
 
   > ul {
-    @apply menu menu-sm menu-vertical;
+    @apply osom-menu osom-menu-vertical;
+    //@apply menu-sm;
     @apply p-1;
 
     li {
-      @apply tooltip;
-      @apply tooltip-right;
+      @apply osom-tooltip;
+      //@apply osom-tooltip-right;
 
       [data-active=true] {
         @apply bg-neutral;
@@ -74,7 +75,7 @@ $menu-overlay-width: 12rem;
     @apply sticky;
     @apply top-0;
 
-    @apply h-osom-header;
+    @apply h-12;
     @apply w-full;
 
     @apply m-0;
@@ -88,8 +89,8 @@ $menu-overlay-width: 12rem;
   }
 
   & > main {
-    @apply h-osom-main;
     @apply w-full;
+    height: calc(100vh - 3rem);
 
     @apply m-0;
     @apply p-0;
@@ -144,7 +145,7 @@ $menu-overlay-width: 12rem;
   @apply overflow-y-auto;
 
   > ul {
-    @apply menu menu-vertical;
+    @apply osom-menu osom-menu-vertical;
     @apply p-1;
     @apply flex-nowrap;
 
