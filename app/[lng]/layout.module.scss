@@ -41,13 +41,13 @@ $menu-overlay-width: 12rem;
   @apply bg-base-200;
 
   > ul {
-    @apply osom-menu osom-menu-vertical;
+    @apply daisy-menu daisy-menu-vertical;
     //@apply menu-sm;
     @apply p-1;
 
     li {
-      @apply osom-tooltip;
-      //@apply osom-tooltip-right;
+      @apply daisy-tooltip;
+      //@apply daisy-tooltip-right;
 
       [data-active=true] {
         @apply bg-neutral;
@@ -145,7 +145,7 @@ $menu-overlay-width: 12rem;
   @apply overflow-y-auto;
 
   > ul {
-    @apply osom-menu osom-menu-vertical;
+    @apply daisy-menu daisy-menu-vertical;
     @apply p-1;
     @apply flex-nowrap;
 

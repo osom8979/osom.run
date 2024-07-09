@@ -9,8 +9,8 @@ export default async function SignupPage(props: I18nPageProps) {
   const {t} = await useTranslation(lng, 'signup');
 
   return (
-    <div className="osom-center">
-      <section className="osom-card">
+    <div className="daisy-center">
+      <section className="daisy-card">
         <div className="card-body items-center space-y-4">
           <div className="card-title">
             <h2>{t('title')}</h2>

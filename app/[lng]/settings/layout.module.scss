@@ -6,7 +6,7 @@
   @apply sm:space-y-4;
 
   .tier {
-    @apply osom-badge osom-badge-primary;
+    @apply daisy-badge daisy-badge-primary;
     //@apply badge-sm
     @apply ml-2;
   }
@@ -40,7 +40,7 @@
     }
 
     .headerLink {
-      @apply osom-btn osom-btn-outline;
+      @apply daisy-btn daisy-btn-outline;
       //@apply btn-sm;
     }
   }
@@ -51,15 +51,15 @@
 
     .navi {
       ul {
-        @apply osom-menu osom-menu-vertical;
+        @apply daisy-menu daisy-menu-vertical;
         @apply sm:w-48;
         @apply bg-base-200;
         @apply rounded-br-box;
         @apply sm:rounded-box;
 
         li {
-          @apply max-sm:osom-tooltip;
-          //@apply max-sm:osom-tooltip-right;
+          @apply max-sm:daisy-tooltip;
+          //@apply max-sm:daisy-tooltip-right;
 
           [data-active=true] {
             @apply bg-neutral;

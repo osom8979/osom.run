@@ -9,8 +9,8 @@ export default async function SignupWaitPage(props: I18nPageProps) {
   const {t} = await useTranslation(lng, 'signup-wait');
 
   return (
-    <div className="osom-center">
-      <section className="osom-card">
+    <div className="daisy-center">
+      <section className="daisy-card">
         <div className="card-body items-center space-y-4">
           <figure>
             <UilEnvelopeCheck className="w-16 h-16" />

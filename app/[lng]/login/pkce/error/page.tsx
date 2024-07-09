@@ -9,8 +9,8 @@ export default async function LoginPkceErrorPage(props: I18nPageProps) {
   const {t} = await useTranslation(lng, 'login-pkce-error');
 
   return (
-    <div className="osom-center">
-      <section className="osom-card">
+    <div className="daisy-center">
+      <section className="daisy-card">
         <div className="card-body items-center space-y-4">
           <figure>
             <MdiBarcodeOff className="w-28 h-28" />

@@ -15,8 +15,8 @@ export default async function RootNotFound() {
 
   return (
     <html className={theme.className} data-theme={theme.dataTheme}>
-      <body className="osom-viewport">
-        <main className="osom-center">
+      <body className="daisy-viewport">
+        <main className="daisy-center">
           <section className="flex flex-col justify-center">
             <figure className="w-full flex justify-center">
               <TablerError404 className="w-28 h-28" />

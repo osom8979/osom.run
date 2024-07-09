@@ -10,8 +10,8 @@ export default async function PasswordResetRequestPage(props: I18nPageProps) {
   const {t} = await useTranslation(lng, 'password-reset-request');
 
   return (
-    <div className="osom-center">
-      <section className="osom-card">
+    <div className="daisy-center">
+      <section className="daisy-card">
         <div className="card-body items-center space-y-4">
           <figure>
             <MaterialSymbolsLockResetRounded className="w-16 h-16" />

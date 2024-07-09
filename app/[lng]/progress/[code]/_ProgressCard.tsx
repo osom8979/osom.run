@@ -33,7 +33,7 @@ export default function ProgressCard(props: ProgressCardProps) {
   }, [props.code]);
 
   return (
-    <section className="osom-card rounded-3xl bg-base-200 bg-gradient-to-b shadow-md shadow-base-content/10">
+    <section className="daisy-card rounded-3xl bg-base-200 bg-gradient-to-b shadow-md shadow-base-content/10">
       <div className="card-body items-center space-y-4">
         <div className="flex flex-col space-y-2">
           <div className="flex justify-center items-end w-full space-x-[-0.8rem]">

@@ -4,7 +4,7 @@ import {type ProgressPageProps} from '@/app/[lng]/progress/[code]/params';
 export default async function ProgressPage(props: ProgressPageProps) {
   const {lng} = props.params;
   return (
-    <div className="osom-center">
+    <div className="daisy-center">
       <ProgressCard lng={lng} code={props.params.code} />
     </div>
   );

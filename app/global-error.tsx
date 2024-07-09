@@ -16,8 +16,8 @@ export default function GlobalError(props: GlobalErrorProps) {
 
   return (
     <html>
-      <body className="osom-viewport">
-        <main className="osom-center">
+      <body className="daisy-viewport">
+        <main className="daisy-center">
           <section className="flex flex-col justify-center">
             <figure className="w-full flex justify-center">
               <IcOutlineErrorOutline className="w-28 h-28" />
